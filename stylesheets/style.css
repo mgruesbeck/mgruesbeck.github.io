@@ -1,0 +1,53 @@
+/* text */
+p, h1, h2, a {
+	background-color: #fff;
+	font-family: monospace;
+	color: #000;
+	padding: .3em;
+}
+h1 {
+	font-size: 2em;
+}
+p {
+	font-size: 1em;
+	line-height: 1.4em;
+}
+a {
+	font-weight: bold;
+}
+section {
+	position: absolute;
+	top: 10%;
+	left: 5%;
+	width: 30%;	
+}
+.credit {
+	position: absolute;
+	top: 90%;
+	left: 5%;
+	width: 20%;	
+}
+@media (min-width: 768px) and (max-width: 979px) { 
+    section {
+        width: 55%;
+    }
+    .credit {
+    	width: 25%;	
+    }
+}
+@media (max-width: 767px) { 
+    section {
+        width: 70%;
+    }
+    .credit {
+    	width: 40%;	
+    }
+}
+@media (max-width: 480px) { 
+    section {
+        width: 80%;
+    }
+    .credit {
+    	width: 55%;	
+    }
+}
