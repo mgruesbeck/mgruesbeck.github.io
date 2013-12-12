@@ -1,5 +1,5 @@
 /* text */
-p, h1, h2, a {
+p, h1, a {
     background-color: #fff;
     font-family: monospace;
     color: #000;
@@ -16,16 +16,22 @@ a {
     font-weight: bold;
 }
 section {
-    position: relative;
+    position: absolute;
     top: 10%;
     left: 5%;
 }
 .credit {
-    position: relative;
-    padding-top: 68%;
+    position: absolute;
+    bottom: 2%;
     left: 5%;
 }
-@media (min-width: 180px) and (max-width: 319px) {
+@media (min-width: 180px) and (max-width: 329px) {
+    p {
+        font-size: 1.3em;
+    }
+    h1 {
+        font-size: 2.3em;
+    }
     section {
         width: 90%;
     }
@@ -33,7 +39,13 @@ section {
         display: none;
     }
 }
-@media (min-width: 320px) and (max-width: 555px) { 
+@media (min-width: 330px) and (max-width: 555px) { 
+    p {
+        font-size: 1.2em;
+    }
+    h1 {
+        font-size: 2.2em;
+    }
     section {
         width: 80%;
     }
@@ -42,6 +54,12 @@ section {
     }
 }
 @media (min-width: 556px) and (max-width: 767px) { 
+    p {
+        font-size: 1.1em;
+    }
+    h1 {
+        font-size: 2.1em;
+    }
     section {
         width: 70%;
     }
