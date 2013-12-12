@@ -23,7 +23,7 @@ section {
 }
 .credit {
     position: absolute;
-    top: 90%;
+    bottom: 2%;
     left: 5%;
 }
 @media (min-width: 180px) and (max-width: 319px) {
