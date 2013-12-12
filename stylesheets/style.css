@@ -16,19 +16,18 @@ a {
     font-weight: bold;
 }
 section {
-    position: absolute;
+    position: relative;
     top: 10%;
     left: 5%;
-    width: 30%; 
 }
 .credit {
-    position: absolute;
-    bottom: 2%;
+    position: relative;
+    padding-top: 68%;
     left: 5%;
 }
 @media (min-width: 180px) and (max-width: 319px) {
     section {
-        width: 100%;
+        width: 90%;
     }
     .credit {
         display: none;
@@ -53,6 +52,14 @@ section {
 @media (min-width: 768px) and (max-width: 979px) { 
     section {
         width: 55%;
+    }
+    .credit {
+        width: 25%; 
+    }
+}
+@media (min-width: 980px) { 
+    section {
+        width: 30%;
     }
     .credit {
         width: 25%; 
