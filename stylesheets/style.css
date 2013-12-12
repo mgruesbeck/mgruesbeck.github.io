@@ -25,17 +25,24 @@ section {
     position: absolute;
     top: 90%;
     left: 5%;
-    width: 20%; 
 }
-@media (min-width: 768px) and (max-width: 979px) { 
+@media (min-width: 180px) and (max-width: 319px) {
     section {
-        width: 55%;
+        width: 100%;
     }
     .credit {
-        width: 25%; 
+        display: none;
     }
 }
-@media (max-width: 767px) { 
+@media (min-width: 320px) and (max-width: 555px) { 
+    section {
+        width: 80%;
+    }
+    .credit {
+        width: 50%;
+    }
+}
+@media (min-width: 556px) and (max-width: 767px) { 
     section {
         width: 70%;
     }
@@ -43,11 +50,11 @@ section {
         width: 40%; 
     }
 }
-@media (max-width: 480px) { 
+@media (min-width: 768px) and (max-width: 979px) { 
     section {
-        width: 80%;
+        width: 55%;
     }
     .credit {
-        display: none;
+        width: 25%; 
     }
 }
