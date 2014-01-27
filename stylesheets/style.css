@@ -1,8 +1,15 @@
-p, h1, a {
-    background-color: #fff;
-    font-family: monospace;
+section {
+    background-color: rgba(255,255,255,.5);
+    padding: 20px;
+    border-radius: 5px;
+}
+h1 {
+    font-family: 'Crete Round', serif;
     color: #000;
-    padding: .3em;
+}
+p, a {
+    font-family: 'Actor', sans-serif;
+    color: #000;
 }
 h1 {
     font-size: 2em;
@@ -55,16 +62,16 @@ section {
         font-size: 2.1em;
     }
     section {
-        width: 70%;
+        width: 50%;
     }
 }
 @media (min-width: 768px) and (max-width: 979px) { 
     section {
-        width: 55%;
+        width: 50%;
     }
 }
 @media (min-width: 980px) { 
     section {
-        width: 30%;
+        width: 28%;
     }
 }
