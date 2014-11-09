@@ -32,15 +32,21 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-<!-- End Analytics -->
+  <!-- End Analytics -->
+
+  <!-- Favicon /-->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <section>
       <h1>Melvin Gruesbeck.</h1>
-      <p>Melvin is a founding member at <a href="http://www.nixieagency.com">Nixie Agency</a>, an art/technology consultancy. He is the agency's principal but participates in production as a front-end developer, graphic designer, and photographer. In 2014 Melvin launched <a href="http://www.winephoto.co">WinePhoto co.</a>, an open source image gallery for the wine community.</p>
+      <p>Melvin is an artist, programmer and entrepreneur. He is a founding member at <a href="http://www.nixieagency.com">Nixie Agency</a>, an art/technology consultancy. 
+      Melvin is the agency's principal but participates in production as a front-end developer, graphic designer, and photographer. 
+      During college he started <a href="http://www.bestofjoy.com">Best of Joy</a>. Now a wedding photography team which he co-produces. 
+      In 2014 he launched <a href="http://www.winephoto.co">WinePhoto co.</a>, an open source image gallery for the wine community.</p>
       <h1>Connect online.</h1>
-      <p>Share your startup with him at<a href="https://angel.co/mgruesbeck">AngelList.</a>Work on open source projects like WinePhoto co. by connecting on<a href="https://github.com/mgruesbeck">GitHub.</a>Head over to<a href="http://www.linkedin.com/pub/melvin-gruesbeck/50/485/b89/">LinkedIn</a>and find common acquaintances. Follow him on<a href="https://twitter.com/melvingruesbeck">Twitter</a>and rant about social issues.
-      <p class="credit">Photo credits:<a href="http://allisonreganphotography.wordpress.com/">Allison Regan</a> &amp; <a href="http://500px.com/Scottrhodius">Scott Rhodius</a></p>
+      <p>Share your startup with him at<a href="https://angel.co/mgruesbeck">AngelList.</a>Work on open source projects together by connecting on<a href="https://github.com/mgruesbeck">GitHub.</a>Head over to<a href="http://www.linkedin.com/pub/melvin-gruesbeck/50/485/b89/">LinkedIn</a>and find common acquaintances. Follow him on<a href="https://twitter.com/melvingruesbeck">Twitter</a>and rant about social issues.
+      <p class="credit">PC:<a href="http://allisonreganphotography.wordpress.com/">Allison Regan</a> &amp; <a href="http://500px.com/Scottrhodius">Scott Rhodius</a></p>
     </section>
 </body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
