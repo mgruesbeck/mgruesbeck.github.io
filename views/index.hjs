@@ -4,7 +4,7 @@
   <title> {{ title }}</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
   <link rel="shortcut icon" href="images/favicon.ico">
-  <meta name="description" content="Melvin Gruesbeck is a founding member at Nixie Agency, an arts/technology consultancy in Sacramento and San Francisco Bay Area. He is currently the agency's principal. Melvin participates in daily production as a front-end developer, graphic designer, and photographer."/> 
+  <meta name="description" content="Melvin is part designer, part programmer, and part entrepreneur. He currently works at MetaMind as a Designer and Frontend Engineer. He founded Nixie Agency, WinePhoto co., and Best of Joy."/> 
   <meta name="keywords" content="arts, technology, consultant, code, marketing, advertising, creative, Nixie, graphic design, photography, video, web design, web development, Ruby on Rails, service, local, Angwin, St.Helena, Davis, California, Napa Valley">
   <!-- Analytics -->
     <script>
