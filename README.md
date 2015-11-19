@@ -2,6 +2,7 @@
 
 ###TODO
 - Sketch new design to include small portfolio and blog
+- Add resume link?
 - Portfolio content
   - UX examples
     - Strategy, thought process, execution, testing, iterating based on test results
