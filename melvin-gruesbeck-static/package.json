@@ -1,0 +1,18 @@
+{
+  "name": "melvingruesbeck.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node --harmony_generators app.js"
+  },
+  "author": "Melvin Gruesbeck",
+  "license": "ISC",
+  "devDependencies": {
+    "hogan.js": "^3.0.2",
+    "metalsmith": "^2.1.0",
+    "metalsmith-layouts": "^1.4.4",
+    "metalsmith-markdown": "^0.2.1"
+  }
+}
