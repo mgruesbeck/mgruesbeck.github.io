@@ -15,6 +15,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="../bower_components/skeleton/css/normalize.css">
 		<link rel="stylesheet" href="../bower_components/skeleton/css/skeleton.css">
+		<link rel="stylesheet" href="../stylesheets/custom.css">
 		<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 
         <!-- analytics -->
@@ -29,11 +30,14 @@
           ga('send', 'pageview');
         </script>
 	</head>
-	<body>
-		<div class="container">
+	<body class="bg-image">
+		<div class="container bg-image">
 			<div class="row">
-				<div class="one-half column" style="margin-top: 25%">
+				<div class="one-half column top-margin content-profile bg-image">
 					{{{ contents }}}
+				</div>
+				<div class="one-half column fixed-right-img">
+                    <img src="../images/melvin-gruesbeck.jpg">
 				</div>
 			</div>
 		</div>
