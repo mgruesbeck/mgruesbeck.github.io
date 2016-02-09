@@ -1,6 +1,5 @@
 ---
 layout: home.hbt
-body-class: bg-image
 ---
 #### **Melvin Gruesbeck**
 Melvin is part designer, part programmer, and part entrepreneur. He works at <a href="http://www.metamind.io" target="_blank">MetaMind</a> as a Designer and Frontend Engineer.

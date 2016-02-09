@@ -1,5 +1,5 @@
 {{> header }}
-<body class="{{ body-class }}">
+<body>
     <div class="container">
         <div class="row">
             <div class="one-half column top-margin content-profile bg-image">
