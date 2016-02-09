@@ -2,11 +2,11 @@
 <html lang="en">
 	<head>
 		<!-- title -->
-		<title>{{ title }}</title>
+		<title>Melvin Gruesbeck</title>
 
 		<!-- meta tags -->
 		<meta charset="UTF-8" />
-		<meta name="description" content="The ramblings of some dude.">
+		<meta name="description" content="Ramblings of a chameleon.">
 		<meta name="author" content="Melvin Gruesbeck">
 		<meta name="keywords" content="web development, design, melvin gruesbeck, photography, ux, ui">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
