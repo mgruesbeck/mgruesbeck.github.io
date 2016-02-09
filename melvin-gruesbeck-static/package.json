@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node --harmony_generators app.js",
-    "deploy": "aws s3 cp build s3://melvingruesbeck.com --region us-west-1 --recursive --acl public-read"
+    "deploy": "aws s3 cp build s3://www.melvingruesbeck.com --region us-west-1 --recursive --acl public-read"
   },
   "author": "Melvin Gruesbeck",
   "license": "ISC",
