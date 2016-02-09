@@ -16,7 +16,7 @@
 		<link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
 		<link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
 		<link rel="stylesheet" href="stylesheets/custom.css">
-		<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
         <!-- analytics -->
         <script>
