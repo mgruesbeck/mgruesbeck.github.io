@@ -2,7 +2,6 @@
 
 ###TODO
 - Sketch new design to include small portfolio and blog
-- Add resume link
 - Portfolio content
   - UX examples
     - Strategy, thought process, execution, testing, iterating based on test results
@@ -16,6 +15,7 @@
   - Front-end 
     - What's the best way to showcase this?
   - Photos
-- Upgrade tech
-    - route 53
-    - s3 
+- ~~Upgrade tech~~
+    - ~~route 53~~
+    - ~~s3~~ 
+- ~~Add resume link~~
