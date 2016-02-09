@@ -30,16 +30,3 @@
           ga('send', 'pageview');
         </script>
 	</head>
-	<body class="bg-image">
-		<div class="container bg-image">
-			<div class="row">
-				<div class="one-half column top-margin content-profile bg-image">
-					{{{ contents }}}
-				</div>
-				<div class="one-half column fixed-right-img">
-                    <img src="images/melvin-gruesbeck.jpg">
-				</div>
-			</div>
-		</div>
-	</body>
-</html>

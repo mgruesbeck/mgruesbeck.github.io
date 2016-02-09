@@ -11,7 +11,7 @@
   "author": "Melvin Gruesbeck",
   "license": "ISC",
   "devDependencies": {
-    "hogan.js": "^3.0.2",
+    "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
     "metalsmith-browser-sync": "^1.1.0",
     "metalsmith-layouts": "^1.4.4",
