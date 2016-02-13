@@ -4,6 +4,7 @@
 - Sketch new design to include small portfolio and blog
 - Check on mobile 
 - Check on large screens
+- Set image to 100vh on large screens
 - Portfolio content
   - UX examples
     - Strategy, thought process, execution, testing, iterating based on test results
