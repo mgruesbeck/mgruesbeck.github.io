@@ -12,16 +12,6 @@ handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/src/templates
 
 Metalsmith(__dirname)
     .use(markdown())
-    .use(permalinks({
-        pattern: 'articles/:title'
-    }))
-    .use(collections({
-        articles: {
-            pattern: 'articles/*.md',
-            sortBy: 'date',
-            reverse: true
-        }
-    }))
     .use(layouts({
         engine: 'handlebars',
         directory: 'src/templates'
