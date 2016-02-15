@@ -12,6 +12,11 @@
     margin-bottom: 0rem;
 }
 
+.articles h4 {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
 .fixed-right-img {
 	position: fixed;
 	right: 0;
@@ -22,9 +27,20 @@
     margin-top: 15%;
 }
 
-/* Media Queries
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-/* Smaller than phablet (also point when grid becomes active) */
+.article-preview {
+    margin-bottom: 4%;
+}
+
+/* Typography */
+.fw-bold {
+    font-weight: bold;
+}
+
+body {
+  font-size: 1.6em;
+}
+
+/* Media Queries */
 @media (max-width: 550px) {
     .fixed-right-img {
         display: none; 
