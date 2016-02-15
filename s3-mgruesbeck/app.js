@@ -18,7 +18,7 @@ Metalsmith(__dirname)
     }))
     .use(browserSync({
         server: 'build',
-        files: ['src/**/*.md', 'src/**/*.css', 'templates/**/*.hbt']
+        files: ['src/**/*.md', 'src/*.md', 'src/**/*.css', 'templates/**/*.hbt']
     }))
     .destination('./build')
     .build(function(err) {
