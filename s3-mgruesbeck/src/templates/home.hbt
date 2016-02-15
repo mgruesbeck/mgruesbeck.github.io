@@ -2,8 +2,8 @@
 <body>
     <div class="container">
         <div class="row">
+            <h4>Melvin Gruesbeck</h4>
             <div class="one-half column top-margin content-profile bg-image">
-                <h4>Melvin Gruesbeck</h4
                 <p>Melvin is part designer, part programmer, and part entrepreneur. He works at <a href="http://www.metamind.io" target="_blank">MetaMind</a> as a Designer and Frontend Engineer.
                 Previously founded <a href="http://www.nixieagency.com" target="_blank">Nixie Agency</a>, <a
                 href="http://www.winephoto.co" target="_blank">WinePhoto</a> and <a href="http://www.bestofjoy.com"
@@ -17,9 +17,11 @@
                 target="_blank">Instagram</a>.</p>
 
                 <h4>Writing</h4>
+                <div>
 					{{#each collections.articles}}
-						<p><a href="/{{this.path}}/">{{this.title}}</a></p>
+						<p><a href="articles/{{title}}.html">{{title}}</a></p>
 					{{/each}}
+                </div>
             </div>
             <div class="one-half column fixed-right-img">
                 <img src="images/melvin-gruesbeck.jpg">

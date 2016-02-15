@@ -13,13 +13,21 @@ handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/src/templates
 
 metalsmith(__dirname)
     .use(markdown())
+    //.use(permalinks())
+    .use(collections({
+        articles: {
+            pattern: 'articles/*',
+            orderBy: 'date',
+            reverse: true
+        }
+    }))
     .use(layouts({
         engine: 'handlebars',
         directory: 'src/templates'
     }))
     .use(browserSync({
         server: 'build',
-        files: ['src/*.md', 'src/**/*.md', 'src/**/*.css', 'src/**/*.hbt']
+        files: ['src/*', 'src/**/*']
     }))
     .use(rootPath())
     .destination('./build')
