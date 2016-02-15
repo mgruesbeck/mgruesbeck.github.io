@@ -3,6 +3,7 @@ var markdown = require('metalsmith-markdown');
 var collections = require('metalsmith-collections');
 var permalinks = require('metalsmith-permalinks');
 var layouts = require('metalsmith-layouts');
+var less = require('metalsmith-less');
 var handlebars = require('handlebars');
 var rootPath = require('metalsmith-rootpath');
 var browserSync = require('metalsmith-browser-sync');
@@ -23,6 +24,7 @@ metalsmith(__dirname)
     .use(permalinks({
         pattern: ':collection/:title'
     }))
+    .use(less())
     .use(layouts({
         engine: 'handlebars',
         directory: 'src/templates'
