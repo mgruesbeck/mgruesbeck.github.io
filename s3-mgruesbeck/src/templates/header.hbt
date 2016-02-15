@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<!-- title -->
-		<title>Melvin Gruesbeck</title>
+        <title>{{ title }}</title>
 
 		<!-- meta tags -->
 		<meta charset="UTF-8">
