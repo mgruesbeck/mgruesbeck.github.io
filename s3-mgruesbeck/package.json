@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node --harmony_generators app.js",
+    "build": "rm -rf build && node --harmony_generators app.js",
     "deploy": "aws s3 cp build s3://www.melvingruesbeck.com --region us-west-1 --recursive --acl public-read"
   },
   "author": "Melvin Gruesbeck",
@@ -14,7 +14,9 @@
     "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
     "metalsmith-browser-sync": "^1.1.0",
+    "metalsmith-collections": "^0.7.0",
     "metalsmith-layouts": "^1.4.4",
-    "metalsmith-markdown": "^0.2.1"
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-permalinks": "^0.4.1"
   }
 }

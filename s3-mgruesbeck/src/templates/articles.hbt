@@ -1,0 +1,11 @@
+{{> header }}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns top-margin">
+                <h4>{{ title }}</h4
+                {{{ contents }}}
+        </div>
+    </div>
+</body>
+{{> footer }}

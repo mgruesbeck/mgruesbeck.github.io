@@ -16,9 +16,10 @@
                 See his photography on <a href="https://www.instagram.com/melvingruesbeck"
                 target="_blank">Instagram</a>.</p>
 
-                <!--
                 <h4>Writing</h4>
-                -->
+					{{#each collections.articles}}
+						<p><a href="/{{this.path}}/">{{this.title}}</a></p>
+					{{/each}}
             </div>
             <div class="one-half column fixed-right-img">
                 <img src="images/melvin-gruesbeck.jpg">
