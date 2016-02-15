@@ -1,16 +1,17 @@
-var Metalsmith = require('metalsmith');
+var metalsmith = require('metalsmith');
 var markdown = require('metalsmith-markdown');
-var layouts = require('metalsmith-layouts');
-var collections = require('metalsmith-collections');
 var permalinks = require('metalsmith-permalinks');
-var browserSync = require('metalsmith-browser-sync');
+var collections = require('metalsmith-collections');
+var layouts = require('metalsmith-layouts');
 var handlebars = require('handlebars');
+var rootPath = require('metalsmith-rootpath');
+var browserSync = require('metalsmith-browser-sync');
 var fs = require('fs');
 
 handlebars.registerPartial('header', fs.readFileSync(__dirname + '/src/templates/header.hbt').toString());
 handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/src/templates/footer.hbt').toString());
 
-Metalsmith(__dirname)
+metalsmith(__dirname)
     .use(markdown())
     .use(layouts({
         engine: 'handlebars',
@@ -18,8 +19,9 @@ Metalsmith(__dirname)
     }))
     .use(browserSync({
         server: 'build',
-        files: ['src/**/*.md', 'src/*.md', 'src/**/*.css', 'templates/**/*.hbt']
+        files: ['src/*.md', 'src/**/*.md', 'src/**/*.css', 'src/**/*.hbt']
     }))
+    .use(rootPath())
     .destination('./build')
     .build(function(err) {
         if (err) throw err;

@@ -13,10 +13,10 @@
 
 		<!-- styles -->
 		<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
-		<link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
-		<link rel="stylesheet" href="stylesheets/custom.css">
-		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+        <link rel="stylesheet" href="{{rootPath}}/bower_components/skeleton/css/normalize.css">
+        <link rel="stylesheet" href="{{rootPath}}/bower_components/skeleton/css/skeleton.css">
+        <link rel="stylesheet" href="{{rootPath}}/stylesheets/custom.css">
+        <link rel="icon" type="image/x-icon" href="{{rootPath}}/images/favicon.ico">
 
         <!-- analytics -->
         <script>
