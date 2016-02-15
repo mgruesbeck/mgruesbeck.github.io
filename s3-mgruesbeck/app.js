@@ -22,13 +22,13 @@ Metalsmith(__dirname)
     .use(permalinks({
         pattern: 'articles/:title'
     }))
-    .use(browserSync({
-        server: 'build',
-        files: ['src/**/*.md', 'src/**/*.css', 'templates/**/*.hbt']
-    }))
     .use(layouts({
         engine: 'handlebars',
         directory: 'src/templates'
+    }))
+    .use(browserSync({
+        server: 'build',
+        files: ['src/**/*.md', 'src/**/*.css', 'templates/**/*.hbt']
     }))
     .destination('./build')
     .build(function(err) {
