@@ -3,7 +3,9 @@
 ###TODO
 - Blog posts
   - aws flaws I've encountered
-  - visualizing data with ggplot
+  - experimenting with R's ggplot
+  - visualizing credit card offers
+  - post of metalsmith
 - Portfolio content
   - UX examples
     - Strategy, thought process, execution, testing, iterating based on test results
