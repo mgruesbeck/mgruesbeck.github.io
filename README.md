@@ -4,6 +4,8 @@
 - Blog posts
   - aws flaws I've encountered
   - experimenting with R's ggplot
+  - earth quakes vs CO levels
+  - plottablejs
   - visualizing credit card offers
   - post of metalsmith
 - Portfolio content
