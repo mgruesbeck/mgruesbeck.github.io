@@ -7,7 +7,8 @@
   - earth quakes vs CO levels
   - plottablejs
   - visualizing credit card offers
-  - post of metalsmith
+  - post on metalsmith
+  - post on language simplification 
 - Portfolio content
   - UX examples
     - Strategy, thought process, execution, testing, iterating based on test results
