@@ -9,6 +9,7 @@
   - visualizing credit card offers
   - post on metalsmith
   - post on language simplification 
+  - post on web critique (rongruesbeck.com). Need permission.
 - Portfolio content
   - UX examples
     - Strategy, thought process, execution, testing, iterating based on test results
