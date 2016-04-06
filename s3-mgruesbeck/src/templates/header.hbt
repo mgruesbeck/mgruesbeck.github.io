@@ -6,7 +6,9 @@
 
 		<!-- meta tags -->
 		<meta charset="UTF-8">
-		<meta name="description" content="Melvin is part designer, part programmer, and part entrepreneur. He works at MetaMind as a Designer and Frontend Engineer. Previously founded Nixie Agency, WinePhoto and Best of Joy.">
+		<meta name="description" content="Melvin is part designer, part programmer, and part entrepreneur. He is a UI/UX
+        Designer at Salesforce via the MetaMind acquisition. Previously, he founded Nixie Agency, WinePhoto and Best of
+        Joy.">
 		<meta name="author" content="Melvin Gruesbeck">
 		<meta name="keywords" content="melvin gruesbeck, web development, design, photography, ux, ui">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +19,24 @@
         <link rel="stylesheet" href="{{rootPath}}/bower_components/skeleton/css/skeleton.css">
         <link rel="stylesheet" href="{{rootPath}}/stylesheets/custom.css">
         <link rel="icon" type="image/x-icon" href="{{rootPath}}/images/favicon.ico">
+
+        <!-- Facebook -->
+        <meta property="og:title" content="Melvin Gruesbeck">
+        <meta property="og:url" content="http://www.melvingruesbeck.com/">
+        <meta property="og:site_name" content="Melvin Gruesbeck">
+        <meta property="og:image" content="http://www.melvingruesbeck.com/images/melvin-gruesbeck.jpg">
+        <meta property="og:description" content="Melvin is part designer, part programmer, and part entrepreneur. He is
+        a UI/UX Designer at Salesforce via the MetaMind acquisition. Previously, he founded Nixie Agency, WinePhoto and
+        Best of Joy.">
+
+        <!-- Twitter -->
+        <meta name="twitter:title" content="How to Create a Twitter Card">
+        <meta name="twitter:url" content="https://www.melvingruesbeck.com">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:image" content="http://www.melvingruesbeck.com/images/melvin-gruesbeck.jpg">
+        <meta name="twitter:description" content="Melvin is part designer, part programmer, and part entrepreneur. He is
+        a UI/UX Designer at Salesforce via the MetaMind acquisition. Previously, he founded Nixie Agency, WinePhoto and
+        Best of Joy.">
 
         <!-- analytics -->
         <script>
