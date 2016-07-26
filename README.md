@@ -2,14 +2,12 @@
 
 ###TODO
 - Blog posts
-  - aws flaws I've encountered
   - experimenting with R's ggplot
   - plottablejs
-  - visualizing credit card offers
   - post on metalsmith
   - post on language simplification 
-  - post on web critique (rongruesbeck.com). Need permission.
 - Portfolio content
+  - AI experience
   - UX examples
     - Strategy, thought process, execution, testing, iterating based on test results
   - UI examples
