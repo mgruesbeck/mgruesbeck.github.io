@@ -1,16 +1,18 @@
 #melvingruesbeck.com
 
 ###TODO
-- Blog posts
-  - experimenting with R's ggplot
-  - plottablejs
-  - post on metalsmith
-  - post on language simplification 
+
+- Refactoring
+  - Add documentation
+  - Remove Bower
+
+- Post ideas
+  - Random experiments with real data visualized with ggplot or d3
+  - Language simplification 
+
 - Portfolio content
-  - AI experience
-  - UX examples
-    - Strategy, thought process, execution, testing, iterating based on test results
-  - UI examples
+  - UX example: survey research
+  - UI examples: metamind
   - Print design
-  - Front-end 
+  - Front-end code
   - Photos
