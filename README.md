@@ -3,7 +3,7 @@
 ###TODO
 
 - Refactoring
-  - Add documentation
+  - Add documentation: develop, build, deploy
   - Remove Bower
 
 - Post ideas
