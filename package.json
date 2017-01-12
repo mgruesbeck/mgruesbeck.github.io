@@ -7,7 +7,7 @@
     "test": "node test.js",
     "build": "rm -rf build && node app.js",
     "debug": "DEBUG='*' node app.js",
-    "deploy": "aws s3 cp build s3://www.melvingruesbeck.com --profile nixie --region us-west-1 --recursive --acl public-read"
+    "deploy": "aws s3 cp build s3://www.melvingruesbeck.com --profile nixie --recursive --acl public-read"
   },
   "author": "Melvin Gruesbeck",
   "license": "ISC",
