@@ -29,7 +29,6 @@ $ npm run build
 ```
 
 ### Deploy
-
 ```shell
 $ npm run deploy
 ```
