@@ -31,5 +31,5 @@ $ npm run build
 ### Deploy
 
 ```shell
-$ aws s3 cp build --profile nixie s3://www.melvingruesbeck.com --recursive --acl public-read
+$ npm run deploy
 ```
