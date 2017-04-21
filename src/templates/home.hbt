@@ -2,21 +2,21 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="one-half column top-margin content-profile bg-image">
-                <h4>Melvin Gruesbeck</h4>
-                <p>Melvin is part designer, part programmer, and part entrepreneur. He is a UI/UX Engineer at <a
+            <div class="top-margin">
+                <h1>&Dagger;</h1>
+                <h1>Melvin Gruesbeck</h1>
+
+                <br>
+
+                <p>... is part designer, programmer, and entrepreneur. He is a UI/UX Engineer at <a
                 href="http://www.salesforce.com/">Salesforce</a> working
                 in the artificial intelligence space. Melvin came to Salesforce via the <a href="http://www.metamind.io" target="_blank">MetaMind</a> acquisition.
-                Before that, he founded <a href="http://www.nixieagency.com" target="_blank">Nixie Agency</a>. He also has a few small <a
-                href="http://www.winephoto.co" target="_blank">side</a> <a href="http://www.bestofjoy.com" target="_blank">projects</a>.</p> 
+                Before that, he founded <a href="http://www.nixieagency.com" target="_blank">Nixie Agency</a> and few <a
+                href="http://www.winephoto.co" target="_blank">other</a> <a href="http://www.bestofjoy.com" target="_blank">projects</a>.</p> 
 
-                <h4>Connect</h4>
-                <p>See his <a
-                href="https://docs.google.com/document/d/1NDHUp9ILvPXyvHNF-gzED7qCJdfOKucUAYwplaLJaxM/edit?usp=sharing" target="_blank">resume</a> or email him at <a href="mailto:mgruesbeck@gmail.com">mgruesbeck@gmail.com</a>. Build projects together on <a href="http://www.github.com/mgruesbeck" target="_blank">GitHub</a>.
-                Connect on <a href="https://www.linkedin.com/in/melvingruesbeck" target="_blank">LinkedIn</a> and find common acquaintances. 
-                Follow him on <a href="https://twitter.com/melvingruesbeck" target="_blank">Twitter</a> and rant about social issues.
-                See his photography on <a href="https://www.instagram.com/melvingruesbeck"
-                target="_blank">Instagram</a>.</p>
+                <br>
+
+                <marquee><a href="https://docs.google.com/document/d/1NDHUp9ILvPXyvHNF-gzED7qCJdfOKucUAYwplaLJaxM/edit?usp=sharing" target="_blank">Resume</a>, <a href="mailto:mgruesbeck@gmail.com">Email</a>, <a href="http://www.github.com/mgruesbeck" target="_blank">GitHub</a>, <a href="https://www.linkedin.com/in/melvingruesbeck" target="_blank">LinkedIn</a>, <a href="https://twitter.com/melvingruesbeck" target="_blank">Twitter</a>, <a href="https://www.instagram.com/melvingruesbeck" target="_blank">Instagram</a>, <a href="https://www.youtube.com/watch?v=mF0FS2-tJKo">Sounds good</a>.</marquee>
 
                 <!--
                 <h4>Writing</h4>
@@ -26,9 +26,6 @@
                 </div>
                 {{/each}}
                 -->
-            </div>
-            <div class="one-half column fixed-right-img">
-                <img src="images/melvin-gruesbeck.jpg">
             </div>
         </div>
     </div>

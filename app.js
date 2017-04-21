@@ -1,7 +1,5 @@
 var metalsmith = require('metalsmith');
 var markdown = require('metalsmith-markdown');
-var collections = require('metalsmith-collections');
-var permalinks = require('metalsmith-permalinks');
 var layouts = require('metalsmith-layouts');
 var less = require('metalsmith-less');
 var handlebars = require('handlebars');
@@ -14,16 +12,6 @@ handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/src/templates
 
 metalsmith(__dirname)
     .use(markdown())
-    .use(collections({
-        articles: {
-            pattern: 'articles/*',
-            orderBy: 'date',
-            reverse: true
-        }
-    }))
-    .use(permalinks({
-        pattern: ':collection/:title'
-    }))
     .use(less())
     .use(layouts({
         engine: 'handlebars',
