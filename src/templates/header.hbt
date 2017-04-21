@@ -11,7 +11,7 @@
         Joy.">
 		<meta name="author" content="Melvin Gruesbeck">
 		<meta name="keywords" content="melvin gruesbeck, web development, design, photography, ux, ui">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
 
 		<!-- styles -->
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400" rel="stylesheet">
