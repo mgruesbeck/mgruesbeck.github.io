@@ -2,11 +2,9 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="top-margin">
+            <div class="margin">
                 <h1>&Dagger;</h1>
                 <h1>Melvin Gruesbeck</h1>
-
-                <br>
 
                 <p>... is part designer, programmer, and entrepreneur. He is a UI/UX Engineer at <a
                 href="http://www.salesforce.com/">Salesforce</a> working
@@ -14,18 +12,7 @@
                 Before that, he founded <a href="http://www.nixieagency.com" target="_blank">Nixie Agency</a> and few <a
                 href="http://www.winephoto.co" target="_blank">other</a> <a href="http://www.bestofjoy.com" target="_blank">projects</a>.</p> 
 
-                <br>
-
                 <marquee><a href="https://docs.google.com/document/d/1NDHUp9ILvPXyvHNF-gzED7qCJdfOKucUAYwplaLJaxM/edit?usp=sharing" target="_blank">Resume</a>, <a href="mailto:mgruesbeck@gmail.com">Email</a>, <a href="http://www.github.com/mgruesbeck" target="_blank">GitHub</a>, <a href="https://www.linkedin.com/in/melvingruesbeck" target="_blank">LinkedIn</a>, <a href="https://twitter.com/melvingruesbeck" target="_blank">Twitter</a>, <a href="https://www.instagram.com/melvingruesbeck" target="_blank">Instagram</a>, <a href="https://www.youtube.com/watch?v=mF0FS2-tJKo">Sounds good</a>.</marquee>
-
-                <!--
-                <h4>Writing</h4>
-                {{#each collections.articles}}
-                <div class="article-preview">
-                    <a class="fw-bold" href="{{path}}">{{title}}</a><br>
-                </div>
-                {{/each}}
-                -->
             </div>
         </div>
     </div>
