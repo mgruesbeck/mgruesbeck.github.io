@@ -1,22 +1,5 @@
 #melvingruesbeck.com
 
-###TODO
-
-- Refactoring
-  - Add documentation: stack details
-  - Remove Bower
-
-- Post ideas
-  - Random experiments with real data visualized with ggplot or d3
-  - Language simplification 
-
-- Portfolio content
-  - UX example: survey research
-  - UI examples: metamind
-  - Print design
-  - Front-end code
-  - Photos
-
 ### Install
 ```shell
 $ npm install
@@ -32,3 +15,21 @@ $ npm run build
 ```shell
 $ npm run deploy
 ```
+
+### Random ideas
+
+- Refactoring
+  - Remove Bower
+  - Use react/webpack/es6
+
+- Writing
+  - Language simplification 
+  - Random experiments with real data visualized with ggplot or d3
+
+- Portfolio content I could add
+  - UX example: survey research
+  - UI examples: metamind.io
+  - Print design posters
+  - Front-end code
+  - Photos
+
