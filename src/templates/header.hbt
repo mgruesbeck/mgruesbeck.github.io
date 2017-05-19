@@ -6,8 +6,8 @@
 
 		<!-- meta tags -->
 		<meta charset="UTF-8">
-		<meta name="description" content="Melvin is part designer, programmer, and entrepreneur. He is a UI/UX Engineer at Salesforce working with the artificial
-    intelligence team. Melvin came to Salesforce via the MetaMind acquisition. Before that, he founded Nixie Agency.">
+    <meta name="description" content="Part designer, and part programmer. Melvin is a UI/UX Engineer on Salesforce's artificial intelligence team. He
+    came there thru the MetaMind acquisition. Before that, he founded Nixie Agency.">
 		<meta name="author" content="Melvin Gruesbeck">
 		<meta name="keywords" content="melvin gruesbeck, designer, ux, ui">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
@@ -23,15 +23,15 @@
     <meta property="og:title" content="Melvin Gruesbeck">
     <meta property="og:url" content="http://www.melvingruesbeck.com/">
     <meta property="og:image" content="http://www.melvingruesbeck.com/images/melvin-gruesbeck.jpg">
-    <meta property="og:description" content="Melvin is part designer, programmer, and entrepreneur. He is a UI/UX Engineer at Salesforce working with the artificial
-    intelligence team. Melvin came to Salesforce via the MetaMind acquisition. Before that, he founded Nixie Agency.">
+    <meta property="og:description" content="Part designer, and part programmer. Melvin is a UI/UX Engineer on Salesforce's artificial intelligence
+    team. He came there thru the MetaMind acquisition. Before that, he founded Nixie Agency.">
 
     <!-- Twitter -->
     <meta name="twitter:title" content="Melvin Gruesbeck">
     <meta name="twitter:url" content="https://www.melvingruesbeck.com">
     <meta name="twitter:image" content="http://www.melvingruesbeck.com/images/melvin-gruesbeck.jpg">
-    <meta name="twitter:description" content="Melvin is part designer, programmer, and entrepreneur. He is a UI/UX Engineer at Salesforce working with the artificial
-    intelligence team. Melvin came to Salesforce via the MetaMind acquisition. Before that, he founded Nixie Agency.">
+    <meta name="twitter:description" content="Part designer, and part programmer. Melvin is a UI/UX Engineer on Salesforce's artificial intelligence
+    team. He came there thru the MetaMind acquisition. Before that, he founded Nixie Agency.">
 
     <!-- analytics -->
     <script>
