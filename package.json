@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "debug": "^2.2.0",
-    "handlebars": "^4.0.5",
+    "handlebars": "^4.0.12",
     "metalsmith": "^2.1.0",
     "metalsmith-browser-sync": "^1.1.0",
     "metalsmith-layouts": "^1.4.4",
