@@ -13,12 +13,12 @@
   "license": "ISC",
   "devDependencies": {
     "debug": "^2.2.0",
-    "handlebars": "^4.0.12",
+    "handlebars": "^4.1.2",
     "metalsmith": "^2.1.0",
     "metalsmith-browser-sync": "^1.1.0",
     "metalsmith-layouts": "^1.4.4",
     "metalsmith-less": "^2.0.0",
-    "metalsmith-markdown": "^1.1.0",
+    "metalsmith-markdown": "^1.2.0",
     "metalsmith-rootpath": "^0.1.7"
   }
 }
