@@ -1,44 +1,61 @@
-.margin {
-  margin-top: 10%;
-  margin-bottom: 10%;
-}
-.container {
-  max-width: 1366px;
-}
-/* Typography */
-body {
-  font-family: 'Roboto Mono', monospace;
-  color: rgba(0, 0, 0, 0.8);
-  font-weight: 300;
+html {
   overflow-x: hidden;
 }
+
+/* typography */
+@font-face {
+  font-family: 'wood-webfont';
+  src: url('wood-webfont.woff2') format('woff2'),
+    url('wood-webfont.woff') format('woff');
+}
+
+.wood-webfont {
+  font-family: 'wood-webfont';
+  font-size: 4rem;
+}
+
+body {
+  color: rgba(0, 0, 0, 0.8);
+  font-family: 'Inconsolata', monospace;
+  font-size: clamp(.8rem, 4vmin, 1.2rem);
+  line-height: 1.45;
+  margin: 0 0 8% 0;
+}
+
+body> :is(h1, h2, h3, h4, h5, h6, p, ul, ol, header, footer, section, blockquote, article, hr) {
+  margin-left: 8%;
+  max-width: 30rem;
+  width: 84%;
+}
+
 a {
   color: rgba(30, 174, 219, 0.8);
 }
-h1 {
-  font-weight: 400;
+
+ul,
+li {
+  margin-left: 0;
 }
-@media (min-width: 550px) {
-  body {
-    font-size: 2em;
+
+/* gradient */
+@keyframes pulse {
+  0% {
+    background-size: 100%;
   }
-  h1 {
-    font-size: 2.5em;
+
+  100% {
+    background-size: 400%;
   }
 }
+
+
+/* media queries */
+@media (min-width: 550px) {}
+
 @media (min-width: 750px) {
-  body {
-    font-size: 3em;
-  }
-  h1 {
-    font-size: 3.5em;
+  body> :is(h1, h2, h3, h4, h5, h6, p, ul, ol, header, footer, section, blockquote, article, hr) {
+    margin-left: calc(8% + 50px);
   }
 }
-@media (min-width: 1200px) {
-  body {
-    font-size: 4em;
-  }
-  h1 {
-    font-size: 4.5em;
-  }
-}
+
+@media (min-width: 1200px) {}
