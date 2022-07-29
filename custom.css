@@ -36,14 +36,14 @@ body {
 }
 
 body> :is(h1, h2, h3, h4, h5, h6, p, ul, ol, header, footer, section, blockquote, article, hr) {
+  box-sizing: border-box;
   margin-left: 8%;
   max-width: 30rem;
   width: 84%;
-  box-sizing: border-box;
 }
 
 body> :is(ul, li) {
-  padding-left: 8%;
+  padding-left: 1.6;
 }
 
 a {
