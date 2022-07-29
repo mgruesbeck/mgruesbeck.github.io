@@ -4,14 +4,27 @@ html {
 
 /* typography */
 @font-face {
-  font-family: 'wood-webfont';
-  src: url('wood-webfont.woff2') format('woff2'),
-    url('wood-webfont.woff') format('woff');
+  font-family: 'cartoon_4_sportsregular';
+  src: url('../fonts/cartoon_4_sports-webfont.woff2') format('woff2'),
+       url('../fonts/cartoon_4_sports-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.wood-webfont {
-  font-family: 'wood-webfont';
-  font-size: 4rem;
+@font-face {
+  font-family: 'inga_stone_redesignedregular';
+  src: url('../fonts/inga_stone_redesigned-webfont.woff2') format('woff2'),
+       url('../fonts/inga_stone_redesigned-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'monsterocityregular';
+  src: url('../fonts/monsterocity-webfont.woff2') format('woff2'),
+       url('../fonts/monsterocity-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
@@ -26,15 +39,15 @@ body> :is(h1, h2, h3, h4, h5, h6, p, ul, ol, header, footer, section, blockquote
   margin-left: 8%;
   max-width: 30rem;
   width: 84%;
+  box-sizing: border-box;
+}
+
+body> :is(ul, li) {
+  padding-left: 8%;
 }
 
 a {
   color: rgba(30, 174, 219, 0.8);
-}
-
-ul,
-li {
-  margin-left: 0;
 }
 
 /* gradient */
