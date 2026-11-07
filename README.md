@@ -17,14 +17,14 @@ The repository is flat. It has no subdirectories.
 | `custom.css` | Site styles. Sets the body font to `'Inconsolata', monospace` with a `clamp(.8rem, 4vmin, 1.2rem)` font size and link color `#0b6e99`. Limits top-level body children to `max-width: 30rem` with an `8%` left margin, which grows to `calc(8% + 50px)` at `min-width: 750px`. |
 | `normalize.css` | Vendored `normalize.css v3.0.2` (MIT). |
 | `favicon.ico` | Site icon. |
-| `melvin-gruesbeck.jpg` | 1200×630 social preview image (about 60 KB). Referenced by `og:image` and the JSON-LD `image` as `https://mgruesbeck.github.io/melvin-gruesbeck.jpg`. |
+| `melvin-gruesbeck.jpg` | 1200×1200 square social preview image (about 140 KB). Referenced by `og:image` and the JSON-LD `image` as `https://mgruesbeck.github.io/melvin-gruesbeck.jpg`. |
 
 Invariants:
 
 - The `description` and `og:description` meta tags in `index.html` hold the
   same text. Edit both together.
 - `og:image:width` and `og:image:height` must match `melvin-gruesbeck.jpg`
-  (1200×630). Renaming the file breaks `og:image` and the JSON-LD `image`.
+  (1200×1200). Renaming the file breaks `og:image` and the JSON-LD `image`.
 - The JSON-LD `jobTitle`, `worksFor`, and `sameAs` values duplicate the
   Experience and Online sections. Update them together.
 - The site is edited both locally and through the GitHub web editor. Pull before
