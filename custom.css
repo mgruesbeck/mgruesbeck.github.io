@@ -2,31 +2,6 @@ html {
   overflow-x: hidden;
 }
 
-/* typography */
-@font-face {
-  font-family: 'cartoon_4_sportsregular';
-  src: url('../fonts/cartoon_4_sports-webfont.woff2') format('woff2'),
-       url('../fonts/cartoon_4_sports-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'inga_stone_redesignedregular';
-  src: url('../fonts/inga_stone_redesigned-webfont.woff2') format('woff2'),
-       url('../fonts/inga_stone_redesigned-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'monsterocityregular';
-  src: url('../fonts/monsterocity-webfont.woff2') format('woff2'),
-       url('../fonts/monsterocity-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
   color: rgba(0, 0, 0, 0.8);
   font-family: 'Inconsolata', monospace;
@@ -47,7 +22,7 @@ body> :is(ul, li) {
 }
 
 a {
-  color: rgba(30, 174, 219, 0.8);
+  color: #0b6e99;
 }
 
 /* gradient */
