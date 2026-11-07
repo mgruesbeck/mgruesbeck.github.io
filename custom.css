@@ -23,6 +23,12 @@ body> :is(ul, li) {
 
 a {
   color: #0b6e99;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
 }
 
 /* gradient */

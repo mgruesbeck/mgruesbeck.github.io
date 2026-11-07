@@ -49,6 +49,5 @@ Invariants:
 
 ## System Verification
 
-- No test suite or build manifest exists. To check the site, serve the root
-  locally and open it in a browser, for example:
-  `python3 -m http.server` and then `http://localhost:8000/`.
+- No test suite exists. To check the site, run `make serve` and open
+  `http://localhost:8000/`. Use `make serve PORT=3000` for another port.
