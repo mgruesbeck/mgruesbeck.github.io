@@ -10,16 +10,17 @@
   <meta name="description" content="I bring a blend of engineering, design, communications, and operations experience, built exclusively alongside research teams at the seed, hyper-growth, and Fortune 100 stages.">
   <meta name="author" content="Melvin Gruesbeck">
   <meta name="keywords" content="melvin gruesbeck, operations, communications, design engineer, profluent">
+  <meta name="theme-color" content="#fafafa">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://mgruesbeck.github.io/">
 
   <!-- styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="normalize.css">
-  <link rel="stylesheet" href="custom.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,400;100,600&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- Open Graph -->
   <meta property="og:type" content="profile">
@@ -55,92 +56,102 @@
   </script>
 
   <!-- analytics -->
+  <style>
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3, p { margin: 0; }
+
+.hd { max-width: 1180px; margin: 0 auto; padding: 48px 22px 0; }
+.feature { max-width: 1180px; margin: 36px auto 0; padding: 0 22px; display: grid; gap: 28px; align-items: start; }
+@media (min-width: 940px) { .feature { grid-template-columns: 7fr 4fr; } }
+.shot { position: relative; margin: 0 auto; width: min(100%, calc(86vh * .753)); }
+.shot img { width: 100%; }
+.dot { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; text-align: center; font: 700 12px/26px var(--mono, "Inter"), sans-serif; background: var(--accent); color: #fff; }
+.legend ol { list-style: none; margin: 0; padding: 0; }
+main { max-width: 1180px; margin: 0 auto; padding: 56px 22px 96px; }
+.about { display: grid; gap: 18px 48px; padding: 32px 0; }
+@media (min-width: 940px) { .about { grid-template-columns: 1fr 1fr; } }
+.about .rest p + p { margin-top: 12px; }
+.sec { display: grid; gap: 12px 48px; padding: 32px 0; }
+@media (min-width: 940px) { .sec { grid-template-columns: 4fr 8fr; } }
+.list li { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-top: 1px solid var(--rule); }
+.list li:first-child { border-top: 0; padding-top: 0; }
+.list .t { display: block; }
+.list .s { display: block; color: var(--muted); font-size: .88em; margin-top: 1px; }
+.list .m { color: var(--muted); font-size: .88em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+a { color: inherit; transition: color .15s, background .15s; }
+.reads { color: var(--muted); }
+footer { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; padding: 24px 22px; }
+
+.gearfig { position: relative; }
+.hs { all: unset; position: absolute; transform: translate(-50%, -50%); cursor: pointer; z-index: 2; }
+.hs .num { display: none; }
+.hs .lbl { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); white-space: nowrap; background: rgba(255,255,255,.94); color: #1b1b1a;
+  font: 600 11px/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .02em; padding: 4px 6px; border-radius: 3px; box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  opacity: 0; pointer-events: none; transition: opacity .15s; }
+.hs.left .lbl { left: auto; right: calc(100% + 8px); }
+.hs:hover .lbl, .hs:focus-visible .lbl, .hs.on .lbl { opacity: 1; }
+.hs:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 50%; }
+[data-gear] { cursor: pointer; border-radius: 4px; transition: background .15s; outline: none; }
+[data-gear].on, [data-gear]:focus-visible { background: var(--hl, #f1ece4); }
+.hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+:root { --bg: #fafafa; --ink: #383a42; --muted: #a0a1a7; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --yellow: #c18401; --cyan: #0184bc; --mono: "Martian Mono", monospace; }
+body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
+.u { color: var(--green); } .w { color: var(--blue); } .g { color: var(--violet); } .ar { color: var(--green); }
+h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 600; font-stretch: 100%; color: #202227; letter-spacing: -0.02em; }
+.dot { font-family: var(--mono); box-shadow: 0 0 0 3px rgba(255,255,255,.85); }
+.list .m { color: var(--blue); }
+a { color: var(--cyan); } a:hover { color: var(--violet); }
+
+.tm { max-width: 820px; padding: 12vh 20px 12vh; }
+.p { margin-top: 44px; color: var(--muted); } .p:first-child { margin-top: 0; }
+.p .cmd { color: var(--ink); }
+.o { margin-top: 8px; } .o p + p { margin-top: 10px; }
+.o .shot { width: min(100%, 560px); margin: 0; }
+.o .shot img { border-radius: 8px; }
+.dim { color: var(--muted); }
+.json pre { margin: 0; white-space: pre-wrap; font: inherit; }
+.json .k { color: var(--violet); } .json .s { color: var(--green); } .json .pn { color: var(--muted); }
+:root { --hl: #efe7f4; } .json .row { display: inline-block; width: 100%; }
+.hs { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px #fff, 0 1px 6px rgba(0,0,0,.45); transition: transform .15s; }
+.hs.on, .hs:hover { transform: translate(-50%, -50%) scale(1.45); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+  </style>
 </head>
 
 <body>
-<h1>Melvin Gruesbeck</h1>
-<p>Hello,</p>
-<p>I bring a blend of engineering, design, communications, and operations experience, built exclusively alongside research teams at the seed, hyper-growth, and Fortune 100 stages.</p>
-<p>Most recently at <a href="https://www.fiercebiotech.com/biotech/lilly-pens-22b-pact-bezos-backed-profluent-work-recombinase-based-gene-editing">Profluent Bio</a>, I built the business infrastructure bridging
-finance, legal, HR, IT, compliance, and communications, and optimized them as
-we scaled to eliminate bottlenecks before they compound. By developing this
-connective tissue, I helped transform a one-room operation into a mature
-startup capable of raising nine-figure funding and signing billion-dollar
-partnerships in a highly regulated industry.</p>
-<p>On weekends I <a href="https://drive.google.com/file/d/140BKfTPPZPU1fFZ__Fq9u3AGQJcOVd8D/view?usp=sharing">backcountry ski</a>, <a href="https://drive.google.com/file/d/1dLB1ld2tVVL0qqQPxYagEMghcQRDgG5Y/view?usp=sharing">ride motorcycles</a>, and <a href="https://drive.google.com/file/d/1R_w0bkouyiYHdiMNRKi0aLojx-uGtahs/view?usp=sharing">fix things with power tools</a>.</p>
-<hr>
-<h2>Experience</h2>
-<p><strong>Profluent / Head of Communications</strong> <br>
-August 2025 - Present @ Emeryville, CA <br>
-</p>
-<p><strong>Profluent / Head of Operations</strong> <br>
-November 2022 - August 2025 @ Berkeley, CA <br>
-</p>
-<p><strong>Salesforce / Design Engineer</strong> <br>
-April 2016 - January 2021 @ Palo Alto, CA <br>
-</p>
-<p><strong>MetaMind / Design Engineer</strong> <br>
-February 2015 - April 2016 @ Palo Alto, CA <br>
-</p>
-<p><strong>Early Career / Design, Marketing, Photography</strong> <br>
-November 2009 - February 2015 @ Napa Valley, CA <br>
-</p>
-<hr>
-<h2>Education</h2>
-<p><strong>Pacific Union College / Journalism &amp; PR (BS)</strong> <br>
-2007 - 2012 @ Napa Valley, CA</p>
-<p><strong>Pacific Union College / Photography (AS)</strong> <br>
-2007 - 2012 @ Napa Valley, CA</p>
-<p><strong>Pacific Union College / Extracurricular</strong> <br>
-2007 - 2012 @ Napa Valley, CA <br>
-Astronomy tutor, student association officer, yearbook editor, campus newspaper photo editor, band leader.</p>
-<hr>
-<h2>Contributions</h2>
-<p><a href="https://arxiv.org/pdf/2004.13332.pdf"><strong>The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies</strong></a> <br>
-Figure &amp; Interface Design @ Science Advances</p>
-<p><a href="https://www.nature.com/articles/s41467-020-19334-3"><strong>Deep learning-enabled breast cancer hormonal receptor status determination from base-level H&amp;E stains</strong></a> <br>
-Figure Design @ Nature Magazine</p>
-<p><a href="https://arxiv.org/pdf/1911.10470.pdf"><strong>Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering</strong></a> <br>
-Figure Design @ ICLR</p>
-<p><a href="https://arxiv.org/pdf/2007.15280.pdf"><strong>PHOTON: A Robust Cross-Domain Text-to-SQL System</strong></a> <br>
-Figure Design @ ACL</p>
-<p><a href="https://yale-lily.github.io/sparc"><strong>SParC: Cross-Domain Semantic Parsing in Context</strong> </a> <br>
-Figure Design @ ACL</p>
-<p><a href="https://www.nature.com/articles/s41587-022-01618-2"><strong>Large language models generate functional protein sequences across diverse families</strong></a> <br>
-Figure Design @ Nature Biotechnology</p>
-<p><a href="https://arxiv.org/pdf/1905.11471.pdf"><strong>XLDA: Cross-Lingual Data Augmentation for Natural Language Inference and Question Answering</strong></a> <br>
-Figure Design</p>
-<p><a href="https://arxiv.org/pdf/1906.02361.pdf"><strong>Explain Yourself! Leveraging Language Models for Commonsense Reasoning</strong></a> <br>
-Figure Design</p>
-<hr>
-<h2>Volunteering</h2>
-<p><strong>Design Consultant</strong> <br>
-University of California, San Francisco</p>
-<p><strong>Public Affairs (ADSO-PA)</strong> <br>
-US Coast Guard Auxiliary</p>
-<hr>
-<h2>Certifications</h2>
-<p><strong>AIARE 1</strong> <br>
-American Institute for Avalanche Research &amp; Education</p>
-<p><strong>FORM+FUND Fellowship</strong> <br>
-University of California, Berkeley</p>
-<p><strong>Lead Renovation, Repair and Painting Program</strong> <br>
-US Environmental Protection Agency (EPA)</p>
-<p><strong>Open Water / Advanced Open Water / Rescue Diver</strong> <br>
-Professional Association of Diving Instructors</p>
-<p><strong>M1</strong> <br>
-California Department of Motor Vehicles</p>
-<p><strong>P1 / P2</strong> <br>
-US Hang Gliding &amp; Paragliding Association</p>
-<p><strong>Traditional Hunter Education</strong> <br>
-California Department of Fish and Wildlife</p>
-<hr>
-<h2>Online</h2>
-<p><a href="https://github.com/mgruesbeck">GitHub</a>, <a href="https://scholar.google.com/citations?user=HvhXtVcAAAAJ">Google Scholar</a>, <a href="https://www.linkedin.com/in/melvingruesbeck/">LinkedIn</a>, <a href="https://x.com/melvingruesbeck">X</a></p>
-<hr>
-<h2>Reads</h2>
-<p><a href="https://en.wikipedia.org/wiki/Ball_Lightning_(novel)">Ball Lightning</a>, <a href="https://archive.org/details/bargainingforadv00gric_0">Bargaining for Advantage: Negotiation Strategies for Reasonable People</a>, <a href="https://archive.org/details/billiondollarles00carr">Billion Dollar Lessons</a>, <a href="https://en.wikipedia.org/wiki/Death%27s_End">Death’s End</a>, <a href="https://archive.org/details/forecastwhatphys0000buch">Forecast: What Physics, Meteorology, and the Natural Sciences Can Teach Us About Economics</a>, <a href="https://en.wikipedia.org/wiki/Good_to_Great">Good to Great</a>, <a href="https://en.wikipedia.org/wiki/Leaving_the_Atocha_Station">Leaving the Atocha Station</a>, <a href="https://milobeckman.com/home-2021.html">Math Without Numbers</a>, <a href="https://en.wikipedia.org/wiki/Nudge_(book)">Nudge</a>, <a href="https://www.principles.com/">Principles</a>, <a href="https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind">Sapiens: A Brief History of Humankind</a>, <a href="https://en.wikipedia.org/wiki/Tao_Te_Ching">Tao Te Ching</a>, <a href="https://archive.org/details/alchemyoffinance0000soro">The Alchemy of Finance</a>, <a href="https://en.wikipedia.org/wiki/The_Ascent_of_Money">The Ascent of Money</a>, <a href="https://en.wikipedia.org/wiki/The_Dark_Forest">The Dark Forest</a>, <a href="https://en.wikipedia.org/wiki/The_Order_of_Time_(book)">The Order of Time</a>, <a href="https://en.wikipedia.org/wiki/The_Pleasure_of_Finding_Things_Out">The Pleasure of Finding Things Out</a>, <a href="https://en.wikipedia.org/wiki/Thinking_Strategically">Thinking Strategically: The Competitive Edge in Business, Politics, and Everyday Life</a>, <a href="https://www.wondrium.com/understanding-the-us-government?plus=y&amp;tn=Our+Newest+Courses_5_0">Understanding the US Government</a>, <a href="https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance">Zen and the Art of Motorcycle Maintenance</a>, <a href="https://en.wikipedia.org/wiki/Zero_to_One">Zero to One</a>.</p>
-
+<main class="tm"><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">whoami</span></p><div class="o"><h1>Melvin Gruesbeck</h1><p class="dim">operator · designer · backcountry skier</p></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">cat about.md</span></p><div class="o"><p>I bring a blend of engineering, design, communications, and operations experience, built exclusively alongside research teams at the seed, hyper-growth, and Fortune 100 stages.</p><p class="dim">Most recently at <a href="https://www.fiercebiotech.com/biotech/lilly-pens-22b-pact-bezos-backed-profluent-work-recombinase-based-gene-editing">Profluent Bio</a>, I built the business infrastructure bridging finance, legal, HR, IT, compliance, and communications, and optimized them as we scaled to eliminate bottlenecks before they compound. By developing this connective tissue, I helped transform a one-room operation into a mature startup capable of raising nine-figure funding and signing billion-dollar partnerships in a highly regulated industry.</p><p class="dim">On weekends I <a href="https://drive.google.com/file/d/140BKfTPPZPU1fFZ__Fq9u3AGQJcOVd8D/view?usp=sharing">backcountry ski</a>, <a href="https://drive.google.com/file/d/1dLB1ld2tVVL0qqQPxYagEMghcQRDgG5Y/view?usp=sharing">ride motorcycles</a>, and <a href="https://drive.google.com/file/d/1R_w0bkouyiYHdiMNRKi0aLojx-uGtahs/view?usp=sharing">fix things with power tools</a>.</p></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">open scramble.jpg</span></p><div class="o"><figure class="shot gearfig"><img class="" src="assets/scramble-1800.jpg" srcset="assets/scramble-900.jpg 900w, assets/scramble-1800.jpg 1800w" sizes="(min-width: 820px) 560px, 100vw" alt="Melvin scrambling up granite boulders above the snow, skis strapped to an orange pack" fetchpriority="high"><button type="button" class="hs" data-i="0" style="left:58%;top:47%" aria-label="Pack"><span class="num">1</span><span class="lbl">Pack</span></button><button type="button" class="hs left" data-i="1" style="left:86%;top:46%" aria-label="Skis"><span class="num">2</span><span class="lbl">Skis</span></button><button type="button" class="hs left" data-i="2" style="left:71%;top:54%" aria-label="Helmet"><span class="num">3</span><span class="lbl">Helmet</span></button><button type="button" class="hs" data-i="3" style="left:60%;top:63%" aria-label="Hands"><span class="num">4</span><span class="lbl">Hands</span></button><button type="button" class="hs" data-i="4" style="left:51%;top:68%" aria-label="Boots"><span class="num">5</span><span class="lbl">Boots</span></button><button type="button" class="hs" data-i="5" style="left:26%;top:66%" aria-label="Poles"><span class="num">6</span><span class="lbl">Poles</span></button></figure></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">cat gear.json</span></p><div class="o"><div class="json"><pre><span class="pn">{</span>
+<span class="row" data-gear="0" tabindex="0">  <span class="k">"pack"</span><span class="pn">:</span> <span class="s">"Orange, overloaded, mostly snacks."</span><span class="pn">,</span></span>
+<span class="row" data-gear="1" tabindex="0">  <span class="k">"skis"</span><span class="pn">:</span> <span class="s">"Fischer Transalp 82 C, A-framed for the scramble."</span><span class="pn">,</span></span>
+<span class="row" data-gear="2" tabindex="0">  <span class="k">"helmet"</span><span class="pn">:</span> <span class="s">"Rockfall is the quiet hazard on granite."</span><span class="pn">,</span></span>
+<span class="row" data-gear="3" tabindex="0">  <span class="k">"hands"</span><span class="pn">:</span> <span class="s">"Third-class terrain means using all four."</span><span class="pn">,</span></span>
+<span class="row" data-gear="4" tabindex="0">  <span class="k">"boots"</span><span class="pn">:</span> <span class="s">"Fischer touring boots, built for the walk."</span><span class="pn">,</span></span>
+<span class="row" data-gear="5" tabindex="0">  <span class="k">"poles"</span><span class="pn">:</span> <span class="s">"Stashed in the snow below. Back for them later."</span><span class="pn"></span></span>
+<span class="pn">}</span></pre></div><p class="hint">// hover a dot or a line</p></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">ls experience/</span></p><div class="o"><ul class="list"><li><span><span class="t">Head of Communications</span><span class="s">Profluent · Emeryville, CA</span></span><span class="m">2025 – Now</span></li><li><span><span class="t">Head of Operations</span><span class="s">Profluent · Berkeley, CA</span></span><span class="m">2022 – 2025</span></li><li><span><span class="t">Design Engineer</span><span class="s">Salesforce · Palo Alto, CA</span></span><span class="m">2016 – 2021</span></li><li><span><span class="t">Design Engineer</span><span class="s">MetaMind · Palo Alto, CA</span></span><span class="m">2015 – 2016</span></li><li><span><span class="t">Design, Marketing, Photography</span><span class="s">Early Career · Napa Valley, CA</span></span><span class="m">2009 – 2015</span></li></ul></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">ls contributions/</span></p><div class="o"><ul class="list"><li><span><span class="t"><a href="https://arxiv.org/pdf/2004.13332.pdf">The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies</a></span><span class="s">Figure &amp; Interface Design</span></span><span class="m">Science Advances</span></li><li><span><span class="t"><a href="https://www.nature.com/articles/s41467-020-19334-3">Deep learning-enabled breast cancer hormonal receptor status determination from base-level H&amp;E stains</a></span><span class="s">Figure Design</span></span><span class="m">Nature Magazine</span></li><li><span><span class="t"><a href="https://arxiv.org/pdf/1911.10470.pdf">Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering</a></span><span class="s">Figure Design</span></span><span class="m">ICLR</span></li><li><span><span class="t"><a href="https://arxiv.org/pdf/2007.15280.pdf">PHOTON: A Robust Cross-Domain Text-to-SQL System</a></span><span class="s">Figure Design</span></span><span class="m">ACL</span></li><li><span><span class="t"><a href="https://yale-lily.github.io/sparc">SParC: Cross-Domain Semantic Parsing in Context</a></span><span class="s">Figure Design</span></span><span class="m">ACL</span></li><li><span><span class="t"><a href="https://www.nature.com/articles/s41587-022-01618-2">Large language models generate functional protein sequences across diverse families</a></span><span class="s">Figure Design</span></span><span class="m">Nature Biotechnology</span></li><li><span><span class="t"><a href="https://arxiv.org/pdf/1905.11471.pdf">XLDA: Cross-Lingual Data Augmentation for Natural Language Inference and Question Answering</a></span><span class="s">Figure Design</span></span><span class="m">Preprint</span></li><li><span><span class="t"><a href="https://arxiv.org/pdf/1906.02361.pdf">Explain Yourself! Leveraging Language Models for Commonsense Reasoning</a></span><span class="s">Figure Design</span></span><span class="m">Preprint</span></li></ul></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">ls kit/</span></p><div class="o"><ul class="list"><li><span><span class="t">Design Consultant</span><span class="s">University of California, San Francisco</span></span><span class="m">volunteer</span></li><li><span><span class="t">Public Affairs (ADSO-PA)</span><span class="s">US Coast Guard Auxiliary</span></span><span class="m">volunteer</span></li><li><span><span class="t">AIARE 1</span><span class="s">American Institute for Avalanche Research &amp; Education</span></span><span class="m">cert</span></li><li><span><span class="t">FORM+FUND Fellowship</span><span class="s">University of California, Berkeley</span></span><span class="m">cert</span></li><li><span><span class="t">Lead Renovation, Repair and Painting Program</span><span class="s">US Environmental Protection Agency (EPA)</span></span><span class="m">cert</span></li><li><span><span class="t">Open Water / Advanced Open Water / Rescue Diver</span><span class="s">Professional Association of Diving Instructors</span></span><span class="m">cert</span></li><li><span><span class="t">M1</span><span class="s">California Department of Motor Vehicles</span></span><span class="m">cert</span></li><li><span><span class="t">P1 / P2</span><span class="s">US Hang Gliding &amp; Paragliding Association</span></span><span class="m">cert</span></li><li><span><span class="t">Traditional Hunter Education</span><span class="s">California Department of Fish and Wildlife</span></span><span class="m">cert</span></li></ul></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">ls education/</span></p><div class="o"><ul class="list"><li><span><span class="t">Journalism &amp; PR (BS)</span><span class="s">Pacific Union College</span></span><span class="m">2007–2012</span></li><li><span><span class="t">Photography (AS)</span><span class="s">Pacific Union College</span></span><span class="m">2007–2012</span></li><li><span><span class="t">Extracurricular</span><span class="s">Pacific Union College</span></span><span class="m">2007–2012</span></li></ul></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">cat reads.txt</span></p><div class="o"><p class="dim"><a href="https://en.wikipedia.org/wiki/Ball_Lightning_(novel)">Ball Lightning</a>, <a href="https://archive.org/details/bargainingforadv00gric_0">Bargaining for Advantage: Negotiation Strategies for Reasonable People</a>, <a href="https://archive.org/details/billiondollarles00carr">Billion Dollar Lessons</a>, <a href="https://en.wikipedia.org/wiki/Death%27s_End">Death’s End</a>, <a href="https://archive.org/details/forecastwhatphys0000buch">Forecast: What Physics, Meteorology, and the Natural Sciences Can Teach Us About Economics</a>, <a href="https://en.wikipedia.org/wiki/Good_to_Great">Good to Great</a>, <a href="https://en.wikipedia.org/wiki/Leaving_the_Atocha_Station">Leaving the Atocha Station</a>, <a href="https://milobeckman.com/home-2021.html">Math Without Numbers</a>, <a href="https://en.wikipedia.org/wiki/Nudge_(book)">Nudge</a>, <a href="https://www.principles.com/">Principles</a>, <a href="https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind">Sapiens: A Brief History of Humankind</a>, <a href="https://en.wikipedia.org/wiki/Tao_Te_Ching">Tao Te Ching</a>, <a href="https://archive.org/details/alchemyoffinance0000soro">The Alchemy of Finance</a>, <a href="https://en.wikipedia.org/wiki/The_Ascent_of_Money">The Ascent of Money</a>, <a href="https://en.wikipedia.org/wiki/The_Dark_Forest">The Dark Forest</a>, <a href="https://en.wikipedia.org/wiki/The_Order_of_Time_(book)">The Order of Time</a>, <a href="https://en.wikipedia.org/wiki/The_Pleasure_of_Finding_Things_Out">The Pleasure of Finding Things Out</a>, <a href="https://en.wikipedia.org/wiki/Thinking_Strategically">Thinking Strategically: The Competitive Edge in Business, Politics, and Everyday Life</a>, <a href="https://www.wondrium.com/understanding-the-us-government?plus=y&amp;tn=Our+Newest+Courses_5_0">Understanding the US Government</a>, <a href="https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance">Zen and the Art of Motorcycle Maintenance</a>, <a href="https://en.wikipedia.org/wiki/Zero_to_One">Zero to One</a>.</p></div><p class="p"><span class="u">melvin</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">open --links</span></p><div class="o"><p><a href="https://github.com/mgruesbeck">GitHub</a>&nbsp;&nbsp;<a href="https://scholar.google.com/citations?user=HvhXtVcAAAAJ">Google Scholar</a>&nbsp;&nbsp;<a href="https://www.linkedin.com/in/melvingruesbeck/">LinkedIn</a>&nbsp;&nbsp;<a href="https://x.com/melvingruesbeck">X</a></p></div></main><script>
+(() => {
+  const fig = document.querySelector('.gearfig');
+  const hs = [...document.querySelectorAll('.hs')], items = [...document.querySelectorAll('[data-gear]')];
+  const set = (i) => {
+    hs.forEach((h) => h.classList.toggle('on', +h.dataset.i === i));
+    items.forEach((x) => x.classList.toggle('on', +x.dataset.gear === i));
+    fig && fig.classList.toggle('active', i >= 0);
+  };
+  const idx = (el) => +(el.dataset.i ?? el.dataset.gear);
+  [...hs, ...items].forEach((el) => {
+    el.addEventListener('mouseenter', () => set(idx(el)));
+    el.addEventListener('mouseleave', () => set(-1));
+    el.addEventListener('focus', () => set(idx(el)));
+    el.addEventListener('blur', () => set(-1));
+    el.addEventListener('click', (e) => { e.stopPropagation(); set(el.classList.contains('on') && e.pointerType !== 'mouse' ? -1 : idx(el)); });
+  });
+  document.addEventListener('click', () => set(-1));
+})();
+</script>
 </body>
 
 </html>

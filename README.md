@@ -4,19 +4,23 @@
 
 A single-page static personal résumé site for Melvin Gruesbeck, served by
 GitHub Pages at `https://mgruesbeck.github.io/` (the `og:url` in
-`index.html`). There is no build step, package manifest, JavaScript, or
-server code: GitHub Pages serves the files in the repository root as-is.
+`index.html`). There is no build step, package manifest, or server code:
+GitHub Pages serves the files as-is.
 
-The repository is flat. It has no subdirectories.
+The page is styled as a light "One Light" terminal transcript (`whoami`,
+`cat about.md`, `open scramble.jpg`, `cat gear.json`, `ls experience/`, …)
+with an annotated ski-mountaineering photo whose gear markers link to the
+`gear.json` lines on hover, focus, or tap.
 
 ## Local Interface & Invariants
 
 | File | Role |
 | --- | --- |
-| `index.html` | The whole site. One HTML document with `<title>Melvin Gruesbeck</title>`, SEO, canonical, Open Graph (`og:type` `profile`), and `twitter:card` meta tags, a JSON-LD `Person` block, an untitled intro, and `<h2>` sections: Experience, Education, Contributions, Volunteering, Certifications, Online, Reads. Links `normalize.css`, `custom.css`, and `favicon.ico` from the root. |
-| `custom.css` | Site styles. Sets the body font to `'Inconsolata', monospace` with a `clamp(.8rem, 4vmin, 1.2rem)` font size and link color `#0b6e99`. Limits top-level body children to `max-width: 30rem` with an `8%` left margin, which grows to `calc(8% + 50px)` at `min-width: 750px`. |
-| `normalize.css` | Vendored `normalize.css v3.0.2` (MIT). |
-| `favicon.ico` | Site icon. |
+| `index.html` | The whole site, self-contained. SEO, canonical, Open Graph (`og:type` `profile`), and `twitter:card` meta tags; a JSON-LD `Person` block; all CSS inline in one `<style>`; one inline `<script>` that links the photo markers (`.hs[data-i]`) to the gear lines (`[data-gear]`). Loads Martian Mono and IBM Plex Mono from Google Fonts and the photo from `assets/`. |
+| `assets/scramble-900.jpg`, `assets/scramble-1800.jpg` | The ski-mountaineering photo at two widths, used through `srcset`. |
+| `custom.css`, `normalize.css` | Styles for the previous design. `index.html` no longer links them. |
+| `favicon.svg` | Site icon: a dark `^` peak with an orange pin on the summit, matching the page's gear markers. |
+| `favicon.ico`, `apple-touch-icon.png` | The same icon as a 16/32/48 px ICO for older browsers, and as a 180 px home-screen icon. |
 | `melvin-gruesbeck.jpg` | 1200×1200 square social preview image (about 140 KB). Referenced by `og:image` and the JSON-LD `image` as `https://mgruesbeck.github.io/melvin-gruesbeck.jpg`. |
 
 Invariants:
@@ -27,12 +31,16 @@ Invariants:
   (1200×1200). Renaming the file breaks `og:image` and the JSON-LD `image`.
 - The JSON-LD `jobTitle`, `worksFor`, and `sameAs` values duplicate the
   Experience and Online sections. Update them together.
+- Each gear marker's `data-i` must match the `data-gear` of its line in
+  `gear.json`, and the marker's `left`/`top` percentages are positions on the
+  photo. Re-cropping or replacing the photo means re-placing the markers.
 - The site is edited both locally and through the GitHub web editor. Pull before
   editing locally.
 
 ## Subdirectories & System Boundaries
 
-- None. Every file is in the repository root.
+- `assets/`: photo files for `index.html`. No contract file.
+- `explorations/`, `research_notes/`, `reports/`: local working folders. `research_notes/` and `reports/` are git-ignored.
 
 ## Global Invariants
 
@@ -41,10 +49,10 @@ Invariants:
 
 ## Global Side Effects
 
-- None at runtime from this repository's code. There are no scripts. The
-  `<!-- analytics -->` placeholder in `index.html` is empty.
-- When the page loads, the browser requests the Inconsolata font from Google
-  Fonts (`fonts.googleapis.com` and `fonts.gstatic.com`).
+- The inline script only toggles classes on the page. It makes no network
+  requests and stores nothing. The `<!-- analytics -->` placeholder is empty.
+- When the page loads, the browser requests Martian Mono and IBM Plex Mono
+  from Google Fonts (`fonts.googleapis.com` and `fonts.gstatic.com`).
 - A push to `master` publishes the site through GitHub Pages.
 
 ## System Verification
