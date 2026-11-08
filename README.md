@@ -30,8 +30,8 @@ Invariants:
 - `og:image:width` and `og:image:height` must match `assets/scramble-og.jpg`
   (1200×1200). Renaming the file breaks `og:image` and the JSON-LD `image`.
 - Keep the photo credit to Brendan King under the photo.
-- The JSON-LD `jobTitle`, `worksFor`, and `sameAs` values duplicate the
-  Experience and Online sections. Update them together.
+- The JSON-LD `sameAs` values duplicate the links section. Update them
+  together. Add `jobTitle` and `worksFor` back when there is a current role.
 - Each gear marker's `data-i` must match the `data-gear` of its line in
   `gear.json`, and the marker's `left`/`top` percentages are positions on the
   photo. Re-cropping or replacing the photo means re-placing the markers.
