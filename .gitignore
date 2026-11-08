@@ -2,3 +2,7 @@
 research_notes/
 reports/
 explorations/
+.DS_Store
+# project originals and text stay local; only the encrypted vault is published
+projects/*/
+!projects/vault/

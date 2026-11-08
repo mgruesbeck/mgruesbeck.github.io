@@ -22,14 +22,19 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | `assets/scramble-og.jpg` | 1200×1200 square crop of the same photo for link previews. Referenced by `og:image` and the JSON-LD `image`. |
 | `favicon.svg` | Site icon: two dark peaks forming an "M", with an orange pin on the higher summit, matching the page's gear markers. |
 | `favicon.ico`, `apple-touch-icon.png` | The same icon as a 16/32/48 px ICO for older browsers, and as a 180 px home-screen icon. |
+| `projects/index.html` | Password-gated project pages (`noindex`). Asks for the password in a `[sudo]` prompt, derives the key with PBKDF2 using `vault/meta.json`, then decrypts `vault/index.bin` (every project's text and photo list) and each photo as it scrolls into view. `#<slug>` opens one project. Keeps the derived key in `sessionStorage` until the tab closes or `logout`. |
+| `projects/vault/` | Output of `make projects`: `meta.json` (salt and iteration count, not secret), `index.bin`, and one `<id>.bin` per photo. Each `.bin` is a 12-byte IV followed by AES-256-GCM ciphertext. Never edit by hand. |
+| `tools/build-projects.mjs` | Builds `projects/vault/` from `projects/<slug>/project.md` and the photos it names. Resizes photos to 1600 px (2400 px for `.png` screenshots) and strips their metadata. IVs and file names are HMACs of the content, so unchanged projects rebuild byte-for-byte. Refuses a password that can't open the existing vault unless `CHANGE_PASSWORD=1`. |
+| `Makefile` | `make serve` runs a local server. `make projects` asks for the password and rebuilds the vault (`make projects CHANGE_PASSWORD=1` to set a new one). |
 
 Invariants:
 
 - The `description` and `og:description` meta tags in `index.html` hold the
   same text. Edit both together.
 - `og:image:width` and `og:image:height` must match `assets/scramble-og.jpg`
-- Each `a.ph` link's `href` must point at an existing file in `assets/`, and its `data-w`/`data-h` must match that file's dimensions
   (1200×1200). Renaming the file breaks `og:image` and the JSON-LD `image`.
+- Each `a.ph` link's `href` must point at an existing file in `assets/`, and its
+  `data-w`/`data-h` must match that file's dimensions.
 - Keep the photo credit to Brendan King under the photo.
 - The JSON-LD `sameAs` values duplicate the links section. Update them
   together. Add `jobTitle` and `worksFor` back when there is a current role.
@@ -42,17 +47,28 @@ Invariants:
 ## Subdirectories & System Boundaries
 
 - `assets/`: photo files for `index.html`. No contract file.
+- `projects/<slug>/`: the original photos for one project plus its `project.md`
+  (`# Title`, `year:` and `summary:` lines, then `## Step` sections with short
+  paragraphs, `![alt](file.jpg)` lines, and ``` fenced notes; consecutive image
+  lines form one gallery). Git-ignored: only the encrypted `projects/vault/` is
+  published, because the repo is public. Not backed up by git.
 - `explorations/`, `research_notes/`, `reports/`: local working folders, all git-ignored.
 
 ## Global Invariants
 
 - The site must stay a plain static site that GitHub Pages can serve directly
-  from the `master` branch with no build.
+  from the `master` branch with no build. The projects vault is built locally
+  and committed, so the server still needs no build.
+- Never commit anything from `projects/<slug>/`; the repo is public. Rebuild
+  the vault with `make projects` after editing a project, then commit
+  `projects/vault/`.
 
 ## Global Side Effects
 
 - The inline script only toggles classes on the page. It makes no network
   requests and stores nothing. The `<!-- analytics -->` placeholder is empty.
+- `projects/index.html` fetches files from `projects/vault/` and stores the
+  derived key in `sessionStorage` under `projects-key`.
 - When the page loads, the browser requests Martian Mono and IBM Plex Mono
   from Google Fonts (`fonts.googleapis.com` and `fonts.gstatic.com`).
 - A push to `master` publishes the site through GitHub Pages.
@@ -61,3 +77,5 @@ Invariants:
 
 - No test suite exists. To check the site, run `make serve` and open
   `http://localhost:8000/`. Use `make serve PORT=3000` for another port.
+- For projects, run `make projects`, then open `http://localhost:8000/projects/`
+  and unlock it with the same password.
