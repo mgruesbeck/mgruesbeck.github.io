@@ -20,7 +20,7 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | `assets/scramble-900.jpg`, `assets/scramble-1800.jpg` | The ski-mountaineering photo at two widths, used through `srcset`. Photo by Brendan King (https://kingb12.github.io/), credited under the photo. |
 | `assets/scramble-og.jpg` | 1200×1200 square crop of the same photo for link previews. Referenced by `og:image` and the JSON-LD `image`. |
 | `custom.css`, `normalize.css` | Styles for the previous design. `index.html` no longer links them. |
-| `favicon.svg` | Site icon: a dark `^` peak with an orange pin on the summit, matching the page's gear markers. |
+| `favicon.svg` | Site icon: two dark peaks forming an "M", with an orange pin on the higher summit, matching the page's gear markers. |
 | `favicon.ico`, `apple-touch-icon.png` | The same icon as a 16/32/48 px ICO for older browsers, and as a 180 px home-screen icon. |
 
 Invariants:
