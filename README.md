@@ -17,18 +17,19 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | File | Role |
 | --- | --- |
 | `index.html` | The whole site, self-contained. SEO, canonical, Open Graph (`og:type` `profile`), and `twitter:card` meta tags; a JSON-LD `Person` block; all CSS inline in one `<style>`; one inline `<script>` that links the photo markers (`.hs[data-i]`) to the gear lines (`[data-gear]`). Loads Martian Mono and IBM Plex Mono from Google Fonts and the photo from `assets/`. |
-| `assets/scramble-900.jpg`, `assets/scramble-1800.jpg` | The ski-mountaineering photo at two widths, used through `srcset`. |
+| `assets/scramble-900.jpg`, `assets/scramble-1800.jpg` | The ski-mountaineering photo at two widths, used through `srcset`. Photo by Brendan King (https://kingb12.github.io/), credited under the photo. |
+| `assets/scramble-og.jpg` | 1200×1200 square crop of the same photo for link previews. Referenced by `og:image` and the JSON-LD `image`. |
 | `custom.css`, `normalize.css` | Styles for the previous design. `index.html` no longer links them. |
 | `favicon.svg` | Site icon: a dark `^` peak with an orange pin on the summit, matching the page's gear markers. |
 | `favicon.ico`, `apple-touch-icon.png` | The same icon as a 16/32/48 px ICO for older browsers, and as a 180 px home-screen icon. |
-| `melvin-gruesbeck.jpg` | 1200×1200 square social preview image (about 140 KB). Referenced by `og:image` and the JSON-LD `image` as `https://mgruesbeck.github.io/melvin-gruesbeck.jpg`. |
 
 Invariants:
 
 - The `description` and `og:description` meta tags in `index.html` hold the
   same text. Edit both together.
-- `og:image:width` and `og:image:height` must match `melvin-gruesbeck.jpg`
+- `og:image:width` and `og:image:height` must match `assets/scramble-og.jpg`
   (1200×1200). Renaming the file breaks `og:image` and the JSON-LD `image`.
+- Keep the photo credit to Brendan King under the photo.
 - The JSON-LD `jobTitle`, `worksFor`, and `sameAs` values duplicate the
   Experience and Online sections. Update them together.
 - Each gear marker's `data-i` must match the `data-gear` of its line in
@@ -40,7 +41,7 @@ Invariants:
 ## Subdirectories & System Boundaries
 
 - `assets/`: photo files for `index.html`. No contract file.
-- `explorations/`, `research_notes/`, `reports/`: local working folders. `research_notes/` and `reports/` are git-ignored.
+- `explorations/`, `research_notes/`, `reports/`: local working folders, all git-ignored.
 
 ## Global Invariants
 
