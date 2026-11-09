@@ -25,7 +25,7 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | `projects/index.html` | Password-gated project pages (`noindex`). Asks for the password in a `[sudo]` prompt, derives the key with PBKDF2 using `vault/meta.json`, then decrypts `vault/index.bin` (every project's text and photo list) and each photo as it scrolls into view. `#<slug>` opens one project. Keeps the derived key in `sessionStorage` until the tab closes or `logout`. |
 | `projects/vault/` | Output of `make projects`: `meta.json` (salt and iteration count, not secret), `index.bin`, and one `<id>.bin` per photo. Each `.bin` is a 12-byte IV followed by AES-256-GCM ciphertext. Never edit by hand. |
 | `tools/build-projects.mjs` | Builds `projects/vault/` from `projects/<slug>/project.md` and the photos it names. Resizes photos to 1600 px (2400 px for `.png` screenshots) and strips their metadata. IVs and file names are HMACs of the content, so unchanged projects rebuild byte-for-byte. Refuses a password that can't open the existing vault unless `CHANGE_PASSWORD=1`. |
-| `Makefile` | `make serve` runs a local server. `make projects` asks for the password and rebuilds the vault (`make projects CHANGE_PASSWORD=1` to set a new one). |
+| `Makefile` | `make serve` runs a local server. `make projects` asks for the password and rebuilds the vault (`make projects CHANGE_PASSWORD=1` to set a new one). `make resume` exports the resume to PDF with LibreOffice (`soffice`) and copies it to `$(FORAGER)` (default `../forager/profile/resume.pdf`) when that folder exists. |
 
 Invariants:
 
@@ -52,7 +52,13 @@ Invariants:
   paragraphs, `![alt](file.jpg)` lines, and ``` fenced notes; consecutive image
   lines form one gallery). Git-ignored: only the encrypted `projects/vault/` is
   published, because the repo is public. Not backed up by git.
-- `explorations/`, `research_notes/`, `reports/`: local working folders, all git-ignored.
+- `explorations/`: past design variants for the site, kept for reference.
+  Browse them at `http://localhost:8000/explorations/` with `make serve`.
+  Git-ignored.
+- `resume/`: the one working copy of the resume, `Melvin Gruesbeck.docx`, and
+  the PDF that `make resume` exports from it. Git-ignored. Edit the `.docx`
+  directly or as tracked changes, keep its fonts and layout, then run
+  `make resume`. Not backed up by git.
 
 ## Global Invariants
 

@@ -1,8 +1,9 @@
 *.swp
-research_notes/
-reports/
-explorations/
 .DS_Store
+# design explorations kept for reference
+explorations/
+# the resume stays local; the site carries the public version
+resume/
 # project originals and text stay local; only the encrypted vault is published
 projects/*/
 !projects/vault/
