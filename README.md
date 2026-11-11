@@ -25,6 +25,8 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | `projects/index.html` | Password-gated project pages (`noindex`). Asks for the password in a `[sudo]` prompt, derives the key with PBKDF2 using `vault/meta.json`, then decrypts `vault/index.bin` (every project's text and photo list) and each photo as it scrolls into view. `#<slug>` opens one project. Keeps the derived key in `sessionStorage` until the tab closes or `logout`. |
 | `projects/vault/` | Output of `make projects`: `meta.json` (salt and iteration count, not secret), `index.bin`, and one `<id>.bin` per photo. Each `.bin` is a 12-byte IV followed by AES-256-GCM ciphertext. Never edit by hand. |
 | `tools/build-projects.mjs` | Builds `projects/vault/` from `projects/<slug>/project.md` and the photos it names. Resizes photos to 1600 px (2400 px for `.png` screenshots) and strips their metadata. IVs and file names are HMACs of the content, so unchanged projects rebuild byte-for-byte. Refuses a password that can't open the existing vault unless `CHANGE_PASSWORD=1`. |
+| `consulting/index.html` | Consulting & booking page (`noindex`), linked from `open --links` in `index.html`. Offers a free 30-minute intro call (Google Calendar Appointment Schedule), a one-time Trial (10h in 30 days, $2,000), and four monthly plans (Advisory 10h/$2,500, Embedded 20h/$4,800, Fractional 40h/$9,000, Half Time 80h/$16,000) with 5% off for a 6-month term and 10% off for a 12-month term. One inline live-interpolated Consulting Agreement covers the trial and every plan; its e-signature form posts to `tools/consulting-contract-gas.js`. |
+| `tools/consulting-contract-gas.js` | Google Apps Script backend for `/consulting/`. Receives the client's signed agreement (`doPost`), creates a Google Doc in a `Consulting Contracts` Google Drive folder, and emails the owner a 1-click countersign link (`doGet`). Clicking the link appends the consultant's countersignature, exports a locked PDF to Drive, and emails both parties the executed PDF + the Stripe ACH payment link that the page sent for the chosen plan and term. |
 | `Makefile` | `make serve` runs a local server. `make projects` asks for the password and rebuilds the vault (`make projects CHANGE_PASSWORD=1` to set a new one). `make resume` exports the resume to PDF with LibreOffice (`soffice`) and copies it to `$(FORAGER)` (default `../forager/profile/resume.pdf`) when that folder exists. |
 
 Invariants:
@@ -36,8 +38,10 @@ Invariants:
 - Each `a.ph` link's `href` must point at an existing file in `assets/`, and its
   `data-w`/`data-h` must match that file's dimensions.
 - Keep the photo credit to Brendan King under the photo.
-- The JSON-LD `sameAs` values duplicate the links section. Update them
-  together. Add `jobTitle` and `worksFor` back when there is a current role.
+- The JSON-LD `sameAs` values duplicate the external profile links in the
+  `open --links` section (`consulting/` is an internal page and is excluded from
+  `sameAs`). Update external links together. Add `jobTitle` and `worksFor` back
+  when there is a current role.
 - Each gear marker's `data-i` must match the `data-gear` of its line in
   `gear.json`, and the marker's `left`/`top` percentages are positions on the
   photo. Re-cropping or replacing the photo means re-placing the markers.
@@ -59,6 +63,17 @@ Invariants:
   the PDF that `make resume` exports from it. Git-ignored. Edit the `.docx`
   directly or as tracked changes, keep its fonts and layout, then run
   `make resume`. Not backed up by git.
+- `consulting/`: static consulting & booking page (`consulting/index.html`).
+  All external endpoints (Google Calendar Appointment Schedule URL, Stripe
+  Payment Links, and Google Apps Script Web App URL) are configured in the
+  top `CONFIG` object of `consulting/index.html`. Any action whose URL still
+  holds a `REPLACE_` placeholder shows as "(not connected yet)" and does
+  nothing, so the page is safe to load before setup but must not be published
+  until every link is real.
+  Prices live in three places that must agree: the `ls engagements/` rows, the
+  `TIERS` and `TERMS` objects in the script, and the Stripe links and codes.
+  The AI spend cap (10% of the monthly fee) and the specialist terms live in
+  two places that must agree: `cat terms.md` and section 4 of the agreement.
 
 ## Global Invariants
 
@@ -71,17 +86,60 @@ Invariants:
 
 ## Global Side Effects
 
-- The inline script only toggles classes on the page. It makes no network
-  requests and stores nothing. The `<!-- analytics -->` placeholder is empty.
+- The inline script in `index.html` only toggles classes on the page. It makes
+  no network requests and stores nothing. The `<!-- analytics -->` placeholder
+  is empty.
 - `projects/index.html` fetches files from `projects/vault/` and stores the
   derived key in `sessionStorage` under `projects-key`.
+- `consulting/index.html` loads the Google Calendar Appointment Schedule iframe
+  on demand when the visitor clicks "Browse open slots" and `POST`s signed
+  agreements to the Google Apps Script endpoint in
+  `CONFIG.contractWebhookUrl`.
 - When the page loads, the browser requests Martian Mono and IBM Plex Mono
   from Google Fonts (`fonts.googleapis.com` and `fonts.gstatic.com`).
 - A push to `master` publishes the site through GitHub Pages.
+
+## Consulting Setup (`consulting/index.html`)
+
+Update the `CONFIG` block at the top of the inline `<script>` in
+`consulting/index.html`:
+
+1. **Google Calendar Appointment Schedule (`CONFIG.calendarBookingUrl`):**
+   - In Google Calendar, click **Create → Appointment schedule**, set a
+     30-minute duration and your available windows, and save. This is the free
+     intro call; no payment is attached to it.
+   - Click **Share → Website embed → Inline booking page** and copy the
+     `https://calendar.google.com/calendar/appointments/schedules/...?gv=true`
+     URL into `CONFIG.calendarBookingUrl`.
+2. **Stripe Payment Links (`CONFIG.stripeLinks`, `CONFIG.termPromoCodes`):**
+   - In the Stripe Dashboard (`https://dashboard.stripe.com/payment-links`),
+     create 5 Payment Links, each with **US Bank Account / ACH only** so
+     Stripe's fee is capped at $5.00:
+     - `trial`: **$2,000.00** one-time.
+     - `advisory`: **$2,500.00/month**.
+     - `embedded`: **$4,800.00/month**.
+     - `fractional`: **$9,000.00/month**.
+     - `half`: **$16,000.00/month**.
+   - Create two coupons with duration **Forever**: 5% off with the promotion
+     code `TERM6`, and 10% off with the promotion code `TERM12`. On each of the
+     four monthly links, turn on **Allow promotion codes**. For a 6-month or
+     12-month term the page adds `?prefilled_promo_code=` to the plan's link.
+   - The payer can edit the code at checkout, so check the first invoice
+     against the signed agreement.
+3. **Google Apps Script Contract Workflow (`CONFIG.contractWebhookUrl`):**
+   - Open `https://script.google.com`, create a new project, and paste the
+     contents of `tools/consulting-contract-gas.js` into `Code.gs`.
+   - Click **Deploy → New deployment → Web app**, set **Execute as: Me** and
+     **Who has access: Anyone**, authorize Drive/Docs/Gmail, and copy the Web
+     App URL (`https://script.google.com/macros/s/.../exec`) into
+     `CONFIG.contractWebhookUrl`.
 
 ## System Verification
 
 - No test suite exists. To check the site, run `make serve` and open
   `http://localhost:8000/`. Use `make serve PORT=3000` for another port.
+- For consulting, open `http://localhost:8000/consulting/` and verify plan and
+  term switching, live contract interpolation, calendar modal, and print/PDF
+  view.
 - For projects, run `make projects`, then open `http://localhost:8000/projects/`
   and unlock it with the same password.
