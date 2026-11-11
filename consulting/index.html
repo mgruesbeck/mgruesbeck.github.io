@@ -57,30 +57,20 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
 .xd .g { color: #c5c6cb; white-space: pre; }
 @keyframes xin { from { opacity: 0; transform: translateY(-4px); } }
 
-/* the signing form: a muted label, then what the visitor types, as at a prompt */
+/* the plan and term pickers: a muted label, then the options */
 .ask { margin-top: 14px; }
 .ask li { display: grid; grid-template-columns: 12ch minmax(0, 1fr); gap: 2px 18px; align-items: baseline; }
 .ask .lb { color: var(--muted); transition: color .15s; } .ask li:focus-within .lb { color: var(--violet); }
-.ask input:not([type="radio"]), .ask textarea { width: 100%; min-width: 0; margin: 0; padding: 0; border: 0; border-radius: 0; outline: none; background: none; font: inherit; color: var(--ink); caret-color: var(--accent); }
-.ask input[type="date"] { width: auto; }
-.ask textarea { display: block; min-height: 3.5em; resize: none; field-sizing: content; }
-.ask ::placeholder { color: #c5c6cb; opacity: 1; }
-.ask .sg { display: flex; gap: 1ch; }
 .opt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 6px; margin-left: -6px; }
-.opt input, .chk input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.opt input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .opt label span { padding: 2px 6px; border-radius: 4px; cursor: pointer; color: var(--cyan); transition: color .15s, background .15s; }
 .opt label:hover span { color: var(--violet); }
 .opt input:checked + span { color: var(--violet); background: var(--hl); }
 .opt input:disabled + span { color: var(--muted); background: none; cursor: default; }
-.opt input:focus-visible + span, .chk input:focus-visible + .bx { outline: 2px solid var(--violet); outline-offset: 2px; border-radius: 4px; }
+.opt input:focus-visible + span { outline: 2px solid var(--violet); outline-offset: 2px; border-radius: 4px; }
 .opt .dim { margin-left: 6px; font-size: .88em; }
-.chk { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 14px; color: var(--muted); cursor: pointer; }
-.chk .bx { color: var(--cyan); white-space: pre; } .chk .bx::before { content: "[ ]"; }
-.chk input:checked + .bx { color: var(--violet); } .chk input:checked + .bx::before { content: "[x]"; }
-.send, .status { margin-top: 14px; } .status p + p { margin-top: 6px; }
-.status .ok { color: var(--green); } .status .err { color: var(--accent); }
 
-.doc { padding-left: 14px; border-left: 1px solid var(--rule); font-size: .92em; }
+.doc { margin-top: 20px; padding-left: 14px; border-left: 1px solid var(--rule); font-size: .92em; }
 .doc > * + * { margin-top: 10px; }
 .doc h2 { font-size: 1em; font-weight: 600; color: var(--ink); } .doc h2:not(:first-child) { margin-top: 24px; }
 .doc h2 .sy { color: #c5c6cb; font-weight: 400; }
@@ -135,7 +125,7 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
             <span class="m">free</span>
           </summary>
           <div class="xd">
-            <p class="in">Start here. Tell me what you are trying to get done, and I will tell you whether I can help and which plan fits. <button type="button" class="act" id="open-cal">Browse open slots</button></p>
+            <p class="in">Start here. Tell me what you are trying to get done, and I will tell you whether I can help and which plan fits. <button type="button" class="act" data-cal>Browse open slots</button></p>
           </div>
         </details>
       </li>
@@ -152,7 +142,7 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
           <div class="xd">
             <p class="in">Ten hours on one real problem, at $200 an hour instead of $250. The trial ends on its own after 30 days, so there is nothing to cancel. One per company.</p>
             <p class="tr"><span class="g">├──</span><span><span class="k">What fits</span> A deck and narrative rewrite, a diligence-readiness review of your operations, a set of figures, or a launch plan for the announcement.</span></p>
-            <p class="tr"><span class="g">└──</span><span><span class="k">Afterwards</span> Stop there, or email me to continue on any plan under the same agreement. <a href="#sign" data-pick-tier="trial">Sign for the trial</a></span></p>
+            <p class="tr"><span class="g">└──</span><span><span class="k">Afterwards</span> Stop there, or email me to continue on any plan under the same agreement. <a href="#agreement" data-pick-tier="trial">See the trial agreement</a></span></p>
           </div>
         </details>
       </li>
@@ -167,7 +157,7 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
             <span class="m">$2,500 / mo</span>
           </summary>
           <div class="xd">
-            <p class="in">A standing call plus review between calls: decks, investor updates, announcements, vendor contracts. <a href="#sign" data-pick-tier="advisory">Sign for Advisory</a></p>
+            <p class="in">A standing call plus review between calls: decks, investor updates, announcements, vendor contracts. <a href="#agreement" data-pick-tier="advisory">See the Advisory agreement</a></p>
           </div>
         </details>
       </li>
@@ -182,7 +172,7 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
             <span class="m">$4,800 / mo</span>
           </summary>
           <div class="xd">
-            <p class="in">About five hours a week of hands-on work alongside your team, as you prepare for a raise or put a new round to work. <a href="#sign" data-pick-tier="embedded">Sign for Embedded</a></p>
+            <p class="in">About five hours a week of hands-on work alongside your team, as you prepare for a raise or put a new round to work. <a href="#agreement" data-pick-tier="embedded">See the Embedded agreement</a></p>
           </div>
         </details>
       </li>
@@ -197,7 +187,7 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
             <span class="m">$9,000 / mo</span>
           </summary>
           <div class="xd">
-            <p class="in">About ten hours a week. Enough to own a function for you as a fractional COO or head of design. <a href="#sign" data-pick-tier="fractional">Sign for Fractional</a></p>
+            <p class="in">About ten hours a week. Enough to own a function for you as a fractional COO or head of design. <a href="#agreement" data-pick-tier="fractional">See the Fractional agreement</a></p>
           </div>
         </details>
       </li>
@@ -212,7 +202,7 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
             <span class="m">$16,000 / mo</span>
           </summary>
           <div class="xd">
-            <p class="in">About twenty hours a week, for a raise and its diligence, a major launch, or interim leadership. <a href="#sign" data-pick-tier="half">Sign for Half Time</a></p>
+            <p class="in">About twenty hours a week, for a raise and its diligence, a major launch, or interim leadership. <a href="#agreement" data-pick-tier="half">See the Half Time agreement</a></p>
           </div>
         </details>
       </li>
@@ -232,11 +222,19 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
     </div>
   </div>
 
-  <form id="contract-form" autocomplete="on">
-    <p class="p" id="sign"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">./sign.sh</span></p>
+  <p class="p"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">cat how-to-start.md</span></p>
+  <div class="o">
+    <div class="xd">
+      <p class="tr"><span class="g">├──</span><span><span class="k">1. Call</span> Book the free intro call. We agree on a plan, a term, and what to start with. <button type="button" class="act" data-cal>Browse open slots</button></span></p>
+      <p class="tr"><span class="g">├──</span><span><span class="k">2. Sign</span> I check for conflicts of interest, then email you the agreement below through SignWell. We both sign there, and each of us receives the signed PDF.</span></p>
+      <p class="tr"><span class="g">└──</span><span><span class="k">3. Pay</span> I email you a Stripe link to pay by bank transfer (ACH). Payment links come only from me by email, never from this page.</span></p>
+    </div>
+    <noscript><p class="dim">Booking needs JavaScript.</p></noscript>
+  </div>
+
+  <form id="plan-form">
+    <p class="p" id="agreement"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">cat consulting-agreement.md</span></p>
     <div class="o">
-      <p class="dim">One agreement covers the trial and every plan: (1) pick a plan and e-sign the agreement below, (2) I check for conflicts of interest and countersign, and (3) you receive the fully executed PDF along with a Stripe link to pay by bank transfer (ACH).</p>
-      <noscript><p class="dim">Booking and signing need JavaScript.</p></noscript>
       <ul class="list ask">
         <li>
           <span class="lb" id="l-tier">plan</span>
@@ -258,32 +256,25 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
             <span class="dim" data-bind="termSummary">ends on its own after 30 days</span>
           </span>
         </li>
-        <li><label class="lb" for="f-company">company</label><input id="f-company" name="clientCompany" type="text" required autocomplete="organization" placeholder="Legal company name"></li>
-        <li><label class="lb" for="f-address">address</label><input id="f-address" name="clientAddress" type="text" required autocomplete="street-address" placeholder="Company address"></li>
-        <li><label class="lb" for="f-name">signer</label><input id="f-name" name="clientName" type="text" required autocomplete="name" placeholder="Your full name"></li>
-        <li><label class="lb" for="f-title">title</label><input id="f-title" name="clientTitle" type="text" required autocomplete="organization-title" placeholder="Your title"></li>
-        <li><label class="lb" for="f-email">email</label><input id="f-email" name="clientEmail" type="email" required autocomplete="email" placeholder="Gets the executed PDF and Stripe link"></li>
-        <li><label class="lb" for="f-date">start date</label><input id="f-date" name="startDate" type="date" required></li>
-        <li><label class="lb" for="f-scope">scope</label><textarea id="f-scope" name="scopeSummary" rows="2" required placeholder="Briefly describe what we will start with (e.g., Series A narrative and deck, data room and diligence prep, launch announcement)"></textarea></li>
       </ul>
-      <p class="hint">// every field is required, and each one fills in the agreement below</p>
+      <p class="hint">// pick a plan and a term to see the numbers. The bracketed parts are filled in after the intro call.</p>
     </div>
 
-    <p class="p"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">cat consulting-agreement.md</span></p>
     <div class="o doc" id="contract-preview">
       <h2><span class="sy">#</span> CONSULTING SERVICES AGREEMENT</h2>
-      <p>This Consulting Services Agreement (the "Agreement") is entered into as of <span class="dyn" data-bind="startDate">__________</span> (the "Effective Date"), by and between <span class="dyn" data-bind="consultantName">Melvin Gruesbeck</span> ("Consultant") and <span class="dyn" data-bind="clientCompany">[Client Company Name]</span>, located at <span class="dyn" data-bind="clientAddress">[Company Address]</span> ("Client").</p>
+      <p>This Consulting Services Agreement (the "Agreement") is entered into as of <span class="dyn">__________</span> (the "Effective Date"), by and between <span class="dyn" data-bind="consultantName">Melvin Gruesbeck</span> ("Consultant") and <span class="dyn">[Client Company Name]</span>, located at <span class="dyn">[Company Address]</span> ("Client").</p>
 
       <h2><span class="sy">##</span> 1. Services</h2>
-      <p>Consultant agrees to provide advisory and hands-on services to Client across operations, communications, and design, beginning with: <span class="dyn" data-bind="scopeSummary">[Initial Focus Areas]</span> (the "Services"). Client may redirect Consultant's hours among these areas at any time by email, and no amendment to this Agreement is needed to do so.</p>
+      <p>Consultant agrees to provide advisory and hands-on services to Client across operations, communications, and design, beginning with: <span class="dyn">[Initial Focus Areas]</span> (the "Services"). Client may redirect Consultant's hours among these areas at any time by email, and no amendment to this Agreement is needed to do so.</p>
 
       <h2><span class="sy">##</span> 2. Plan, Fees &amp; Payment</h2>
       <p>Plan: <span class="dyn" data-bind="planLine">Trial, 10 hours within 30 days of the Effective Date</span><br>
       Fee: <span class="dyn" data-bind="feeLine">$2,000.00, one payment</span><br>
       Term: <span class="dyn" data-bind="termLine">30 days, no renewal</span><br>
       Notice Period: <span class="dyn" data-bind="noticeLine">None; the Trial ends on its own</span></p>
-      <p>The hours in the Plan are reserved capacity. Hours not used within a monthly billing period, or by the end of a Trial, expire and are not refunded or carried over. Hours beyond the Plan require Client's prior approval by email and are billed at $250.00 per hour. The first payment is due upon full execution (countersignature) of this Agreement via the Stripe ACH bank transfer payment link provided to Client. For a monthly Plan, each later payment is due in advance on the monthly anniversary of the first payment, and the discounted Fee for a 6-month or 12-month Term applies from the first payment.</p>
+      <p>The hours in the Plan are reserved capacity. Hours not used within a monthly billing period, or by the end of a Trial, expire and are not refunded or carried over. Hours beyond the Plan require Client's prior approval by email and are billed at $250.00 per hour. The first payment is due upon full execution (countersignature) of this Agreement via the Stripe ACH bank transfer payment link that Consultant emails to Client. For a monthly Plan, each later payment is due in advance on the monthly anniversary of the first payment, and the discounted Fee for a 6-month or 12-month Term applies from the first payment.</p>
       <p>The parties may change the Plan or the Term by email confirmed by both parties, including continuing from a Trial onto a monthly Plan, and this Agreement then governs the new Plan from the date agreed. A Trial is available once per Client.</p>
+      <p>Consultant sends payment links and payment instructions only from the email address used to send this Agreement for signature. Consultant will not change payment instructions by email alone, and Client should confirm any such change with Consultant by phone or video before paying.</p>
 
       <h2><span class="sy">##</span> 3. Term &amp; Ending</h2>
       <p>This Agreement commences on the Effective Date. A Trial lasts thirty (30) days and ends on its own, with no renewal. A monthly Plan renews automatically each month until either party ends it by giving the other written notice (including via email) of at least the Notice Period: thirty (30) days on a month-to-month Term, sixty (60) days on a 6-month Term, and ninety (90) days on a 12-month Term. Fees remain payable, and Consultant continues to provide the Services, through the Notice Period. There is no early termination fee, no repayment of any discount, and no refund of Fees already paid. A 6-month or 12-month Term that reaches its end continues at the same Fee and Notice Period until either party gives notice. Either party may terminate this Agreement immediately in the event of an uncured material breach.</p>
@@ -312,27 +303,17 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
       <p>The parties shall first attempt in good faith to resolve any dispute arising out of or relating to this Agreement by direct discussion for thirty (30) days after either party gives the other written notice of the dispute (including via email). Any dispute not resolved in that period shall be brought exclusively in the state or federal courts located in the California county of Consultant's principal place of business, and each party consents to the jurisdiction and venue of those courts. Nothing in this section prevents either party from bringing a qualifying claim in small claims court, or from seeking injunctive relief at any time to protect its Confidential Information or intellectual property.</p>
 
       <h2><span class="sy">##</span> Signatures</h2>
-      <p>CLIENT (<span class="dyn" data-bind="clientCompany">[Client Company Name]</span>):<br>
-      Signature: <span class="dyn" data-bind="clientSignature">/s/ ____________________</span><br>
-      Name &amp; Title: <span class="dyn" data-bind="clientName">[Signer Name]</span>, <span class="dyn" data-bind="clientTitle">[Signer Title]</span><br>
-      Email: <span class="dyn" data-bind="clientEmail">[Signer Email]</span></p>
+      <p>CLIENT (<span class="dyn">[Client Company Name]</span>):<br>
+      Signature: <span class="dyn">____________________</span><br>
+      Name &amp; Title: <span class="dyn">[Signer Name]</span>, <span class="dyn">[Signer Title]</span><br>
+      Email: <span class="dyn">[Signer Email]</span></p>
       <p>CONSULTANT (<span class="dyn" data-bind="consultantName">Melvin Gruesbeck</span>):<br>
-      Signature: <span class="dyn">[Pending Conflict Check &amp; Countersignature]</span><br>
+      Signature: <span class="dyn">____________________</span><br>
       Name &amp; Title: <span class="dyn" data-bind="consultantName">Melvin Gruesbeck</span>, <span class="dyn" data-bind="consultantTitle">Independent Consultant</span></p>
     </div>
 
     <div class="o">
       <p class="hint">// <button type="button" class="act" id="print-btn">print or save a draft .pdf</button></p>
-      <ul class="list ask">
-        <li><label class="lb" for="f-sig">signature</label><span class="sg"><span class="dim">/s/</span><input id="f-sig" name="clientSignature" type="text" required placeholder="Type your full legal name to e-sign"></span></li>
-      </ul>
-      <label class="chk">
-        <input id="f-agree" type="checkbox" required>
-        <span class="bx" aria-hidden="true"></span>
-        <span>I confirm I am authorized to sign on behalf of <span data-bind="clientCompany">[Client Company Name]</span>, agree to the Consulting Services Agreement above, and adopt my typed name as my legally binding electronic signature.</span>
-      </label>
-      <p class="send"><button type="submit" class="act" id="submit-contract-btn">Sign &amp; submit for countersignature</button></p>
-      <div class="status" id="contract-status" role="status" hidden></div>
     </div>
   </form>
 
@@ -347,24 +328,13 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
 
 <script>
 (() => {
-  // Replace each REPLACE_ placeholder with the live link; README.md has the steps under "Consulting Setup".
-  // An action whose link is still a placeholder shows as "not connected yet" and does nothing.
+  // Replace the REPLACE_ placeholder with the live link; README.md has the steps under "Consulting Setup".
+  // Until then, booking shows as "not connected yet" and does nothing.
   const CONFIG = {
     consultantName: 'Melvin Gruesbeck', // swap to the LLC name once formed
     consultantTitle: 'Independent Consultant',
     governingState: 'California',
-    calendarBookingUrl: 'https://calendar.google.com/calendar/appointments/schedules/REPLACE_WITH_GOOGLE_CALENDAR_SCHEDULE_ID?gv=true',
-    stripeLinks: {
-      trial:      'https://buy.stripe.com/REPLACE_TRIAL_2000_ACH',    // $2,000 once (ACH only)
-      advisory:   'https://buy.stripe.com/REPLACE_MONTHLY_2500_ACH',  // $2,500/mo (ACH only)
-      embedded:   'https://buy.stripe.com/REPLACE_MONTHLY_4800_ACH',  // $4,800/mo (ACH only)
-      fractional: 'https://buy.stripe.com/REPLACE_MONTHLY_9000_ACH',  // $9,000/mo (ACH only)
-      half:       'https://buy.stripe.com/REPLACE_MONTHLY_16000_ACH'  // $16,000/mo (ACH only)
-    },
-    // Stripe promotion codes that take the term discount off a monthly link
-    termPromoCodes: { six: 'TERM6', twelve: 'TERM12' },
-    // the web app URL of tools/consulting-contract-gas.js
-    contractWebhookUrl: 'https://script.google.com/macros/s/REPLACE_WITH_GAS_DEPLOYMENT_ID/exec'
+    calendarBookingUrl: 'https://calendar.google.com/calendar/appointments/schedules/REPLACE_WITH_GOOGLE_CALENDAR_SCHEDULE_ID?gv=true'
   };
   // these must match the engagements list and terms.md above
   const TIERS = {
@@ -391,81 +361,37 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
   sync();
 
   // the intro call: a Google Calendar booking page in a dialog
-  const dlg = $('cal-dialog'), frame = $('cal-iframe'), openCal = $('open-cal'), calLink = $('cal-link');
-  if (live(CONFIG.calendarBookingUrl)) calLink.href = CONFIG.calendarBookingUrl; else { off(calLink); off(openCal); }
-  openCal.addEventListener('click', () => {
+  const dlg = $('cal-dialog'), frame = $('cal-iframe'), calLink = $('cal-link'), calBtns = [...document.querySelectorAll('[data-cal]')];
+  if (live(CONFIG.calendarBookingUrl)) calLink.href = CONFIG.calendarBookingUrl; else [calLink, ...calBtns].forEach(off);
+  calBtns.forEach((b) => b.addEventListener('click', () => {
     if (!dlg.showModal) { window.open(CONFIG.calendarBookingUrl, '_blank', 'noopener'); return; }
     if (!frame.src) frame.src = CONFIG.calendarBookingUrl;
     dlg.showModal(); dlg.focus();
-  });
+  }));
   dlg.querySelector('.x').addEventListener('click', () => dlg.close());
   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
 
-  // the signing form fills in the agreement as the visitor types
-  const form = $('contract-form');
-  const now = new Date();
-  $('f-date').value = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-  const read = () => {
-    const fd = new FormData(form), get = (k) => (fd.get(k) || '').trim();
-    return { tier: fd.get('tier'), term: fd.get('term'), clientCompany: get('clientCompany'), clientName: get('clientName'), clientTitle: get('clientTitle'), clientEmail: get('clientEmail'),
-      clientAddress: get('clientAddress'), startDate: get('startDate'), scopeSummary: get('scopeSummary'), clientSignature: get('clientSignature') };
-  };
-  // what the chosen plan and term come to; a trial is one payment and takes no term
-  const deal = (f) => {
-    const t = TIERS[f.tier], link = CONFIG.stripeLinks[f.tier];
-    if (t.once) return { hours: t.hours, fee: t.price, stripeUrl: link, planLine: `${t.name}, ${t.hours} hours within 30 days of the Effective Date`, feeLine: `${usd(t.price, true)}, one payment`,
+  // the chosen plan and term fill in the agreement; a trial is one payment and takes no term
+  const form = $('plan-form');
+  const deal = (tier, term) => {
+    const t = TIERS[tier];
+    if (t.once) return { planLine: `${t.name}, ${t.hours} hours within 30 days of the Effective Date`, feeLine: `${usd(t.price, true)}, one payment`,
       termLine: '30 days, no renewal', noticeLine: 'None; the Trial ends on its own', tierSummary: `${t.hours} hrs · ${usd(t.price)} once`, termSummary: 'ends on its own after 30 days' };
-    const m = TERMS[f.term], fee = t.price * (100 - m.off) / 100, code = CONFIG.termPromoCodes[f.term];
-    return { hours: t.hours, fee, stripeUrl: code ? `${link}?prefilled_promo_code=${code}` : link, planLine: `${t.name}, ${t.hours} hours per month`, feeLine: `${usd(fee, true)} per month`,
+    const m = TERMS[term], fee = t.price * (100 - m.off) / 100;
+    return { planLine: `${t.name}, ${t.hours} hours per month`, feeLine: `${usd(fee, true)} per month`,
       termLine: m.off ? `${m.label} (${m.off}% discount)` : m.label, noticeLine: `${m.notice} days`, tierSummary: `${t.hours} hrs · ${usd(fee)} / mo`,
       termSummary: m.off ? `${m.off}% off · ${m.notice} days' notice` : `${m.notice} days' notice` };
   };
   function preview() {
-    form.elements.term.forEach((r) => { r.disabled = !!TIERS[form.elements.tier.value].once; });
-    const f = read(), d = deal(f);
-    const values = {
-      consultantName: CONFIG.consultantName, consultantTitle: CONFIG.consultantTitle, governingState: CONFIG.governingState,
-      planLine: d.planLine, feeLine: d.feeLine, termLine: d.termLine, noticeLine: d.noticeLine, tierSummary: d.tierSummary, termSummary: d.termSummary,
-      clientCompany: f.clientCompany || '[Client Company Name]', clientName: f.clientName || '[Signer Name]', clientTitle: f.clientTitle || '[Signer Title]',
-      clientEmail: f.clientEmail || '[Signer Email]', clientAddress: f.clientAddress || '[Company Address]', startDate: f.startDate || '__________',
-      scopeSummary: f.scopeSummary || '[Initial Focus Areas]', clientSignature: `/s/ ${f.clientSignature || '____________________'}`
-    };
+    const tier = form.elements.tier.value;
+    form.elements.term.forEach((r) => { r.disabled = !!TIERS[tier].once; });
+    const values = { consultantName: CONFIG.consultantName, consultantTitle: CONFIG.consultantTitle, governingState: CONFIG.governingState, ...deal(tier, form.elements.term.value) };
     document.querySelectorAll('[data-bind]').forEach((el) => { el.textContent = values[el.dataset.bind]; });
   }
   form.addEventListener('input', preview);
   document.querySelectorAll('[data-pick-tier]').forEach((a) => a.addEventListener('click', () => { form.elements.tier.value = a.dataset.pickTier; preview(); }));
   preview();
   $('print-btn').addEventListener('click', () => window.print());
-
-  // signing posts the agreement to the Apps Script, which files it and emails both sides
-  const status = $('contract-status'), submit = $('submit-contract-btn');
-  const say = (...lines) => {
-    status.hidden = false;
-    status.replaceChildren(...lines.map(([cls, text]) => Object.assign(document.createElement('p'), { className: cls, textContent: text })));
-  };
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const f = read(), d = deal(f);
-    const payload = {
-      ...f, consultantName: CONFIG.consultantName, consultantTitle: CONFIG.consultantTitle, governingState: CONFIG.governingState,
-      planLine: d.planLine, feeLine: d.feeLine, termLine: d.termLine, noticeLine: d.noticeLine, hours: d.hours, fee: d.fee, stripeUrl: d.stripeUrl,
-      signedAt: new Date().toISOString(), userAgent: navigator.userAgent, agreementText: $('contract-preview').innerText
-    };
-    say(['dim', 'Sending the signed agreement…']);
-    submit.disabled = true;
-    try {
-      if (!live(CONFIG.contractWebhookUrl)) throw new Error('not connected');
-      const res = await fetch(CONFIG.contractWebhookUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
-      const out = await res.json();
-      if (!out || !out.ok) throw new Error((out && out.error) || 'Submission failed');
-      say(['ok', `✓ Signed by ${payload.clientSignature} (${payload.clientCompany}) at ${payload.signedAt}.`],
-        ['dim', `Your agreement has been saved to Google Drive and sent to ${CONFIG.consultantName} for conflict-of-interest review and countersignature. As soon as it is countersigned, the executed PDF and your Stripe ACH payment link (${d.feeLine}) will be emailed to ${payload.clientEmail}.`]);
-    } catch (err) {
-      say(['err', live(CONFIG.contractWebhookUrl) ? '! Could not send the agreement.' : '! Signing is not connected yet.'],
-        ['dim', 'Nothing was submitted. Use "print or save a draft .pdf" above to keep a copy.']);
-      submit.disabled = false;
-    }
-  });
 })();
 </script>
 </body>
