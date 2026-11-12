@@ -7,3 +7,5 @@ resume/
 # project originals and text stay local; only the encrypted vault is published
 projects/*/
 !projects/vault/
+# agreements and signed client documents stay local
+contracts/

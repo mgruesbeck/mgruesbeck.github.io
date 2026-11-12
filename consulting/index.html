@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,400;100,600&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,400;100,600&display=swap" rel="stylesheet">
   <style>
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
@@ -20,61 +20,77 @@ body { margin: 0; }
 ul { list-style: none; margin: 0; padding: 0; }
 h1, h2, p { margin: 0; }
 
-:root { --bg: #fafafa; --ink: #383a42; --muted: #a0a1a7; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --cyan: #0184bc; --hl: #efe7f4; --mono: "Martian Mono", monospace; }
+:root { --bg: #fafafa; --ink: #383a42; --soft: #696c77; --muted: #a0a1a7; --glyph: #c5c6cb; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --cyan: #0184bc; --mono: "Martian Mono", monospace; }
 body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
 a { color: var(--cyan); text-decoration: none; transition: color .15s; } a:hover { color: var(--violet); }
-h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 600; font-stretch: 100%; color: #202227; letter-spacing: -0.02em; }
-.tm { max-width: 820px; margin: 0 auto; padding: 12vh 20px; }
-.p { margin-top: 44px; color: var(--muted); } .tm > .p:first-child { margin-top: 0; }
-.p .cmd { color: var(--ink); }
+h2 { font: inherit; }
+.tm { max-width: 1560px; margin: 0 auto; padding: 9vh 32px 64px; }
+.p { color: var(--muted); } .p .cmd { color: var(--ink); }
 .u { color: var(--green); } .w { color: var(--blue); } .ar { color: var(--green); }
-.o { margin-top: 8px; } .o > p + p { margin-top: 10px; }
-.dim { color: var(--muted); }
-.hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
-.nav { margin-top: 44px; color: var(--muted); }
+.o > p + p { margin-top: 10px; }
+.hint { color: var(--muted); font-size: 12px; }
+.xd { font-size: .92em; margin: 10px 0 4px; } .o > .xd:first-child { margin-top: 0; }
+.xd + p { margin-top: 12px; }
+.xd .k, .list h2 { font-weight: 600; font-stretch: 100%; }
+.xd .tr { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 6px; } .o > .xd:first-child > .tr:first-child { margin-top: 0; }
+.xd .g { color: var(--glyph); white-space: pre; }
 
-/* text actions: the same look as a link */
-.act { all: unset; cursor: pointer; color: var(--cyan); transition: color .15s; } .act:hover, .act:focus-visible { color: var(--violet); }
-a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
-
-.list li { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-top: 1px solid var(--rule); }
+.list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 13px 0; border-top: 1px solid var(--rule); }
 .list li:first-child { border-top: 0; padding-top: 0; }
-.list .t { display: block; }
-.list .s { display: block; color: var(--muted); font-size: .88em; margin-top: 1px; }
+.list .t { flex: 1; min-width: 0; }
+.list .s { margin-left: 8px; color: var(--muted); font-size: .88em; font-weight: 400; font-stretch: 87.5%; }
 .list .m { color: var(--blue); font-size: .88em; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.list li.x { display: block; }
-.x summary { display: flex; justify-content: space-between; gap: 18px; cursor: pointer; list-style: none; outline: none; }
-.x summary::-webkit-details-marker { display: none; }
-.x summary .t { transition: color .15s; }
-.x summary:hover .t, .x summary:focus-visible .t, .x details[open] .t { color: var(--violet); }
-.x summary:focus-visible { background: var(--hl); border-radius: 4px; }
-.x summary .t::before { content: "›"; position: absolute; width: 12px; margin-left: -16px; text-align: center; color: var(--muted); font-size: 1.15em; transition: transform .15s, color .15s; }
-.x details[open] summary .t::before { transform: rotate(90deg); color: var(--violet); }
-.xd { color: var(--muted); font-size: .92em; margin: 10px 0 4px; animation: xin .2s ease-out; }
-.xd .k { color: var(--ink); }
-.xd .in { margin-bottom: 8px; }
-.xd .tr { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 6px; }
-.xd .g { color: #c5c6cb; white-space: pre; }
-@keyframes xin { from { opacity: 0; transform: translateY(-4px); } }
+.list .d { flex: 0 0 100%; font-size: .92em; }
 
-/* the plan and term pickers: a muted label, then the options */
-.ask { margin-top: 14px; }
-.ask li { display: grid; grid-template-columns: 12ch minmax(0, 1fr); gap: 2px 18px; align-items: baseline; }
-.ask .lb { color: var(--muted); transition: color .15s; } .ask li:focus-within .lb { color: var(--violet); }
-.opt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 6px; margin-left: -6px; }
-.opt input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.opt label span { padding: 2px 6px; border-radius: 4px; cursor: pointer; color: var(--cyan); transition: color .15s, background .15s; }
-.opt label:hover span { color: var(--violet); }
-.opt input:checked + span { color: var(--violet); background: var(--hl); }
-.opt input:disabled + span { color: var(--muted); background: none; cursor: default; }
-.opt input:focus-visible + span { outline: 2px solid var(--violet); outline-offset: 2px; border-radius: 4px; }
-.opt .dim { margin-left: 6px; font-size: .88em; }
+/* the three files as a vim split: numbered lines, a status line under each file, and the command line under them all */
+.vi { margin-top: 14px; border-top: 1px solid var(--rule); }
+.pn { display: flex; flex-direction: column; counter-reset: ln; padding: 14px 20px 0 46px; }
+.o > p, .tr, .list h2, .list .d { position: relative; counter-increment: ln; }
+.o > p::before, .tr::before, .list h2::before, .list .d::before { content: counter(ln); position: absolute; left: -46px; top: .15em; width: 30px; text-align: right; color: var(--glyph); font-size: 11.5px; }
+.vt { flex: 1 1 0; min-height: 3.5em; margin: 8px 0 0 -46px; padding-left: 21px; overflow: hidden; color: var(--blue); opacity: .5; white-space: pre; }
+.vs { display: flex; justify-content: space-between; margin: 0 -20px 0 -46px; background: var(--rule); color: var(--soft); font-size: 12px; } .on .vs { color: var(--ink); }
+.vs span { padding: 2px 12px; } .vs .fn { margin-right: auto; }
+.pn:not(.on) .vs .md, .pn:not(.on) .vs .ty { display: none; }
+.vs .md { padding-right: 20px; background: var(--green); color: #fff; clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 50%, calc(100% - 9px) 100%, 0 100%); }
+.on .vs .ps { padding-left: 20px; background: var(--ink); color: var(--bg); clip-path: polygon(9px 0, 100% 0, 100% 100%, 9px 100%, 0 50%); }
+.vc { padding: 5px 12px 0; font-size: 12px; overflow-wrap: anywhere; }
+.vc i { display: inline-block; width: .62em; height: 1.25em; margin-left: 1px; vertical-align: text-bottom; background: var(--ink); }
+.vc .q { outline: none; caret-color: var(--ink); } .vc .q[contenteditable] { cursor: text; }
+.vc .q:focus + i, .vc.err i, .vc.err .sl { display: none; }
+.vc.err { color: var(--accent); } .vc.err::before { content: "E486: Pattern not found: "; }
 
-.doc { margin-top: 20px; padding-left: 14px; border-left: 1px solid var(--rule); font-size: .92em; }
-.doc > * + * { margin-top: 10px; }
-.doc h2 { font-size: 1em; font-weight: 600; color: var(--ink); } .doc h2:not(:first-child) { margin-top: 24px; }
-.doc h2 .sy { color: #c5c6cb; font-weight: 400; }
-.doc .dyn { color: var(--violet); }
+/* the call link is the match of the search in the command line; one colour passes over a few of its letters at a time */
+.cta a { white-space: nowrap; margin: 0 1px 0 -3px; padding: 2px 3px; background: #fbe08a; color: var(--ink); }
+.cta a:hover { background: #f4bf4f; color: var(--ink); }
+.cta a.miss { margin: 0; padding: 2px 0; background: none; color: var(--cyan); } .cta a.miss:hover { background: none; color: var(--violet); }
+.cta a span { animation: gl 3.4s linear infinite; animation-delay: calc(var(--i) * 70ms); } .cta a:hover span { animation: none; }
+@keyframes gl { 0%, 12%, 100% { color: inherit; } 3%, 9% { color: var(--accent); } }
+::highlight(hit) { background-color: #fbe08a; color: #383a42; } ::highlight(hitl) { background-color: #fbe08a; }
+
+/* the motto, drawn in blocks with a red shadow. it stays out of the page until someone types in the search */
+.ft { max-width: 1560px; margin: 0 auto; padding: clamp(56px, 10vh, 120px) 32px 9vh; --s: var(--accent); }
+.ft h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ft svg { display: block; width: 100%; height: auto; } .ft .nw { display: none; }
+.art { fill: var(--f, #202227); } .art .l2 { fill: none; stroke: var(--s, #202227); stroke-width: .42; } .art .l2.in { stroke: var(--bg); stroke-width: .18; }
+.d0, .d1 { --f: var(--accent); }
+.egg .ft .k { opacity: 0; transition: opacity .15s; } .egg .ft .k.on { opacity: 1; }
+.shut .ft { padding-top: 0; padding-bottom: 0; } .shut .ft svg { display: none; }
+
+@media (min-width: 1080px) {
+  .sp { display: grid; grid-template-columns: 1.25fr 1fr 1fr; }
+  .pn + .pn { border-left: 1px solid var(--rule); }
+  .list .s { display: block; margin-left: 0; }
+}
+@media (max-width: 720px) {
+  .tm { padding: 9vh 20px 44px; }
+  .pn { padding-left: 34px; padding-right: 0; }
+  .o > p::before, .tr::before, .list h2::before, .list .d::before { left: -34px; width: 22px; }
+  .vt { margin-left: -34px; padding-left: 13px; } .vs { margin: 0 0 0 -34px; }
+  .ft { padding-right: 20px; padding-bottom: 7vh; padding-left: 20px; }
+  .ft .wd { display: none; } .ft .nw { display: block; }
+}
+@media (max-width: 560px) { .list .s { display: block; margin-left: 0; } }
+@media (max-width: 420px) { .vs .ty { display: none; } }
 
 .viewer { width: min(920px, calc(100vw - 32px)); max-width: calc(100vw - 32px); max-height: none; padding: 0; border: 1px solid var(--rule); border-radius: 10px;
   background: var(--bg); color: var(--ink); box-shadow: 0 24px 70px rgba(56,58,66,.28); overflow: hidden; }
@@ -89,237 +105,296 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
 .viewer iframe { display: block; width: 100%; height: min(72vh, 680px); border: 0; background: #fff; }
 .viewer .cap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; padding: 9px 12px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
 
-@media (max-width: 560px) { .ask li { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-/* printing keeps only the agreement */
-@media print { body { background: #fff; } .tm { padding: 0; } .tm > :not(form), form > :not(.doc) { display: none; } .doc { margin: 0; padding: 0; border: 0; } }
   </style>
 </head>
 
 <body>
 <main class="tm">
-  <p class="p"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">cat overview.md</span></p>
+  <p class="p"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">vim -O overview.md engagements.md terms.md</span></p>
+<div class="sp vi">
+<div class="pn on">
   <div class="o">
-    <h1>Consulting Built Around Your Raise</h1>
-    <p class="dim">operations · design · communications · one operator, pointed at your next round</p>
-    <p>I help seed to Series B founders prepare for a raise, run it, and deliver on it afterwards. Investors judge three things at once: the story, how the company shows its work, and whether the operations hold up in diligence. Most teams hire for those separately. I run them as one effort, so the deck, the figures, and the data room all say the same thing.</p>
-    <p>At Profluent I was the first full-time hire. I designed the narrative and decks with the CEO for the Series A ($35M) and Series B ($106M), and coordinated due diligence for both rounds and the $2.25B Eli Lilly partnership.</p>
+    <p>I plan, orchestrate, and execute across ops, comms, and design, keeping you ready to pitch and diligence ready for whenever opportunity strikes. On top of that, I use AI agents to keep output high and overhead low.</p>
+    <p>The work runs year round. Each month we decide what would most strengthen the company's position, and I get it done. So when it is time to raise, or a partner or acquirer calls without notice, you are already organized and in position.</p>
+    <p>Three things get stronger together, and keep telling the same story.</p>
     <div class="xd">
-      <p class="tr"><span class="g">├──</span><span><span class="k">Communications</span> The narrative and deck before the raise, investor updates between rounds, and the announcement, press, and launch when it closes.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">Design</span> Figures, product visuals, and prototypes that make hard technology legible to an investor in the first two minutes. Publication-grade work for Nature, Science Advances, NeurIPS, and ICLR.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">Operations</span> Finance, legal, HR, and IT/security (SOC 2) in a state that holds up in diligence, with a data room that answers questions before they are asked.</span></p>
-      <p class="tr"><span class="g">└──</span><span><span class="k">AI-first</span> AI agents do the drafting, research, and production under my direction. That is how one person delivers the output of all three.</span></p>
+      <p class="tr"><span class="g">├──</span><span><span class="k">The story</span> A narrative that keeps up with the company, carried through the deck, the website, announcements, and investor updates.</span></p>
+      <p class="tr"><span class="g">├──</span><span><span class="k">The numbers</span> Finance, legal, HR, and security kept in order as you grow, with a data room that is ready to populate at a moment's notice.</span></p>
+      <p class="tr"><span class="g">└──</span><span><span class="k">The proof</span> Figures, demos, and visuals that make hard technology clear to customers, hires, and investors.</span></p>
     </div>
+    <p>I have done this from the inside. As the first full-time hire at Profluent, I shaped the narrative and decks with the CEO for a $35M Series A and a $106M Series B, coordinated diligence for both rounds and a $2.25B Eli Lilly partnership, and built operations as the team grew past fifty.</p>
+    <p class="cta">It starts with a <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ11I8e4jU3gjZ8jNkvJyKs7j6AMjH1TOBgXuA_q0elvkDiUFV1op4VqEzYyX9aCjPGYxih9YZAH?gv=true" target="_blank" rel="noopener" data-cal><span style="--i:0">f</span><span style="--i:1">r</span><span style="--i:2">e</span><span style="--i:3">e</span> <span style="--i:5">3</span><span style="--i:6">0</span><span style="--i:7">-</span><span style="--i:8">m</span><span style="--i:9">i</span><span style="--i:10">n</span><span style="--i:11">u</span><span style="--i:12">t</span><span style="--i:13">e</span> <span style="--i:15">c</span><span style="--i:16">a</span><span style="--i:17">l</span><span style="--i:18">l</span></a>.</p>
   </div>
 
-  <p class="p"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">ls engagements/</span></p>
+  <p class="vt" aria-hidden="true">~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+</p>
+  <p class="vs" aria-hidden="true"><span class="md">NORMAL</span><span class="fn">overview.md</span><span class="ty">markdown</span><span class="ps">8:18</span></p>
+</div>
+<div class="pn">
   <div class="o">
     <ul class="list">
-      <li class="x">
-        <details open>
-          <summary>
-            <span>
-              <span class="t">Intro Call</span>
-              <span class="s">30 minutes · video · pick an open slot on my Google Calendar</span>
-            </span>
-            <span class="m">free</span>
-          </summary>
-          <div class="xd">
-            <p class="in">Start here. Tell me what you are trying to get done, and I will tell you whether I can help and which plan fits. <button type="button" class="act" data-cal>Browse open slots</button></p>
-          </div>
-        </details>
+      <li>
+        <h2 class="t">Trial <span class="s">10 hours / 30 days</span></h2>
+        <span class="m">$2,000 / one payment</span>
+        <p class="d">A great starting point. I look at your story, your operations, and your materials, and hand you a ranked plan: what would most strengthen the company over the next year, and what would slow growth if we didn't get ahead of it. It ends on its own after 30 days, so there is nothing to cancel. One per company.</p>
       </li>
-
-      <li class="x">
-        <details>
-          <summary>
-            <span>
-              <span class="t">Trial</span>
-              <span class="s">10 hours over 30 days · one payment · no renewal</span>
-            </span>
-            <span class="m">$2,000</span>
-          </summary>
-          <div class="xd">
-            <p class="in">Ten hours on one real problem, at $200 an hour instead of $250. The trial ends on its own after 30 days, so there is nothing to cancel. One per company.</p>
-            <p class="tr"><span class="g">├──</span><span><span class="k">What fits</span> A deck and narrative rewrite, a diligence-readiness review of your operations, a set of figures, or a launch plan for the announcement.</span></p>
-            <p class="tr"><span class="g">└──</span><span><span class="k">Afterwards</span> Stop there, or email me to continue on any plan under the same agreement. <a href="#agreement" data-pick-tier="trial">See the trial agreement</a></span></p>
-          </div>
-        </details>
+      <li>
+        <h2 class="t">Advisory <span class="s">10 hours / month</span></h2>
+        <span class="m">$2,500 / mo</span>
+        <p class="d">Your team works the plan and I advise. A standing call to set priorities each month, plus deck review, systems review, and some execution.</p>
       </li>
-
-      <li class="x">
-        <details>
-          <summary>
-            <span>
-              <span class="t">Advisory</span>
-              <span class="s">10 hours / month · $250 / hr</span>
-            </span>
-            <span class="m">$2,500 / mo</span>
-          </summary>
-          <div class="xd">
-            <p class="in">A standing call plus review between calls: decks, investor updates, announcements, vendor contracts. <a href="#agreement" data-pick-tier="advisory">See the Advisory agreement</a></p>
-          </div>
-        </details>
-      </li>
-
-      <li class="x">
-        <details>
-          <summary>
-            <span>
-              <span class="t">Embedded</span>
-              <span class="s">20 hours / month · $240 / hr</span>
-            </span>
-            <span class="m">$4,800 / mo</span>
-          </summary>
-          <div class="xd">
-            <p class="in">About five hours a week of hands-on work alongside your team, as you prepare for a raise or put a new round to work. <a href="#agreement" data-pick-tier="embedded">See the Embedded agreement</a></p>
-          </div>
-        </details>
-      </li>
-
-      <li class="x">
-        <details>
-          <summary>
-            <span>
-              <span class="t">Fractional</span>
-              <span class="s">40 hours / month · $225 / hr</span>
-            </span>
-            <span class="m">$9,000 / mo</span>
-          </summary>
-          <div class="xd">
-            <p class="in">About ten hours a week. Enough to own a function for you as a fractional COO or head of design. <a href="#agreement" data-pick-tier="fractional">See the Fractional agreement</a></p>
-          </div>
-        </details>
-      </li>
-
-      <li class="x">
-        <details>
-          <summary>
-            <span>
-              <span class="t">Half Time</span>
-              <span class="s">80 hours / month · $200 / hr</span>
-            </span>
-            <span class="m">$16,000 / mo</span>
-          </summary>
-          <div class="xd">
-            <p class="in">About twenty hours a week, for a raise and its diligence, a major launch, or interim leadership. <a href="#agreement" data-pick-tier="half">See the Half Time agreement</a></p>
-          </div>
-        </details>
+      <li>
+        <h2 class="t">Fractional <span class="s">40 hours / month</span></h2>
+        <span class="m">$9,000 / mo</span>
+        <p class="d">I work the plan with you, year round. About ten hours a week as your fractional COO or head of design: operations kept in order, the story kept current, the visuals built, and diligence run when a round opens.</p>
       </li>
     </ul>
-    <p class="hint">// click a row, or <button type="button" class="act all">expand all</button></p>
   </div>
 
-  <p class="p"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">cat terms.md</span></p>
+  <p class="vt" aria-hidden="true">~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+</p>
+  <p class="vs" aria-hidden="true"><span class="md">NORMAL</span><span class="fn">engagements.md</span><span class="ty">markdown</span><span class="ps">1:1</span></p>
+</div>
+<div class="pn">
   <div class="o">
     <div class="xd">
-      <p class="tr"><span class="g">├──</span><span><span class="k">One agreement</span> It covers the trial and every plan. Your hours move between operations, communications, and design as priorities change, and an email is enough to change plans.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">Longer term, lower rate</span> 5% off any monthly plan on a 6-month term, 10% off on a 12-month term.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">No exit fees</span> End a monthly plan with 30 days' notice, a 6-month term with 60, a 12-month term with 90. Nothing to pay back.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">Hours</span> They are reserved for you each month and do not roll over. Extra hours, when you ask for them, are $250 each.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">AI included</span> My own AI tools are part of the fee. Anything billed by usage runs on accounts you own, capped at 10% of your monthly fee unless you approve more.</span></p>
-      <p class="tr"><span class="g">└──</span><span><span class="k">Specialists</span> If the work needs an artist, designer, writer, or operator, I propose the person and a fixed budget. Nothing starts without your approval, and you pay their cost with no markup.</span></p>
+      <p class="tr"><span class="g">├──</span><span><span class="k">One agreement</span> It covers the trial and both monthly plans. Your hours go wherever the priorities are, and an email is enough to change plans.</span></p>
+      <p class="tr"><span class="g">├──</span><span><span class="k">Terms</span> Monthly plans run month to month with 30 days' notice. A 6-month term is 5% off and a 12-month term is 10% off. End a term early and the discount on the months used is billed back.</span></p>
+      <p class="tr"><span class="g">└──</span><span><span class="k">Costs</span> Hours do not roll over, and extra hours are $250 each. AI platforms such as Claude Max run on accounts you own. Nothing else is spent without your approval, and approved costs pass through with no markup.</span></p>
     </div>
+    <p class="hint">// the agreement has the full terms; I send it after the intro call</p>
   </div>
-
-  <p class="p"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">cat how-to-start.md</span></p>
-  <div class="o">
-    <div class="xd">
-      <p class="tr"><span class="g">├──</span><span><span class="k">1. Call</span> Book the free intro call. We agree on a plan, a term, and what to start with. <button type="button" class="act" data-cal>Browse open slots</button></span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">2. Sign</span> I check for conflicts of interest, then email you the agreement below through SignWell. We both sign there, and each of us receives the signed PDF.</span></p>
-      <p class="tr"><span class="g">└──</span><span><span class="k">3. Pay</span> I email you a Stripe link to pay by bank transfer (ACH). Payment links come only from me by email, never from this page.</span></p>
-    </div>
-    <noscript><p class="dim">Booking needs JavaScript.</p></noscript>
-  </div>
-
-  <form id="plan-form">
-    <p class="p" id="agreement"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">cat consulting-agreement.md</span></p>
-    <div class="o">
-      <ul class="list ask">
-        <li>
-          <span class="lb" id="l-tier">plan</span>
-          <span class="opt" role="radiogroup" aria-labelledby="l-tier">
-            <label><input type="radio" name="tier" value="trial" checked><span>trial</span></label>
-            <label><input type="radio" name="tier" value="advisory"><span>advisory</span></label>
-            <label><input type="radio" name="tier" value="embedded"><span>embedded</span></label>
-            <label><input type="radio" name="tier" value="fractional"><span>fractional</span></label>
-            <label><input type="radio" name="tier" value="half"><span>half time</span></label>
-            <span class="dim" data-bind="tierSummary">10 hrs · $2,000 once</span>
-          </span>
-        </li>
-        <li>
-          <span class="lb" id="l-term">term</span>
-          <span class="opt" role="radiogroup" aria-labelledby="l-term">
-            <label><input type="radio" name="term" value="monthly" checked><span>monthly</span></label>
-            <label><input type="radio" name="term" value="six"><span>6 months</span></label>
-            <label><input type="radio" name="term" value="twelve"><span>12 months</span></label>
-            <span class="dim" data-bind="termSummary">ends on its own after 30 days</span>
-          </span>
-        </li>
-      </ul>
-      <p class="hint">// pick a plan and a term to see the numbers. The bracketed parts are filled in after the intro call.</p>
-    </div>
-
-    <div class="o doc" id="contract-preview">
-      <h2><span class="sy">#</span> CONSULTING SERVICES AGREEMENT</h2>
-      <p>This Consulting Services Agreement (the "Agreement") is entered into as of <span class="dyn">__________</span> (the "Effective Date"), by and between <span class="dyn" data-bind="consultantName">Melvin Gruesbeck</span> ("Consultant") and <span class="dyn">[Client Company Name]</span>, located at <span class="dyn">[Company Address]</span> ("Client").</p>
-
-      <h2><span class="sy">##</span> 1. Services</h2>
-      <p>Consultant agrees to provide advisory and hands-on services to Client across operations, communications, and design, beginning with: <span class="dyn">[Initial Focus Areas]</span> (the "Services"). Client may redirect Consultant's hours among these areas at any time by email, and no amendment to this Agreement is needed to do so.</p>
-
-      <h2><span class="sy">##</span> 2. Plan, Fees &amp; Payment</h2>
-      <p>Plan: <span class="dyn" data-bind="planLine">Trial, 10 hours within 30 days of the Effective Date</span><br>
-      Fee: <span class="dyn" data-bind="feeLine">$2,000.00, one payment</span><br>
-      Term: <span class="dyn" data-bind="termLine">30 days, no renewal</span><br>
-      Notice Period: <span class="dyn" data-bind="noticeLine">None; the Trial ends on its own</span></p>
-      <p>The hours in the Plan are reserved capacity. Hours not used within a monthly billing period, or by the end of a Trial, expire and are not refunded or carried over. Hours beyond the Plan require Client's prior approval by email and are billed at $250.00 per hour. The first payment is due upon full execution (countersignature) of this Agreement via the Stripe ACH bank transfer payment link that Consultant emails to Client. For a monthly Plan, each later payment is due in advance on the monthly anniversary of the first payment, and the discounted Fee for a 6-month or 12-month Term applies from the first payment.</p>
-      <p>The parties may change the Plan or the Term by email confirmed by both parties, including continuing from a Trial onto a monthly Plan, and this Agreement then governs the new Plan from the date agreed. A Trial is available once per Client.</p>
-      <p>Consultant sends payment links and payment instructions only from the email address used to send this Agreement for signature. Consultant will not change payment instructions by email alone, and Client should confirm any such change with Consultant by phone or video before paying.</p>
-
-      <h2><span class="sy">##</span> 3. Term &amp; Ending</h2>
-      <p>This Agreement commences on the Effective Date. A Trial lasts thirty (30) days and ends on its own, with no renewal. A monthly Plan renews automatically each month until either party ends it by giving the other written notice (including via email) of at least the Notice Period: thirty (30) days on a month-to-month Term, sixty (60) days on a 6-month Term, and ninety (90) days on a 12-month Term. Fees remain payable, and Consultant continues to provide the Services, through the Notice Period. There is no early termination fee, no repayment of any discount, and no refund of Fees already paid. A 6-month or 12-month Term that reaches its end continues at the same Fee and Notice Period until either party gives notice. Either party may terminate this Agreement immediately in the event of an uncured material breach.</p>
-
-      <h2><span class="sy">##</span> 4. AI Tools, Costs &amp; Specialists</h2>
-      <p>Consultant uses AI tools to perform the Services, reviews their output, and remains responsible for all work delivered. Consultant's own tools and subscriptions are included in the Fee. Consultant will use Client's Confidential Information only in tools whose terms do not permit training on it. Any AI system built to keep running in Client's business will be set up on accounts that Client owns and pays for directly. Client acknowledges that Deliverables may include AI-generated material, which may not be eligible for copyright protection.</p>
-      <p>Consultant will not incur usage-based AI charges on Client's accounts of more than ten percent (10%) of the Fee in any month, and will not incur any other cost on Client's behalf, without Client's prior approval by email. Approved costs are paid by Client directly or reimbursed at cost, without markup.</p>
-      <p>The hours in the Plan are Consultant's own. If the Services call for a specialist (for example an artist, designer, writer, or operator), Consultant will propose the person, the work, and a fixed budget, and no specialist will be engaged without Client's prior approval by email. By default, Client engages and pays the specialist directly and Consultant directs the work within the Plan. If Client prefers a single contract, Consultant may engage the specialist as a subcontractor, in which case Client pays the approved budget in advance at cost, without markup, the subcontractor will be bound in writing by confidentiality and intellectual property terms at least as protective of Client as this Agreement, and Consultant remains responsible for the subcontractor's work.</p>
-
-      <h2><span class="sy">##</span> 5. Intellectual Property</h2>
-      <p>Upon Consultant's receipt of full payment for the applicable billing period, Consultant assigns to Client all right, title, and interest in bespoke work product created exclusively for Client under this Agreement ("Deliverables"). Consultant retains all right, title, and interest in pre-existing tools, code, templates, frameworks, and general know-how ("Background IP"), and grants Client a non-exclusive, perpetual, worldwide, royalty-free license to use any Background IP incorporated into the Deliverables.</p>
-
-      <h2><span class="sy">##</span> 6. Confidentiality</h2>
-      <p>Each party agrees to hold the other party's non-public business, technical, financial, and scientific information ("Confidential Information") in strict confidence and not to disclose it to any third party or use it for any purpose outside the performance of this Agreement.</p>
-
-      <h2><span class="sy">##</span> 7. Independent Contractor &amp; Limitation of Liability</h2>
-      <p>Consultant is an independent contractor and not an employee or agent of Client. NEITHER PARTY SHALL BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES. CONSULTANT'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL NOT EXCEED THE TOTAL FEES PAID BY CLIENT TO CONSULTANT IN THE ONE (1) MONTH IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.</p>
-
-      <h2><span class="sy">##</span> 8. Assignment</h2>
-      <p>Consultant may assign this Agreement upon written notice to Client to a wholly-owned limited liability company (LLC) or corporate entity controlled by Consultant. Otherwise, neither party may assign this Agreement without prior written consent.</p>
-
-      <h2><span class="sy">##</span> 9. Governing Law &amp; Counterparts</h2>
-      <p>This Agreement is governed by the laws of the State of <span class="dyn" data-bind="governingState">California</span>, without regard to conflict-of-law principles. Electronic signatures transmitted digitally shall have the same legal force and effect as original signatures.</p>
-
-      <h2><span class="sy">##</span> 10. Dispute Resolution</h2>
-      <p>The parties shall first attempt in good faith to resolve any dispute arising out of or relating to this Agreement by direct discussion for thirty (30) days after either party gives the other written notice of the dispute (including via email). Any dispute not resolved in that period shall be brought exclusively in the state or federal courts located in the California county of Consultant's principal place of business, and each party consents to the jurisdiction and venue of those courts. Nothing in this section prevents either party from bringing a qualifying claim in small claims court, or from seeking injunctive relief at any time to protect its Confidential Information or intellectual property.</p>
-
-      <h2><span class="sy">##</span> Signatures</h2>
-      <p>CLIENT (<span class="dyn">[Client Company Name]</span>):<br>
-      Signature: <span class="dyn">____________________</span><br>
-      Name &amp; Title: <span class="dyn">[Signer Name]</span>, <span class="dyn">[Signer Title]</span><br>
-      Email: <span class="dyn">[Signer Email]</span></p>
-      <p>CONSULTANT (<span class="dyn" data-bind="consultantName">Melvin Gruesbeck</span>):<br>
-      Signature: <span class="dyn">____________________</span><br>
-      Name &amp; Title: <span class="dyn" data-bind="consultantName">Melvin Gruesbeck</span>, <span class="dyn" data-bind="consultantTitle">Independent Consultant</span></p>
-    </div>
-
-    <div class="o">
-      <p class="hint">// <button type="button" class="act" id="print-btn">print or save a draft .pdf</button></p>
-    </div>
-  </form>
-
-  <p class="nav"><a href="../">cd ~</a></p>
+  <p class="vt" aria-hidden="true">~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+</p>
+  <p class="vs" aria-hidden="true"><span class="md">NORMAL</span><span class="fn">terms.md</span><span class="ty">markdown</span><span class="ps">1:1</span></p>
+</div>
+</div>
+  <p class="vc" aria-hidden="true"><span class="sl">/</span><span class="q">free 30-minute call</span><i></i></p>
 </main>
 
+<footer class="ft">
+  <h1>Better Every Month. Ready Any Day.</h1>
+  <svg viewBox="0 0 147 42" aria-hidden="true" class="wd"><g class="art k"><path class="l2" d="M7.5 2.02L7.5 1L6.98 1M2.5 4.02L2.5 3L3.02 3M2.98 3L3.5 3L4.02 3M3.98 3L4.5 3L5.02 3M5.5 1.98L5.5 3L4.98 3M8.5 4.02L8.5 3L7.98 3M2.5 3.98L2.5 5L2.5 6.02M8.5 3.98L8.5 5L8.5 6.02M7.5 8.02L7.5 7L8.02 7M8.5 5.98L8.5 7L8.5 8.02M8.5 7L7.98 7M2.5 10.02L2.5 9L3.02 9M2.98 9L3.5 9L4.02 9M3.98 9L4.5 9L5.02 9M5.5 7.98L5.5 9L4.98 9M8.5 7.98L8.5 9L8.5 10.02M2.5 9.98L2.5 11L2.5 12.02M8.5 9.98L8.5 11L8.5 12.02M7.5 14.02L7.5 13L8.02 13M7.98 13L8.5 13L9.02 13M8.5 13L8.5 11.98M0.5 13.98L0.5 15L1.02 15M0.98 15L1.5 15L2.02 15M1.98 15L2.5 15L3.02 15M2.98 15L3.5 15L4.02 15M3.98 15L4.5 15L5.02 15M4.98 15L5.5 15L6.02 15M5.98 15L6.5 15L7.02 15M7.5 13.98L7.5 15L6.98 15"/><path class="l2 in" d="M7.5 2.02L7.5 1L6.98 1M2.5 4.02L2.5 3L3.02 3M2.98 3L3.5 3L4.02 3M3.98 3L4.5 3L5.02 3M5.5 1.98L5.5 3L4.98 3M8.5 4.02L8.5 3L7.98 3M2.5 3.98L2.5 5L2.5 6.02M8.5 3.98L8.5 5L8.5 6.02M7.5 8.02L7.5 7L8.02 7M8.5 5.98L8.5 7L8.5 8.02M8.5 7L7.98 7M2.5 10.02L2.5 9L3.02 9M2.98 9L3.5 9L4.02 9M3.98 9L4.5 9L5.02 9M5.5 7.98L5.5 9L4.98 9M8.5 7.98L8.5 9L8.5 10.02M2.5 9.98L2.5 11L2.5 12.02M8.5 9.98L8.5 11L8.5 12.02M7.5 14.02L7.5 13L8.02 13M7.98 13L8.5 13L9.02 13M8.5 13L8.5 11.98M0.5 13.98L0.5 15L1.02 15M0.98 15L1.5 15L2.02 15M1.98 15L2.5 15L3.02 15M2.98 15L3.5 15L4.02 15M3.98 15L4.5 15L5.02 15M4.98 15L5.5 15L6.02 15M5.98 15L6.5 15L7.02 15M7.5 13.98L7.5 15L6.98 15"/><path d="M0 0h7.02v2.02h-7.02zM0 2h2.02v2.02h-2.02zM6 2h2.02v2.02h-2.02zM0 4h2.02v2.02h-2.02zM6 4h2.02v2.02h-2.02zM0 6h7.02v2.02h-7.02zM0 8h2.02v2.02h-2.02zM6 8h2.02v2.02h-2.02zM0 10h2.02v2.02h-2.02zM6 10h2.02v2.02h-2.02zM0 12h7.02v2.02h-7.02z"/></g><g class="art k"><path class="l2" d="M15.5 6.02L15.5 5L14.98 5M11.5 8.02L11.5 7L12.02 7M11.98 7L12.5 7L13.02 7M13.5 8.02L13.5 7L12.98 7M16.5 8.02L16.5 7L17.02 7M16.5 7.98L16.5 9L16.5 10.02M11.5 12.02L11.5 11L12.02 11M11.98 11L12.5 11L13.02 11M12.98 11L13.5 11L14.02 11M13.98 11L14.5 11L15.02 11M14.98 11L15.5 11L16.02 11M16.5 9.98L16.5 11L16.5 12.02M16.5 11L15.98 11M9.5 11.98L9.5 13L8.98 13M16.5 11.98L16.5 13L16.5 14.02M10.5 13.98L10.5 15L11.02 15M10.98 15L11.5 15L12.02 15M11.98 15L12.5 15L13.02 15M12.98 15L13.5 15L14.02 15M13.98 15L14.5 15L15.02 15M14.98 15L15.5 15L16.02 15M16.5 13.98L16.5 15L15.98 15"/><path class="l2 in" d="M15.5 6.02L15.5 5L14.98 5M11.5 8.02L11.5 7L12.02 7M11.98 7L12.5 7L13.02 7M13.5 8.02L13.5 7L12.98 7M16.5 8.02L16.5 7L17.02 7M16.5 7.98L16.5 9L16.5 10.02M11.5 12.02L11.5 11L12.02 11M11.98 11L12.5 11L13.02 11M12.98 11L13.5 11L14.02 11M13.98 11L14.5 11L15.02 11M14.98 11L15.5 11L16.02 11M16.5 9.98L16.5 11L16.5 12.02M16.5 11L15.98 11M9.5 11.98L9.5 13L8.98 13M16.5 11.98L16.5 13L16.5 14.02M10.5 13.98L10.5 15L11.02 15M10.98 15L11.5 15L12.02 15M11.98 15L12.5 15L13.02 15M12.98 15L13.5 15L14.02 15M13.98 15L14.5 15L15.02 15M14.98 15L15.5 15L16.02 15M16.5 13.98L16.5 15L15.98 15"/><path d="M10 4h5.02v2.02h-5.02zM9 6h2.02v2.02h-2.02zM14 6h2.02v2.02h-2.02zM9 8h7.02v2.02h-7.02zM9 10h2.02v2.02h-2.02zM10 12h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M20.5 2.02L20.5 1L19.98 1M20.5 1.98L20.5 3L20.5 4.02M23.5 6.02L23.5 5L22.98 5M17.5 5.98L17.5 7L16.98 7M20.5 8.02L20.5 7L21.02 7M20.98 7L21.5 7L22.02 7M21.98 7L22.5 7L23.02 7M22.98 7L23.5 7L24.02 7M23.5 7L23.5 5.98M20.5 7.98L20.5 9L20.5 10.02M20.5 9.98L20.5 11L20.5 12.02M18.5 11.98L18.5 13L19.02 13M23.5 14.02L23.5 13L22.98 13M19.5 13.98L19.5 15L20.02 15M19.98 15L20.5 15L21.02 15M20.98 15L21.5 15L22.02 15M21.98 15L22.5 15L23.02 15M23.5 13.98L23.5 15L22.98 15"/><path class="l2 in" d="M20.5 2.02L20.5 1L19.98 1M20.5 1.98L20.5 3L20.5 4.02M23.5 6.02L23.5 5L22.98 5M17.5 5.98L17.5 7L16.98 7M20.5 8.02L20.5 7L21.02 7M20.98 7L21.5 7L22.02 7M21.98 7L22.5 7L23.02 7M22.98 7L23.5 7L24.02 7M23.5 7L23.5 5.98M20.5 7.98L20.5 9L20.5 10.02M20.5 9.98L20.5 11L20.5 12.02M18.5 11.98L18.5 13L19.02 13M23.5 14.02L23.5 13L22.98 13M19.5 13.98L19.5 15L20.02 15M19.98 15L20.5 15L21.02 15M20.98 15L21.5 15L22.02 15M21.98 15L22.5 15L23.02 15M23.5 13.98L23.5 15L22.98 15"/><path d="M18 0h2.02v2.02h-2.02zM18 2h2.02v2.02h-2.02zM17 4h6.02v2.02h-6.02zM18 6h2.02v2.02h-2.02zM18 8h2.02v2.02h-2.02zM18 10h2.02v2.02h-2.02zM19 12h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M27.5 2.02L27.5 1L26.98 1M27.5 1.98L27.5 3L27.5 4.02M30.5 6.02L30.5 5L29.98 5M24.5 5.98L24.5 7L23.98 7M27.5 8.02L27.5 7L28.02 7M27.98 7L28.5 7L29.02 7M28.98 7L29.5 7L30.02 7M30.5 5.98L30.5 7L29.98 7M27.5 7.98L27.5 9L27.5 10.02M27.5 9.98L27.5 11L27.5 12.02M25.5 11.98L25.5 13L26.02 13M30.5 14.02L30.5 13L31.02 13M26.5 13.98L26.5 15L27.02 15M26.98 15L27.5 15L28.02 15M27.98 15L28.5 15L29.02 15M28.98 15L29.5 15L30.02 15M30.5 13.98L30.5 15L29.98 15"/><path class="l2 in" d="M27.5 2.02L27.5 1L26.98 1M27.5 1.98L27.5 3L27.5 4.02M30.5 6.02L30.5 5L29.98 5M24.5 5.98L24.5 7L23.98 7M27.5 8.02L27.5 7L28.02 7M27.98 7L28.5 7L29.02 7M28.98 7L29.5 7L30.02 7M30.5 5.98L30.5 7L29.98 7M27.5 7.98L27.5 9L27.5 10.02M27.5 9.98L27.5 11L27.5 12.02M25.5 11.98L25.5 13L26.02 13M30.5 14.02L30.5 13L31.02 13M26.5 13.98L26.5 15L27.02 15M26.98 15L27.5 15L28.02 15M27.98 15L28.5 15L29.02 15M28.98 15L29.5 15L30.02 15M30.5 13.98L30.5 15L29.98 15"/><path d="M25 0h2.02v2.02h-2.02zM25 2h2.02v2.02h-2.02zM24 4h6.02v2.02h-6.02zM25 6h2.02v2.02h-2.02zM25 8h2.02v2.02h-2.02zM25 10h2.02v2.02h-2.02zM26 12h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M37.5 6.02L37.5 5L36.98 5M33.5 8.02L33.5 7L34.02 7M33.98 7L34.5 7L35.02 7M35.5 8.02L35.5 7L34.98 7M38.5 8.02L38.5 7L37.98 7M38.5 7.98L38.5 9L38.5 10.02M33.5 12.02L33.5 11L34.02 11M33.98 11L34.5 11L35.02 11M34.98 11L35.5 11L36.02 11M35.98 11L36.5 11L37.02 11M36.98 11L37.5 11L38.02 11M38.5 9.98L38.5 11L38.5 12.02M38.5 11L37.98 11M31.5 11.98L31.5 13L30.98 13M38.5 11.98L38.5 13L38.5 14.02M32.5 13.98L32.5 15L33.02 15M32.98 15L33.5 15L34.02 15M33.98 15L34.5 15L35.02 15M34.98 15L35.5 15L36.02 15M35.98 15L36.5 15L37.02 15M36.98 15L37.5 15L38.02 15M37.98 15L38.5 15L39.02 15M38.5 15L38.5 13.98"/><path class="l2 in" d="M37.5 6.02L37.5 5L36.98 5M33.5 8.02L33.5 7L34.02 7M33.98 7L34.5 7L35.02 7M35.5 8.02L35.5 7L34.98 7M38.5 8.02L38.5 7L37.98 7M38.5 7.98L38.5 9L38.5 10.02M33.5 12.02L33.5 11L34.02 11M33.98 11L34.5 11L35.02 11M34.98 11L35.5 11L36.02 11M35.98 11L36.5 11L37.02 11M36.98 11L37.5 11L38.02 11M38.5 9.98L38.5 11L38.5 12.02M38.5 11L37.98 11M31.5 11.98L31.5 13L30.98 13M38.5 11.98L38.5 13L38.5 14.02M32.5 13.98L32.5 15L33.02 15M32.98 15L33.5 15L34.02 15M33.98 15L34.5 15L35.02 15M34.98 15L35.5 15L36.02 15M35.98 15L36.5 15L37.02 15M36.98 15L37.5 15L38.02 15M37.98 15L38.5 15L39.02 15M38.5 15L38.5 13.98"/><path d="M32 4h5.02v2.02h-5.02zM31 6h2.02v2.02h-2.02zM36 6h2.02v2.02h-2.02zM31 8h7.02v2.02h-7.02zM31 10h2.02v2.02h-2.02zM32 12h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M41.5 6.02L41.5 5L40.98 5M46.5 6.02L46.5 5L45.98 5M43.5 8.02L43.5 7L44.02 7M43.98 7L44.5 7L45.02 7M44.98 7L45.5 7L46.02 7M46.5 5.98L46.5 7L45.98 7M41.5 10.02L41.5 9L42.02 9M41.98 9L42.5 9L43.02 9M43.5 7.98L43.5 9L42.98 9M41.5 9.98L41.5 11L41.5 12.02M41.5 11.98L41.5 13L41.5 14.02M38.98 15L39.5 15L40.02 15M39.98 15L40.5 15L41.02 15M41.5 13.98L41.5 15L40.98 15"/><path class="l2 in" d="M41.5 6.02L41.5 5L40.98 5M46.5 6.02L46.5 5L45.98 5M43.5 8.02L43.5 7L44.02 7M43.98 7L44.5 7L45.02 7M44.98 7L45.5 7L46.02 7M46.5 5.98L46.5 7L45.98 7M41.5 10.02L41.5 9L42.02 9M41.98 9L42.5 9L43.02 9M43.5 7.98L43.5 9L42.98 9M41.5 9.98L41.5 11L41.5 12.02M41.5 11.98L41.5 13L41.5 14.02M38.98 15L39.5 15L40.02 15M39.98 15L40.5 15L41.02 15M41.5 13.98L41.5 15L40.98 15"/><path d="M39 4h2.02v2.02h-2.02zM42 4h4.02v2.02h-4.02zM39 6h4.02v2.02h-4.02zM39 8h2.02v2.02h-2.02zM39 10h2.02v2.02h-2.02zM39 12h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M60.5 2.02L60.5 1L59.98 1M54.5 4.02L54.5 3L55.02 3M54.98 3L55.5 3L56.02 3M55.98 3L56.5 3L57.02 3M56.98 3L57.5 3L58.02 3M57.98 3L58.5 3L59.02 3M58.98 3L59.5 3L60.02 3M60.5 1.98L60.5 3L59.98 3M54.5 3.98L54.5 5L54.5 6.02M58.5 8.02L58.5 7L57.98 7M54.5 10.02L54.5 9L55.02 9M54.98 9L55.5 9L56.02 9M55.98 9L56.5 9L57.02 9M56.98 9L57.5 9L58.02 9M58.5 7.98L58.5 9L57.98 9M54.5 9.98L54.5 11L54.5 12.02M60.5 14.02L60.5 13L59.98 13M52.5 13.98L52.5 15L53.02 15M52.98 15L53.5 15L54.02 15M53.98 15L54.5 15L55.02 15M54.98 15L55.5 15L56.02 15M55.98 15L56.5 15L57.02 15M56.98 15L57.5 15L58.02 15M57.98 15L58.5 15L59.02 15M58.98 15L59.5 15L60.02 15M60.5 13.98L60.5 15L59.98 15"/><path class="l2 in" d="M60.5 2.02L60.5 1L59.98 1M54.5 4.02L54.5 3L55.02 3M54.98 3L55.5 3L56.02 3M55.98 3L56.5 3L57.02 3M56.98 3L57.5 3L58.02 3M57.98 3L58.5 3L59.02 3M58.98 3L59.5 3L60.02 3M60.5 1.98L60.5 3L59.98 3M54.5 3.98L54.5 5L54.5 6.02M58.5 8.02L58.5 7L57.98 7M54.5 10.02L54.5 9L55.02 9M54.98 9L55.5 9L56.02 9M55.98 9L56.5 9L57.02 9M56.98 9L57.5 9L58.02 9M58.5 7.98L58.5 9L57.98 9M54.5 9.98L54.5 11L54.5 12.02M60.5 14.02L60.5 13L59.98 13M52.5 13.98L52.5 15L53.02 15M52.98 15L53.5 15L54.02 15M53.98 15L54.5 15L55.02 15M54.98 15L55.5 15L56.02 15M55.98 15L56.5 15L57.02 15M56.98 15L57.5 15L58.02 15M57.98 15L58.5 15L59.02 15M58.98 15L59.5 15L60.02 15M60.5 13.98L60.5 15L59.98 15"/><path d="M52 0h8.02v2.02h-8.02zM52 2h2.02v2.02h-2.02zM52 4h2.02v2.02h-2.02zM52 6h6.02v2.02h-6.02zM52 8h2.02v2.02h-2.02zM52 10h2.02v2.02h-2.02zM52 12h8.02v2.02h-8.02z"/></g><g class="art k"><path class="l2" d="M63.5 6.02L63.5 5L62.98 5M69.5 6.02L69.5 5L68.98 5M63.5 5.98L63.5 7L63.5 8.02M69.5 5.98L69.5 7L69.5 8.02M63.5 7.98L63.5 9L63.5 10.02M69.5 7.98L69.5 9L69.5 10.02M61.5 9.98L61.5 11L62.02 11M64.5 12.02L64.5 11L63.98 11M68.5 12.02L68.5 11L69.02 11M69.5 9.98L69.5 11L68.98 11M62.5 11.98L62.5 13L63.02 13M67.5 14.02L67.5 13L68.02 13M68.5 11.98L68.5 13L67.98 13M63.5 13.98L63.5 15L64.02 15M63.98 15L64.5 15L65.02 15M64.98 15L65.5 15L66.02 15M65.98 15L66.5 15L67.02 15M67.5 13.98L67.5 15L66.98 15"/><path class="l2 in" d="M63.5 6.02L63.5 5L62.98 5M69.5 6.02L69.5 5L68.98 5M63.5 5.98L63.5 7L63.5 8.02M69.5 5.98L69.5 7L69.5 8.02M63.5 7.98L63.5 9L63.5 10.02M69.5 7.98L69.5 9L69.5 10.02M61.5 9.98L61.5 11L62.02 11M64.5 12.02L64.5 11L63.98 11M68.5 12.02L68.5 11L69.02 11M69.5 9.98L69.5 11L68.98 11M62.5 11.98L62.5 13L63.02 13M67.5 14.02L67.5 13L68.02 13M68.5 11.98L68.5 13L67.98 13M63.5 13.98L63.5 15L64.02 15M63.98 15L64.5 15L65.02 15M64.98 15L65.5 15L66.02 15M65.98 15L66.5 15L67.02 15M67.5 13.98L67.5 15L66.98 15"/><path d="M61 4h2.02v2.02h-2.02zM67 4h2.02v2.02h-2.02zM61 6h2.02v2.02h-2.02zM67 6h2.02v2.02h-2.02zM61 8h2.02v2.02h-2.02zM67 8h2.02v2.02h-2.02zM62 10h2.02v2.02h-2.02zM66 10h2.02v2.02h-2.02zM63 12h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M76.5 6.02L76.5 5L75.98 5M72.5 8.02L72.5 7L73.02 7M72.98 7L73.5 7L74.02 7M74.5 8.02L74.5 7L73.98 7M77.5 8.02L77.5 7L76.98 7M77.5 7.98L77.5 9L77.5 10.02M72.5 12.02L72.5 11L73.02 11M72.98 11L73.5 11L74.02 11M73.98 11L74.5 11L75.02 11M74.98 11L75.5 11L76.02 11M75.98 11L76.5 11L77.02 11M77.5 9.98L77.5 11L77.5 12.02M77.5 11L76.98 11M70.5 11.98L70.5 13L71.02 13M77.5 11.98L77.5 13L77.5 14.02M71.5 13.98L71.5 15L72.02 15M71.98 15L72.5 15L73.02 15M72.98 15L73.5 15L74.02 15M73.98 15L74.5 15L75.02 15M74.98 15L75.5 15L76.02 15M75.98 15L76.5 15L77.02 15M76.98 15L77.5 15L78.02 15M77.5 15L77.5 13.98"/><path class="l2 in" d="M76.5 6.02L76.5 5L75.98 5M72.5 8.02L72.5 7L73.02 7M72.98 7L73.5 7L74.02 7M74.5 8.02L74.5 7L73.98 7M77.5 8.02L77.5 7L76.98 7M77.5 7.98L77.5 9L77.5 10.02M72.5 12.02L72.5 11L73.02 11M72.98 11L73.5 11L74.02 11M73.98 11L74.5 11L75.02 11M74.98 11L75.5 11L76.02 11M75.98 11L76.5 11L77.02 11M77.5 9.98L77.5 11L77.5 12.02M77.5 11L76.98 11M70.5 11.98L70.5 13L71.02 13M77.5 11.98L77.5 13L77.5 14.02M71.5 13.98L71.5 15L72.02 15M71.98 15L72.5 15L73.02 15M72.98 15L73.5 15L74.02 15M73.98 15L74.5 15L75.02 15M74.98 15L75.5 15L76.02 15M75.98 15L76.5 15L77.02 15M76.98 15L77.5 15L78.02 15M77.5 15L77.5 13.98"/><path d="M71 4h5.02v2.02h-5.02zM70 6h2.02v2.02h-2.02zM75 6h2.02v2.02h-2.02zM70 8h7.02v2.02h-7.02zM70 10h2.02v2.02h-2.02zM71 12h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M80.5 6.02L80.5 5L79.98 5M85.5 6.02L85.5 5L84.98 5M82.5 8.02L82.5 7L83.02 7M82.98 7L83.5 7L84.02 7M83.98 7L84.5 7L85.02 7M85.5 5.98L85.5 7L84.98 7M80.5 10.02L80.5 9L81.02 9M80.98 9L81.5 9L82.02 9M82.5 7.98L82.5 9L81.98 9M80.5 9.98L80.5 11L80.5 12.02M80.5 11.98L80.5 13L80.5 14.02M77.98 15L78.5 15L79.02 15M78.98 15L79.5 15L80.02 15M80.5 13.98L80.5 15L79.98 15"/><path class="l2 in" d="M80.5 6.02L80.5 5L79.98 5M85.5 6.02L85.5 5L84.98 5M82.5 8.02L82.5 7L83.02 7M82.98 7L83.5 7L84.02 7M83.98 7L84.5 7L85.02 7M85.5 5.98L85.5 7L84.98 7M80.5 10.02L80.5 9L81.02 9M80.98 9L81.5 9L82.02 9M82.5 7.98L82.5 9L81.98 9M80.5 9.98L80.5 11L80.5 12.02M80.5 11.98L80.5 13L80.5 14.02M77.98 15L78.5 15L79.02 15M78.98 15L79.5 15L80.02 15M80.5 13.98L80.5 15L79.98 15"/><path d="M78 4h2.02v2.02h-2.02zM81 4h4.02v2.02h-4.02zM78 6h4.02v2.02h-4.02zM78 8h2.02v2.02h-2.02zM78 10h2.02v2.02h-2.02zM78 12h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M88.5 6.02L88.5 5L87.98 5M93.5 6.02L93.5 5L92.98 5M88.5 5.98L88.5 7L88.5 8.02M93.5 5.98L93.5 7L93.5 8.02M88.5 7.98L88.5 9L88.5 10.02M93.5 7.98L93.5 9L93.5 10.02M88.5 9.98L88.5 11L88.5 12.02M93.5 9.98L93.5 11L93.5 12.02M86.5 11.98L86.5 13L87.02 13M93.5 11.98L93.5 13L93.5 14.02M87.5 16.02L87.5 15L88.02 15M87.98 15L88.5 15L89.02 15M88.98 15L89.5 15L90.02 15M90.5 16.02L90.5 15L89.98 15M93.5 13.98L93.5 15L93.5 16.02M92.5 18.02L92.5 17L93.02 17M93.5 15.98L93.5 17L92.98 17M87.5 17.98L87.5 19L88.02 19M87.98 19L88.5 19L89.02 19M88.98 19L89.5 19L90.02 19M89.98 19L90.5 19L91.02 19M90.98 19L91.5 19L92.02 19M92.5 17.98L92.5 19L91.98 19"/><path class="l2 in" d="M88.5 6.02L88.5 5L87.98 5M93.5 6.02L93.5 5L92.98 5M88.5 5.98L88.5 7L88.5 8.02M93.5 5.98L93.5 7L93.5 8.02M88.5 7.98L88.5 9L88.5 10.02M93.5 7.98L93.5 9L93.5 10.02M88.5 9.98L88.5 11L88.5 12.02M93.5 9.98L93.5 11L93.5 12.02M86.5 11.98L86.5 13L87.02 13M93.5 11.98L93.5 13L93.5 14.02M87.5 16.02L87.5 15L88.02 15M87.98 15L88.5 15L89.02 15M88.98 15L89.5 15L90.02 15M90.5 16.02L90.5 15L89.98 15M93.5 13.98L93.5 15L93.5 16.02M92.5 18.02L92.5 17L93.02 17M93.5 15.98L93.5 17L92.98 17M87.5 17.98L87.5 19L88.02 19M87.98 19L88.5 19L89.02 19M88.98 19L89.5 19L90.02 19M89.98 19L90.5 19L91.02 19M90.98 19L91.5 19L92.02 19M92.5 17.98L92.5 19L91.98 19"/><path d="M86 4h2.02v2.02h-2.02zM91 4h2.02v2.02h-2.02zM86 6h2.02v2.02h-2.02zM91 6h2.02v2.02h-2.02zM86 8h2.02v2.02h-2.02zM91 8h2.02v2.02h-2.02zM86 10h2.02v2.02h-2.02zM91 10h2.02v2.02h-2.02zM87 12h6.02v2.02h-6.02zM91 14h2.02v2.02h-2.02zM87 16h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M102.5 2.02L102.5 1L101.98 1M109.5 2.02L109.5 1L108.98 1M103.5 4.02L103.5 3L102.98 3M109.5 1.98L109.5 3L109.5 4.02M101.5 6.02L101.5 5L100.98 5M106.5 6.02L106.5 5L105.98 5M109.5 3.98L109.5 5L109.5 6.02M101.5 5.98L101.5 7L101.5 8.02M101.5 7L102.02 7M102.5 5.98L102.5 7L101.98 7M105.5 8.02L105.5 7L106.02 7M106.5 5.98L106.5 7L105.98 7M109.5 5.98L109.5 7L109.5 8.02M101.5 7.98L101.5 9L101.5 10.02M103.5 7.98L103.5 9L104.02 9M103.98 9L104.5 9L105.02 9M105.5 7.98L105.5 9L104.98 9M109.5 7.98L109.5 9L109.5 10.02M101.5 9.98L101.5 11L101.5 12.02M109.5 9.98L109.5 11L109.5 12.02M101.5 11.98L101.5 13L101.5 14.02M109.5 11.98L109.5 13L109.5 14.02M109.5 13L110.02 13M99.5 13.98L99.5 15L100.02 15M99.98 15L100.5 15L101.02 15M101.5 13.98L101.5 15L100.98 15M107.5 13.98L107.5 15L108.02 15M107.98 15L108.5 15L109.02 15M109.5 13.98L109.5 15L108.98 15"/><path class="l2 in" d="M102.5 2.02L102.5 1L101.98 1M109.5 2.02L109.5 1L108.98 1M103.5 4.02L103.5 3L102.98 3M109.5 1.98L109.5 3L109.5 4.02M101.5 6.02L101.5 5L100.98 5M106.5 6.02L106.5 5L105.98 5M109.5 3.98L109.5 5L109.5 6.02M101.5 5.98L101.5 7L101.5 8.02M101.5 7L102.02 7M102.5 5.98L102.5 7L101.98 7M105.5 8.02L105.5 7L106.02 7M106.5 5.98L106.5 7L105.98 7M109.5 5.98L109.5 7L109.5 8.02M101.5 7.98L101.5 9L101.5 10.02M103.5 7.98L103.5 9L104.02 9M103.98 9L104.5 9L105.02 9M105.5 7.98L105.5 9L104.98 9M109.5 7.98L109.5 9L109.5 10.02M101.5 9.98L101.5 11L101.5 12.02M109.5 9.98L109.5 11L109.5 12.02M101.5 11.98L101.5 13L101.5 14.02M109.5 11.98L109.5 13L109.5 14.02M109.5 13L110.02 13M99.5 13.98L99.5 15L100.02 15M99.98 15L100.5 15L101.02 15M101.5 13.98L101.5 15L100.98 15M107.5 13.98L107.5 15L108.02 15M107.98 15L108.5 15L109.02 15M109.5 13.98L109.5 15L108.98 15"/><path d="M99 0h3.02v2.02h-3.02zM106 0h3.02v2.02h-3.02zM99 2h4.02v2.02h-4.02zM105 2h4.02v2.02h-4.02zM99 4h2.02v2.02h-2.02zM102 4h4.02v2.02h-4.02zM107 4h2.02v2.02h-2.02zM99 6h2.02v2.02h-2.02zM103 6h2.02v2.02h-2.02zM107 6h2.02v2.02h-2.02zM99 8h2.02v2.02h-2.02zM107 8h2.02v2.02h-2.02zM99 10h2.02v2.02h-2.02zM107 10h2.02v2.02h-2.02zM99 12h2.02v2.02h-2.02zM107 12h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M116.5 6.02L116.5 5L115.98 5M112.5 8.02L112.5 7L113.02 7M112.98 7L113.5 7L114.02 7M114.5 5.98L114.5 7L113.98 7M117.5 8.02L117.5 7L116.98 7M112.5 7.98L112.5 9L112.5 10.02M117.5 7.98L117.5 9L117.5 10.02M112.5 9.98L112.5 11L112.5 12.02M117.5 9.98L117.5 11L117.5 12.02M110.5 11.98L110.5 13L109.98 13M116.5 14.02L116.5 13L117.02 13M117.5 11.98L117.5 13L116.98 13M111.5 13.98L111.5 15L112.02 15M111.98 15L112.5 15L113.02 15M112.98 15L113.5 15L114.02 15M113.98 15L114.5 15L115.02 15M114.98 15L115.5 15L116.02 15M116.5 13.98L116.5 15L115.98 15"/><path class="l2 in" d="M116.5 6.02L116.5 5L115.98 5M112.5 8.02L112.5 7L113.02 7M112.98 7L113.5 7L114.02 7M114.5 5.98L114.5 7L113.98 7M117.5 8.02L117.5 7L116.98 7M112.5 7.98L112.5 9L112.5 10.02M117.5 7.98L117.5 9L117.5 10.02M112.5 9.98L112.5 11L112.5 12.02M117.5 9.98L117.5 11L117.5 12.02M110.5 11.98L110.5 13L109.98 13M116.5 14.02L116.5 13L117.02 13M117.5 11.98L117.5 13L116.98 13M111.5 13.98L111.5 15L112.02 15M111.98 15L112.5 15L113.02 15M112.98 15L113.5 15L114.02 15M113.98 15L114.5 15L115.02 15M114.98 15L115.5 15L116.02 15M116.5 13.98L116.5 15L115.98 15"/><path d="M111 4h5.02v2.02h-5.02zM110 6h2.02v2.02h-2.02zM115 6h2.02v2.02h-2.02zM110 8h2.02v2.02h-2.02zM115 8h2.02v2.02h-2.02zM110 10h2.02v2.02h-2.02zM115 10h2.02v2.02h-2.02zM111 12h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M124.5 6.02L124.5 5L123.98 5M120.5 8.02L120.5 7L121.02 7M120.98 7L121.5 7L122.02 7M122.5 5.98L122.5 7L121.98 7M125.5 8.02L125.5 7L126.02 7M120.5 7.98L120.5 9L120.5 10.02M125.5 7.98L125.5 9L125.5 10.02M120.5 9.98L120.5 11L120.5 12.02M125.5 9.98L125.5 11L125.5 12.02M120.5 11.98L120.5 13L120.5 14.02M125.5 11.98L125.5 13L125.5 14.02M118.5 13.98L118.5 15L119.02 15M118.98 15L119.5 15L120.02 15M120.5 13.98L120.5 15L119.98 15M123.5 13.98L123.5 15L124.02 15M123.98 15L124.5 15L125.02 15M125.5 13.98L125.5 15L124.98 15"/><path class="l2 in" d="M124.5 6.02L124.5 5L123.98 5M120.5 8.02L120.5 7L121.02 7M120.98 7L121.5 7L122.02 7M122.5 5.98L122.5 7L121.98 7M125.5 8.02L125.5 7L126.02 7M120.5 7.98L120.5 9L120.5 10.02M125.5 7.98L125.5 9L125.5 10.02M120.5 9.98L120.5 11L120.5 12.02M125.5 9.98L125.5 11L125.5 12.02M120.5 11.98L120.5 13L120.5 14.02M125.5 11.98L125.5 13L125.5 14.02M118.5 13.98L118.5 15L119.02 15M118.98 15L119.5 15L120.02 15M120.5 13.98L120.5 15L119.98 15M123.5 13.98L123.5 15L124.02 15M123.98 15L124.5 15L125.02 15M125.5 13.98L125.5 15L124.98 15"/><path d="M118 4h6.02v2.02h-6.02zM118 6h2.02v2.02h-2.02zM123 6h2.02v2.02h-2.02zM118 8h2.02v2.02h-2.02zM123 8h2.02v2.02h-2.02zM118 10h2.02v2.02h-2.02zM123 10h2.02v2.02h-2.02zM118 12h2.02v2.02h-2.02zM123 12h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M129.5 2.02L129.5 1L128.98 1M129.5 1.98L129.5 3L129.5 4.02M132.5 6.02L132.5 5L131.98 5M126.5 5.98L126.5 7L125.98 7M129.5 8.02L129.5 7L130.02 7M129.98 7L130.5 7L131.02 7M130.98 7L131.5 7L132.02 7M132.5 5.98L132.5 7L131.98 7M129.5 7.98L129.5 9L129.5 10.02M129.5 9.98L129.5 11L129.5 12.02M127.5 11.98L127.5 13L128.02 13M132.5 14.02L132.5 13L131.98 13M128.5 13.98L128.5 15L129.02 15M128.98 15L129.5 15L130.02 15M129.98 15L130.5 15L131.02 15M130.98 15L131.5 15L132.02 15M131.98 15L132.5 15L133.02 15M132.5 15L132.5 13.98"/><path class="l2 in" d="M129.5 2.02L129.5 1L128.98 1M129.5 1.98L129.5 3L129.5 4.02M132.5 6.02L132.5 5L131.98 5M126.5 5.98L126.5 7L125.98 7M129.5 8.02L129.5 7L130.02 7M129.98 7L130.5 7L131.02 7M130.98 7L131.5 7L132.02 7M132.5 5.98L132.5 7L131.98 7M129.5 7.98L129.5 9L129.5 10.02M129.5 9.98L129.5 11L129.5 12.02M127.5 11.98L127.5 13L128.02 13M132.5 14.02L132.5 13L131.98 13M128.5 13.98L128.5 15L129.02 15M128.98 15L129.5 15L130.02 15M129.98 15L130.5 15L131.02 15M130.98 15L131.5 15L132.02 15M131.98 15L132.5 15L133.02 15M132.5 15L132.5 13.98"/><path d="M127 0h2.02v2.02h-2.02zM127 2h2.02v2.02h-2.02zM126 4h6.02v2.02h-6.02zM127 6h2.02v2.02h-2.02zM127 8h2.02v2.02h-2.02zM127 10h2.02v2.02h-2.02zM128 12h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M135.5 2.02L135.5 1L134.98 1M135.5 1.98L135.5 3L135.5 4.02M139.5 6.02L139.5 5L138.98 5M135.5 8.02L135.5 7L136.02 7M135.98 7L136.5 7L137.02 7M137.5 5.98L137.5 7L136.98 7M140.5 8.02L140.5 7L139.98 7M135.5 7.98L135.5 9L135.5 10.02M140.5 7.98L140.5 9L140.5 10.02M135.5 9.98L135.5 11L135.5 12.02M140.5 9.98L140.5 11L140.5 12.02M135.5 11.98L135.5 13L135.5 14.02M140.5 11.98L140.5 13L140.5 14.02M132.98 15L133.5 15L134.02 15M133.98 15L134.5 15L135.02 15M135.5 13.98L135.5 15L134.98 15M138.5 13.98L138.5 15L139.02 15M138.98 15L139.5 15L140.02 15M140.5 13.98L140.5 15L139.98 15"/><path class="l2 in" d="M135.5 2.02L135.5 1L134.98 1M135.5 1.98L135.5 3L135.5 4.02M139.5 6.02L139.5 5L138.98 5M135.5 8.02L135.5 7L136.02 7M135.98 7L136.5 7L137.02 7M137.5 5.98L137.5 7L136.98 7M140.5 8.02L140.5 7L139.98 7M135.5 7.98L135.5 9L135.5 10.02M140.5 7.98L140.5 9L140.5 10.02M135.5 9.98L135.5 11L135.5 12.02M140.5 9.98L140.5 11L140.5 12.02M135.5 11.98L135.5 13L135.5 14.02M140.5 11.98L140.5 13L140.5 14.02M132.98 15L133.5 15L134.02 15M133.98 15L134.5 15L135.02 15M135.5 13.98L135.5 15L134.98 15M138.5 13.98L138.5 15L139.02 15M138.98 15L139.5 15L140.02 15M140.5 13.98L140.5 15L139.98 15"/><path d="M133 0h2.02v2.02h-2.02zM133 2h2.02v2.02h-2.02zM133 4h6.02v2.02h-6.02zM133 6h2.02v2.02h-2.02zM138 6h2.02v2.02h-2.02zM133 8h2.02v2.02h-2.02zM138 8h2.02v2.02h-2.02zM133 10h2.02v2.02h-2.02zM138 10h2.02v2.02h-2.02zM133 12h2.02v2.02h-2.02zM138 12h2.02v2.02h-2.02z"/></g><g class="art k d0"><path class="l2" d="M145.5 14.02L145.5 13L144.98 13M143.5 13.98L143.5 15L144.02 15M143.98 15L144.5 15L145.02 15M145.5 13.98L145.5 15L144.98 15"/><path class="l2 in" d="M145.5 14.02L145.5 13L144.98 13M143.5 13.98L143.5 15L144.02 15M143.98 15L144.5 15L145.02 15M145.5 13.98L145.5 15L144.98 15"/><path d="M143 12h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M7.5 24.02L7.5 23L6.98 23M2.5 26.02L2.5 25L3.02 25M2.98 25L3.5 25L4.02 25M3.98 25L4.5 25L5.02 25M5.5 23.98L5.5 25L4.98 25M8.5 26.02L8.5 25L7.98 25M2.5 25.98L2.5 27L2.5 28.02M8.5 25.98L8.5 27L8.5 28.02M7.5 30.02L7.5 29L8.02 29M8.5 27.98L8.5 29L7.98 29M2.5 32.02L2.5 31L3.02 31M3.5 29.98L3.5 31L2.98 31M6.5 32.02L6.5 31L7.02 31M7.5 29.98L7.5 31L7.5 32.02M7.5 31L6.98 31M2.5 31.98L2.5 33L2.5 34.02M4.5 31.98L4.5 33L5.02 33M7.5 31.98L7.5 33L7.5 34.02M2.5 33.98L2.5 35L2.5 36.02M5.5 33.98L5.5 35L6.02 35M8.5 36.02L8.5 35L9.02 35M0.5 35.98L0.5 37L1.02 37M0.98 37L1.5 37L2.02 37M2.5 35.98L2.5 37L1.98 37M6.5 35.98L6.5 37L7.02 37M6.98 37L7.5 37L8.02 37M8.5 35.98L8.5 37L7.98 37"/><path class="l2 in" d="M7.5 24.02L7.5 23L6.98 23M2.5 26.02L2.5 25L3.02 25M2.98 25L3.5 25L4.02 25M3.98 25L4.5 25L5.02 25M5.5 23.98L5.5 25L4.98 25M8.5 26.02L8.5 25L7.98 25M2.5 25.98L2.5 27L2.5 28.02M8.5 25.98L8.5 27L8.5 28.02M7.5 30.02L7.5 29L8.02 29M8.5 27.98L8.5 29L7.98 29M2.5 32.02L2.5 31L3.02 31M3.5 29.98L3.5 31L2.98 31M6.5 32.02L6.5 31L7.02 31M7.5 29.98L7.5 31L7.5 32.02M7.5 31L6.98 31M2.5 31.98L2.5 33L2.5 34.02M4.5 31.98L4.5 33L5.02 33M7.5 31.98L7.5 33L7.5 34.02M2.5 33.98L2.5 35L2.5 36.02M5.5 33.98L5.5 35L6.02 35M8.5 36.02L8.5 35L9.02 35M0.5 35.98L0.5 37L1.02 37M0.98 37L1.5 37L2.02 37M2.5 35.98L2.5 37L1.98 37M6.5 35.98L6.5 37L7.02 37M6.98 37L7.5 37L8.02 37M8.5 35.98L8.5 37L7.98 37"/><path d="M0 22h7.02v2.02h-7.02zM0 24h2.02v2.02h-2.02zM6 24h2.02v2.02h-2.02zM0 26h2.02v2.02h-2.02zM6 26h2.02v2.02h-2.02zM0 28h7.02v2.02h-7.02zM0 30h2.02v2.02h-2.02zM4 30h2.02v2.02h-2.02zM0 32h2.02v2.02h-2.02zM5 32h2.02v2.02h-2.02zM0 34h2.02v2.02h-2.02zM6 34h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M15.5 28.02L15.5 27L14.98 27M11.5 30.02L11.5 29L12.02 29M11.98 29L12.5 29L13.02 29M13.5 30.02L13.5 29L12.98 29M16.5 30.02L16.5 29L15.98 29M16.5 29.98L16.5 31L16.5 32.02M11.5 34.02L11.5 33L12.02 33M11.98 33L12.5 33L13.02 33M12.98 33L13.5 33L14.02 33M13.98 33L14.5 33L15.02 33M14.98 33L15.5 33L16.02 33M16.5 31.98L16.5 33L16.5 34.02M16.5 33L15.98 33M9.5 33.98L9.5 35L8.98 35M16.5 33.98L16.5 35L16.5 36.02M16.5 35L17.02 35M10.5 35.98L10.5 37L11.02 37M10.98 37L11.5 37L12.02 37M11.98 37L12.5 37L13.02 37M12.98 37L13.5 37L14.02 37M13.98 37L14.5 37L15.02 37M14.98 37L15.5 37L16.02 37M16.5 35.98L16.5 37L15.98 37"/><path class="l2 in" d="M15.5 28.02L15.5 27L14.98 27M11.5 30.02L11.5 29L12.02 29M11.98 29L12.5 29L13.02 29M13.5 30.02L13.5 29L12.98 29M16.5 30.02L16.5 29L15.98 29M16.5 29.98L16.5 31L16.5 32.02M11.5 34.02L11.5 33L12.02 33M11.98 33L12.5 33L13.02 33M12.98 33L13.5 33L14.02 33M13.98 33L14.5 33L15.02 33M14.98 33L15.5 33L16.02 33M16.5 31.98L16.5 33L16.5 34.02M16.5 33L15.98 33M9.5 33.98L9.5 35L8.98 35M16.5 33.98L16.5 35L16.5 36.02M16.5 35L17.02 35M10.5 35.98L10.5 37L11.02 37M10.98 37L11.5 37L12.02 37M11.98 37L12.5 37L13.02 37M12.98 37L13.5 37L14.02 37M13.98 37L14.5 37L15.02 37M14.98 37L15.5 37L16.02 37M16.5 35.98L16.5 37L15.98 37"/><path d="M10 26h5.02v2.02h-5.02zM9 28h2.02v2.02h-2.02zM14 28h2.02v2.02h-2.02zM9 30h7.02v2.02h-7.02zM9 32h2.02v2.02h-2.02zM10 34h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M23.5 28.02L23.5 27L22.98 27M18.5 30.02L18.5 29L19.02 29M18.98 29L19.5 29L20.02 29M19.98 29L20.5 29L21.02 29M21.5 30.02L21.5 29L20.98 29M24.5 30.02L24.5 29L23.98 29M24.5 29.98L24.5 31L24.5 32.02M19.5 34.02L19.5 33L20.02 33M19.98 33L20.5 33L21.02 33M21.5 34.02L21.5 33L20.98 33M24.5 31.98L24.5 33L24.5 34.02M17.5 33.98L17.5 35L16.98 35M24.5 33.98L24.5 35L24.5 36.02M24.5 35L25.02 35M18.5 35.98L18.5 37L19.02 37M18.98 37L19.5 37L20.02 37M19.98 37L20.5 37L21.02 37M20.98 37L21.5 37L22.02 37M21.98 37L22.5 37L23.02 37M22.98 37L23.5 37L24.02 37M24.5 35.98L24.5 37L23.98 37"/><path class="l2 in" d="M23.5 28.02L23.5 27L22.98 27M18.5 30.02L18.5 29L19.02 29M18.98 29L19.5 29L20.02 29M19.98 29L20.5 29L21.02 29M21.5 30.02L21.5 29L20.98 29M24.5 30.02L24.5 29L23.98 29M24.5 29.98L24.5 31L24.5 32.02M19.5 34.02L19.5 33L20.02 33M19.98 33L20.5 33L21.02 33M21.5 34.02L21.5 33L20.98 33M24.5 31.98L24.5 33L24.5 34.02M17.5 33.98L17.5 35L16.98 35M24.5 33.98L24.5 35L24.5 36.02M24.5 35L25.02 35M18.5 35.98L18.5 37L19.02 37M18.98 37L19.5 37L20.02 37M19.98 37L20.5 37L21.02 37M20.98 37L21.5 37L22.02 37M21.98 37L22.5 37L23.02 37M22.98 37L23.5 37L24.02 37M24.5 35.98L24.5 37L23.98 37"/><path d="M18 26h5.02v2.02h-5.02zM22 28h2.02v2.02h-2.02zM18 30h6.02v2.02h-6.02zM17 32h2.02v2.02h-2.02zM22 32h2.02v2.02h-2.02zM18 34h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M32.5 24.02L32.5 23L31.98 23M32.5 23.98L32.5 25L32.5 26.02M32.5 25.98L32.5 27L32.5 28.02M27.5 30.02L27.5 29L28.02 29M27.98 29L28.5 29L29.02 29M29.5 27.98L29.5 29L28.98 29M32.5 27.98L32.5 29L32.5 30.02M27.5 29.98L27.5 31L27.5 32.02M32.5 29.98L32.5 31L32.5 32.02M27.5 31.98L27.5 33L27.5 34.02M32.5 31.98L32.5 33L32.5 34.02M25.5 33.98L25.5 35L24.98 35M32.5 33.98L32.5 35L32.5 36.02M32.5 35L33.02 35M26.5 35.98L26.5 37L27.02 37M26.98 37L27.5 37L28.02 37M27.98 37L28.5 37L29.02 37M28.98 37L29.5 37L30.02 37M29.98 37L30.5 37L31.02 37M30.98 37L31.5 37L32.02 37M32.5 35.98L32.5 37L31.98 37"/><path class="l2 in" d="M32.5 24.02L32.5 23L31.98 23M32.5 23.98L32.5 25L32.5 26.02M32.5 25.98L32.5 27L32.5 28.02M27.5 30.02L27.5 29L28.02 29M27.98 29L28.5 29L29.02 29M29.5 27.98L29.5 29L28.98 29M32.5 27.98L32.5 29L32.5 30.02M27.5 29.98L27.5 31L27.5 32.02M32.5 29.98L32.5 31L32.5 32.02M27.5 31.98L27.5 33L27.5 34.02M32.5 31.98L32.5 33L32.5 34.02M25.5 33.98L25.5 35L24.98 35M32.5 33.98L32.5 35L32.5 36.02M32.5 35L33.02 35M26.5 35.98L26.5 37L27.02 37M26.98 37L27.5 37L28.02 37M27.98 37L28.5 37L29.02 37M28.98 37L29.5 37L30.02 37M29.98 37L30.5 37L31.02 37M30.98 37L31.5 37L32.02 37M32.5 35.98L32.5 37L31.98 37"/><path d="M30 22h2.02v2.02h-2.02zM30 24h2.02v2.02h-2.02zM26 26h6.02v2.02h-6.02zM25 28h2.02v2.02h-2.02zM30 28h2.02v2.02h-2.02zM25 30h2.02v2.02h-2.02zM30 30h2.02v2.02h-2.02zM25 32h2.02v2.02h-2.02zM30 32h2.02v2.02h-2.02zM26 34h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M35.5 28.02L35.5 27L34.98 27M40.5 28.02L40.5 27L39.98 27M35.5 27.98L35.5 29L35.5 30.02M40.5 27.98L40.5 29L40.5 30.02M35.5 29.98L35.5 31L35.5 32.02M40.5 29.98L40.5 31L40.5 32.02M35.5 31.98L35.5 33L35.5 34.02M40.5 31.98L40.5 33L40.5 34.02M33.5 33.98L33.5 35L32.98 35M40.5 33.98L40.5 35L40.5 36.02M34.5 38.02L34.5 37L35.02 37M34.98 37L35.5 37L36.02 37M35.98 37L36.5 37L37.02 37M37.5 38.02L37.5 37L36.98 37M40.5 35.98L40.5 37L40.5 38.02M39.5 40.02L39.5 39L40.02 39M40.5 37.98L40.5 39L39.98 39M34.5 39.98L34.5 41L35.02 41M34.98 41L35.5 41L36.02 41M35.98 41L36.5 41L37.02 41M36.98 41L37.5 41L38.02 41M37.98 41L38.5 41L39.02 41M39.5 39.98L39.5 41L38.98 41"/><path class="l2 in" d="M35.5 28.02L35.5 27L34.98 27M40.5 28.02L40.5 27L39.98 27M35.5 27.98L35.5 29L35.5 30.02M40.5 27.98L40.5 29L40.5 30.02M35.5 29.98L35.5 31L35.5 32.02M40.5 29.98L40.5 31L40.5 32.02M35.5 31.98L35.5 33L35.5 34.02M40.5 31.98L40.5 33L40.5 34.02M33.5 33.98L33.5 35L32.98 35M40.5 33.98L40.5 35L40.5 36.02M34.5 38.02L34.5 37L35.02 37M34.98 37L35.5 37L36.02 37M35.98 37L36.5 37L37.02 37M37.5 38.02L37.5 37L36.98 37M40.5 35.98L40.5 37L40.5 38.02M39.5 40.02L39.5 39L40.02 39M40.5 37.98L40.5 39L39.98 39M34.5 39.98L34.5 41L35.02 41M34.98 41L35.5 41L36.02 41M35.98 41L36.5 41L37.02 41M36.98 41L37.5 41L38.02 41M37.98 41L38.5 41L39.02 41M39.5 39.98L39.5 41L38.98 41"/><path d="M33 26h2.02v2.02h-2.02zM38 26h2.02v2.02h-2.02zM33 28h2.02v2.02h-2.02zM38 28h2.02v2.02h-2.02zM33 30h2.02v2.02h-2.02zM38 30h2.02v2.02h-2.02zM33 32h2.02v2.02h-2.02zM38 32h2.02v2.02h-2.02zM34 34h6.02v2.02h-6.02zM38 36h2.02v2.02h-2.02zM34 38h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M53.5 24.02L53.5 23L52.98 23M48.5 26.02L48.5 25L49.02 25M48.98 25L49.5 25L50.02 25M49.98 25L50.5 25L51.02 25M51.5 23.98L51.5 25L50.98 25M54.5 26.02L54.5 25L53.98 25M48.5 25.98L48.5 27L48.5 28.02M54.5 25.98L54.5 27L54.5 28.02M54.5 27.98L54.5 29L54.5 30.02M48.5 32.02L48.5 31L49.02 31M48.98 31L49.5 31L50.02 31M49.98 31L50.5 31L51.02 31M51.5 29.98L51.5 31L50.98 31M54.5 29.98L54.5 31L54.5 32.02M48.5 31.98L48.5 33L48.5 34.02M54.5 31.98L54.5 33L54.5 34.02M48.5 33.98L48.5 35L48.5 36.02M54.5 33.98L54.5 35L54.5 36.02M46.5 35.98L46.5 37L47.02 37M46.98 37L47.5 37L48.02 37M48.5 35.98L48.5 37L47.98 37M52.5 35.98L52.5 37L53.02 37M52.98 37L53.5 37L54.02 37M53.98 37L54.5 37L55.02 37M54.5 37L54.5 35.98"/><path class="l2 in" d="M53.5 24.02L53.5 23L52.98 23M48.5 26.02L48.5 25L49.02 25M48.98 25L49.5 25L50.02 25M49.98 25L50.5 25L51.02 25M51.5 23.98L51.5 25L50.98 25M54.5 26.02L54.5 25L53.98 25M48.5 25.98L48.5 27L48.5 28.02M54.5 25.98L54.5 27L54.5 28.02M54.5 27.98L54.5 29L54.5 30.02M48.5 32.02L48.5 31L49.02 31M48.98 31L49.5 31L50.02 31M49.98 31L50.5 31L51.02 31M51.5 29.98L51.5 31L50.98 31M54.5 29.98L54.5 31L54.5 32.02M48.5 31.98L48.5 33L48.5 34.02M54.5 31.98L54.5 33L54.5 34.02M48.5 33.98L48.5 35L48.5 36.02M54.5 33.98L54.5 35L54.5 36.02M46.5 35.98L46.5 37L47.02 37M46.98 37L47.5 37L48.02 37M48.5 35.98L48.5 37L47.98 37M52.5 35.98L52.5 37L53.02 37M52.98 37L53.5 37L54.02 37M53.98 37L54.5 37L55.02 37M54.5 37L54.5 35.98"/><path d="M47 22h6.02v2.02h-6.02zM46 24h2.02v2.02h-2.02zM52 24h2.02v2.02h-2.02zM46 26h2.02v2.02h-2.02zM52 26h2.02v2.02h-2.02zM46 28h8.02v2.02h-8.02zM46 30h2.02v2.02h-2.02zM52 30h2.02v2.02h-2.02zM46 32h2.02v2.02h-2.02zM52 32h2.02v2.02h-2.02zM46 34h2.02v2.02h-2.02zM52 34h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M61.5 28.02L61.5 27L60.98 27M57.5 30.02L57.5 29L58.02 29M57.98 29L58.5 29L59.02 29M59.5 27.98L59.5 29L58.98 29M62.5 30.02L62.5 29L61.98 29M57.5 29.98L57.5 31L57.5 32.02M62.5 29.98L62.5 31L62.5 32.02M57.5 31.98L57.5 33L57.5 34.02M62.5 31.98L62.5 33L62.5 34.02M57.5 33.98L57.5 35L57.5 36.02M62.5 33.98L62.5 35L62.5 36.02M62.5 35L63.02 35M54.98 37L55.5 37L56.02 37M55.98 37L56.5 37L57.02 37M57.5 35.98L57.5 37L56.98 37M60.5 35.98L60.5 37L61.02 37M60.98 37L61.5 37L62.02 37M62.5 35.98L62.5 37L61.98 37"/><path class="l2 in" d="M61.5 28.02L61.5 27L60.98 27M57.5 30.02L57.5 29L58.02 29M57.98 29L58.5 29L59.02 29M59.5 27.98L59.5 29L58.98 29M62.5 30.02L62.5 29L61.98 29M57.5 29.98L57.5 31L57.5 32.02M62.5 29.98L62.5 31L62.5 32.02M57.5 31.98L57.5 33L57.5 34.02M62.5 31.98L62.5 33L62.5 34.02M57.5 33.98L57.5 35L57.5 36.02M62.5 33.98L62.5 35L62.5 36.02M62.5 35L63.02 35M54.98 37L55.5 37L56.02 37M55.98 37L56.5 37L57.02 37M57.5 35.98L57.5 37L56.98 37M60.5 35.98L60.5 37L61.02 37M60.98 37L61.5 37L62.02 37M62.5 35.98L62.5 37L61.98 37"/><path d="M55 26h6.02v2.02h-6.02zM55 28h2.02v2.02h-2.02zM60 28h2.02v2.02h-2.02zM55 30h2.02v2.02h-2.02zM60 30h2.02v2.02h-2.02zM55 32h2.02v2.02h-2.02zM60 32h2.02v2.02h-2.02zM55 34h2.02v2.02h-2.02zM60 34h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M65.5 28.02L65.5 27L64.98 27M70.5 28.02L70.5 27L69.98 27M65.5 27.98L65.5 29L65.5 30.02M70.5 27.98L70.5 29L70.5 30.02M65.5 29.98L65.5 31L65.5 32.02M70.5 29.98L70.5 31L70.5 32.02M65.5 31.98L65.5 33L65.5 34.02M70.5 31.98L70.5 33L70.5 34.02M63.5 33.98L63.5 35L62.98 35M70.5 33.98L70.5 35L70.5 36.02M64.5 38.02L64.5 37L65.02 37M64.98 37L65.5 37L66.02 37M65.98 37L66.5 37L67.02 37M67.5 38.02L67.5 37L66.98 37M70.5 35.98L70.5 37L70.5 38.02M69.5 40.02L69.5 39L70.02 39M70.5 37.98L70.5 39L69.98 39M64.5 39.98L64.5 41L65.02 41M64.98 41L65.5 41L66.02 41M65.98 41L66.5 41L67.02 41M66.98 41L67.5 41L68.02 41M67.98 41L68.5 41L69.02 41M69.5 39.98L69.5 41L68.98 41"/><path class="l2 in" d="M65.5 28.02L65.5 27L64.98 27M70.5 28.02L70.5 27L69.98 27M65.5 27.98L65.5 29L65.5 30.02M70.5 27.98L70.5 29L70.5 30.02M65.5 29.98L65.5 31L65.5 32.02M70.5 29.98L70.5 31L70.5 32.02M65.5 31.98L65.5 33L65.5 34.02M70.5 31.98L70.5 33L70.5 34.02M63.5 33.98L63.5 35L62.98 35M70.5 33.98L70.5 35L70.5 36.02M64.5 38.02L64.5 37L65.02 37M64.98 37L65.5 37L66.02 37M65.98 37L66.5 37L67.02 37M67.5 38.02L67.5 37L66.98 37M70.5 35.98L70.5 37L70.5 38.02M69.5 40.02L69.5 39L70.02 39M70.5 37.98L70.5 39L69.98 39M64.5 39.98L64.5 41L65.02 41M64.98 41L65.5 41L66.02 41M65.98 41L66.5 41L67.02 41M66.98 41L67.5 41L68.02 41M67.98 41L68.5 41L69.02 41M69.5 39.98L69.5 41L68.98 41"/><path d="M63 26h2.02v2.02h-2.02zM68 26h2.02v2.02h-2.02zM63 28h2.02v2.02h-2.02zM68 28h2.02v2.02h-2.02zM63 30h2.02v2.02h-2.02zM68 30h2.02v2.02h-2.02zM63 32h2.02v2.02h-2.02zM68 32h2.02v2.02h-2.02zM64 34h6.02v2.02h-6.02zM68 36h2.02v2.02h-2.02zM64 38h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M83.5 24.02L83.5 23L82.98 23M78.5 26.02L78.5 25L79.02 25M78.98 25L79.5 25L80.02 25M79.98 25L80.5 25L81.02 25M81.5 23.98L81.5 25L80.98 25M84.5 26.02L84.5 25L83.98 25M78.5 25.98L78.5 27L78.5 28.02M84.5 25.98L84.5 27L84.5 28.02M78.5 27.98L78.5 29L78.5 30.02M84.5 27.98L84.5 29L84.5 30.02M78.5 29.98L78.5 31L78.5 32.02M84.5 29.98L84.5 31L84.5 32.02M78.5 31.98L78.5 33L78.5 34.02M84.5 31.98L84.5 33L84.5 34.02M83.5 36.02L83.5 35L84.02 35M83.98 35L84.5 35L85.02 35M84.5 35L84.5 33.98M76.5 35.98L76.5 37L77.02 37M76.98 37L77.5 37L78.02 37M77.98 37L78.5 37L79.02 37M78.98 37L79.5 37L80.02 37M79.98 37L80.5 37L81.02 37M80.98 37L81.5 37L82.02 37M81.98 37L82.5 37L83.02 37M83.5 35.98L83.5 37L82.98 37"/><path class="l2 in" d="M83.5 24.02L83.5 23L82.98 23M78.5 26.02L78.5 25L79.02 25M78.98 25L79.5 25L80.02 25M79.98 25L80.5 25L81.02 25M81.5 23.98L81.5 25L80.98 25M84.5 26.02L84.5 25L83.98 25M78.5 25.98L78.5 27L78.5 28.02M84.5 25.98L84.5 27L84.5 28.02M78.5 27.98L78.5 29L78.5 30.02M84.5 27.98L84.5 29L84.5 30.02M78.5 29.98L78.5 31L78.5 32.02M84.5 29.98L84.5 31L84.5 32.02M78.5 31.98L78.5 33L78.5 34.02M84.5 31.98L84.5 33L84.5 34.02M83.5 36.02L83.5 35L84.02 35M83.98 35L84.5 35L85.02 35M84.5 35L84.5 33.98M76.5 35.98L76.5 37L77.02 37M76.98 37L77.5 37L78.02 37M77.98 37L78.5 37L79.02 37M78.98 37L79.5 37L80.02 37M79.98 37L80.5 37L81.02 37M80.98 37L81.5 37L82.02 37M81.98 37L82.5 37L83.02 37M83.5 35.98L83.5 37L82.98 37"/><path d="M76 22h7.02v2.02h-7.02zM76 24h2.02v2.02h-2.02zM82 24h2.02v2.02h-2.02zM76 26h2.02v2.02h-2.02zM82 26h2.02v2.02h-2.02zM76 28h2.02v2.02h-2.02zM82 28h2.02v2.02h-2.02zM76 30h2.02v2.02h-2.02zM82 30h2.02v2.02h-2.02zM76 32h2.02v2.02h-2.02zM82 32h2.02v2.02h-2.02zM76 34h7.02v2.02h-7.02z"/></g><g class="art k"><path class="l2" d="M91.5 28.02L91.5 27L90.98 27M86.5 30.02L86.5 29L87.02 29M86.98 29L87.5 29L88.02 29M87.98 29L88.5 29L89.02 29M89.5 30.02L89.5 29L88.98 29M92.5 30.02L92.5 29L91.98 29M92.5 29.98L92.5 31L92.5 32.02M87.5 34.02L87.5 33L88.02 33M87.98 33L88.5 33L89.02 33M89.5 34.02L89.5 33L88.98 33M92.5 31.98L92.5 33L92.5 34.02M85.5 33.98L85.5 35L84.98 35M92.5 33.98L92.5 35L92.5 36.02M92.5 35L93.02 35M86.5 35.98L86.5 37L87.02 37M86.98 37L87.5 37L88.02 37M87.98 37L88.5 37L89.02 37M88.98 37L89.5 37L90.02 37M89.98 37L90.5 37L91.02 37M90.98 37L91.5 37L92.02 37M92.5 35.98L92.5 37L91.98 37"/><path class="l2 in" d="M91.5 28.02L91.5 27L90.98 27M86.5 30.02L86.5 29L87.02 29M86.98 29L87.5 29L88.02 29M87.98 29L88.5 29L89.02 29M89.5 30.02L89.5 29L88.98 29M92.5 30.02L92.5 29L91.98 29M92.5 29.98L92.5 31L92.5 32.02M87.5 34.02L87.5 33L88.02 33M87.98 33L88.5 33L89.02 33M89.5 34.02L89.5 33L88.98 33M92.5 31.98L92.5 33L92.5 34.02M85.5 33.98L85.5 35L84.98 35M92.5 33.98L92.5 35L92.5 36.02M92.5 35L93.02 35M86.5 35.98L86.5 37L87.02 37M86.98 37L87.5 37L88.02 37M87.98 37L88.5 37L89.02 37M88.98 37L89.5 37L90.02 37M89.98 37L90.5 37L91.02 37M90.98 37L91.5 37L92.02 37M92.5 35.98L92.5 37L91.98 37"/><path d="M86 26h5.02v2.02h-5.02zM90 28h2.02v2.02h-2.02zM86 30h6.02v2.02h-6.02zM85 32h2.02v2.02h-2.02zM90 32h2.02v2.02h-2.02zM86 34h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M95.5 28.02L95.5 27L94.98 27M100.5 28.02L100.5 27L99.98 27M95.5 27.98L95.5 29L95.5 30.02M100.5 27.98L100.5 29L100.5 30.02M95.5 29.98L95.5 31L95.5 32.02M100.5 29.98L100.5 31L100.5 32.02M95.5 31.98L95.5 33L95.5 34.02M100.5 31.98L100.5 33L100.5 34.02M93.5 33.98L93.5 35L92.98 35M100.5 33.98L100.5 35L100.5 36.02M94.5 38.02L94.5 37L95.02 37M94.98 37L95.5 37L96.02 37M95.98 37L96.5 37L97.02 37M97.5 38.02L97.5 37L96.98 37M100.5 35.98L100.5 37L100.5 38.02M99.5 40.02L99.5 39L100.02 39M100.5 37.98L100.5 39L99.98 39M94.5 39.98L94.5 41L95.02 41M94.98 41L95.5 41L96.02 41M95.98 41L96.5 41L97.02 41M96.98 41L97.5 41L98.02 41M97.98 41L98.5 41L99.02 41M99.5 39.98L99.5 41L98.98 41"/><path class="l2 in" d="M95.5 28.02L95.5 27L94.98 27M100.5 28.02L100.5 27L99.98 27M95.5 27.98L95.5 29L95.5 30.02M100.5 27.98L100.5 29L100.5 30.02M95.5 29.98L95.5 31L95.5 32.02M100.5 29.98L100.5 31L100.5 32.02M95.5 31.98L95.5 33L95.5 34.02M100.5 31.98L100.5 33L100.5 34.02M93.5 33.98L93.5 35L92.98 35M100.5 33.98L100.5 35L100.5 36.02M94.5 38.02L94.5 37L95.02 37M94.98 37L95.5 37L96.02 37M95.98 37L96.5 37L97.02 37M97.5 38.02L97.5 37L96.98 37M100.5 35.98L100.5 37L100.5 38.02M99.5 40.02L99.5 39L100.02 39M100.5 37.98L100.5 39L99.98 39M94.5 39.98L94.5 41L95.02 41M94.98 41L95.5 41L96.02 41M95.98 41L96.5 41L97.02 41M96.98 41L97.5 41L98.02 41M97.98 41L98.5 41L99.02 41M99.5 39.98L99.5 41L98.98 41"/><path d="M93 26h2.02v2.02h-2.02zM98 26h2.02v2.02h-2.02zM93 28h2.02v2.02h-2.02zM98 28h2.02v2.02h-2.02zM93 30h2.02v2.02h-2.02zM98 30h2.02v2.02h-2.02zM93 32h2.02v2.02h-2.02zM98 32h2.02v2.02h-2.02zM94 34h6.02v2.02h-6.02zM98 36h2.02v2.02h-2.02zM94 38h5.02v2.02h-5.02z"/></g><g class="art k d1"><path class="l2" d="M105.5 36.02L105.5 35L104.98 35M103.5 35.98L103.5 37L104.02 37M103.98 37L104.5 37L105.02 37M105.5 35.98L105.5 37L104.98 37"/><path class="l2 in" d="M105.5 36.02L105.5 35L104.98 35M103.5 35.98L103.5 37L104.02 37M103.98 37L104.5 37L105.02 37M105.5 35.98L105.5 37L104.98 37"/><path d="M103 34h2.02v2.02h-2.02z"/></g></svg>
+  <svg viewBox="0 0 94 86" aria-hidden="true" class="nw"><g class="art k"><path class="l2" d="M7.5 2.02L7.5 1L6.98 1M2.5 4.02L2.5 3L3.02 3M2.98 3L3.5 3L4.02 3M3.98 3L4.5 3L5.02 3M5.5 1.98L5.5 3L4.98 3M8.5 4.02L8.5 3L7.98 3M2.5 3.98L2.5 5L2.5 6.02M8.5 3.98L8.5 5L8.5 6.02M7.5 8.02L7.5 7L8.02 7M8.5 5.98L8.5 7L8.5 8.02M8.5 7L7.98 7M2.5 10.02L2.5 9L3.02 9M2.98 9L3.5 9L4.02 9M3.98 9L4.5 9L5.02 9M5.5 7.98L5.5 9L4.98 9M8.5 7.98L8.5 9L8.5 10.02M2.5 9.98L2.5 11L2.5 12.02M8.5 9.98L8.5 11L8.5 12.02M7.5 14.02L7.5 13L8.02 13M7.98 13L8.5 13L9.02 13M8.5 13L8.5 11.98M0.5 13.98L0.5 15L1.02 15M0.98 15L1.5 15L2.02 15M1.98 15L2.5 15L3.02 15M2.98 15L3.5 15L4.02 15M3.98 15L4.5 15L5.02 15M4.98 15L5.5 15L6.02 15M5.98 15L6.5 15L7.02 15M7.5 13.98L7.5 15L6.98 15"/><path class="l2 in" d="M7.5 2.02L7.5 1L6.98 1M2.5 4.02L2.5 3L3.02 3M2.98 3L3.5 3L4.02 3M3.98 3L4.5 3L5.02 3M5.5 1.98L5.5 3L4.98 3M8.5 4.02L8.5 3L7.98 3M2.5 3.98L2.5 5L2.5 6.02M8.5 3.98L8.5 5L8.5 6.02M7.5 8.02L7.5 7L8.02 7M8.5 5.98L8.5 7L8.5 8.02M8.5 7L7.98 7M2.5 10.02L2.5 9L3.02 9M2.98 9L3.5 9L4.02 9M3.98 9L4.5 9L5.02 9M5.5 7.98L5.5 9L4.98 9M8.5 7.98L8.5 9L8.5 10.02M2.5 9.98L2.5 11L2.5 12.02M8.5 9.98L8.5 11L8.5 12.02M7.5 14.02L7.5 13L8.02 13M7.98 13L8.5 13L9.02 13M8.5 13L8.5 11.98M0.5 13.98L0.5 15L1.02 15M0.98 15L1.5 15L2.02 15M1.98 15L2.5 15L3.02 15M2.98 15L3.5 15L4.02 15M3.98 15L4.5 15L5.02 15M4.98 15L5.5 15L6.02 15M5.98 15L6.5 15L7.02 15M7.5 13.98L7.5 15L6.98 15"/><path d="M0 0h7.02v2.02h-7.02zM0 2h2.02v2.02h-2.02zM6 2h2.02v2.02h-2.02zM0 4h2.02v2.02h-2.02zM6 4h2.02v2.02h-2.02zM0 6h7.02v2.02h-7.02zM0 8h2.02v2.02h-2.02zM6 8h2.02v2.02h-2.02zM0 10h2.02v2.02h-2.02zM6 10h2.02v2.02h-2.02zM0 12h7.02v2.02h-7.02z"/></g><g class="art k"><path class="l2" d="M15.5 6.02L15.5 5L14.98 5M11.5 8.02L11.5 7L12.02 7M11.98 7L12.5 7L13.02 7M13.5 8.02L13.5 7L12.98 7M16.5 8.02L16.5 7L17.02 7M16.5 7.98L16.5 9L16.5 10.02M11.5 12.02L11.5 11L12.02 11M11.98 11L12.5 11L13.02 11M12.98 11L13.5 11L14.02 11M13.98 11L14.5 11L15.02 11M14.98 11L15.5 11L16.02 11M16.5 9.98L16.5 11L16.5 12.02M16.5 11L15.98 11M9.5 11.98L9.5 13L8.98 13M16.5 11.98L16.5 13L16.5 14.02M10.5 13.98L10.5 15L11.02 15M10.98 15L11.5 15L12.02 15M11.98 15L12.5 15L13.02 15M12.98 15L13.5 15L14.02 15M13.98 15L14.5 15L15.02 15M14.98 15L15.5 15L16.02 15M16.5 13.98L16.5 15L15.98 15"/><path class="l2 in" d="M15.5 6.02L15.5 5L14.98 5M11.5 8.02L11.5 7L12.02 7M11.98 7L12.5 7L13.02 7M13.5 8.02L13.5 7L12.98 7M16.5 8.02L16.5 7L17.02 7M16.5 7.98L16.5 9L16.5 10.02M11.5 12.02L11.5 11L12.02 11M11.98 11L12.5 11L13.02 11M12.98 11L13.5 11L14.02 11M13.98 11L14.5 11L15.02 11M14.98 11L15.5 11L16.02 11M16.5 9.98L16.5 11L16.5 12.02M16.5 11L15.98 11M9.5 11.98L9.5 13L8.98 13M16.5 11.98L16.5 13L16.5 14.02M10.5 13.98L10.5 15L11.02 15M10.98 15L11.5 15L12.02 15M11.98 15L12.5 15L13.02 15M12.98 15L13.5 15L14.02 15M13.98 15L14.5 15L15.02 15M14.98 15L15.5 15L16.02 15M16.5 13.98L16.5 15L15.98 15"/><path d="M10 4h5.02v2.02h-5.02zM9 6h2.02v2.02h-2.02zM14 6h2.02v2.02h-2.02zM9 8h7.02v2.02h-7.02zM9 10h2.02v2.02h-2.02zM10 12h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M20.5 2.02L20.5 1L19.98 1M20.5 1.98L20.5 3L20.5 4.02M23.5 6.02L23.5 5L22.98 5M17.5 5.98L17.5 7L16.98 7M20.5 8.02L20.5 7L21.02 7M20.98 7L21.5 7L22.02 7M21.98 7L22.5 7L23.02 7M22.98 7L23.5 7L24.02 7M23.5 7L23.5 5.98M20.5 7.98L20.5 9L20.5 10.02M20.5 9.98L20.5 11L20.5 12.02M18.5 11.98L18.5 13L19.02 13M23.5 14.02L23.5 13L22.98 13M19.5 13.98L19.5 15L20.02 15M19.98 15L20.5 15L21.02 15M20.98 15L21.5 15L22.02 15M21.98 15L22.5 15L23.02 15M23.5 13.98L23.5 15L22.98 15"/><path class="l2 in" d="M20.5 2.02L20.5 1L19.98 1M20.5 1.98L20.5 3L20.5 4.02M23.5 6.02L23.5 5L22.98 5M17.5 5.98L17.5 7L16.98 7M20.5 8.02L20.5 7L21.02 7M20.98 7L21.5 7L22.02 7M21.98 7L22.5 7L23.02 7M22.98 7L23.5 7L24.02 7M23.5 7L23.5 5.98M20.5 7.98L20.5 9L20.5 10.02M20.5 9.98L20.5 11L20.5 12.02M18.5 11.98L18.5 13L19.02 13M23.5 14.02L23.5 13L22.98 13M19.5 13.98L19.5 15L20.02 15M19.98 15L20.5 15L21.02 15M20.98 15L21.5 15L22.02 15M21.98 15L22.5 15L23.02 15M23.5 13.98L23.5 15L22.98 15"/><path d="M18 0h2.02v2.02h-2.02zM18 2h2.02v2.02h-2.02zM17 4h6.02v2.02h-6.02zM18 6h2.02v2.02h-2.02zM18 8h2.02v2.02h-2.02zM18 10h2.02v2.02h-2.02zM19 12h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M27.5 2.02L27.5 1L26.98 1M27.5 1.98L27.5 3L27.5 4.02M30.5 6.02L30.5 5L29.98 5M24.5 5.98L24.5 7L23.98 7M27.5 8.02L27.5 7L28.02 7M27.98 7L28.5 7L29.02 7M28.98 7L29.5 7L30.02 7M30.5 5.98L30.5 7L29.98 7M27.5 7.98L27.5 9L27.5 10.02M27.5 9.98L27.5 11L27.5 12.02M25.5 11.98L25.5 13L26.02 13M30.5 14.02L30.5 13L31.02 13M26.5 13.98L26.5 15L27.02 15M26.98 15L27.5 15L28.02 15M27.98 15L28.5 15L29.02 15M28.98 15L29.5 15L30.02 15M30.5 13.98L30.5 15L29.98 15"/><path class="l2 in" d="M27.5 2.02L27.5 1L26.98 1M27.5 1.98L27.5 3L27.5 4.02M30.5 6.02L30.5 5L29.98 5M24.5 5.98L24.5 7L23.98 7M27.5 8.02L27.5 7L28.02 7M27.98 7L28.5 7L29.02 7M28.98 7L29.5 7L30.02 7M30.5 5.98L30.5 7L29.98 7M27.5 7.98L27.5 9L27.5 10.02M27.5 9.98L27.5 11L27.5 12.02M25.5 11.98L25.5 13L26.02 13M30.5 14.02L30.5 13L31.02 13M26.5 13.98L26.5 15L27.02 15M26.98 15L27.5 15L28.02 15M27.98 15L28.5 15L29.02 15M28.98 15L29.5 15L30.02 15M30.5 13.98L30.5 15L29.98 15"/><path d="M25 0h2.02v2.02h-2.02zM25 2h2.02v2.02h-2.02zM24 4h6.02v2.02h-6.02zM25 6h2.02v2.02h-2.02zM25 8h2.02v2.02h-2.02zM25 10h2.02v2.02h-2.02zM26 12h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M37.5 6.02L37.5 5L36.98 5M33.5 8.02L33.5 7L34.02 7M33.98 7L34.5 7L35.02 7M35.5 8.02L35.5 7L34.98 7M38.5 8.02L38.5 7L37.98 7M38.5 7.98L38.5 9L38.5 10.02M33.5 12.02L33.5 11L34.02 11M33.98 11L34.5 11L35.02 11M34.98 11L35.5 11L36.02 11M35.98 11L36.5 11L37.02 11M36.98 11L37.5 11L38.02 11M38.5 9.98L38.5 11L38.5 12.02M38.5 11L37.98 11M31.5 11.98L31.5 13L30.98 13M38.5 11.98L38.5 13L38.5 14.02M32.5 13.98L32.5 15L33.02 15M32.98 15L33.5 15L34.02 15M33.98 15L34.5 15L35.02 15M34.98 15L35.5 15L36.02 15M35.98 15L36.5 15L37.02 15M36.98 15L37.5 15L38.02 15M37.98 15L38.5 15L39.02 15M38.5 15L38.5 13.98"/><path class="l2 in" d="M37.5 6.02L37.5 5L36.98 5M33.5 8.02L33.5 7L34.02 7M33.98 7L34.5 7L35.02 7M35.5 8.02L35.5 7L34.98 7M38.5 8.02L38.5 7L37.98 7M38.5 7.98L38.5 9L38.5 10.02M33.5 12.02L33.5 11L34.02 11M33.98 11L34.5 11L35.02 11M34.98 11L35.5 11L36.02 11M35.98 11L36.5 11L37.02 11M36.98 11L37.5 11L38.02 11M38.5 9.98L38.5 11L38.5 12.02M38.5 11L37.98 11M31.5 11.98L31.5 13L30.98 13M38.5 11.98L38.5 13L38.5 14.02M32.5 13.98L32.5 15L33.02 15M32.98 15L33.5 15L34.02 15M33.98 15L34.5 15L35.02 15M34.98 15L35.5 15L36.02 15M35.98 15L36.5 15L37.02 15M36.98 15L37.5 15L38.02 15M37.98 15L38.5 15L39.02 15M38.5 15L38.5 13.98"/><path d="M32 4h5.02v2.02h-5.02zM31 6h2.02v2.02h-2.02zM36 6h2.02v2.02h-2.02zM31 8h7.02v2.02h-7.02zM31 10h2.02v2.02h-2.02zM32 12h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M41.5 6.02L41.5 5L40.98 5M46.5 6.02L46.5 5L45.98 5M43.5 8.02L43.5 7L44.02 7M43.98 7L44.5 7L45.02 7M44.98 7L45.5 7L46.02 7M46.5 5.98L46.5 7L45.98 7M41.5 10.02L41.5 9L42.02 9M41.98 9L42.5 9L43.02 9M43.5 7.98L43.5 9L42.98 9M41.5 9.98L41.5 11L41.5 12.02M41.5 11.98L41.5 13L41.5 14.02M38.98 15L39.5 15L40.02 15M39.98 15L40.5 15L41.02 15M41.5 13.98L41.5 15L40.98 15"/><path class="l2 in" d="M41.5 6.02L41.5 5L40.98 5M46.5 6.02L46.5 5L45.98 5M43.5 8.02L43.5 7L44.02 7M43.98 7L44.5 7L45.02 7M44.98 7L45.5 7L46.02 7M46.5 5.98L46.5 7L45.98 7M41.5 10.02L41.5 9L42.02 9M41.98 9L42.5 9L43.02 9M43.5 7.98L43.5 9L42.98 9M41.5 9.98L41.5 11L41.5 12.02M41.5 11.98L41.5 13L41.5 14.02M38.98 15L39.5 15L40.02 15M39.98 15L40.5 15L41.02 15M41.5 13.98L41.5 15L40.98 15"/><path d="M39 4h2.02v2.02h-2.02zM42 4h4.02v2.02h-4.02zM39 6h4.02v2.02h-4.02zM39 8h2.02v2.02h-2.02zM39 10h2.02v2.02h-2.02zM39 12h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M60.5 2.02L60.5 1L59.98 1M54.5 4.02L54.5 3L55.02 3M54.98 3L55.5 3L56.02 3M55.98 3L56.5 3L57.02 3M56.98 3L57.5 3L58.02 3M57.98 3L58.5 3L59.02 3M58.98 3L59.5 3L60.02 3M60.5 1.98L60.5 3L59.98 3M54.5 3.98L54.5 5L54.5 6.02M58.5 8.02L58.5 7L57.98 7M54.5 10.02L54.5 9L55.02 9M54.98 9L55.5 9L56.02 9M55.98 9L56.5 9L57.02 9M56.98 9L57.5 9L58.02 9M58.5 7.98L58.5 9L57.98 9M54.5 9.98L54.5 11L54.5 12.02M60.5 14.02L60.5 13L59.98 13M52.5 13.98L52.5 15L53.02 15M52.98 15L53.5 15L54.02 15M53.98 15L54.5 15L55.02 15M54.98 15L55.5 15L56.02 15M55.98 15L56.5 15L57.02 15M56.98 15L57.5 15L58.02 15M57.98 15L58.5 15L59.02 15M58.98 15L59.5 15L60.02 15M60.5 13.98L60.5 15L59.98 15"/><path class="l2 in" d="M60.5 2.02L60.5 1L59.98 1M54.5 4.02L54.5 3L55.02 3M54.98 3L55.5 3L56.02 3M55.98 3L56.5 3L57.02 3M56.98 3L57.5 3L58.02 3M57.98 3L58.5 3L59.02 3M58.98 3L59.5 3L60.02 3M60.5 1.98L60.5 3L59.98 3M54.5 3.98L54.5 5L54.5 6.02M58.5 8.02L58.5 7L57.98 7M54.5 10.02L54.5 9L55.02 9M54.98 9L55.5 9L56.02 9M55.98 9L56.5 9L57.02 9M56.98 9L57.5 9L58.02 9M58.5 7.98L58.5 9L57.98 9M54.5 9.98L54.5 11L54.5 12.02M60.5 14.02L60.5 13L59.98 13M52.5 13.98L52.5 15L53.02 15M52.98 15L53.5 15L54.02 15M53.98 15L54.5 15L55.02 15M54.98 15L55.5 15L56.02 15M55.98 15L56.5 15L57.02 15M56.98 15L57.5 15L58.02 15M57.98 15L58.5 15L59.02 15M58.98 15L59.5 15L60.02 15M60.5 13.98L60.5 15L59.98 15"/><path d="M52 0h8.02v2.02h-8.02zM52 2h2.02v2.02h-2.02zM52 4h2.02v2.02h-2.02zM52 6h6.02v2.02h-6.02zM52 8h2.02v2.02h-2.02zM52 10h2.02v2.02h-2.02zM52 12h8.02v2.02h-8.02z"/></g><g class="art k"><path class="l2" d="M63.5 6.02L63.5 5L62.98 5M69.5 6.02L69.5 5L68.98 5M63.5 5.98L63.5 7L63.5 8.02M69.5 5.98L69.5 7L69.5 8.02M63.5 7.98L63.5 9L63.5 10.02M69.5 7.98L69.5 9L69.5 10.02M61.5 9.98L61.5 11L62.02 11M64.5 12.02L64.5 11L63.98 11M68.5 12.02L68.5 11L69.02 11M69.5 9.98L69.5 11L68.98 11M62.5 11.98L62.5 13L63.02 13M67.5 14.02L67.5 13L68.02 13M68.5 11.98L68.5 13L67.98 13M63.5 13.98L63.5 15L64.02 15M63.98 15L64.5 15L65.02 15M64.98 15L65.5 15L66.02 15M65.98 15L66.5 15L67.02 15M67.5 13.98L67.5 15L66.98 15"/><path class="l2 in" d="M63.5 6.02L63.5 5L62.98 5M69.5 6.02L69.5 5L68.98 5M63.5 5.98L63.5 7L63.5 8.02M69.5 5.98L69.5 7L69.5 8.02M63.5 7.98L63.5 9L63.5 10.02M69.5 7.98L69.5 9L69.5 10.02M61.5 9.98L61.5 11L62.02 11M64.5 12.02L64.5 11L63.98 11M68.5 12.02L68.5 11L69.02 11M69.5 9.98L69.5 11L68.98 11M62.5 11.98L62.5 13L63.02 13M67.5 14.02L67.5 13L68.02 13M68.5 11.98L68.5 13L67.98 13M63.5 13.98L63.5 15L64.02 15M63.98 15L64.5 15L65.02 15M64.98 15L65.5 15L66.02 15M65.98 15L66.5 15L67.02 15M67.5 13.98L67.5 15L66.98 15"/><path d="M61 4h2.02v2.02h-2.02zM67 4h2.02v2.02h-2.02zM61 6h2.02v2.02h-2.02zM67 6h2.02v2.02h-2.02zM61 8h2.02v2.02h-2.02zM67 8h2.02v2.02h-2.02zM62 10h2.02v2.02h-2.02zM66 10h2.02v2.02h-2.02zM63 12h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M76.5 6.02L76.5 5L75.98 5M72.5 8.02L72.5 7L73.02 7M72.98 7L73.5 7L74.02 7M74.5 8.02L74.5 7L73.98 7M77.5 8.02L77.5 7L76.98 7M77.5 7.98L77.5 9L77.5 10.02M72.5 12.02L72.5 11L73.02 11M72.98 11L73.5 11L74.02 11M73.98 11L74.5 11L75.02 11M74.98 11L75.5 11L76.02 11M75.98 11L76.5 11L77.02 11M77.5 9.98L77.5 11L77.5 12.02M77.5 11L76.98 11M70.5 11.98L70.5 13L71.02 13M77.5 11.98L77.5 13L77.5 14.02M71.5 13.98L71.5 15L72.02 15M71.98 15L72.5 15L73.02 15M72.98 15L73.5 15L74.02 15M73.98 15L74.5 15L75.02 15M74.98 15L75.5 15L76.02 15M75.98 15L76.5 15L77.02 15M76.98 15L77.5 15L78.02 15M77.5 15L77.5 13.98"/><path class="l2 in" d="M76.5 6.02L76.5 5L75.98 5M72.5 8.02L72.5 7L73.02 7M72.98 7L73.5 7L74.02 7M74.5 8.02L74.5 7L73.98 7M77.5 8.02L77.5 7L76.98 7M77.5 7.98L77.5 9L77.5 10.02M72.5 12.02L72.5 11L73.02 11M72.98 11L73.5 11L74.02 11M73.98 11L74.5 11L75.02 11M74.98 11L75.5 11L76.02 11M75.98 11L76.5 11L77.02 11M77.5 9.98L77.5 11L77.5 12.02M77.5 11L76.98 11M70.5 11.98L70.5 13L71.02 13M77.5 11.98L77.5 13L77.5 14.02M71.5 13.98L71.5 15L72.02 15M71.98 15L72.5 15L73.02 15M72.98 15L73.5 15L74.02 15M73.98 15L74.5 15L75.02 15M74.98 15L75.5 15L76.02 15M75.98 15L76.5 15L77.02 15M76.98 15L77.5 15L78.02 15M77.5 15L77.5 13.98"/><path d="M71 4h5.02v2.02h-5.02zM70 6h2.02v2.02h-2.02zM75 6h2.02v2.02h-2.02zM70 8h7.02v2.02h-7.02zM70 10h2.02v2.02h-2.02zM71 12h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M80.5 6.02L80.5 5L79.98 5M85.5 6.02L85.5 5L84.98 5M82.5 8.02L82.5 7L83.02 7M82.98 7L83.5 7L84.02 7M83.98 7L84.5 7L85.02 7M85.5 5.98L85.5 7L84.98 7M80.5 10.02L80.5 9L81.02 9M80.98 9L81.5 9L82.02 9M82.5 7.98L82.5 9L81.98 9M80.5 9.98L80.5 11L80.5 12.02M80.5 11.98L80.5 13L80.5 14.02M77.98 15L78.5 15L79.02 15M78.98 15L79.5 15L80.02 15M80.5 13.98L80.5 15L79.98 15"/><path class="l2 in" d="M80.5 6.02L80.5 5L79.98 5M85.5 6.02L85.5 5L84.98 5M82.5 8.02L82.5 7L83.02 7M82.98 7L83.5 7L84.02 7M83.98 7L84.5 7L85.02 7M85.5 5.98L85.5 7L84.98 7M80.5 10.02L80.5 9L81.02 9M80.98 9L81.5 9L82.02 9M82.5 7.98L82.5 9L81.98 9M80.5 9.98L80.5 11L80.5 12.02M80.5 11.98L80.5 13L80.5 14.02M77.98 15L78.5 15L79.02 15M78.98 15L79.5 15L80.02 15M80.5 13.98L80.5 15L79.98 15"/><path d="M78 4h2.02v2.02h-2.02zM81 4h4.02v2.02h-4.02zM78 6h4.02v2.02h-4.02zM78 8h2.02v2.02h-2.02zM78 10h2.02v2.02h-2.02zM78 12h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M88.5 6.02L88.5 5L87.98 5M93.5 6.02L93.5 5L92.98 5M88.5 5.98L88.5 7L88.5 8.02M93.5 5.98L93.5 7L93.5 8.02M88.5 7.98L88.5 9L88.5 10.02M93.5 7.98L93.5 9L93.5 10.02M88.5 9.98L88.5 11L88.5 12.02M93.5 9.98L93.5 11L93.5 12.02M86.5 11.98L86.5 13L87.02 13M93.5 11.98L93.5 13L93.5 14.02M87.5 16.02L87.5 15L88.02 15M87.98 15L88.5 15L89.02 15M88.98 15L89.5 15L90.02 15M90.5 16.02L90.5 15L89.98 15M93.5 13.98L93.5 15L93.5 16.02M92.5 18.02L92.5 17L93.02 17M93.5 15.98L93.5 17L92.98 17M87.5 17.98L87.5 19L88.02 19M87.98 19L88.5 19L89.02 19M88.98 19L89.5 19L90.02 19M89.98 19L90.5 19L91.02 19M90.98 19L91.5 19L92.02 19M92.5 17.98L92.5 19L91.98 19"/><path class="l2 in" d="M88.5 6.02L88.5 5L87.98 5M93.5 6.02L93.5 5L92.98 5M88.5 5.98L88.5 7L88.5 8.02M93.5 5.98L93.5 7L93.5 8.02M88.5 7.98L88.5 9L88.5 10.02M93.5 7.98L93.5 9L93.5 10.02M88.5 9.98L88.5 11L88.5 12.02M93.5 9.98L93.5 11L93.5 12.02M86.5 11.98L86.5 13L87.02 13M93.5 11.98L93.5 13L93.5 14.02M87.5 16.02L87.5 15L88.02 15M87.98 15L88.5 15L89.02 15M88.98 15L89.5 15L90.02 15M90.5 16.02L90.5 15L89.98 15M93.5 13.98L93.5 15L93.5 16.02M92.5 18.02L92.5 17L93.02 17M93.5 15.98L93.5 17L92.98 17M87.5 17.98L87.5 19L88.02 19M87.98 19L88.5 19L89.02 19M88.98 19L89.5 19L90.02 19M89.98 19L90.5 19L91.02 19M90.98 19L91.5 19L92.02 19M92.5 17.98L92.5 19L91.98 19"/><path d="M86 4h2.02v2.02h-2.02zM91 4h2.02v2.02h-2.02zM86 6h2.02v2.02h-2.02zM91 6h2.02v2.02h-2.02zM86 8h2.02v2.02h-2.02zM91 8h2.02v2.02h-2.02zM86 10h2.02v2.02h-2.02zM91 10h2.02v2.02h-2.02zM87 12h6.02v2.02h-6.02zM91 14h2.02v2.02h-2.02zM87 16h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M3.5 24.02L3.5 23L2.98 23M10.5 24.02L10.5 23L9.98 23M4.5 26.02L4.5 25L3.98 25M10.5 23.98L10.5 25L10.5 26.02M2.5 28.02L2.5 27L1.98 27M7.5 28.02L7.5 27L6.98 27M10.5 25.98L10.5 27L10.5 28.02M2.5 27.98L2.5 29L2.5 30.02M2.5 29L3.02 29M3.5 27.98L3.5 29L2.98 29M6.5 30.02L6.5 29L7.02 29M7.5 27.98L7.5 29L6.98 29M10.5 27.98L10.5 29L10.5 30.02M2.5 29.98L2.5 31L2.5 32.02M4.5 29.98L4.5 31L5.02 31M4.98 31L5.5 31L6.02 31M6.5 29.98L6.5 31L5.98 31M10.5 29.98L10.5 31L10.5 32.02M2.5 31.98L2.5 33L2.5 34.02M10.5 31.98L10.5 33L10.5 34.02M2.5 33.98L2.5 35L2.5 36.02M10.5 33.98L10.5 35L10.5 36.02M10.5 35L11.02 35M0.5 35.98L0.5 37L1.02 37M0.98 37L1.5 37L2.02 37M2.5 35.98L2.5 37L1.98 37M8.5 35.98L8.5 37L9.02 37M8.98 37L9.5 37L10.02 37M10.5 35.98L10.5 37L9.98 37"/><path class="l2 in" d="M3.5 24.02L3.5 23L2.98 23M10.5 24.02L10.5 23L9.98 23M4.5 26.02L4.5 25L3.98 25M10.5 23.98L10.5 25L10.5 26.02M2.5 28.02L2.5 27L1.98 27M7.5 28.02L7.5 27L6.98 27M10.5 25.98L10.5 27L10.5 28.02M2.5 27.98L2.5 29L2.5 30.02M2.5 29L3.02 29M3.5 27.98L3.5 29L2.98 29M6.5 30.02L6.5 29L7.02 29M7.5 27.98L7.5 29L6.98 29M10.5 27.98L10.5 29L10.5 30.02M2.5 29.98L2.5 31L2.5 32.02M4.5 29.98L4.5 31L5.02 31M4.98 31L5.5 31L6.02 31M6.5 29.98L6.5 31L5.98 31M10.5 29.98L10.5 31L10.5 32.02M2.5 31.98L2.5 33L2.5 34.02M10.5 31.98L10.5 33L10.5 34.02M2.5 33.98L2.5 35L2.5 36.02M10.5 33.98L10.5 35L10.5 36.02M10.5 35L11.02 35M0.5 35.98L0.5 37L1.02 37M0.98 37L1.5 37L2.02 37M2.5 35.98L2.5 37L1.98 37M8.5 35.98L8.5 37L9.02 37M8.98 37L9.5 37L10.02 37M10.5 35.98L10.5 37L9.98 37"/><path d="M0 22h3.02v2.02h-3.02zM7 22h3.02v2.02h-3.02zM0 24h4.02v2.02h-4.02zM6 24h4.02v2.02h-4.02zM0 26h2.02v2.02h-2.02zM3 26h4.02v2.02h-4.02zM8 26h2.02v2.02h-2.02zM0 28h2.02v2.02h-2.02zM4 28h2.02v2.02h-2.02zM8 28h2.02v2.02h-2.02zM0 30h2.02v2.02h-2.02zM8 30h2.02v2.02h-2.02zM0 32h2.02v2.02h-2.02zM8 32h2.02v2.02h-2.02zM0 34h2.02v2.02h-2.02zM8 34h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M17.5 28.02L17.5 27L16.98 27M13.5 30.02L13.5 29L14.02 29M13.98 29L14.5 29L15.02 29M15.5 27.98L15.5 29L14.98 29M18.5 30.02L18.5 29L17.98 29M13.5 29.98L13.5 31L13.5 32.02M18.5 29.98L18.5 31L18.5 32.02M13.5 31.98L13.5 33L13.5 34.02M18.5 31.98L18.5 33L18.5 34.02M11.5 33.98L11.5 35L10.98 35M17.5 36.02L17.5 35L18.02 35M18.5 33.98L18.5 35L17.98 35M12.5 35.98L12.5 37L13.02 37M12.98 37L13.5 37L14.02 37M13.98 37L14.5 37L15.02 37M14.98 37L15.5 37L16.02 37M15.98 37L16.5 37L17.02 37M17.5 35.98L17.5 37L16.98 37"/><path class="l2 in" d="M17.5 28.02L17.5 27L16.98 27M13.5 30.02L13.5 29L14.02 29M13.98 29L14.5 29L15.02 29M15.5 27.98L15.5 29L14.98 29M18.5 30.02L18.5 29L17.98 29M13.5 29.98L13.5 31L13.5 32.02M18.5 29.98L18.5 31L18.5 32.02M13.5 31.98L13.5 33L13.5 34.02M18.5 31.98L18.5 33L18.5 34.02M11.5 33.98L11.5 35L10.98 35M17.5 36.02L17.5 35L18.02 35M18.5 33.98L18.5 35L17.98 35M12.5 35.98L12.5 37L13.02 37M12.98 37L13.5 37L14.02 37M13.98 37L14.5 37L15.02 37M14.98 37L15.5 37L16.02 37M15.98 37L16.5 37L17.02 37M17.5 35.98L17.5 37L16.98 37"/><path d="M12 26h5.02v2.02h-5.02zM11 28h2.02v2.02h-2.02zM16 28h2.02v2.02h-2.02zM11 30h2.02v2.02h-2.02zM16 30h2.02v2.02h-2.02zM11 32h2.02v2.02h-2.02zM16 32h2.02v2.02h-2.02zM12 34h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M25.5 28.02L25.5 27L24.98 27M21.5 30.02L21.5 29L22.02 29M21.98 29L22.5 29L23.02 29M23.5 27.98L23.5 29L22.98 29M26.5 30.02L26.5 29L27.02 29M21.5 29.98L21.5 31L21.5 32.02M26.5 29.98L26.5 31L26.5 32.02M21.5 31.98L21.5 33L21.5 34.02M26.5 31.98L26.5 33L26.5 34.02M21.5 33.98L21.5 35L21.5 36.02M26.5 33.98L26.5 35L26.5 36.02M19.5 35.98L19.5 37L20.02 37M19.98 37L20.5 37L21.02 37M21.5 35.98L21.5 37L20.98 37M24.5 35.98L24.5 37L25.02 37M24.98 37L25.5 37L26.02 37M26.5 35.98L26.5 37L25.98 37"/><path class="l2 in" d="M25.5 28.02L25.5 27L24.98 27M21.5 30.02L21.5 29L22.02 29M21.98 29L22.5 29L23.02 29M23.5 27.98L23.5 29L22.98 29M26.5 30.02L26.5 29L27.02 29M21.5 29.98L21.5 31L21.5 32.02M26.5 29.98L26.5 31L26.5 32.02M21.5 31.98L21.5 33L21.5 34.02M26.5 31.98L26.5 33L26.5 34.02M21.5 33.98L21.5 35L21.5 36.02M26.5 33.98L26.5 35L26.5 36.02M19.5 35.98L19.5 37L20.02 37M19.98 37L20.5 37L21.02 37M21.5 35.98L21.5 37L20.98 37M24.5 35.98L24.5 37L25.02 37M24.98 37L25.5 37L26.02 37M26.5 35.98L26.5 37L25.98 37"/><path d="M19 26h6.02v2.02h-6.02zM19 28h2.02v2.02h-2.02zM24 28h2.02v2.02h-2.02zM19 30h2.02v2.02h-2.02zM24 30h2.02v2.02h-2.02zM19 32h2.02v2.02h-2.02zM24 32h2.02v2.02h-2.02zM19 34h2.02v2.02h-2.02zM24 34h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M30.5 24.02L30.5 23L29.98 23M30.5 23.98L30.5 25L30.5 26.02M33.5 28.02L33.5 27L32.98 27M27.5 27.98L27.5 29L26.98 29M30.5 30.02L30.5 29L31.02 29M30.98 29L31.5 29L32.02 29M31.98 29L32.5 29L33.02 29M33.5 27.98L33.5 29L32.98 29M30.5 29.98L30.5 31L30.5 32.02M30.5 31.98L30.5 33L30.5 34.02M28.5 33.98L28.5 35L29.02 35M33.5 36.02L33.5 35L32.98 35M29.5 35.98L29.5 37L30.02 37M29.98 37L30.5 37L31.02 37M30.98 37L31.5 37L32.02 37M31.98 37L32.5 37L33.02 37M32.98 37L33.5 37L34.02 37M33.5 37L33.5 35.98"/><path class="l2 in" d="M30.5 24.02L30.5 23L29.98 23M30.5 23.98L30.5 25L30.5 26.02M33.5 28.02L33.5 27L32.98 27M27.5 27.98L27.5 29L26.98 29M30.5 30.02L30.5 29L31.02 29M30.98 29L31.5 29L32.02 29M31.98 29L32.5 29L33.02 29M33.5 27.98L33.5 29L32.98 29M30.5 29.98L30.5 31L30.5 32.02M30.5 31.98L30.5 33L30.5 34.02M28.5 33.98L28.5 35L29.02 35M33.5 36.02L33.5 35L32.98 35M29.5 35.98L29.5 37L30.02 37M29.98 37L30.5 37L31.02 37M30.98 37L31.5 37L32.02 37M31.98 37L32.5 37L33.02 37M32.98 37L33.5 37L34.02 37M33.5 37L33.5 35.98"/><path d="M28 22h2.02v2.02h-2.02zM28 24h2.02v2.02h-2.02zM27 26h6.02v2.02h-6.02zM28 28h2.02v2.02h-2.02zM28 30h2.02v2.02h-2.02zM28 32h2.02v2.02h-2.02zM29 34h4.02v2.02h-4.02z"/></g><g class="art k"><path class="l2" d="M36.5 24.02L36.5 23L35.98 23M36.5 23.98L36.5 25L36.5 26.02M40.5 28.02L40.5 27L39.98 27M36.5 30.02L36.5 29L37.02 29M36.98 29L37.5 29L38.02 29M38.5 27.98L38.5 29L37.98 29M41.5 30.02L41.5 29L40.98 29M36.5 29.98L36.5 31L36.5 32.02M41.5 29.98L41.5 31L41.5 32.02M36.5 31.98L36.5 33L36.5 34.02M41.5 31.98L41.5 33L41.5 34.02M36.5 33.98L36.5 35L36.5 36.02M41.5 33.98L41.5 35L41.5 36.02M33.98 37L34.5 37L35.02 37M34.98 37L35.5 37L36.02 37M36.5 35.98L36.5 37L35.98 37M39.5 35.98L39.5 37L40.02 37M39.98 37L40.5 37L41.02 37M41.5 35.98L41.5 37L40.98 37"/><path class="l2 in" d="M36.5 24.02L36.5 23L35.98 23M36.5 23.98L36.5 25L36.5 26.02M40.5 28.02L40.5 27L39.98 27M36.5 30.02L36.5 29L37.02 29M36.98 29L37.5 29L38.02 29M38.5 27.98L38.5 29L37.98 29M41.5 30.02L41.5 29L40.98 29M36.5 29.98L36.5 31L36.5 32.02M41.5 29.98L41.5 31L41.5 32.02M36.5 31.98L36.5 33L36.5 34.02M41.5 31.98L41.5 33L41.5 34.02M36.5 33.98L36.5 35L36.5 36.02M41.5 33.98L41.5 35L41.5 36.02M33.98 37L34.5 37L35.02 37M34.98 37L35.5 37L36.02 37M36.5 35.98L36.5 37L35.98 37M39.5 35.98L39.5 37L40.02 37M39.98 37L40.5 37L41.02 37M41.5 35.98L41.5 37L40.98 37"/><path d="M34 22h2.02v2.02h-2.02zM34 24h2.02v2.02h-2.02zM34 26h6.02v2.02h-6.02zM34 28h2.02v2.02h-2.02zM39 28h2.02v2.02h-2.02zM34 30h2.02v2.02h-2.02zM39 30h2.02v2.02h-2.02zM34 32h2.02v2.02h-2.02zM39 32h2.02v2.02h-2.02zM34 34h2.02v2.02h-2.02zM39 34h2.02v2.02h-2.02z"/></g><g class="art k d0"><path class="l2" d="M46.5 36.02L46.5 35L45.98 35M44.5 35.98L44.5 37L45.02 37M44.98 37L45.5 37L46.02 37M46.5 35.98L46.5 37L45.98 37"/><path class="l2 in" d="M46.5 36.02L46.5 35L45.98 35M44.5 35.98L44.5 37L45.02 37M44.98 37L45.5 37L46.02 37M46.5 35.98L46.5 37L45.98 37"/><path d="M44 34h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M7.5 46.02L7.5 45L6.98 45M2.5 48.02L2.5 47L3.02 47M2.98 47L3.5 47L4.02 47M3.98 47L4.5 47L5.02 47M5.5 45.98L5.5 47L4.98 47M8.5 48.02L8.5 47L7.98 47M2.5 47.98L2.5 49L2.5 50.02M8.5 47.98L8.5 49L8.5 50.02M7.5 52.02L7.5 51L8.02 51M8.5 49.98L8.5 51L7.98 51M2.5 54.02L2.5 53L3.02 53M3.5 51.98L3.5 53L2.98 53M6.5 54.02L6.5 53L7.02 53M7.5 51.98L7.5 53L7.5 54.02M7.5 53L6.98 53M2.5 53.98L2.5 55L2.5 56.02M4.5 53.98L4.5 55L5.02 55M7.5 53.98L7.5 55L7.5 56.02M2.5 55.98L2.5 57L2.5 58.02M5.5 55.98L5.5 57L6.02 57M8.5 58.02L8.5 57L9.02 57M0.5 57.98L0.5 59L1.02 59M0.98 59L1.5 59L2.02 59M2.5 57.98L2.5 59L1.98 59M6.5 57.98L6.5 59L7.02 59M6.98 59L7.5 59L8.02 59M8.5 57.98L8.5 59L7.98 59"/><path class="l2 in" d="M7.5 46.02L7.5 45L6.98 45M2.5 48.02L2.5 47L3.02 47M2.98 47L3.5 47L4.02 47M3.98 47L4.5 47L5.02 47M5.5 45.98L5.5 47L4.98 47M8.5 48.02L8.5 47L7.98 47M2.5 47.98L2.5 49L2.5 50.02M8.5 47.98L8.5 49L8.5 50.02M7.5 52.02L7.5 51L8.02 51M8.5 49.98L8.5 51L7.98 51M2.5 54.02L2.5 53L3.02 53M3.5 51.98L3.5 53L2.98 53M6.5 54.02L6.5 53L7.02 53M7.5 51.98L7.5 53L7.5 54.02M7.5 53L6.98 53M2.5 53.98L2.5 55L2.5 56.02M4.5 53.98L4.5 55L5.02 55M7.5 53.98L7.5 55L7.5 56.02M2.5 55.98L2.5 57L2.5 58.02M5.5 55.98L5.5 57L6.02 57M8.5 58.02L8.5 57L9.02 57M0.5 57.98L0.5 59L1.02 59M0.98 59L1.5 59L2.02 59M2.5 57.98L2.5 59L1.98 59M6.5 57.98L6.5 59L7.02 59M6.98 59L7.5 59L8.02 59M8.5 57.98L8.5 59L7.98 59"/><path d="M0 44h7.02v2.02h-7.02zM0 46h2.02v2.02h-2.02zM6 46h2.02v2.02h-2.02zM0 48h2.02v2.02h-2.02zM6 48h2.02v2.02h-2.02zM0 50h7.02v2.02h-7.02zM0 52h2.02v2.02h-2.02zM4 52h2.02v2.02h-2.02zM0 54h2.02v2.02h-2.02zM5 54h2.02v2.02h-2.02zM0 56h2.02v2.02h-2.02zM6 56h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M15.5 50.02L15.5 49L14.98 49M11.5 52.02L11.5 51L12.02 51M11.98 51L12.5 51L13.02 51M13.5 52.02L13.5 51L12.98 51M16.5 52.02L16.5 51L15.98 51M16.5 51.98L16.5 53L16.5 54.02M11.5 56.02L11.5 55L12.02 55M11.98 55L12.5 55L13.02 55M12.98 55L13.5 55L14.02 55M13.98 55L14.5 55L15.02 55M14.98 55L15.5 55L16.02 55M16.5 53.98L16.5 55L16.5 56.02M16.5 55L15.98 55M9.5 55.98L9.5 57L8.98 57M16.5 55.98L16.5 57L16.5 58.02M16.5 57L17.02 57M10.5 57.98L10.5 59L11.02 59M10.98 59L11.5 59L12.02 59M11.98 59L12.5 59L13.02 59M12.98 59L13.5 59L14.02 59M13.98 59L14.5 59L15.02 59M14.98 59L15.5 59L16.02 59M16.5 57.98L16.5 59L15.98 59"/><path class="l2 in" d="M15.5 50.02L15.5 49L14.98 49M11.5 52.02L11.5 51L12.02 51M11.98 51L12.5 51L13.02 51M13.5 52.02L13.5 51L12.98 51M16.5 52.02L16.5 51L15.98 51M16.5 51.98L16.5 53L16.5 54.02M11.5 56.02L11.5 55L12.02 55M11.98 55L12.5 55L13.02 55M12.98 55L13.5 55L14.02 55M13.98 55L14.5 55L15.02 55M14.98 55L15.5 55L16.02 55M16.5 53.98L16.5 55L16.5 56.02M16.5 55L15.98 55M9.5 55.98L9.5 57L8.98 57M16.5 55.98L16.5 57L16.5 58.02M16.5 57L17.02 57M10.5 57.98L10.5 59L11.02 59M10.98 59L11.5 59L12.02 59M11.98 59L12.5 59L13.02 59M12.98 59L13.5 59L14.02 59M13.98 59L14.5 59L15.02 59M14.98 59L15.5 59L16.02 59M16.5 57.98L16.5 59L15.98 59"/><path d="M10 48h5.02v2.02h-5.02zM9 50h2.02v2.02h-2.02zM14 50h2.02v2.02h-2.02zM9 52h7.02v2.02h-7.02zM9 54h2.02v2.02h-2.02zM10 56h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M23.5 50.02L23.5 49L22.98 49M18.5 52.02L18.5 51L19.02 51M18.98 51L19.5 51L20.02 51M19.98 51L20.5 51L21.02 51M21.5 52.02L21.5 51L20.98 51M24.5 52.02L24.5 51L23.98 51M24.5 51.98L24.5 53L24.5 54.02M19.5 56.02L19.5 55L20.02 55M19.98 55L20.5 55L21.02 55M21.5 56.02L21.5 55L20.98 55M24.5 53.98L24.5 55L24.5 56.02M17.5 55.98L17.5 57L16.98 57M24.5 55.98L24.5 57L24.5 58.02M24.5 57L25.02 57M18.5 57.98L18.5 59L19.02 59M18.98 59L19.5 59L20.02 59M19.98 59L20.5 59L21.02 59M20.98 59L21.5 59L22.02 59M21.98 59L22.5 59L23.02 59M22.98 59L23.5 59L24.02 59M24.5 57.98L24.5 59L23.98 59"/><path class="l2 in" d="M23.5 50.02L23.5 49L22.98 49M18.5 52.02L18.5 51L19.02 51M18.98 51L19.5 51L20.02 51M19.98 51L20.5 51L21.02 51M21.5 52.02L21.5 51L20.98 51M24.5 52.02L24.5 51L23.98 51M24.5 51.98L24.5 53L24.5 54.02M19.5 56.02L19.5 55L20.02 55M19.98 55L20.5 55L21.02 55M21.5 56.02L21.5 55L20.98 55M24.5 53.98L24.5 55L24.5 56.02M17.5 55.98L17.5 57L16.98 57M24.5 55.98L24.5 57L24.5 58.02M24.5 57L25.02 57M18.5 57.98L18.5 59L19.02 59M18.98 59L19.5 59L20.02 59M19.98 59L20.5 59L21.02 59M20.98 59L21.5 59L22.02 59M21.98 59L22.5 59L23.02 59M22.98 59L23.5 59L24.02 59M24.5 57.98L24.5 59L23.98 59"/><path d="M18 48h5.02v2.02h-5.02zM22 50h2.02v2.02h-2.02zM18 52h6.02v2.02h-6.02zM17 54h2.02v2.02h-2.02zM22 54h2.02v2.02h-2.02zM18 56h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M32.5 46.02L32.5 45L31.98 45M32.5 45.98L32.5 47L32.5 48.02M32.5 47.98L32.5 49L32.5 50.02M27.5 52.02L27.5 51L28.02 51M27.98 51L28.5 51L29.02 51M29.5 49.98L29.5 51L28.98 51M32.5 49.98L32.5 51L32.5 52.02M27.5 51.98L27.5 53L27.5 54.02M32.5 51.98L32.5 53L32.5 54.02M27.5 53.98L27.5 55L27.5 56.02M32.5 53.98L32.5 55L32.5 56.02M25.5 55.98L25.5 57L24.98 57M32.5 55.98L32.5 57L32.5 58.02M32.5 57L33.02 57M26.5 57.98L26.5 59L27.02 59M26.98 59L27.5 59L28.02 59M27.98 59L28.5 59L29.02 59M28.98 59L29.5 59L30.02 59M29.98 59L30.5 59L31.02 59M30.98 59L31.5 59L32.02 59M32.5 57.98L32.5 59L31.98 59"/><path class="l2 in" d="M32.5 46.02L32.5 45L31.98 45M32.5 45.98L32.5 47L32.5 48.02M32.5 47.98L32.5 49L32.5 50.02M27.5 52.02L27.5 51L28.02 51M27.98 51L28.5 51L29.02 51M29.5 49.98L29.5 51L28.98 51M32.5 49.98L32.5 51L32.5 52.02M27.5 51.98L27.5 53L27.5 54.02M32.5 51.98L32.5 53L32.5 54.02M27.5 53.98L27.5 55L27.5 56.02M32.5 53.98L32.5 55L32.5 56.02M25.5 55.98L25.5 57L24.98 57M32.5 55.98L32.5 57L32.5 58.02M32.5 57L33.02 57M26.5 57.98L26.5 59L27.02 59M26.98 59L27.5 59L28.02 59M27.98 59L28.5 59L29.02 59M28.98 59L29.5 59L30.02 59M29.98 59L30.5 59L31.02 59M30.98 59L31.5 59L32.02 59M32.5 57.98L32.5 59L31.98 59"/><path d="M30 44h2.02v2.02h-2.02zM30 46h2.02v2.02h-2.02zM26 48h6.02v2.02h-6.02zM25 50h2.02v2.02h-2.02zM30 50h2.02v2.02h-2.02zM25 52h2.02v2.02h-2.02zM30 52h2.02v2.02h-2.02zM25 54h2.02v2.02h-2.02zM30 54h2.02v2.02h-2.02zM26 56h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M35.5 50.02L35.5 49L34.98 49M40.5 50.02L40.5 49L39.98 49M35.5 49.98L35.5 51L35.5 52.02M40.5 49.98L40.5 51L40.5 52.02M35.5 51.98L35.5 53L35.5 54.02M40.5 51.98L40.5 53L40.5 54.02M35.5 53.98L35.5 55L35.5 56.02M40.5 53.98L40.5 55L40.5 56.02M33.5 55.98L33.5 57L32.98 57M40.5 55.98L40.5 57L40.5 58.02M34.5 60.02L34.5 59L35.02 59M34.98 59L35.5 59L36.02 59M35.98 59L36.5 59L37.02 59M37.5 60.02L37.5 59L36.98 59M40.5 57.98L40.5 59L40.5 60.02M39.5 62.02L39.5 61L40.02 61M40.5 59.98L40.5 61L39.98 61M34.5 61.98L34.5 63L35.02 63M34.98 63L35.5 63L36.02 63M35.98 63L36.5 63L37.02 63M36.98 63L37.5 63L38.02 63M37.98 63L38.5 63L39.02 63M39.5 61.98L39.5 63L38.98 63"/><path class="l2 in" d="M35.5 50.02L35.5 49L34.98 49M40.5 50.02L40.5 49L39.98 49M35.5 49.98L35.5 51L35.5 52.02M40.5 49.98L40.5 51L40.5 52.02M35.5 51.98L35.5 53L35.5 54.02M40.5 51.98L40.5 53L40.5 54.02M35.5 53.98L35.5 55L35.5 56.02M40.5 53.98L40.5 55L40.5 56.02M33.5 55.98L33.5 57L32.98 57M40.5 55.98L40.5 57L40.5 58.02M34.5 60.02L34.5 59L35.02 59M34.98 59L35.5 59L36.02 59M35.98 59L36.5 59L37.02 59M37.5 60.02L37.5 59L36.98 59M40.5 57.98L40.5 59L40.5 60.02M39.5 62.02L39.5 61L40.02 61M40.5 59.98L40.5 61L39.98 61M34.5 61.98L34.5 63L35.02 63M34.98 63L35.5 63L36.02 63M35.98 63L36.5 63L37.02 63M36.98 63L37.5 63L38.02 63M37.98 63L38.5 63L39.02 63M39.5 61.98L39.5 63L38.98 63"/><path d="M33 48h2.02v2.02h-2.02zM38 48h2.02v2.02h-2.02zM33 50h2.02v2.02h-2.02zM38 50h2.02v2.02h-2.02zM33 52h2.02v2.02h-2.02zM38 52h2.02v2.02h-2.02zM33 54h2.02v2.02h-2.02zM38 54h2.02v2.02h-2.02zM34 56h6.02v2.02h-6.02zM38 58h2.02v2.02h-2.02zM34 60h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M53.5 46.02L53.5 45L52.98 45M48.5 48.02L48.5 47L49.02 47M48.98 47L49.5 47L50.02 47M49.98 47L50.5 47L51.02 47M51.5 45.98L51.5 47L50.98 47M54.5 48.02L54.5 47L53.98 47M48.5 47.98L48.5 49L48.5 50.02M54.5 47.98L54.5 49L54.5 50.02M54.5 49.98L54.5 51L54.5 52.02M48.5 54.02L48.5 53L49.02 53M48.98 53L49.5 53L50.02 53M49.98 53L50.5 53L51.02 53M51.5 51.98L51.5 53L50.98 53M54.5 51.98L54.5 53L54.5 54.02M48.5 53.98L48.5 55L48.5 56.02M54.5 53.98L54.5 55L54.5 56.02M48.5 55.98L48.5 57L48.5 58.02M54.5 55.98L54.5 57L54.5 58.02M46.5 57.98L46.5 59L47.02 59M46.98 59L47.5 59L48.02 59M48.5 57.98L48.5 59L47.98 59M52.5 57.98L52.5 59L53.02 59M52.98 59L53.5 59L54.02 59M53.98 59L54.5 59L55.02 59M54.5 59L54.5 57.98"/><path class="l2 in" d="M53.5 46.02L53.5 45L52.98 45M48.5 48.02L48.5 47L49.02 47M48.98 47L49.5 47L50.02 47M49.98 47L50.5 47L51.02 47M51.5 45.98L51.5 47L50.98 47M54.5 48.02L54.5 47L53.98 47M48.5 47.98L48.5 49L48.5 50.02M54.5 47.98L54.5 49L54.5 50.02M54.5 49.98L54.5 51L54.5 52.02M48.5 54.02L48.5 53L49.02 53M48.98 53L49.5 53L50.02 53M49.98 53L50.5 53L51.02 53M51.5 51.98L51.5 53L50.98 53M54.5 51.98L54.5 53L54.5 54.02M48.5 53.98L48.5 55L48.5 56.02M54.5 53.98L54.5 55L54.5 56.02M48.5 55.98L48.5 57L48.5 58.02M54.5 55.98L54.5 57L54.5 58.02M46.5 57.98L46.5 59L47.02 59M46.98 59L47.5 59L48.02 59M48.5 57.98L48.5 59L47.98 59M52.5 57.98L52.5 59L53.02 59M52.98 59L53.5 59L54.02 59M53.98 59L54.5 59L55.02 59M54.5 59L54.5 57.98"/><path d="M47 44h6.02v2.02h-6.02zM46 46h2.02v2.02h-2.02zM52 46h2.02v2.02h-2.02zM46 48h2.02v2.02h-2.02zM52 48h2.02v2.02h-2.02zM46 50h8.02v2.02h-8.02zM46 52h2.02v2.02h-2.02zM52 52h2.02v2.02h-2.02zM46 54h2.02v2.02h-2.02zM52 54h2.02v2.02h-2.02zM46 56h2.02v2.02h-2.02zM52 56h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M61.5 50.02L61.5 49L60.98 49M57.5 52.02L57.5 51L58.02 51M57.98 51L58.5 51L59.02 51M59.5 49.98L59.5 51L58.98 51M62.5 52.02L62.5 51L61.98 51M57.5 51.98L57.5 53L57.5 54.02M62.5 51.98L62.5 53L62.5 54.02M57.5 53.98L57.5 55L57.5 56.02M62.5 53.98L62.5 55L62.5 56.02M57.5 55.98L57.5 57L57.5 58.02M62.5 55.98L62.5 57L62.5 58.02M62.5 57L63.02 57M54.98 59L55.5 59L56.02 59M55.98 59L56.5 59L57.02 59M57.5 57.98L57.5 59L56.98 59M60.5 57.98L60.5 59L61.02 59M60.98 59L61.5 59L62.02 59M62.5 57.98L62.5 59L61.98 59"/><path class="l2 in" d="M61.5 50.02L61.5 49L60.98 49M57.5 52.02L57.5 51L58.02 51M57.98 51L58.5 51L59.02 51M59.5 49.98L59.5 51L58.98 51M62.5 52.02L62.5 51L61.98 51M57.5 51.98L57.5 53L57.5 54.02M62.5 51.98L62.5 53L62.5 54.02M57.5 53.98L57.5 55L57.5 56.02M62.5 53.98L62.5 55L62.5 56.02M57.5 55.98L57.5 57L57.5 58.02M62.5 55.98L62.5 57L62.5 58.02M62.5 57L63.02 57M54.98 59L55.5 59L56.02 59M55.98 59L56.5 59L57.02 59M57.5 57.98L57.5 59L56.98 59M60.5 57.98L60.5 59L61.02 59M60.98 59L61.5 59L62.02 59M62.5 57.98L62.5 59L61.98 59"/><path d="M55 48h6.02v2.02h-6.02zM55 50h2.02v2.02h-2.02zM60 50h2.02v2.02h-2.02zM55 52h2.02v2.02h-2.02zM60 52h2.02v2.02h-2.02zM55 54h2.02v2.02h-2.02zM60 54h2.02v2.02h-2.02zM55 56h2.02v2.02h-2.02zM60 56h2.02v2.02h-2.02z"/></g><g class="art k"><path class="l2" d="M65.5 50.02L65.5 49L64.98 49M70.5 50.02L70.5 49L69.98 49M65.5 49.98L65.5 51L65.5 52.02M70.5 49.98L70.5 51L70.5 52.02M65.5 51.98L65.5 53L65.5 54.02M70.5 51.98L70.5 53L70.5 54.02M65.5 53.98L65.5 55L65.5 56.02M70.5 53.98L70.5 55L70.5 56.02M63.5 55.98L63.5 57L62.98 57M70.5 55.98L70.5 57L70.5 58.02M64.5 60.02L64.5 59L65.02 59M64.98 59L65.5 59L66.02 59M65.98 59L66.5 59L67.02 59M67.5 60.02L67.5 59L66.98 59M70.5 57.98L70.5 59L70.5 60.02M69.5 62.02L69.5 61L70.02 61M70.5 59.98L70.5 61L69.98 61M64.5 61.98L64.5 63L65.02 63M64.98 63L65.5 63L66.02 63M65.98 63L66.5 63L67.02 63M66.98 63L67.5 63L68.02 63M67.98 63L68.5 63L69.02 63M69.5 61.98L69.5 63L68.98 63"/><path class="l2 in" d="M65.5 50.02L65.5 49L64.98 49M70.5 50.02L70.5 49L69.98 49M65.5 49.98L65.5 51L65.5 52.02M70.5 49.98L70.5 51L70.5 52.02M65.5 51.98L65.5 53L65.5 54.02M70.5 51.98L70.5 53L70.5 54.02M65.5 53.98L65.5 55L65.5 56.02M70.5 53.98L70.5 55L70.5 56.02M63.5 55.98L63.5 57L62.98 57M70.5 55.98L70.5 57L70.5 58.02M64.5 60.02L64.5 59L65.02 59M64.98 59L65.5 59L66.02 59M65.98 59L66.5 59L67.02 59M67.5 60.02L67.5 59L66.98 59M70.5 57.98L70.5 59L70.5 60.02M69.5 62.02L69.5 61L70.02 61M70.5 59.98L70.5 61L69.98 61M64.5 61.98L64.5 63L65.02 63M64.98 63L65.5 63L66.02 63M65.98 63L66.5 63L67.02 63M66.98 63L67.5 63L68.02 63M67.98 63L68.5 63L69.02 63M69.5 61.98L69.5 63L68.98 63"/><path d="M63 48h2.02v2.02h-2.02zM68 48h2.02v2.02h-2.02zM63 50h2.02v2.02h-2.02zM68 50h2.02v2.02h-2.02zM63 52h2.02v2.02h-2.02zM68 52h2.02v2.02h-2.02zM63 54h2.02v2.02h-2.02zM68 54h2.02v2.02h-2.02zM64 56h6.02v2.02h-6.02zM68 58h2.02v2.02h-2.02zM64 60h5.02v2.02h-5.02z"/></g><g class="art k"><path class="l2" d="M7.5 68.02L7.5 67L6.98 67M2.5 70.02L2.5 69L3.02 69M2.98 69L3.5 69L4.02 69M3.98 69L4.5 69L5.02 69M5.5 67.98L5.5 69L4.98 69M8.5 70.02L8.5 69L7.98 69M2.5 69.98L2.5 71L2.5 72.02M8.5 69.98L8.5 71L8.5 72.02M2.5 71.98L2.5 73L2.5 74.02M8.5 71.98L8.5 73L8.5 74.02M2.5 73.98L2.5 75L2.5 76.02M8.5 73.98L8.5 75L8.5 76.02M2.5 75.98L2.5 77L2.5 78.02M8.5 75.98L8.5 77L8.5 78.02M7.5 80.02L7.5 79L8.02 79M7.98 79L8.5 79L9.02 79M8.5 79L8.5 77.98M0.5 79.98L0.5 81L1.02 81M0.98 81L1.5 81L2.02 81M1.98 81L2.5 81L3.02 81M2.98 81L3.5 81L4.02 81M3.98 81L4.5 81L5.02 81M4.98 81L5.5 81L6.02 81M5.98 81L6.5 81L7.02 81M7.5 79.98L7.5 81L6.98 81"/><path class="l2 in" d="M7.5 68.02L7.5 67L6.98 67M2.5 70.02L2.5 69L3.02 69M2.98 69L3.5 69L4.02 69M3.98 69L4.5 69L5.02 69M5.5 67.98L5.5 69L4.98 69M8.5 70.02L8.5 69L7.98 69M2.5 69.98L2.5 71L2.5 72.02M8.5 69.98L8.5 71L8.5 72.02M2.5 71.98L2.5 73L2.5 74.02M8.5 71.98L8.5 73L8.5 74.02M2.5 73.98L2.5 75L2.5 76.02M8.5 73.98L8.5 75L8.5 76.02M2.5 75.98L2.5 77L2.5 78.02M8.5 75.98L8.5 77L8.5 78.02M7.5 80.02L7.5 79L8.02 79M7.98 79L8.5 79L9.02 79M8.5 79L8.5 77.98M0.5 79.98L0.5 81L1.02 81M0.98 81L1.5 81L2.02 81M1.98 81L2.5 81L3.02 81M2.98 81L3.5 81L4.02 81M3.98 81L4.5 81L5.02 81M4.98 81L5.5 81L6.02 81M5.98 81L6.5 81L7.02 81M7.5 79.98L7.5 81L6.98 81"/><path d="M0 66h7.02v2.02h-7.02zM0 68h2.02v2.02h-2.02zM6 68h2.02v2.02h-2.02zM0 70h2.02v2.02h-2.02zM6 70h2.02v2.02h-2.02zM0 72h2.02v2.02h-2.02zM6 72h2.02v2.02h-2.02zM0 74h2.02v2.02h-2.02zM6 74h2.02v2.02h-2.02zM0 76h2.02v2.02h-2.02zM6 76h2.02v2.02h-2.02zM0 78h7.02v2.02h-7.02z"/></g><g class="art k"><path class="l2" d="M15.5 72.02L15.5 71L14.98 71M10.5 74.02L10.5 73L11.02 73M10.98 73L11.5 73L12.02 73M11.98 73L12.5 73L13.02 73M13.5 74.02L13.5 73L12.98 73M16.5 74.02L16.5 73L15.98 73M16.5 73.98L16.5 75L16.5 76.02M11.5 78.02L11.5 77L12.02 77M11.98 77L12.5 77L13.02 77M13.5 78.02L13.5 77L12.98 77M16.5 75.98L16.5 77L16.5 78.02M9.5 77.98L9.5 79L8.98 79M16.5 77.98L16.5 79L16.5 80.02M16.5 79L17.02 79M10.5 79.98L10.5 81L11.02 81M10.98 81L11.5 81L12.02 81M11.98 81L12.5 81L13.02 81M12.98 81L13.5 81L14.02 81M13.98 81L14.5 81L15.02 81M14.98 81L15.5 81L16.02 81M16.5 79.98L16.5 81L15.98 81"/><path class="l2 in" d="M15.5 72.02L15.5 71L14.98 71M10.5 74.02L10.5 73L11.02 73M10.98 73L11.5 73L12.02 73M11.98 73L12.5 73L13.02 73M13.5 74.02L13.5 73L12.98 73M16.5 74.02L16.5 73L15.98 73M16.5 73.98L16.5 75L16.5 76.02M11.5 78.02L11.5 77L12.02 77M11.98 77L12.5 77L13.02 77M13.5 78.02L13.5 77L12.98 77M16.5 75.98L16.5 77L16.5 78.02M9.5 77.98L9.5 79L8.98 79M16.5 77.98L16.5 79L16.5 80.02M16.5 79L17.02 79M10.5 79.98L10.5 81L11.02 81M10.98 81L11.5 81L12.02 81M11.98 81L12.5 81L13.02 81M12.98 81L13.5 81L14.02 81M13.98 81L14.5 81L15.02 81M14.98 81L15.5 81L16.02 81M16.5 79.98L16.5 81L15.98 81"/><path d="M10 70h5.02v2.02h-5.02zM14 72h2.02v2.02h-2.02zM10 74h6.02v2.02h-6.02zM9 76h2.02v2.02h-2.02zM14 76h2.02v2.02h-2.02zM10 78h6.02v2.02h-6.02z"/></g><g class="art k"><path class="l2" d="M19.5 72.02L19.5 71L18.98 71M24.5 72.02L24.5 71L23.98 71M19.5 71.98L19.5 73L19.5 74.02M24.5 71.98L24.5 73L24.5 74.02M19.5 73.98L19.5 75L19.5 76.02M24.5 73.98L24.5 75L24.5 76.02M19.5 75.98L19.5 77L19.5 78.02M24.5 75.98L24.5 77L24.5 78.02M17.5 77.98L17.5 79L16.98 79M24.5 77.98L24.5 79L24.5 80.02M18.5 82.02L18.5 81L19.02 81M18.98 81L19.5 81L20.02 81M19.98 81L20.5 81L21.02 81M21.5 82.02L21.5 81L20.98 81M24.5 79.98L24.5 81L24.5 82.02M23.5 84.02L23.5 83L24.02 83M24.5 81.98L24.5 83L23.98 83M18.5 83.98L18.5 85L19.02 85M18.98 85L19.5 85L20.02 85M19.98 85L20.5 85L21.02 85M20.98 85L21.5 85L22.02 85M21.98 85L22.5 85L23.02 85M23.5 83.98L23.5 85L22.98 85"/><path class="l2 in" d="M19.5 72.02L19.5 71L18.98 71M24.5 72.02L24.5 71L23.98 71M19.5 71.98L19.5 73L19.5 74.02M24.5 71.98L24.5 73L24.5 74.02M19.5 73.98L19.5 75L19.5 76.02M24.5 73.98L24.5 75L24.5 76.02M19.5 75.98L19.5 77L19.5 78.02M24.5 75.98L24.5 77L24.5 78.02M17.5 77.98L17.5 79L16.98 79M24.5 77.98L24.5 79L24.5 80.02M18.5 82.02L18.5 81L19.02 81M18.98 81L19.5 81L20.02 81M19.98 81L20.5 81L21.02 81M21.5 82.02L21.5 81L20.98 81M24.5 79.98L24.5 81L24.5 82.02M23.5 84.02L23.5 83L24.02 83M24.5 81.98L24.5 83L23.98 83M18.5 83.98L18.5 85L19.02 85M18.98 85L19.5 85L20.02 85M19.98 85L20.5 85L21.02 85M20.98 85L21.5 85L22.02 85M21.98 85L22.5 85L23.02 85M23.5 83.98L23.5 85L22.98 85"/><path d="M17 70h2.02v2.02h-2.02zM22 70h2.02v2.02h-2.02zM17 72h2.02v2.02h-2.02zM22 72h2.02v2.02h-2.02zM17 74h2.02v2.02h-2.02zM22 74h2.02v2.02h-2.02zM17 76h2.02v2.02h-2.02zM22 76h2.02v2.02h-2.02zM18 78h6.02v2.02h-6.02zM22 80h2.02v2.02h-2.02zM18 82h5.02v2.02h-5.02z"/></g><g class="art k d1"><path class="l2" d="M29.5 80.02L29.5 79L28.98 79M27.5 79.98L27.5 81L28.02 81M27.98 81L28.5 81L29.02 81M29.5 79.98L29.5 81L28.98 81"/><path class="l2 in" d="M29.5 80.02L29.5 79L28.98 79M27.5 79.98L27.5 81L28.02 81M27.98 81L28.5 81L29.02 81M29.5 79.98L29.5 81L28.98 81"/><path d="M27 78h2.02v2.02h-2.02z"/></g></svg>
+</footer>
+
+<script>
+(() => {
+  // the search in the command line can be typed over, and the matches in the three files are lit as it changes. nothing leaves the page
+  const vi = document.querySelector('.vi'), vc = document.querySelector('.vc'), q = vc && vc.querySelector('.q');
+  if (!q || !window.Highlight || !window.CSS || !CSS.highlights) return;
+  const link = vi.querySelector('.cta a'), first = q.textContent, panes = [...vi.querySelectorAll('.pn')];
+  // the link keeps its own text colour under the highlight, so the glimmer shows through it
+  const hit = new Highlight(), hitl = new Highlight();
+  CSS.highlights.set('hit', hit); CSS.highlights.set('hitl', hitl);
+
+  // every line as one lower-case string, with each character traced back to its text node. prices share the number of the line above them
+  const lines = [];
+  panes.forEach((pn, p) => {
+    let n = 0;
+    pn.querySelectorAll('.o > p, .tr, .list h2, .list .m, .list .d').forEach((el) => {
+      if (!el.matches('.m')) n++;
+      const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), at = [];
+      let s = '', t;
+      while ((t = w.nextNode())) {
+        if (t.parentNode.closest('.g')) continue;
+        for (let i = 0; i < t.data.length; i++) {
+          const c = /\s/.test(t.data[i]) ? ' ' : t.data[i];
+          if (c === ' ' && (!s || s.endsWith(' '))) continue;
+          s += c; at.push([t, i]);
+        }
+      }
+      lines.push({ el, p, n, s: s.toLowerCase(), at });
+    });
+  });
+
+  // light every match and move the cursor to the first one; a search that finds nothing leaves the cursor where it was
+  let cur = null;
+  const find = () => {
+    const k = q.textContent.replace(/\s+/g, ' ').toLowerCase();
+    let full = false; cur = null;
+    hit.clear(); hitl.clear();
+    if (k.trim()) lines.forEach((l) => {
+      for (let i = l.s.indexOf(k); i > -1; i = l.s.indexOf(k, i + k.length)) {
+        const e = i + k.length;
+        cur = cur || { l, col: i + 1 };
+        // one range for the part of the match inside the link and one for each part outside it
+        for (let j = i, a; j < e; j = a) {
+          const inl = link.contains(l.at[j][0]);
+          for (a = j + 1; a < e && link.contains(l.at[a][0]) === inl; a++);
+          const r = new Range();
+          r.setStart(l.at[j][0], l.at[j][1]); r.setEnd(l.at[a - 1][0], l.at[a - 1][1] + 1);
+          (inl ? hitl : hit).add(r);
+          if (inl && a - j === link.textContent.length) full = true;
+        }
+      }
+    });
+    // a match on the whole link is drawn by the link itself
+    if (full) hitl.clear();
+    link.classList.toggle('miss', !full);
+    if (cur) panes.forEach((pn, p) => {
+      pn.classList.toggle('on', p === cur.l.p);
+      pn.querySelector('.ps').textContent = p === cur.l.p ? cur.l.n + ':' + cur.col : '1:1';
+    });
+    return cur;
+  };
+
+  try { q.contentEditable = 'plaintext-only'; } catch (e) { q.contentEditable = 'true'; }
+  q.spellcheck = false;
+  for (const [k, v] of [['role', 'textbox'], ['aria-label', 'Search the three files'], ['autocapitalize', 'off'], ['autocorrect', 'off']]) q.setAttribute(k, v);
+  vc.removeAttribute('aria-hidden');
+  q.addEventListener('input', () => { if (q.children.length) q.textContent = q.textContent; find(); });
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') q.textContent = first;
+    if (e.key !== 'Enter' && e.key !== 'Escape') return;
+    e.preventDefault(); q.blur();
+    if (e.key === 'Enter' && cur) cur.l.el.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
+  q.addEventListener('focus', () => vc.classList.remove('err'));
+  // an empty search goes back to the first one, as it repeats the last search in vim
+  q.addEventListener('blur', () => { if (!q.textContent.trim()) q.textContent = first; vc.classList.toggle('err', !find()); });
+  vc.addEventListener('click', (e) => { if (e.target === q) return; q.focus(); getSelection().selectAllChildren(q); getSelection().collapseToEnd(); });
+  find();
+})();
+</script>
+<script>
+(() => {
+  // the motto stays out of the page until someone types in the search, and each keystroke sets one more letter of it
+  const ft = document.querySelector('.ft'), vc = document.querySelector('.vc'), q = vc && vc.querySelector('.q');
+  if (!q || !q.isContentEditable) return;
+  const rows = [...ft.querySelectorAll('svg')].map((s) => [...s.querySelectorAll('.k')]), root = document.documentElement;
+  let n = 0;
+  root.classList.add('egg', 'shut');
+  q.addEventListener('input', () => {
+    if (n >= rows[0].length) return;
+    n++; rows.forEach((r) => r[n - 1].classList.add('on'));
+    if (n > 1) return;
+    root.classList.remove('shut');
+    // bring the motto into view once, without pushing the command line off the top
+    const vh = window.visualViewport ? visualViewport.height : innerHeight;
+    const y = Math.min(vc.getBoundingClientRect().top + scrollY - 24, ft.getBoundingClientRect().bottom + scrollY - vh);
+    if (y > scrollY) scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 <dialog class="viewer" id="cal-dialog" aria-label="Book a 30-minute intro call" tabindex="-1">
   <div class="bar"><span class="u">mgruesbeck</span> <span class="w">~/consulting</span> <span class="ar">❯</span> <span class="cmd">open calendar.google.com</span><button type="button" class="x" aria-label="Close">✕</button></div>
   <iframe id="cal-iframe" title="Google Calendar appointment schedule"></iframe>
@@ -328,70 +403,21 @@ a:not([href]), .act:disabled { color: var(--muted); cursor: default; }
 
 <script>
 (() => {
-  // Replace the REPLACE_ placeholder with the live link; README.md has the steps under "Consulting Setup".
-  // Until then, booking shows as "not connected yet" and does nothing.
-  const CONFIG = {
-    consultantName: 'Melvin Gruesbeck', // swap to the LLC name once formed
-    consultantTitle: 'Independent Consultant',
-    governingState: 'California',
-    calendarBookingUrl: 'https://calendar.google.com/calendar/appointments/schedules/REPLACE_WITH_GOOGLE_CALENDAR_SCHEDULE_ID?gv=true'
-  };
-  // these must match the engagements list and terms.md above
-  const TIERS = {
-    trial:      { name: 'Trial',      hours: 10, price: 2000, once: true },
-    advisory:   { name: 'Advisory',   hours: 10, price: 2500 },
-    embedded:   { name: 'Embedded',   hours: 20, price: 4800 },
-    fractional: { name: 'Fractional', hours: 40, price: 9000 },
-    half:       { name: 'Half Time',  hours: 80, price: 16000 }
-  };
-  const TERMS = {
-    monthly: { label: 'Month to month', off: 0,  notice: 30 },
-    six:     { label: '6-month term',   off: 5,  notice: 60 },
-    twelve:  { label: '12-month term',  off: 10, notice: 90 }
-  };
+  // an intro call link's href is the embeddable form of https://calendar.app.google/GgaCiBS6cBxxC8dy8, which cannot be framed itself
+  const links = [...document.querySelectorAll('[data-cal]')], CALENDAR = links[0].href;
   const $ = (id) => document.getElementById(id);
-  const live = (url) => !url.includes('REPLACE_');
-  const off = (el) => { el.disabled = true; el.append(' (not connected yet)'); };
-  const usd = (n, cents) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: cents ? 2 : 0 });
 
-  const allBtn = document.querySelector('.hint .all'), ds = [...document.querySelectorAll('.x details')];
-  const sync = () => { allBtn.textContent = ds.every((d) => d.open) ? 'collapse all' : 'expand all'; };
-  allBtn.addEventListener('click', () => { const open = !ds.every((d) => d.open); ds.forEach((d) => { d.open = open; }); sync(); });
-  ds.forEach((d) => d.addEventListener('toggle', sync));
-  sync();
-
-  // the intro call: a Google Calendar booking page in a dialog
-  const dlg = $('cal-dialog'), frame = $('cal-iframe'), calLink = $('cal-link'), calBtns = [...document.querySelectorAll('[data-cal]')];
-  if (live(CONFIG.calendarBookingUrl)) calLink.href = CONFIG.calendarBookingUrl; else [calLink, ...calBtns].forEach(off);
-  calBtns.forEach((b) => b.addEventListener('click', () => {
-    if (!dlg.showModal) { window.open(CONFIG.calendarBookingUrl, '_blank', 'noopener'); return; }
-    if (!frame.src) frame.src = CONFIG.calendarBookingUrl;
+  // the link opens the Google Calendar booking page in a dialog; without one, it opens in a new tab
+  const dlg = $('cal-dialog'), frame = $('cal-iframe');
+  $('cal-link').href = CALENDAR;
+  links.forEach((a) => a.addEventListener('click', (e) => {
+    if (!dlg.showModal || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    if (!frame.src) frame.src = CALENDAR;
     dlg.showModal(); dlg.focus();
   }));
   dlg.querySelector('.x').addEventListener('click', () => dlg.close());
   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
-
-  // the chosen plan and term fill in the agreement; a trial is one payment and takes no term
-  const form = $('plan-form');
-  const deal = (tier, term) => {
-    const t = TIERS[tier];
-    if (t.once) return { planLine: `${t.name}, ${t.hours} hours within 30 days of the Effective Date`, feeLine: `${usd(t.price, true)}, one payment`,
-      termLine: '30 days, no renewal', noticeLine: 'None; the Trial ends on its own', tierSummary: `${t.hours} hrs · ${usd(t.price)} once`, termSummary: 'ends on its own after 30 days' };
-    const m = TERMS[term], fee = t.price * (100 - m.off) / 100;
-    return { planLine: `${t.name}, ${t.hours} hours per month`, feeLine: `${usd(fee, true)} per month`,
-      termLine: m.off ? `${m.label} (${m.off}% discount)` : m.label, noticeLine: `${m.notice} days`, tierSummary: `${t.hours} hrs · ${usd(fee)} / mo`,
-      termSummary: m.off ? `${m.off}% off · ${m.notice} days' notice` : `${m.notice} days' notice` };
-  };
-  function preview() {
-    const tier = form.elements.tier.value;
-    form.elements.term.forEach((r) => { r.disabled = !!TIERS[tier].once; });
-    const values = { consultantName: CONFIG.consultantName, consultantTitle: CONFIG.consultantTitle, governingState: CONFIG.governingState, ...deal(tier, form.elements.term.value) };
-    document.querySelectorAll('[data-bind]').forEach((el) => { el.textContent = values[el.dataset.bind]; });
-  }
-  form.addEventListener('input', preview);
-  document.querySelectorAll('[data-pick-tier]').forEach((a) => a.addEventListener('click', () => { form.elements.tier.value = a.dataset.pickTier; preview(); }));
-  preview();
-  $('print-btn').addEventListener('click', () => window.print());
 })();
 </script>
 </body>
