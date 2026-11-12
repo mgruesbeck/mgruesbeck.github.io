@@ -376,6 +376,12 @@ h2 { font: inherit; }
   // an empty search goes back to the first one, as it repeats the last search in vim
   q.addEventListener('blur', () => { if (!q.textContent.trim()) q.textContent = first; vc.classList.toggle('err', !find()); });
   vc.addEventListener('click', (e) => { if (e.target === q) return; q.focus(); getSelection().selectAllChildren(q); getSelection().collapseToEnd(); });
+  // the search reads as already selected, so a key pressed anywhere on the page is typed into it
+  addEventListener('keydown', (e) => {
+    if (document.activeElement === q || e.metaKey || e.ctrlKey || e.isComposing || document.querySelector('dialog[open]')) return;
+    if (e.key === 'Backspace' ? !q.textContent : e.key.length !== 1 || e.key === ' ') return;
+    q.focus(); getSelection().selectAllChildren(q); getSelection().collapseToEnd();
+  });
   find();
 })();
 </script>
