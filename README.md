@@ -98,8 +98,8 @@ Invariants:
 - `consulting/index.html` loads the Google Calendar Appointment Schedule iframe
   on demand when the visitor clicks "free 30-minute call". The search in its
   command line runs in the page. It sends nothing else.
-- When the page loads, the browser requests Martian Mono and IBM Plex Mono
-  from Google Fonts (`fonts.googleapis.com` and `fonts.gstatic.com`).
+- When the page loads, the browser requests Martian Mono from Google Fonts
+  (`fonts.googleapis.com` and `fonts.gstatic.com`).
 - A push to `master` publishes the site through GitHub Pages.
 
 ## Consulting Setup (`consulting/index.html`)

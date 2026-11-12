@@ -17,7 +17,7 @@
   <!-- styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,400;100,600&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,400;100,600&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -76,20 +76,19 @@ main { max-width: 1180px; margin: 0 auto; padding: 56px 22px 96px; }
 .about .rest p + p { margin-top: 12px; }
 .sec { display: grid; gap: 12px 48px; padding: 32px 0; }
 @media (min-width: 940px) { .sec { grid-template-columns: 4fr 8fr; } }
-.list li { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-top: 1px solid var(--rule); }
+.list li { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-top: 1px solid var(--rule); }
 .list li:first-child { border-top: 0; padding-top: 0; }
 .list .t { display: block; }
-.list .s { display: block; color: var(--muted); font-size: .88em; margin-top: 1px; }
-.list .m { color: var(--muted); font-size: .88em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.list .s { display: block; color: var(--soft); font-size: 12px; margin-top: 1px; }
+.list .m { color: var(--muted); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 a { color: inherit; transition: color .15s, background .15s; }
 .reads { color: var(--muted); }
-footer { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; padding: 24px 22px; }
 
 .gearfig { position: relative; }
 .hs { all: unset; position: absolute; transform: translate(-50%, -50%); cursor: pointer; z-index: 2; }
 .hs .num { display: none; }
 .hs .lbl { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); white-space: nowrap; background: rgba(255,255,255,.94); color: #1b1b1a;
-  font: 600 11px/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .02em; padding: 4px 6px; border-radius: 3px; box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  font: 600 11px/1 var(--mono); padding: 4px 6px; border-radius: 3px; box-shadow: 0 2px 8px rgba(0,0,0,.18);
   opacity: 0; pointer-events: none; transition: opacity .15s; }
 .hs.left .lbl { left: auto; right: calc(100% + 8px); }
 .hs:hover .lbl, .hs:focus-visible .lbl, .hs.on .lbl { opacity: 1; }
@@ -98,21 +97,23 @@ footer { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px;
 [data-gear].on, [data-gear]:focus-visible { background: var(--hl, #f1ece4); }
 .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
 
-:root { --bg: #fafafa; --ink: #383a42; --muted: #a0a1a7; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --yellow: #c18401; --cyan: #0184bc; --mono: "Martian Mono", monospace; }
+:root { --bg: #fafafa; --ink: #383a42; --soft: #696c77; --muted: #a0a1a7; --glyph: #c5c6cb; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --yellow: #c18401; --cyan: #0184bc; --mono: "Martian Mono", monospace; }
 body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
 .u { color: var(--green); } .w { color: var(--blue); } .g { color: var(--violet); } .ar { color: var(--green); }
 h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 600; font-stretch: 100%; color: #202227; letter-spacing: -0.02em; }
 .dot { font-family: var(--mono); box-shadow: 0 0 0 3px rgba(255,255,255,.85); }
 .list .m { color: var(--blue); }
 a { color: var(--cyan); } a:hover { color: var(--violet); }
+a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 2px; }
+::selection { background: #fbe08a; color: var(--ink); }
 
-.tm { max-width: 820px; padding: 12vh 20px 64px; }
+.tm { max-width: 820px; padding: clamp(48px, 10vh, 112px) 20px 64px; }
 .p { margin-top: 44px; color: var(--muted); } .p:first-child { margin-top: 0; }
 .p .cmd { color: var(--ink); }
-.o { margin-top: 8px; } .o p + p { margin-top: 10px; }
+.o { margin-top: 8px; } .o p + p { margin-top: 10px; } .o p { text-wrap: pretty; }
 .o .shot { width: min(100%, 560px); margin: 0; }
 .o .shot img { border-radius: 8px; }
-.dim { color: var(--muted); }
+.dim { color: var(--soft); }
 .json pre { margin: 0; white-space: pre-wrap; font: inherit; }
 .json .k { color: var(--violet); } .json .s { color: var(--green); } .json .pn { color: var(--muted); }
 :root { --hl: #efe7f4; } .json .row { display: inline-block; width: 100%; }
@@ -142,17 +143,17 @@ a { color: var(--cyan); } a:hover { color: var(--violet); }
 .x summary .t { transition: color .15s; }
 .x summary:hover .t, .x summary:focus-visible .t, .x details[open] .t { color: var(--violet); }
 .x summary:focus-visible { background: var(--hl); border-radius: 4px; }
-.xd { color: var(--muted); font-size: .92em; animation: xin .2s ease-out; }
-.xd .k { color: var(--ink); }
+.xd { color: var(--soft); font-size: 12px; animation: xin .2s ease-out; }
+.xd .k { color: var(--ink); font-weight: 600; font-stretch: 100%; }
 @keyframes xin { from { opacity: 0; transform: translateY(-4px); } }
 .x summary .t::before { content: "›"; position: absolute; width: 12px; margin-left: -16px; text-align: center; color: var(--muted); font-size: 1.15em; transition: transform .15s, color .15s; }
 .x details[open] summary .t::before { transform: rotate(90deg); color: var(--violet); }
 .xd { margin: 10px 0 4px; }
 .xd .in { margin-bottom: 8px; }
 .xd .tr { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 6px; }
-.xd .g { color: #c5c6cb; white-space: pre; }
+.xd .g { color: var(--glyph); white-space: pre; }
 .hint .all { all: unset; cursor: pointer; color: var(--cyan); } .hint .all:hover, .hint .all:focus-visible { color: var(--violet); }
-.ft { max-width: 820px; margin: 0 auto; padding: clamp(56px, 10vh, 120px) 20px 12vh; --s: var(--accent); }
+.ft { max-width: 820px; margin: 0 auto; padding: clamp(56px, 10vh, 120px) 20px clamp(48px, 10vh, 112px); --s: var(--accent); }
 .ft p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .ft svg { display: block; width: 100%; height: auto; }
 .art { fill: var(--f, #202227); } .art .l2 { fill: none; stroke: var(--s, #202227); stroke-width: .42; } .art .l2.in { stroke: var(--bg); stroke-width: .18; }
