@@ -23,30 +23,33 @@ h1, h2, p { margin: 0; }
 :root { --bg: #fafafa; --ink: #383a42; --soft: #696c77; --muted: #a0a1a7; --glyph: #c5c6cb; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --cyan: #0184bc; --mono: "Martian Mono", monospace; }
 body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
 a { color: var(--cyan); text-decoration: none; transition: color .15s; } a:hover { color: var(--violet); }
+a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 2px; }
+::selection { background: #fbe08a; color: var(--ink); }
 h2 { font: inherit; }
-.tm { max-width: 1560px; margin: 0 auto; padding: 9vh 32px 64px; }
+.tm { max-width: 1560px; margin: 0 auto; padding: clamp(48px, 10vh, 112px) 32px 64px; }
 .p { color: var(--muted); } .p .cmd { color: var(--ink); }
 .u { color: var(--green); } .w { color: var(--blue); } .ar { color: var(--green); }
-.o > p + p { margin-top: 10px; }
+.o > p + p { margin-top: 10px; } .o p { text-wrap: pretty; }
 .hint { color: var(--muted); font-size: 12px; }
-.xd { font-size: .92em; margin: 10px 0 4px; } .o > .xd:first-child { margin-top: 0; }
+.xd { font-size: 12px; margin: 10px 0 4px; } .o > .xd:first-child { margin-top: 0; }
 .xd + p { margin-top: 12px; }
 .xd .k, .list h2 { font-weight: 600; font-stretch: 100%; }
 .xd .tr { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 6px; } .o > .xd:first-child > .tr:first-child { margin-top: 0; }
 .xd .g { color: var(--glyph); white-space: pre; }
 
-.list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 13px 0; border-top: 1px solid var(--rule); }
+.list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 12px 0; border-top: 1px solid var(--rule); }
 .list li:first-child { border-top: 0; padding-top: 0; }
 .list .t { flex: 1; min-width: 0; }
-.list .s { margin-left: 8px; color: var(--muted); font-size: .88em; font-weight: 400; font-stretch: 87.5%; }
-.list .m { color: var(--blue); font-size: .88em; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.list .d { flex: 0 0 100%; font-size: .92em; }
+.list .s { margin-left: 8px; color: var(--soft); font-size: 12px; font-weight: 400; font-stretch: 87.5%; }
+.list .m { color: var(--blue); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.list .d { flex: 0 0 100%; font-size: 12px; }
 
-/* the three files as a vim split: numbered lines, a status line under each file, and the command line under them all */
+/* the three files as a vim split: numbered lines, a status line under each file, and the command line under them all.
+   a number sits on the baseline of its line, which in Martian Mono at this leading is 1.27 of the type size down */
 .vi { margin-top: 14px; border-top: 1px solid var(--rule); }
-.pn { display: flex; flex-direction: column; counter-reset: ln; padding: 14px 20px 0 46px; }
+.pn { display: flex; flex-direction: column; counter-reset: ln; padding: 14px 20px 0 46px; --row: 13.5px; } .xd, .list .d, .o > .hint { --row: 12px; }
 .o > p, .tr, .list h2, .list .d { position: relative; counter-increment: ln; }
-.o > p::before, .tr::before, .list h2::before, .list .d::before { content: counter(ln); position: absolute; left: -46px; top: .15em; width: 30px; text-align: right; color: var(--glyph); font-size: 11.5px; }
+.o > p::before, .tr::before, .list h2::before, .list .d::before { content: counter(ln); position: absolute; left: -46px; top: calc((var(--row) - 11px) * 1.27); width: 30px; text-align: right; color: var(--glyph); font-size: 11px; font-weight: 400; font-stretch: 87.5%; }
 .vt { flex: 1 1 0; min-height: 3.5em; margin: 8px 0 0 -46px; padding-left: 21px; overflow: hidden; color: var(--blue); opacity: .5; white-space: pre; }
 .vs { display: flex; justify-content: space-between; margin: 0 -20px 0 -46px; background: var(--rule); color: var(--soft); font-size: 12px; } .on .vs { color: var(--ink); }
 .vs span { padding: 2px 12px; } .vs .fn { margin-right: auto; }
@@ -68,7 +71,7 @@ h2 { font: inherit; }
 ::highlight(hit) { background-color: #fbe08a; color: #383a42; } ::highlight(hitl) { background-color: #fbe08a; }
 
 /* the motto, drawn in blocks with a red shadow. it stays out of the page until someone types in the search */
-.ft { max-width: 1560px; margin: 0 auto; padding: clamp(56px, 10vh, 120px) 32px 9vh; --s: var(--accent); }
+.ft { max-width: 1560px; margin: 0 auto; padding: clamp(56px, 10vh, 120px) 32px clamp(48px, 10vh, 112px); --s: var(--accent); }
 .ft h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .ft svg { display: block; width: 100%; height: auto; } .ft .nw { display: none; }
 .art { fill: var(--f, #202227); } .art .l2 { fill: none; stroke: var(--s, #202227); stroke-width: .42; } .art .l2.in { stroke: var(--bg); stroke-width: .18; }
@@ -82,11 +85,11 @@ h2 { font: inherit; }
   .list .s { display: block; margin-left: 0; }
 }
 @media (max-width: 720px) {
-  .tm { padding: 9vh 20px 44px; }
+  .tm { padding: clamp(48px, 10vh, 112px) 20px 44px; }
   .pn { padding-left: 34px; padding-right: 0; }
   .o > p::before, .tr::before, .list h2::before, .list .d::before { left: -34px; width: 22px; }
   .vt { margin-left: -34px; padding-left: 13px; } .vs { margin: 0 0 0 -34px; }
-  .ft { padding-right: 20px; padding-bottom: 7vh; padding-left: 20px; }
+  .ft { padding-right: 20px; padding-left: 20px; }
   .ft .wd { display: none; } .ft .nw { display: block; }
 }
 @media (max-width: 560px) { .list .s { display: block; margin-left: 0; } }
