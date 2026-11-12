@@ -248,6 +248,12 @@ a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-ra
     q.blur(); hit.parentNode.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   });
   p.addEventListener('click', (e) => { if (e.target !== q) q.focus(); });
+  // the prompt reads as already selected, so a key pressed anywhere on the page is typed into it
+  addEventListener('keydown', (e) => {
+    if (document.activeElement === q || e.metaKey || e.ctrlKey || e.isComposing || document.querySelector('dialog[open]')) return;
+    if (e.key === 'Backspace' ? !q.textContent : e.key.length !== 1 || e.key === ' ') return;
+    q.focus(); getSelection().selectAllChildren(q); getSelection().collapseToEnd();
+  });
 })();
 (() => {
   const ft = document.querySelector('.ft'), ks = [...ft.querySelectorAll('.k')];
