@@ -3,8 +3,8 @@
 ## System Overview
 
 A single-page static personal résumé site for Melvin Gruesbeck, served by
-GitHub Pages at `https://mgruesbeck.github.io/` (the `og:url` in
-`index.html`). There is no build step, package manifest, or server code:
+GitHub Pages at `https://mgruesbeck.sh/` (the `og:url` in
+`index.html`; the old `https://mgruesbeck.github.io/` address redirects there). There is no build step, package manifest, or server code:
 GitHub Pages serves the files as-is.
 
 The page is styled as a light "One Light" terminal transcript (`whoami`,
@@ -21,6 +21,7 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | `assets/ski-air.jpg`, `assets/mountain-1800.jpg`, `assets/climb-1800.jpg`, `assets/moto-1800.jpg`, `assets/tools-1800.jpg` | Hobby photos linked from the last line of `about.md`. Each `a.ph` link's `href` points at its file; the script loads that `href` into the viewer and reads `data-name` (the title), `data-alt`, `data-cap`, and `data-w`/`data-h` (the file's pixel size, so the viewer takes the photo's own shape without cropping). Without JavaScript the link opens the file directly. |
 | `assets/scramble-og.jpg` | 1200×1200 square crop of the same photo for link previews. Referenced by `og:image` and the JSON-LD `image`. |
 | `assets/consulting-og.jpg` | 1200×630 share card for the consulting page: the motto, "Start with a 30-day trial.", and the mark beside the mountain photo. Referenced by `og:image` in `consulting/index.html`, whose `og:image:width` and `og:image:height` must match it. |
+| `CNAME` | The custom domain, `mgruesbeck.sh`, read by GitHub Pages. The domain is registered at Porkbun, where four `A` records point the apex at GitHub Pages and a `CNAME` record points `www` at `mgruesbeck.github.io`. The `canonical`, `og:url` and `og:image` addresses in both pages use this domain. |
 | `favicon.svg` | Site icon, drawn in blocks: a near peak in paper white, a far peak in grey, and a red block above the summit, on a dark tile. Eight blocks across, so each block is two pixels at 16 px. The same drawing, in ink on the page colour, closes the motto in both footers. |
 | `favicon.ico`, `apple-touch-icon.png` | The same icon as a 16/32/48 px ICO for older browsers, and as a 180 px home-screen icon. |
 | `projects/index.html` | Password-gated project pages (`noindex`). Asks for the password in a `[sudo]` prompt, derives the key with PBKDF2 using `vault/meta.json`, then decrypts `vault/index.bin` (every project's text and photo list) and each photo as it scrolls into view. `#<slug>` opens one project. Keeps the derived key in `sessionStorage` until the tab closes or `logout`. |
