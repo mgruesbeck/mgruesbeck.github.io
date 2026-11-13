@@ -64,10 +64,10 @@ Invariants:
   the PDF that `make resume` exports from it. Git-ignored. Edit the `.docx`
   directly or as tracked changes, keep its fonts and layout, then run
   `make resume`. Not backed up by git.
-- `contracts/`: the agreement template,
-  `Revised Consulting Services Agreement.docx`, and the place to keep signed
-  client agreements. Git-ignored, because the repo is public. Not backed up by
-  git.
+- `contracts/`: the place to keep signed client agreements. Git-ignored,
+  because the repo is public. Not backed up by git. The agreement template is
+  a Google Doc, "Consulting Services Agreement", in Melvin's Drive; its link
+  stays out of the repo.
 - `consulting/`: static consulting & booking page (`consulting/index.html`).
   Its only external endpoint is the Google Calendar Appointment Schedule URL
   in the `href` of the "free 30-minute call" link (`data-cal`). The page
@@ -75,11 +75,11 @@ Invariants:
   way. Its copy uses no parentheses.
   Prices live in two places that must agree: the `ls engagements/` rows with
   `cat terms.md`, and the Stripe links and codes.
-  `cat terms.md` and `cat how-to-start.md` summarize the agreement template in
-  `contracts/` (plans, term discounts and notice, the discount billed back on
-  early termination, hours, AI accounts, costs, specialists, payment). The
-  template is the source of truth: after any change to it, update those two
-  sections and replace the file in SignWell.
+  `terms.md` summarizes the agreement template, a Google Doc (plans, term
+  discounts and notice, the discount billed back on early termination, hours,
+  AI accounts, costs, specialists, payment). The Google Doc is the source of
+  truth: after any change to it, update `terms.md` and replace the template
+  in SignWell.
 
 ## Global Invariants
 
@@ -115,11 +115,11 @@ Invariants:
      URL into the `href` of the `data-cal` link. The short
      `calendar.app.google` link cannot be shown in the page's dialog.
 2. **SignWell (nothing goes in the repo):**
-   - Upload `contracts/Revised Consulting Services Agreement.docx` as a
-     template with two signers, Client and Consultant. Place a field on each
-     blank: text fields for the Client Information and Plan Details tables,
-     then a signature, name and title, email and date for the Client, and a
-     signature and date for the Consultant.
+   - Download the agreement Google Doc as a `.docx` (File, Download) and
+     upload it as a template with two signers, Client and Consultant. Place a
+     field on each blank: text fields for the Client Information and Plan
+     Details tables, then a signature, name and title, email and date for the
+     Client, and a signature and date for the Consultant.
    - After an intro call and a conflict check, send the template to the
      client from SignWell with the plan, fee, term and notice period filled
      in. The fee is the plan's price less the term discount (5% for a 3-month
