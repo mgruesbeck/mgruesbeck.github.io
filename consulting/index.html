@@ -60,8 +60,10 @@ h2 { font: inherit; }
 .vc i { display: inline-block; width: .62em; height: 1.25em; margin-left: 1px; vertical-align: text-bottom; background: var(--ink); animation: bl 1.1s steps(1) infinite; }
 @keyframes bl { 50% { opacity: 0; } }
 .vc .q { outline: none; caret-color: var(--ink); } .vc .q[contenteditable] { cursor: text; }
-.vc .q:focus + i, .vc.err i, .vc.err .sl { display: none; }
-.vc.err { color: var(--accent); } .vc.err::before { content: "E486: Pattern not found: "; }
+.vc .q:focus:not(:empty) + i, .vc.nm i, .vc.say .sl, .vc.say .q, .vc.say i { display: none; }
+.vc .ms { white-space: pre-wrap; } .vc .mo { color: var(--green); }
+.vc.err { color: var(--accent); } .vc.dim { color: var(--muted); }
+.vc.nm:not(.say)::before { content: "/ search   :help keys"; float: right; margin-left: 2ch; color: var(--muted); white-space: pre; }
 
 /* the call link is the match of the search in the command line; one colour passes over a few of its letters at a time */
 .cta a { white-space: nowrap; margin: 0 1px 0 -3px; padding: 2px 3px; background: #fbe08a; color: var(--ink); }
@@ -110,6 +112,29 @@ h2 { font: inherit; }
 .viewer .cap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; padding: 9px 12px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* normal mode: a block cursor, the number of its line in ink, and :set nonu */
+::highlight(cur) { background-color: #383a42; color: #fafafa; }
+.vi .cl::before { color: var(--ink); }
+.nonu .o > p::before, .nonu .tr::before, .nonu .list h2::before, .nonu .list .d::before { content: none; }
+
+/* where there is room, the editor is a window of a fixed height and each file scrolls inside its own pane. it stops short
+   of the foot of the browser window by the top half of the motto, so the first line of the motto shows there when it
+   appears and nothing in the editor moves. the art is 147 by 42, so half its height is .143 of its width */
+@media screen and (min-width: 1080px) and (min-height: 640px) {
+  .tm { --pk: calc(clamp(24px, 5vh, 56px) + (min(100vw, 1560px) - 64px) * .143); display: flex; flex-direction: column; height: calc(100vh - var(--pk)); height: calc(100dvh - var(--pk)); padding: clamp(24px, 5vh, 56px) 32px 20px; }
+  .tm > * { flex: none; }
+  .tm > .sp { flex: 1 1 0; min-height: 0; grid-template-rows: minmax(0, 1fr); }
+  .pn { min-height: 0; }
+  .pn .o { flex: 0 1 auto; min-height: 0; margin: 0 -20px 0 -46px; padding: 0 20px 0 46px; overflow: hidden auto; scrollbar-width: none; }
+  .pn .o::-webkit-scrollbar { display: none; }
+  /* the line with the call link is pinned to the foot of its window, so it is in view wherever the file is scrolled to */
+  .o > .cta { position: sticky; bottom: 0; z-index: 1; margin-left: -46px; padding-left: 46px; background: var(--bg); box-shadow: 0 -10px 8px var(--bg); }
+  .o > .cta::before { left: 0; }
+  .vt { min-height: 0; }
+  .ft { padding-top: clamp(24px, 5vh, 56px); }
+  .shut .ft { padding-top: 0; }
+}
   </style>
 </head>
 
@@ -302,20 +327,25 @@ h2 { font: inherit; }
 
 <script>
 (() => {
-  // the search in the command line can be typed over, and the matches in the three files are lit as it changes. nothing leaves the page
+  // the three files behave as a vim split. the page opens on a search in the command line, and Enter or Escape leaves it for
+  // normal mode, where vim's own keys move a cursor through the files. nothing typed leaves the page
   const vi = document.querySelector('.vi'), vc = document.querySelector('.vc'), q = vc && vc.querySelector('.q');
   if (!q || !window.Highlight || !window.CSS || !CSS.highlights) return;
-  const link = vi.querySelector('.cta a'), first = q.textContent, panes = [...vi.querySelectorAll('.pn')];
-  // the link keeps its own text colour under the highlight, so the glimmer shows through it
-  const hit = new Highlight(), hitl = new Highlight();
-  CSS.highlights.set('hit', hit); CSS.highlights.set('hitl', hitl);
+  const link = vi.querySelector('.cta a'), sl = vc.querySelector('.sl'), panes = [...vi.querySelectorAll('.pn')], root = document.documentElement;
+  const files = panes.map((pn) => pn.querySelector('.fn').textContent);
+  const ms = document.createElement('span'); ms.className = 'ms'; ms.setAttribute('role', 'status'); vc.append(ms);
+  // the link keeps its own text colour under the highlight, so the glimmer shows through it. the cursor is drawn over both
+  const hit = new Highlight(), hitl = new Highlight(), blk = new Highlight();
+  blk.priority = 1;
+  CSS.highlights.set('hit', hit); CSS.highlights.set('hitl', hitl); CSS.highlights.set('cur', blk);
 
   // every line as one lower-case string, with each character traced back to its text node. prices share the number of the line above them
   const lines = [];
   panes.forEach((pn, p) => {
     let n = 0;
     pn.querySelectorAll('.o > p, .tr, .list h2, .list .m, .list .d').forEach((el) => {
-      if (!el.matches('.m')) n++;
+      const m = el.matches('.m');
+      if (!m) n++;
       const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), at = [];
       let s = '', t;
       while ((t = w.nextNode())) {
@@ -326,20 +356,28 @@ h2 { font: inherit; }
           s += c; at.push([t, i]);
         }
       }
-      lines.push({ el, p, n, s: s.toLowerCase(), at });
+      if (s) lines.push({ el, p, n, m, s: s.toLowerCase(), at });
     });
   });
 
-  // light every match and move the cursor to the first one; a search that finds nothing leaves the cursor where it was
-  let cur = null;
-  const find = () => {
-    const k = q.textContent.replace(/\s+/g, ' ').toLowerCase();
-    let full = false; cur = null;
+  // each file keeps its own cursor, as each window does in vim
+  const pos = panes.map((_, p) => ({ l: lines.find((l) => l.p === p), col: 0 })), hist = { '/': [q.textContent], ':': [] };
+  let mode = 'cmd', kind = '/', pat = q.textContent, shown = ['/', pat], hits = [], win = 0, back, hx = 1, hold = false, pend = '', cnt = '';
+  // a search that is given up puts the cursor, and each window's view of its file, back where they were
+  const view = () => panes.map((pn) => pn.querySelector('.o'));
+  const snap = () => ({ win, pos: pos.slice(), at: view().map((o) => o.scrollTop) });
+  const undo = () => { win = back.win; pos.splice(0, pos.length, ...back.pos); view().forEach((o, p) => { o.scrollTop = back.at[p]; }); };
+  const end = () => { getSelection().selectAllChildren(q); getSelection().collapseToEnd(); };
+
+  // light every match of a search, and say how many there are
+  const light = (k) => {
+    k = k.replace(/\s+/g, ' ').toLowerCase();
+    let full = false; hits = [];
     hit.clear(); hitl.clear();
     if (k.trim()) lines.forEach((l) => {
       for (let i = l.s.indexOf(k); i > -1; i = l.s.indexOf(k, i + k.length)) {
         const e = i + k.length;
-        cur = cur || { l, col: i + 1 };
+        hits.push({ l, col: i });
         // one range for the part of the match inside the link and one for each part outside it
         for (let j = i, a; j < e; j = a) {
           const inl = link.contains(l.at[j][0]);
@@ -354,55 +392,206 @@ h2 { font: inherit; }
     // a match on the whole link is drawn by the link itself
     if (full) hitl.clear();
     link.classList.toggle('miss', !full);
-    if (cur) panes.forEach((pn, p) => {
-      pn.classList.toggle('on', p === cur.l.p);
-      pn.querySelector('.ps').textContent = p === cur.l.p ? cur.l.n + ':' + cur.col : '1:1';
-    });
-    return cur;
+    return hits.length;
   };
+  // the match after or before a place, going round at the ends as vim does
+  const ord = (c) => lines.indexOf(c.l) * 1e4 + c.col;
+  const seek = (from, d, same) => {
+    const o = ord(from), f = hits.find((h) => (same ? ord(h) >= o : ord(h) > o)), b = [...hits].reverse().find((h) => ord(h) < o);
+    return d > 0 ? [f || hits[0], !f] : [b || hits[hits.length - 1], !b];
+  };
+
+  // the status lines and the block cursor follow the state. a file scrolls inside its own window to keep a line in view,
+  // and the page itself only moves when there is no window to scroll. each status line ends with vim's ruler
+  const rule = () => panes.forEach((pn, p) => {
+    const o = pn.querySelector('.o'), over = o.scrollHeight - o.clientHeight, y = o.scrollTop;
+    pn.querySelector('.ps').textContent = pos[p].l.n + ':' + (pos[p].col + 1) + (over < 2 ? '' : y < 1 ? ' Top' : y > over - 2 ? ' Bot' : ' ' + Math.round(y / over * 100) + '%');
+  });
+  const draw = () => {
+    const c = pos[win];
+    panes.forEach((pn, p) => {
+      pn.classList.toggle('on', p === win);
+      pn.querySelector('.md').textContent = mode === 'cmd' ? 'COMMAND' : 'NORMAL';
+    });
+    rule();
+    lines.forEach((l) => l.el.classList.toggle('cl', mode === 'normal' && l.p === win && l.n === c.l.n && !l.m));
+    blk.clear();
+    if (mode !== 'normal') return;
+    const [t, i] = c.l.at[c.col], r = new Range();
+    r.setStart(t, i); r.setEnd(t, i + 1); blk.add(r);
+  };
+  const show = (page) => {
+    const el = pos[win].l.el, o = el.closest('.o'), a = el.getBoundingClientRect(), b = o.getBoundingClientRect();
+    // the line with the call link is pinned to the foot of its window, so the lines above it have that much less room
+    const pin = o.querySelector('.cta'), foot = b.bottom - (pin && pin !== el && getComputedStyle(pin).position === 'sticky' ? pin.offsetHeight + 10 : 0);
+    if (o.scrollHeight > o.clientHeight + 1) o.scrollTop += a.bottom > foot ? a.bottom - foot + 8 : a.top < b.top ? a.top - b.top - 8 : 0;
+    else if (page) el.scrollIntoView({ block: 'nearest' });
+  };
+  const go = (l, col, page) => { win = l.p; pos[win] = { l, col: Math.max(0, Math.min(col, l.s.length - 1)) }; draw(); show(page); };
+
+  // the command line shows what is being typed, or the last thing run, or a message in its place
+  const say = (t, cls) => {
+    ms.textContent = t || '';
+    if (cls === 'more') { const m = document.createElement('span'); m.className = 'mo'; m.textContent = '\nPress ENTER or type command to continue'; ms.append(m); }
+    hold = cls === 'more';
+    vc.className = 'vc' + (mode === 'normal' ? ' nm' : '') + (t ? ' say' : '') + (cls ? ' ' + cls : '');
+  };
+  const normal = (t, cls) => { mode = 'normal'; q.blur(); [sl.textContent, q.textContent] = shown; say(t, cls); draw(); show(); };
+  const cmd = (k, t) => { mode = 'cmd'; kind = k; back = snap(); hx = hist[k].length; sl.textContent = k; q.textContent = t || ''; say(''); draw(); show(); q.focus(); end(); };
+
+  // the motto stays out of the page until someone types, and each keystroke sets one more letter of it. it is the page's footer,
+  // under the editor, which is kept short enough for the first line of it to show without the page moving
+  const ft = document.querySelector('.ft'), glyphs = [...ft.querySelectorAll('svg')].map((s) => [...s.querySelectorAll('.k')]);
+  let set = 0;
+  root.classList.add('egg', 'shut');
+  const egg = () => {
+    if (set >= glyphs[0].length) return;
+    set++; glyphs.forEach((r) => r[set - 1].classList.add('on'));
+    if (set === 1) root.classList.remove('shut');
+  };
+
+  // moving in normal mode. a line here is a paragraph, so j and k cross a wrapped one in a single step, as they do in vim
+  const rows = () => lines.filter((l) => l.p === win && !l.m), row = () => rows().findIndex((l) => l.n === pos[win].l.n);
+  const line = (i) => { const r = rows(); go(r[Math.max(0, Math.min(i, r.length - 1))], pos[win].col, true); };
+  const word = (d) => {
+    const { l, col } = pos[win], st = (j) => l.s[j] !== ' ' && (!j || l.s[j - 1] === ' ');
+    let j = col + d;
+    while (j > 0 && j < l.s.length && !st(j)) j += d;
+    if (j >= l.s.length && row() < rows().length - 1) go(rows()[row() + 1], 0, true); else go(l, j, true);
+  };
+  const step = (d) => {
+    if (!light(pat)) return normal('E486: Pattern not found: ' + pat, 'err');
+    const [h, round] = seek(pos[win], d);
+    shown = ['/', pat]; go(h.l, h.col, true);
+    normal(round ? (d > 0 ? 'search hit BOTTOM, continuing at TOP' : 'search hit TOP, continuing at BOTTOM') : '', round && 'err');
+  };
+  const star = () => {
+    const { l, col } = pos[win], ok = (j) => /[a-z0-9]/.test(l.s[j] || '');
+    if (!ok(col)) return normal('E348: No string under cursor', 'err');
+    let a = col, b = col;
+    while (ok(a - 1)) a--;
+    while (ok(b + 1)) b++;
+    pat = l.s.slice(a, b + 1); hist['/'].push(pat); step(1);
+  };
+  const call = () => (link.contains(pos[win].l.at[pos[win].col][0]) ? link.click() : line(row() + 1));
+  const quit = () => { location.href = '../'; };
+  const keys = {
+    '/': () => cmd('/'), ':': () => cmd(':'), n: () => step(1), N: () => step(-1), '*': star, Enter: call, gx: call, ZZ: quit, ZQ: quit,
+    j: (n) => line(row() + n), k: (n) => line(row() - n), gg: (n, had) => line(had ? n - 1 : 0), G: (n, had) => line(had ? n - 1 : 1e4),
+    h: (n) => go(pos[win].l, pos[win].col - n), l: (n) => go(pos[win].l, pos[win].col + n), 0: () => go(pos[win].l, 0), $: () => go(pos[win].l, 1e4),
+    w: () => word(1), b: () => word(-1), Escape: () => normal(),
+  };
+  for (const [a, b] of [['ArrowDown', 'j'], ['ArrowUp', 'k'], ['ArrowLeft', 'h'], ['ArrowRight', 'l'], [' ', 'l'], ['Backspace', 'h']]) keys[a] = keys[b];
+
+  // the commands after a colon. the files cannot be changed, and quitting goes back to the home page
+  const KEYS = [
+    ['/text', 'search the three files'], ['n  N', 'next and previous match'], ['j  k', 'down and up a line'], ['h  l', 'left and right'],
+    ['w  b', 'forward and back a word'], ['0  $', 'start and end of a line'], ['gg  G', 'top and bottom of a file'], ['*', 'search the word at the cursor'],
+    [':e terms', 'move to another file'], [':12', 'go to a line'], [':set nonu', 'hide the line numbers'], [':noh', 'clear the highlight'],
+    [':q', 'back to the home page'], ['Enter', 'open the link under the cursor'],
+  ];
+  // two columns where the command line is wide enough for them, and one where it is not
+  const help = () => {
+    const cell = ([k, t]) => k.padEnd(11) + t, two = vc.clientWidth > 700;
+    return KEYS.map((x, i) => (two ? (i % 2 ? cell(x) + '\n' : cell(x).padEnd(39)) : cell(x) + '\n')).join('').trimEnd();
+  };
+  const ex = (t) => {
+    const [c, ...a] = t.trim().replace(/^:+/, '').split(/\s+/), arg = a.join(' ');
+    if (/^(\d+|\$)$/.test(c)) { line(c === '$' ? 1e4 : c - 1); return normal(); }
+    if (/^(q|qa|quit|x|xit|exit)!?$/.test(c)) { quit(); return normal(); }
+    if (/^(w|wq|wa|write|up|update)!?$/.test(c)) return normal("E45: 'readonly' option is set", 'err');
+    if (/^noh(lsearch)?$/.test(c)) { light(''); return normal(); }
+    if (/^h(elp)?$/.test(c)) return normal(help(), 'more');
+    if (/^(bn|bnext|bp|bprevious|wincmd)$/.test(c)) { win = (win + (c[1] === 'p' ? panes.length - 1 : 1)) % panes.length; return normal(); }
+    if (/^(e|edit|b|buffer)$/.test(c)) {
+      const p = !arg ? win : /^\d+$/.test(arg) ? arg - 1 : files.findIndex((f) => f.startsWith(arg));
+      if (!panes[p]) return normal(c[0] === 'b' ? 'E94: No matching buffer for ' + arg : "E484: Can't open file " + arg, 'err');
+      win = p; return normal();
+    }
+    if (/^set?$/.test(c)) {
+      for (const o of a) {
+        if (!/^(no)?(nu|number)$/.test(o)) return normal('E518: Unknown option: ' + o, 'err');
+        root.classList.toggle('nonu', o.startsWith('no'));
+      }
+      return normal();
+    }
+    normal(c ? 'E492: Not an editor command: ' + t.trim() : '', c && 'err');
+  };
+  // tab completes a command, a file after :e, or an option after :set, as far as the matches agree
+  const tab = () => {
+    const t = q.textContent, i = t.lastIndexOf(' '), w = t.slice(i + 1), c = t.trim().split(' ')[0];
+    const pool = i < 0 ? ['bnext', 'bprevious', 'edit', 'help', 'nohlsearch', 'quit', 'set'] : /^se/.test(c) ? ['nonumber', 'number'] : /^[eb]/.test(c) ? files : [];
+    const got = pool.filter((x) => x.startsWith(w));
+    if (!got.length) return;
+    let pre = got[0];
+    for (const g of got) while (!g.startsWith(pre)) pre = pre.slice(0, -1);
+    q.textContent = t.slice(0, i + 1) + pre; end();
+  };
+
+  // typing a search lights its matches and moves to the first one from where the cursor was, as incsearch does
+  const typing = () => {
+    if (kind !== '/') return;
+    undo();
+    if (light(q.textContent)) { const [h] = seek(pos[win], 1, true); go(h.l, h.col); } else { draw(); show(); }
+  };
+  const enter = () => {
+    const t = q.textContent.replace(/\s+/g, ' ');
+    if (t.trim()) hist[kind].push(t);
+    shown = [kind, t];
+    if (kind === ':') return ex(t);
+    // an empty search repeats the last one
+    if (t.trim()) pat = t;
+    shown = ['/', pat]; undo();
+    if (!light(pat)) return normal('E486: Pattern not found: ' + pat, 'err');
+    const [h] = seek(pos[win], 1, true);
+    go(h.l, h.col, true); normal();
+  };
+  const leave = () => { undo(); light(pat); normal(); show(); };
 
   try { q.contentEditable = 'plaintext-only'; } catch (e) { q.contentEditable = 'true'; }
   q.spellcheck = false;
-  for (const [k, v] of [['role', 'textbox'], ['aria-label', 'Search the three files'], ['autocapitalize', 'off'], ['autocorrect', 'off']]) q.setAttribute(k, v);
+  for (const [k, v] of [['role', 'textbox'], ['aria-label', 'Vim command line. Search the three files'], ['autocapitalize', 'off'], ['autocorrect', 'off']]) q.setAttribute(k, v);
   vc.removeAttribute('aria-hidden');
-  q.addEventListener('input', () => { if (q.children.length) q.textContent = q.textContent; find(); });
-  q.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') q.textContent = first;
-    if (e.key !== 'Enter' && e.key !== 'Escape') return;
-    e.preventDefault(); q.blur();
-    if (e.key === 'Enter' && cur) cur.l.el.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  });
-  q.addEventListener('focus', () => vc.classList.remove('err'));
-  // an empty search goes back to the first one, as it repeats the last search in vim
-  q.addEventListener('blur', () => { if (!q.textContent.trim()) q.textContent = first; vc.classList.toggle('err', !find()); });
-  vc.addEventListener('click', (e) => { if (e.target === q) return; q.focus(); getSelection().selectAllChildren(q); getSelection().collapseToEnd(); });
-  // the search reads as already selected, so a key pressed anywhere on the page is typed into it
+  q.addEventListener('input', () => { if (q.children.length) { q.textContent = q.textContent; end(); } egg(); typing(); });
+  q.addEventListener('focus', () => { if (mode === 'normal') cmd(...shown); });
+  // a search left empty goes back to the last one
+  q.addEventListener('blur', () => { if (mode === 'cmd' && kind === '/' && !q.textContent.trim()) { q.textContent = pat; typing(); } });
+  vc.addEventListener('click', (e) => { if (mode === 'normal') cmd(...shown); else if (e.target !== q) { q.focus(); end(); } });
+  addEventListener('resize', () => { if (mode === 'normal') show(); rule(); });
+  panes.forEach((pn) => pn.querySelector('.o').addEventListener('scroll', rule, { passive: true }));
+  document.fonts.ready.then(rule);
   addEventListener('keydown', (e) => {
-    if (document.activeElement === q || e.metaKey || e.ctrlKey || e.isComposing || document.querySelector('dialog[open]')) return;
-    if (e.key === 'Backspace' ? !q.textContent : e.key.length !== 1 || e.key === ' ') return;
-    q.focus(); getSelection().selectAllChildren(q); getSelection().collapseToEnd();
+    const k = e.key, f = document.activeElement;
+    if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing || document.querySelector('dialog[open]')) return;
+    if ((k === 'Enter' || k === ' ') && f && f !== q && f.matches('a, button')) return;
+    if (mode === 'cmd') {
+      // the command line reads as already selected, so a key pressed anywhere on the page is typed into it
+      if (k === 'Enter') { e.preventDefault(); enter(); }
+      else if (k === 'Escape') leave();
+      else if (f !== q) {
+        if (k === ':' || k === '/') { e.preventDefault(); cmd(k); egg(); }
+        else if (k === 'Backspace' ? q.textContent : k.length === 1 && k !== ' ') { q.focus(); end(); }
+      }
+      else if (k === 'Tab' && kind === ':') { e.preventDefault(); tab(); }
+      else if (k === 'ArrowUp' || k === 'ArrowDown') { e.preventDefault(); hx = Math.max(0, Math.min(hist[kind].length, hx + (k === 'ArrowUp' ? -1 : 1))); q.textContent = hist[kind][hx] || ''; end(); typing(); }
+      return;
+    }
+    if (k.length > 1 && !keys[k]) return;
+    e.preventDefault(); egg();
+    if (hold) { normal(); if (k !== ':' && k !== '/') return; }
+    if (/^[1-9]$/.test(k) || (cnt && k === '0')) { cnt += k; return; }
+    const n = +cnt || 1, had = !!cnt, key = pend + k;
+    cnt = ''; pend = '';
+    if (keys[key]) { if (!'nN*:/'.includes(key)) say(''); keys[key](n, had); }
+    else if (key === 'g' || key === 'Z') pend = key;
+    else if (/^[iIaAoOxXdDcCsSrRpPJuU~.<>]$/.test(key)) normal("E21: Cannot make changes, 'modifiable' is off", 'err');
+    else normal('press / to search, or type :help for the keys', 'dim');
   });
-  find();
-})();
-</script>
-<script>
-(() => {
-  // the motto stays out of the page until someone types in the search, and each keystroke sets one more letter of it
-  const ft = document.querySelector('.ft'), vc = document.querySelector('.vc'), q = vc && vc.querySelector('.q');
-  if (!q || !q.isContentEditable) return;
-  const rows = [...ft.querySelectorAll('svg')].map((s) => [...s.querySelectorAll('.k')]), root = document.documentElement;
-  let n = 0;
-  root.classList.add('egg', 'shut');
-  q.addEventListener('input', () => {
-    if (n >= rows[0].length) return;
-    n++; rows.forEach((r) => r[n - 1].classList.add('on'));
-    if (n > 1) return;
-    root.classList.remove('shut');
-    // bring the motto into view once, without pushing the command line off the top
-    const vh = window.visualViewport ? visualViewport.height : innerHeight;
-    const y = Math.min(vc.getBoundingClientRect().top + scrollY - 24, ft.getBoundingClientRect().bottom + scrollY - vh);
-    if (y > scrollY) scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  });
+
+  // the page opens on the search for the call link, with the cursor waiting in the command line. Escape leaves it on the link
+  // each file opens at its top, to be read from the start, and moves to a match once someone searches
+  back = snap(); typing(); view().forEach((o) => { o.scrollTop = 0; }); back = snap();
+  rule();
 })();
 </script>
 <dialog class="viewer" id="cal-dialog" aria-label="Book a 30-minute intro call" tabindex="-1">
