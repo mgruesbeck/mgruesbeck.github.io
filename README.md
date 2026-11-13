@@ -17,8 +17,9 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | File | Role |
 | --- | --- |
 | `index.html` | The whole site, self-contained. SEO, canonical, Open Graph (`og:type` `profile`), and `twitter:card` meta tags; a JSON-LD `Person` block; all CSS inline in one `<style>`; one inline `<script>` that links the photo markers (`.hs[data-i]`) to the gear lines (`[data-gear]`) and opens the hobby photos (`a.ph`) in the `<dialog class="viewer">`. Each `ls experience/` row is a native `<details>` (`li.x`) whose `.xd` panel holds the resume detail for that role, drawn as a `tree`-style list, so it expands without JavaScript. The `expand all` button in the hint below (`.hint .all`) opens or closes every row. Under `<main>`, a `<footer class="ft">` holds the motto "Make It Work. Make It Clear." as block lettering with a red shadow: one inline SVG with a `<g class="k">` for each letter and full stop and a last one for the two tone mark of the site icon, plus the same words in a visually hidden `<p>`. The script hides the letters and sets them one at a time the first time the footer is scrolled into view, or all at once under reduced motion; without JavaScript the motto is simply shown. Loads Martian Mono and IBM Plex Mono from Google Fonts and the photos from `assets/`. |
-| `assets/scramble-900.jpg`, `assets/scramble-1800.jpg` | The ski-mountaineering photo at two widths, used through `srcset`. Photo by Brendan King (https://kingb12.github.io/), credited under the photo. |
+| `assets/scramble-600.jpg`, `assets/scramble-900.jpg`, `assets/scramble-1200.jpg`, `assets/scramble-1800.jpg` | The ski-mountaineering photo at four widths, used through `srcset`; the photo is drawn at most 560 px wide, so the `sizes` hint in `index.html` must follow any change to that width. The 600 and 1200 px files are resized from the 1800 px one. Photo by Brendan King (https://kingb12.github.io/), credited under the photo. |
 | `assets/ski-air.jpg`, `assets/mountain-1800.jpg`, `assets/climb-1800.jpg`, `assets/moto-1800.jpg`, `assets/tools-1800.jpg` | Hobby photos linked from the last line of `about.md`. Each `a.ph` link's `href` points at its file; the script loads that `href` into the viewer and reads `data-name` (the title), `data-alt`, `data-cap`, and `data-w`/`data-h` (the file's pixel size, so the viewer takes the photo's own shape without cropping). Without JavaScript the link opens the file directly. |
+| `assets/fonts/` | Martian Mono, the one typeface, served from this site: `martian-mono-latin.woff2` (one variable file, declared at weight 400 and width 87.5%, and at weight 600 and width 100%) and `martian-mono-latin-ext.woff2` (used by `projects/index.html` only, for accented letters outside Latin-1). The `@font-face` rules sit at the top of each page's `<style>`, and each page preloads the Latin file. `OFL.txt` is the font's licence and stays with the files. |
 | `assets/scramble-og.jpg` | 1200×1200 square crop of the same photo for link previews. Referenced by `og:image` and the JSON-LD `image`. |
 | `assets/consulting-og.jpg` | 1200×630 share card for the consulting page: the motto, "Start with a 30-day trial.", and the mark beside the mountain photo. Referenced by `og:image` in `consulting/index.html`, whose `og:image:width` and `og:image:height` must match it. |
 | `CNAME` | The custom domain, `mgruesbeck.sh`, read by GitHub Pages. The domain is registered at Porkbun, where four `A` records point the apex at GitHub Pages and a `CNAME` record points `www` at `mgruesbeck.github.io`. The `canonical`, `og:url` and `og:image` addresses in both pages use this domain. |
@@ -100,8 +101,8 @@ Invariants:
 - `consulting/index.html` loads the Google Calendar Appointment Schedule iframe
   on demand when the visitor clicks "free 30-minute call". The search in its
   command line runs in the page. It sends nothing else.
-- When the page loads, the browser requests Martian Mono from Google Fonts
-  (`fonts.googleapis.com` and `fonts.gstatic.com`).
+- Fonts are served from `assets/fonts/`. No page contacts another site when it
+  loads.
 - A push to `master` publishes the site through GitHub Pages.
 
 ## Consulting Setup (`consulting/index.html`)
