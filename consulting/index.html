@@ -53,9 +53,9 @@ h2 { font: inherit; }
 .list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 12px 0; border-top: 1px solid var(--rule); }
 .list li:first-child { border-top: 0; padding-top: 0; }
 .list .t { flex: 1; min-width: 0; }
-.list .s { margin-left: 8px; color: var(--soft); font-size: 12px; font-weight: 400; font-stretch: 87.5%; }
 .list .m { color: var(--blue); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .list .d { flex: 0 0 100%; font-size: 12px; }
+.list { padding-bottom: 12px; border-bottom: 1px solid var(--rule); } .list + .hint { margin-top: 12px; }
 
 /* the three files as a vim split: numbered lines, a status line under each file, and the command line under them all.
    a number sits on the baseline of its line, which in Martian Mono at this leading is 1.27 of the type size down */
@@ -98,7 +98,6 @@ h2 { font: inherit; }
 @media (min-width: 1080px) {
   .sp { display: grid; grid-template-columns: 1.25fr 1fr 1fr; }
   .pn + .pn { border-left: 1px solid var(--rule); }
-  .list .s { display: block; margin-left: 0; white-space: nowrap; }
 }
 @media (max-width: 720px) {
   .tm { padding: clamp(48px, 10vh, 112px) 20px 44px; }
@@ -108,7 +107,6 @@ h2 { font: inherit; }
   .ft { padding-right: 20px; padding-left: 20px; }
   .ft .wd { display: none; } .ft .nw { display: block; }
 }
-@media (max-width: 560px) { .list .s { display: block; margin-left: 0; white-space: nowrap; } }
 @media (max-width: 420px) { .vs .ty { display: none; } }
 
 .viewer { width: min(920px, calc(100vw - 32px)); max-width: calc(100vw - 32px); max-height: none; padding: 0; border: 1px solid var(--rule); border-radius: 10px;
@@ -159,7 +157,7 @@ h2 { font: inherit; }
 <div class="pn on">
   <div class="o">
     <p>I plan, orchestrate, and execute across ops, comms, and design, keeping you ready to pitch and diligence ready for whenever opportunity strikes. On top of that, I use AI agents to keep output high and overhead low.</p>
-    <p>The work runs year round. Each month we decide what would most strengthen the company's position, and I get it done. So when it is time to raise, or a partner or acquirer calls without notice, you are already organized and in position.</p>
+    <p>The work runs year round. Each month we decide what would most strengthen the company's position. Then I do the work, or guide your team through it. So when it is time to raise, or a partner or acquirer calls without notice, you are already organized and in position.</p>
     <p>Three things get stronger together, and keep telling the same story.</p>
     <div class="xd">
       <p class="tr"><span class="g">├──</span><span><span class="k">The story</span> A narrative that keeps up with the company, carried through the deck, the website, announcements, and investor updates.</span></p>
@@ -217,21 +215,22 @@ h2 { font: inherit; }
   <div class="o">
     <ul class="list">
       <li>
-        <h2 class="t">Trial <span class="s">10 hours / 30 days</span></h2>
-        <span class="m">$2,000 / one payment</span>
+        <h2 class="t">Trial</h2>
+        <span class="m">$2,000 once</span>
         <p class="d">A great starting point. I look at your story, your operations, and your materials, and hand you a ranked plan: what would most strengthen the company over the next year, and what would slow growth if we didn't get ahead of it. It ends on its own after 30 days, so there is nothing to cancel. One per company.</p>
       </li>
       <li>
-        <h2 class="t">Advisory <span class="s">10 hours / month</span></h2>
-        <span class="m">$2,500 / mo</span>
+        <h2 class="t">Advisory</h2>
+        <span class="m">$2,500 every month</span>
         <p class="d">Your team works the plan and I advise. A standing call to set priorities each month, plus deck review, systems review, and hands-on help with small pieces.</p>
       </li>
       <li>
-        <h2 class="t">Fractional <span class="s">40 hours / month</span></h2>
-        <span class="m">$9,000 / mo</span>
+        <h2 class="t">Fractional</h2>
+        <span class="m">$9,000 every month</span>
         <p class="d">I work the plan with you, year round. About ten hours a week as your fractional COO, head of comms, or head of design: operations kept in order, the story kept current, the visuals built, and diligence run when a round opens.</p>
       </li>
     </ul>
+    <p class="hint">// the trial and Advisory are capped at 10 hours a month, and Fractional at 40</p>
   </div>
 
   <p class="vt" aria-hidden="true">~
@@ -282,7 +281,7 @@ h2 { font: inherit; }
     <div class="xd">
       <p class="tr"><span class="g">├──</span><span><span class="k">One agreement</span> It covers the trial and both monthly plans. Your hours go wherever the priorities are, and an email is enough to change plans.</span></p>
       <p class="tr"><span class="g">├──</span><span><span class="k">Terms</span> Monthly plans run month to month with 30 days' notice. A 3-month term is 5% off and a 6-month term is 10% off. End a term early and the discount on the months used is billed back.</span></p>
-      <p class="tr"><span class="g">└──</span><span><span class="k">Costs</span> Hours do not roll over, and extra hours are $250 each. AI platforms such as Claude Max run on accounts you own. Nothing else is spent without your approval, and approved costs pass through with no markup.</span></p>
+      <p class="tr"><span class="g">└──</span><span><span class="k">Costs</span> Hours do not roll over. Hours above the cap need your approval first and are $250 each. AI platforms such as Claude Max run on accounts you own. Nothing else is spent without your approval, and approved costs pass through with no markup.</span></p>
     </div>
     <p class="hint">// the agreement has the full terms; I send it after the intro call</p>
   </div>
