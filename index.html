@@ -115,7 +115,11 @@ a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-ra
 .cu i { display: inline-block; width: .62em; height: 1.25em; margin-left: 1px; vertical-align: text-bottom; background: var(--ink); animation: bl 1.1s steps(1) infinite; }
 .cu .q { display: inline-block; min-width: 1px; outline: none; caret-color: var(--ink); overflow-wrap: anywhere; } .cu .q[contenteditable] { cursor: text; }
 .cu .q:focus + i { display: none; }
-.cu + .o:empty { display: none; }
+/* what has been run at the prompt stays above it, as it would in a terminal */
+.sb:empty { display: none; }
+.sb .p, .sb:not(:empty) + .cu { margin-top: 28px; } .sb .p:first-child { margin-top: 44px; }
+.ls { display: flex; flex-wrap: wrap; gap: 0 3ch; }
+.tx { white-space: pre-wrap; overflow-wrap: anywhere; }
 @keyframes bl { 50% { opacity: 0; } }
 .o { margin-top: 8px; } .o p + p { margin-top: 10px; } .o p { text-wrap: pretty; }
 .o .shot { width: min(100%, 560px); margin: 0; }
@@ -226,33 +230,130 @@ a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-ra
   ds.forEach((d) => d.addEventListener('toggle', sync));
 })();
 (() => {
-  // the last prompt takes typing. a command from this page scrolls to its output, and anything else is not found, as zsh says it
+  // the last prompt is a small shell over this page. its files are the commands above, read from the page, and its output is
+  // copied from the page's own nodes or set as text, so nothing typed is ever read as markup
   const p = document.querySelector('.cu'), q = p && p.querySelector('.q');
   if (!q) return;
   try { q.contentEditable = 'plaintext-only'; } catch (e) { q.contentEditable = 'true'; }
   q.spellcheck = false;
   for (const [k, v] of [['role', 'textbox'], ['aria-label', 'Terminal prompt'], ['autocapitalize', 'off'], ['autocorrect', 'off']]) q.setAttribute(k, v);
   p.removeAttribute('aria-hidden');
-  const out = document.createElement('div'); out.className = 'o'; out.setAttribute('aria-live', 'polite'); p.after(out);
-  const norm = (s) => s.trim().replace(/\s+/g, ' ').replace(/\/$/, '');
-  const say = (t) => { out.textContent = ''; if (!t) return; const l = document.createElement('p'); l.className = 'dim'; l.textContent = t; out.append(l); };
+  const sb = document.createElement('div'); sb.className = 'sb'; sb.setAttribute('aria-live', 'polite'); p.before(sb);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').slice(0, 4).join('-');
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+
+  // the tree: cat and open name files, ls names folders, and a folder holds the rows of its list
+  const root = { dir: true, kids: new Map() }, extra = {};
+  for (const c of document.querySelectorAll('.p:not(.cu) .cmd')) {
+    const t = c.textContent.trim(), o = c.parentNode.nextElementSibling, m = t.match(/^(cat|open|ls) ([^-].*?)\/?$/);
+    if (!m) { extra[t] = o; continue; }
+    const node = { dir: m[1] === 'ls', el: o, kids: new Map(), show: m[1] === 'open' };
+    if (node.dir) for (const li of o.querySelectorAll('.list > li')) {
+      const n = slug(li.querySelector('.t').textContent); let k = n;
+      for (let i = 2; node.kids.has(k); i++) k = n + '-' + i;
+      node.kids.set(k, { el: li });
+    }
+    root.kids.set(m[2], node);
+  }
+  const away = document.querySelector('.tm a[href$="consulting/"]');
+  if (away) root.kids.set('consulting', { dir: true, kids: new Map(), go: away.href });
+
+  let cwd = [], at = 0;
+  const past = [], path = () => '~' + cwd.map((s) => '/' + s).join('');
+  const walk = (arg) => {
+    const segs = /^[~/]/.test(arg) ? [] : [...cwd];
+    for (const s of arg.replace(/^~/, '').split('/')) { if (s === '..') segs.pop(); else if (s && s !== '.') segs.push(s); }
+    let n = root;
+    for (const s of segs) { n = n.kids && n.kids.get(s); if (!n) return null; }
+    return { n, segs };
+  };
+  const copy = (node) => { const c = node.cloneNode(true); for (const x of [c, ...c.querySelectorAll('*')]) for (const a of ['id', 'data-gear', 'tabindex']) x.removeAttribute(a); return c; };
+  const names = (n) => {
+    const l = el('p', 'ls'), ks = [...n.kids];
+    for (const [k, v] of n === root ? ks.sort((a, b) => (a[0] > b[0] ? 1 : -1)) : ks) l.append(el('span', v.dir ? 'w' : '', k + (v.dir ? '/' : '')));
+    return l;
+  };
+  const jump = (n) => { q.blur(); n.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); };
+  const read = (c, a) => {
+    const all = c + ' ' + a.join(' ');
+    if (!a[0]) return c === 'open' ? 'usage: open <file>' : '';
+    if (has(extra, all)) return [...copy(extra[all]).childNodes];
+    const r = walk(a[0]);
+    if (!r) return c + ': ' + a[0] + ': No such file or directory';
+    if (r.n.go) { location.href = r.n.go; return ''; }
+    if (r.n.dir) return c === 'cat' ? 'cat: ' + a[0] + ': Is a directory' : names(r.n);
+    if (r.n.show) { jump(r.n.el.previousElementSibling); return ''; }
+    if (!r.n.el.matches('li')) return [...copy(r.n.el).childNodes].filter((x) => !(x.matches && x.matches('.hint')));
+    const u = el('ul', 'list'), link = r.n.el.querySelector('.t a');
+    u.append(copy(r.n.el));
+    if (u.querySelector('details')) u.querySelector('details').open = true;
+    if (c === 'open' && link) window.open(link.href, '_blank', 'noopener');
+    return u;
+  };
+  const run = {
+    help: () => el('p', 'dim tx', 'cat <file>      print a file\ncd <folder>     move into a folder, and cd .. comes back\nls [folder]     list what is here\nopen <file>     open a file, or open --links\nclear  date  echo  history  pwd  whoami\n\ntab completes a name. up and down recall.'),
+    clear: () => { sb.textContent = ''; },
+    pwd: () => '/Users/mgruesbeck' + cwd.map((s) => '/' + s).join(''),
+    whoami: () => (extra.whoami ? [...extra.whoami.children].map((c) => el('p', c.className, c.textContent)) : 'mgruesbeck'),
+    echo: (a, raw) => raw.replace(/^(["'])(.*)\1$/, '$2'),
+    date: () => new Date().toString(),
+    history: () => el('p', 'dim tx', past.map((t, i) => String(i + 1).padStart(4) + '  ' + t).join('\n')),
+    ls: (a) => { const r = walk(a[0] || '.'); return !r ? 'ls: ' + a[0] + ': No such file or directory' : r.n.dir ? names(r.n) : r.segs[r.segs.length - 1]; },
+    cd: (a) => {
+      const r = walk(a[0] || '~');
+      if (!r) return 'cd: no such file or directory: ' + a[0];
+      if (!r.n.dir) return 'cd: not a directory: ' + a[0];
+      if (r.n.go) location.href = r.n.go; else cwd = r.segs;
+    },
+    cat: (a) => read('cat', a),
+    open: (a) => read('open', a),
+  };
+
+  const end = () => { getSelection().selectAllChildren(q); getSelection().collapseToEnd(); };
+  const enter = () => {
+    const t = q.textContent.replace(/\s+/g, ' ').trim(), [c, ...a] = t.split(' ');
+    q.textContent = '';
+    const line = el('p', 'p');
+    line.append(el('span', 'u', 'mgruesbeck'), ' ', el('span', 'w', path()), ' ', el('span', 'ar', '❯'), ' ', el('span', 'cmd', t));
+    if (t) past.push(t);
+    at = past.length;
+    const r = !t ? '' : has(run, c) ? run[c](a, t.slice(c.length + 1)) : 'zsh: command not found: ' + c;
+    if (c !== 'clear') sb.append(line);
+    if (r) { const o = el('div', 'o'); o.append(...(typeof r === 'string' ? [el('p', 'dim tx', r)] : [].concat(r))); sb.append(o); }
+    p.querySelector('.w').textContent = path();
+    if (document.activeElement === q) p.scrollIntoView({ block: 'nearest' });
+  };
+  // tab completes a command, or a name in the folder the word points into, as far as the matches agree
+  const tab = () => {
+    const t = q.textContent, i = t.lastIndexOf(' '), w = t.slice(i + 1), j = w.lastIndexOf('/') + 1, r = i < 0 ? null : walk(w.slice(0, j) || '.');
+    const pool = i < 0 ? Object.keys(run) : r && r.n.kids ? [...r.n.kids].map(([k, v]) => w.slice(0, j) + k + (v.dir ? '/' : '')) : [];
+    const hits = pool.filter((x) => x.startsWith(w));
+    if (!hits.length) return;
+    let pre = hits[0];
+    for (const h of hits) while (!h.startsWith(pre)) pre = pre.slice(0, -1);
+    q.textContent = t.slice(0, i + 1) + pre + (hits.length === 1 && !pre.endsWith('/') ? ' ' : ''); end();
+  };
   q.addEventListener('input', () => { if (q.children.length) q.textContent = q.textContent; });
   q.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { q.textContent = ''; q.blur(); }
-    if (e.key !== 'Enter') return;
-    e.preventDefault();
-    const t = norm(q.textContent), hit = t && [...document.querySelectorAll('.p .cmd')].find((c) => c !== q && norm(c.textContent) === t);
-    q.textContent = '';
-    say(hit || !t || t === 'clear' ? '' : 'zsh: command not found: ' + t.split(' ')[0]);
-    if (!hit) return;
-    q.blur(); hit.parentNode.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    if (e.key === 'Enter') { e.preventDefault(); enter(); }
+    else if (e.key === 'Escape') { q.textContent = ''; q.blur(); }
+    else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); at = Math.max(0, Math.min(past.length, at + (e.key === 'ArrowUp' ? -1 : 1))); q.textContent = past[at] || ''; end(); }
+    else if (e.key === 'Tab' && q.textContent) { e.preventDefault(); tab(); }
+    else if (e.ctrlKey && e.key === 'l') { e.preventDefault(); sb.textContent = ''; }
+    else if (e.ctrlKey && e.key === 'c' && getSelection().isCollapsed) { e.preventDefault(); q.textContent = ''; }
   });
   p.addEventListener('click', (e) => { if (e.target !== q) q.focus(); });
+  // a photo link in copied output opens the viewer through the link it was copied from
+  sb.addEventListener('click', (e) => {
+    const a = e.target.closest('a.ph'), b = a && document.querySelector('.tm a.ph[href="' + a.getAttribute('href') + '"]');
+    if (b && b !== a) { e.preventDefault(); e.stopPropagation(); b.click(); }
+  });
   // the prompt reads as already selected, so a key pressed anywhere on the page is typed into it
   addEventListener('keydown', (e) => {
     if (document.activeElement === q || e.metaKey || e.ctrlKey || e.isComposing || document.querySelector('dialog[open]')) return;
     if (e.key === 'Backspace' ? !q.textContent : e.key.length !== 1 || e.key === ' ') return;
-    q.focus(); getSelection().selectAllChildren(q); getSelection().collapseToEnd();
+    q.focus(); end();
   });
 })();
 (() => {
