@@ -22,10 +22,11 @@
   <link rel="icon" href="../favicon.ico" sizes="48x48">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,400;100,600&display=swap" rel="stylesheet">
+  <link rel="preload" href="../assets/fonts/martian-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <style>
+/* Martian Mono, served from this site: one variable file, used at two settings */
+@font-face { font-family: "Martian Mono"; font-style: normal; font-weight: 400; font-stretch: 87.5%; font-display: swap; src: url(../assets/fonts/martian-mono-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Martian Mono"; font-style: normal; font-weight: 600; font-stretch: 100%; font-display: swap; src: url(../assets/fonts/martian-mono-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 body { margin: 0; }
@@ -97,7 +98,7 @@ h2 { font: inherit; }
 @media (min-width: 1080px) {
   .sp { display: grid; grid-template-columns: 1.25fr 1fr 1fr; }
   .pn + .pn { border-left: 1px solid var(--rule); }
-  .list .s { display: block; margin-left: 0; }
+  .list .s { display: block; margin-left: 0; white-space: nowrap; }
 }
 @media (max-width: 720px) {
   .tm { padding: clamp(48px, 10vh, 112px) 20px 44px; }
@@ -107,7 +108,7 @@ h2 { font: inherit; }
   .ft { padding-right: 20px; padding-left: 20px; }
   .ft .wd { display: none; } .ft .nw { display: block; }
 }
-@media (max-width: 560px) { .list .s { display: block; margin-left: 0; } }
+@media (max-width: 560px) { .list .s { display: block; margin-left: 0; white-space: nowrap; } }
 @media (max-width: 420px) { .vs .ty { display: none; } }
 
 .viewer { width: min(920px, calc(100vw - 32px)); max-width: calc(100vw - 32px); max-height: none; padding: 0; border: 1px solid var(--rule); border-radius: 10px;

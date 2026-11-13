@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+
   <!-- title -->
   <title>Melvin Gruesbeck</title>
 
   <!-- meta tags -->
-  <meta charset="UTF-8">
   <meta name="description" content="I bring a blend of operations, design, engineering, and communications experience, built exclusively alongside research teams at the seed, hyper-growth, and Fortune 100 stages.">
   <meta name="author" content="Melvin Gruesbeck">
   <meta name="keywords" content="melvin gruesbeck, operations, communications, design engineer, profluent">
@@ -15,9 +16,7 @@
   <link rel="canonical" href="https://mgruesbeck.sh/">
 
   <!-- styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,400;100,600&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/martian-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -55,6 +54,9 @@
 
   <!-- analytics -->
   <style>
+/* Martian Mono, served from this site: one variable file, used at two settings */
+@font-face { font-family: "Martian Mono"; font-style: normal; font-weight: 400; font-stretch: 87.5%; font-display: swap; src: url(assets/fonts/martian-mono-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Martian Mono"; font-style: normal; font-weight: 600; font-stretch: 100%; font-display: swap; src: url(assets/fonts/martian-mono-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 body { margin: 0; }
@@ -63,19 +65,9 @@ img { display: block; max-width: 100%; }
 ul { list-style: none; margin: 0; padding: 0; }
 h1, h2, h3, p { margin: 0; }
 
-.hd { max-width: 1180px; margin: 0 auto; padding: 48px 22px 0; }
-.feature { max-width: 1180px; margin: 36px auto 0; padding: 0 22px; display: grid; gap: 28px; align-items: start; }
-@media (min-width: 940px) { .feature { grid-template-columns: 7fr 4fr; } }
 .shot { position: relative; margin: 0 auto; width: min(100%, calc(86vh * .753)); }
-.shot img { width: 100%; }
-.dot { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; text-align: center; font: 700 12px/26px var(--mono, "Inter"), sans-serif; background: var(--accent); color: #fff; }
-.legend ol { list-style: none; margin: 0; padding: 0; }
+.shot img { width: 100%; height: auto; }
 main { max-width: 1180px; margin: 0 auto; padding: 56px 22px 96px; }
-.about { display: grid; gap: 18px 48px; padding: 32px 0; }
-@media (min-width: 940px) { .about { grid-template-columns: 1fr 1fr; } }
-.about .rest p + p { margin-top: 12px; }
-.sec { display: grid; gap: 12px 48px; padding: 32px 0; }
-@media (min-width: 940px) { .sec { grid-template-columns: 4fr 8fr; } }
 .list li { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-top: 1px solid var(--rule); }
 .list li:first-child { border-top: 0; padding-top: 0; }
 .list .t { display: block; }
@@ -102,7 +94,6 @@ a { color: inherit; transition: color .15s, background .15s; }
 body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
 .u { color: var(--green); } .w { color: var(--blue); } .g { color: var(--violet); } .ar { color: var(--green); }
 h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 600; font-stretch: 100%; color: #202227; letter-spacing: -0.02em; }
-.dot { font-family: var(--mono); box-shadow: 0 0 0 3px rgba(255,255,255,.85); }
 a { color: var(--cyan); } a:hover { color: var(--violet); }
 a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 2px; }
 ::selection { background: #fbe08a; color: var(--ink); }
@@ -174,7 +165,7 @@ a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-ra
 </head>
 
 <body>
-<main class="tm"><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">whoami</span></p><div class="o"><h1>Melvin Gruesbeck</h1><p class="dim">operator · designer · storyteller · wayfinder</p></div><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">cat about.md</span></p><div class="o"><p>I bring a blend of operations, design, engineering, and communications experience, built exclusively alongside research teams at the seed, hyper-growth, and Fortune 100 stages.</p><p>Most recently at <a href="https://www.fiercebiotech.com/biotech/lilly-pens-22b-pact-bezos-backed-profluent-work-recombinase-based-gene-editing" target="_blank" rel="noopener">Profluent Bio</a>, I built the business infrastructure bridging finance, legal, HR, IT, compliance, and communications, and optimized them as we scaled to eliminate bottlenecks before they compounded. That connective tissue helped a one-room operation become a mature startup, one that held up under diligence for $150M in funding and a partnership worth up to $2.25B in a highly regulated industry.</p><p>Next, I want to bring AI agents to operations, design, and communications.</p><p>On weekends I <a class="ph" href="assets/ski-air.jpg" data-name="ski" data-w="1080" data-h="1920" data-alt="Melvin catching air off a snowy rollover in the backcountry, one ski kicked out and a pole raised" data-cap="Catching air in fresh snow.">backcountry ski</a>, <a class="ph" href="assets/mountain-1800.jpg" data-name="mountain" data-w="1800" data-h="2391" data-alt="A mountaineer on a rocky moraine below a towering granite spire and a crevassed glacier" data-cap="Approaching a granite spire above the glacier.">mountaineer</a>, <a class="ph" href="assets/climb-1800.jpg" data-name="climb" data-w="1800" data-h="2400" data-alt="Looking down a steep granite corner from a belay, a partner climbing below and yellow pants in the foreground" data-cap="Looking down the route from the belay.">rock climb</a>, <a class="ph" href="assets/moto-1800.jpg" data-name="moto" data-w="1800" data-h="2400" data-alt="Adventure motorcycle parked on a dirt track through high desert under a clear blue sky" data-cap="Dirt track through the high desert.">ride motorcycles</a>, and <a class="ph" href="assets/tools-1800.jpg" data-name="tools" data-w="1800" data-h="2397" data-alt="Backyard patio with paver border, wooden table, folding chairs, shed and string lights at dusk" data-cap="Backyard patio project.">fix things with power tools</a>.</p></div><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">open scramble.jpg</span></p><div class="o"><figure class="shot gearfig"><img class="" src="assets/scramble-1800.jpg" srcset="assets/scramble-900.jpg 900w, assets/scramble-1800.jpg 1800w" sizes="(min-width: 820px) 560px, 100vw" alt="Melvin downclimbing granite boulders toward the snow, skis strapped to an orange pack" fetchpriority="high"><button type="button" class="hs" data-i="0" style="left:58%;top:47%" aria-label="Pack"><span class="num">1</span><span class="lbl">Pack</span></button><button type="button" class="hs left" data-i="1" style="left:86%;top:46%" aria-label="Skis"><span class="num">2</span><span class="lbl">Skis</span></button><button type="button" class="hs left" data-i="2" style="left:71%;top:54%" aria-label="Helmet"><span class="num">3</span><span class="lbl">Helmet</span></button><button type="button" class="hs" data-i="3" style="left:60%;top:63%" aria-label="Gloves"><span class="num">4</span><span class="lbl">Gloves</span></button><button type="button" class="hs" data-i="4" style="left:51%;top:68%" aria-label="Boots"><span class="num">5</span><span class="lbl">Boots</span></button><button type="button" class="hs" data-i="5" style="left:26%;top:66%" aria-label="Poles"><span class="num">6</span><span class="lbl">Poles</span></button></figure><p class="credit">photo: <a href="https://kingb12.github.io/" target="_blank" rel="noopener">Brendan King</a></p></div><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">cat gear.json</span></p><div class="o"><div class="json"><pre><span class="pn">{</span>
+<main class="tm"><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">whoami</span></p><div class="o"><h1>Melvin Gruesbeck</h1><p class="dim">operator · designer · storyteller · wayfinder</p></div><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">cat about.md</span></p><div class="o"><p>I bring a blend of operations, design, engineering, and communications experience, built exclusively alongside research teams at the seed, hyper-growth, and Fortune 100 stages.</p><p>Most recently at <a href="https://www.fiercebiotech.com/biotech/lilly-pens-22b-pact-bezos-backed-profluent-work-recombinase-based-gene-editing" target="_blank" rel="noopener">Profluent Bio</a>, I built the business infrastructure bridging finance, legal, HR, IT, compliance, and communications, and optimized them as we scaled to eliminate bottlenecks before they compounded. That connective tissue helped a one-room operation become a mature startup, one that held up under diligence for $150M in funding and a partnership worth up to $2.25B in a highly regulated industry.</p><p>Next, I want to bring AI agents to operations, design, and communications.</p><p>On weekends I <a class="ph" href="assets/ski-air.jpg" data-name="ski" data-w="1080" data-h="1920" data-alt="Melvin catching air off a snowy rollover in the backcountry, one ski kicked out and a pole raised" data-cap="Catching air in fresh snow.">backcountry ski</a>, <a class="ph" href="assets/mountain-1800.jpg" data-name="mountain" data-w="1800" data-h="2391" data-alt="A mountaineer on a rocky moraine below a towering granite spire and a crevassed glacier" data-cap="Approaching a granite spire above the glacier.">mountaineer</a>, <a class="ph" href="assets/climb-1800.jpg" data-name="climb" data-w="1800" data-h="2400" data-alt="Looking down a steep granite corner from a belay, a partner climbing below and yellow pants in the foreground" data-cap="Looking down the route from the belay.">rock climb</a>, <a class="ph" href="assets/moto-1800.jpg" data-name="moto" data-w="1800" data-h="2400" data-alt="Adventure motorcycle parked on a dirt track through high desert under a clear blue sky" data-cap="Dirt track through the high desert.">ride motorcycles</a>, and <a class="ph" href="assets/tools-1800.jpg" data-name="tools" data-w="1800" data-h="2397" data-alt="Backyard patio with paver border, wooden table, folding chairs, shed and string lights at dusk" data-cap="Backyard patio project.">fix things with power tools</a>.</p></div><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">open scramble.jpg</span></p><div class="o"><figure class="shot gearfig"><img src="assets/scramble-1800.jpg" srcset="assets/scramble-600.jpg 600w, assets/scramble-900.jpg 900w, assets/scramble-1200.jpg 1200w, assets/scramble-1800.jpg 1800w" sizes="(min-width: 600px) 560px, calc(100vw - 40px)" width="1800" height="2391" alt="Melvin downclimbing granite boulders toward the snow, skis strapped to an orange pack" fetchpriority="high"><button type="button" class="hs" data-i="0" style="left:58%;top:47%" aria-label="Pack"><span class="num">1</span><span class="lbl">Pack</span></button><button type="button" class="hs left" data-i="1" style="left:86%;top:46%" aria-label="Skis"><span class="num">2</span><span class="lbl">Skis</span></button><button type="button" class="hs left" data-i="2" style="left:71%;top:54%" aria-label="Helmet"><span class="num">3</span><span class="lbl">Helmet</span></button><button type="button" class="hs" data-i="3" style="left:60%;top:63%" aria-label="Gloves"><span class="num">4</span><span class="lbl">Gloves</span></button><button type="button" class="hs" data-i="4" style="left:51%;top:68%" aria-label="Boots"><span class="num">5</span><span class="lbl">Boots</span></button><button type="button" class="hs" data-i="5" style="left:26%;top:66%" aria-label="Poles"><span class="num">6</span><span class="lbl">Poles</span></button></figure><p class="credit">photo: <a href="https://kingb12.github.io/" target="_blank" rel="noopener">Brendan King</a></p></div><p class="p"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> <span class="cmd">cat gear.json</span></p><div class="o"><div class="json"><pre><span class="pn">{</span>
 <span class="row" data-gear="0" tabindex="0">  <span class="k">"pack"</span><span class="pn">:</span> <span class="s">"Mammut ski pack, lean supply chain. Partners handle catering."</span><span class="pn">,</span></span>
 <span class="row" data-gear="1" tabindex="0">  <span class="k">"skis"</span><span class="pn">:</span> <span class="s">"Fischer Transalp 82 Carbonlite, currently an expensive backpack accessory."</span><span class="pn">,</span></span>
 <span class="row" data-gear="2" tabindex="0">  <span class="k">"helmet"</span><span class="pn">:</span> <span class="s">"Petzl Meteor, protecting the operation's most valuable asset."</span><span class="pn">,</span></span>
