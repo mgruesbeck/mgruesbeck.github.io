@@ -28,7 +28,7 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | `projects/index.html` | Password-gated project pages (`noindex`). Asks for the password in a `[sudo]` prompt, derives the key with PBKDF2 using `vault/meta.json`, then decrypts `vault/index.bin` (every project's text and photo list) and each photo as it scrolls into view. `#<slug>` opens one project. Keeps the derived key in `sessionStorage` until the tab closes or `logout`. |
 | `projects/vault/` | Output of `make projects`: `meta.json` (salt and iteration count, not secret), `index.bin`, and one `<id>.bin` per photo. Each `.bin` is a 12-byte IV followed by AES-256-GCM ciphertext. Never edit by hand. |
 | `tools/build-projects.mjs` | Builds `projects/vault/` from `projects/<slug>/project.md` and the photos it names. Resizes photos to 1600 px (2400 px for `.png` screenshots) and strips their metadata. IVs and file names are HMACs of the content, so unchanged projects rebuild byte-for-byte. Refuses a password that can't open the existing vault unless `CHANGE_PASSWORD=1`. |
-| `consulting/index.html` | Consulting & booking page (`noindex`), linked from `open --links` in `index.html`. Drawn as a vim window split over three files: `overview.md` (the pitch: operations, communications and design run as one effort, year round, so the company is ready whenever a raise, partner or acquirer comes), `engagements.md` (a one-time Trial, 10h in 30 days, $2,000, and two monthly plans, Advisory 10h/$2,500 and Fractional 40h/$9,000) and `terms.md` (a summary of the Consulting Services Agreement: one agreement, month to month, 5% off for a 3-month term and 10% off for a 6-month term, extra hours $250 each). The call to action is the "free 30-minute call" link, which opens the Google Calendar Appointment Schedule in a dialog. It is the only link in the three files, so nothing draws a click away from it. The command line under the window holds a search for that link and can be typed over, by clicking it or by pressing a key anywhere on the page: the matches in the three files light up and the cursor moves to the first. Enter or Escape leaves the search for normal mode, where a small set of vim keys and colon commands work (`n`, `N`, `j`, `k`, `h`, `l`, `w`, `b`, `0`, `$`, `gg`, `G`, `*`, `:e`, `:12`, `:set nonu`, `:noh`, `:q` back to the home page, and `:help` for the list). In a window at least 1080px wide and 640px tall the editor has a fixed height, each file scrolls in its own pane, and the line with the call link stays pinned at the foot of `overview.md`. The headline, "Better Every Month. Ready Any Day.", is block lettering in the footer, kept out of the page until someone presses a key; each keystroke sets one more letter, and the last sets the two tone mark of the site icon. The editor stops short of the foot of the window, by the tops of the first line of the lettering, so those show under it without anything moving and the rest is a scroll away. Nothing is signed or paid on the page: the agreement is sent for signature through SignWell after the intro call, and the Stripe payment link is emailed after both parties sign. |
+| `consulting/index.html` | Consulting & booking page (`noindex`), linked from `open --links` in `index.html`. Drawn as a vim window split over three files: `overview.md` (the pitch: operations, communications and design run as one effort, year round, so the company is ready whenever a raise, partner or acquirer comes), `engagements.md` (a one-time Trial, 10h in 30 days, $2,000, and two monthly plans, Advisory 10h/$2,500 and Fractional 40h/$9,000) and `terms.md` (a summary of the Consulting Services Agreement: one agreement, month to month, 5% off for a 3-month term and 10% off for a 6-month term, hours above a plan's cap need approval and are $250 each). The call to action is the "free 30-minute call" link, which opens the Google Calendar Appointment Schedule in a dialog. It is the only link in the three files, so nothing draws a click away from it. The command line under the window holds a search for that link and can be typed over, by clicking it or by pressing a key anywhere on the page: the matches in the three files light up and the cursor moves to the first. Enter or Escape leaves the search for normal mode, where a small set of vim keys and colon commands work (`n`, `N`, `j`, `k`, `h`, `l`, `w`, `b`, `0`, `$`, `gg`, `G`, `*`, `:e`, `:12`, `:set nonu`, `:noh`, `:q` back to the home page, and `:help` for the list). In a window at least 1080px wide and 640px tall the editor has a fixed height, each file scrolls in its own pane, and the line with the call link stays pinned at the foot of `overview.md`. The headline, "Better Every Month. Ready Any Day.", is block lettering in the footer, kept out of the page until someone presses a key; each keystroke sets one more letter, and the last sets the two tone mark of the site icon. The editor stops short of the foot of the window, by the tops of the first line of the lettering, so those show under it without anything moving and the rest is a scroll away. Nothing is signed or paid on the page: the agreement is sent for signature through SignWell after the intro call, and the Stripe payment link is emailed after both parties sign. |
 | `Makefile` | `make serve` runs a local server. `make projects` asks for the password and rebuilds the vault (`make projects CHANGE_PASSWORD=1` to set a new one). `make resume` exports the resume to PDF with LibreOffice (`soffice`) and copies it to `$(FORAGER)` (default `../forager/profile/resume.pdf`) when that folder exists. |
 
 Invariants:
@@ -74,8 +74,9 @@ Invariants:
   in the `href` of the "free 30-minute call" link (`data-cal`). The page
   collects no visitor data and holds no payment links or keys; keep it that
   way. Its copy uses no parentheses.
-  Prices live in two places that must agree: the `ls engagements/` rows with
-  `cat terms.md`, and the Stripe links and codes.
+  Prices live in three places that must agree: `engagements.md` and
+  `terms.md` on the page, section 2 of the agreement, and the Stripe links
+  and codes.
   `terms.md` summarizes the agreement template, a Google Doc (plans, term
   discounts and notice, the discount billed back on early termination, hours,
   AI accounts, costs, specialists, payment). The Google Doc is the source of
@@ -118,14 +119,16 @@ Invariants:
 2. **SignWell (nothing goes in the repo):**
    - Download the agreement Google Doc as a `.docx` (File, Download) and
      upload it as a template with two signers, Client and Consultant. Place a
-     field on each blank: text fields for the Client Information and Plan
-     Details tables, then a signature, name and title, email and date for the
-     Client, and a signature and date for the Consultant.
+     field on each blank: text fields for the Client Information table,
+     assigned to the Client; dropdowns for Plan (Trial, Advisory, Fractional)
+     and Term (None, Month to month, 3-month, 6-month); then a signature, name
+     and title, email and date for the Client, and a signature and date for
+     the Consultant.
    - After an intro call and a conflict check, send the template to the
-     client from SignWell with the plan, fee, term and notice period filled
-     in. The fee is the plan's price less the term discount (5% for a 3-month
-     term, 10% for a 6-month term); the notice period is 30 days for a monthly
-     plan on any term, and none for a trial.
+     client from SignWell with the Plan and Term chosen. Nothing else is
+     entered: the agreement lists each plan's fee on each term and its cap on
+     hours, sets 30 days' notice, and takes the date of the last signature as
+     its effective date.
    - Save each signed agreement in `contracts/`.
 3. **Stripe Payment Links (kept in Stripe, never in the repo):**
    - In the Stripe Dashboard (`https://dashboard.stripe.com/payment-links`),
