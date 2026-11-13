@@ -131,10 +131,11 @@ h2 { font: inherit; }
 .nonu .o > p::before, .nonu .tr::before, .nonu .list h2::before, .nonu .list .d::before { content: none; }
 
 /* where there is room, the editor is a window of a fixed height and each file scrolls inside its own pane. it stops short
-   of the foot of the browser window by the top half of the motto, so the first line of the motto shows there when it
-   appears and nothing in the editor moves. the art is 147 by 42, so half its height is .143 of its width */
+   of the foot of the browser window by the tops of the first line of the motto, so those show there when it appears and
+   nothing in the editor moves; the rest is a scroll away. the art is 147 wide and its capitals 14 tall, so .045 of its
+   width is about the top half of a capital and the top quarter of a small letter */
 @media screen and (min-width: 1080px) and (min-height: 640px) {
-  .tm { --pk: calc(clamp(24px, 5vh, 56px) + (min(100vw, 1560px) - 64px) * .143); display: flex; flex-direction: column; height: calc(100vh - var(--pk)); height: calc(100dvh - var(--pk)); padding: clamp(24px, 5vh, 56px) 32px 20px; }
+  .tm { --pk: calc(clamp(24px, 5vh, 56px) + (min(100vw, 1560px) - 64px) * .045); display: flex; flex-direction: column; height: calc(100vh - var(--pk)); height: calc(100dvh - var(--pk)); padding: clamp(24px, 5vh, 56px) 32px 20px; }
   .tm > * { flex: none; }
   .tm > .sp { flex: 1 1 0; min-height: 0; grid-template-rows: minmax(0, 1fr); }
   .pn { min-height: 0; }
