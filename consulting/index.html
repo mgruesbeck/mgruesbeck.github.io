@@ -83,17 +83,18 @@ h2 { font: inherit; }
 .qp { margin: 26px 0; padding: 22px 0; border: solid var(--rule); border-width: 1px 0; }
 .sel button { all: unset; box-sizing: border-box; position: relative; display: flex; justify-content: space-between; gap: 2ch; width: 100%; padding: 4px 1ch 4px 3ch; cursor: pointer; }
 .sel button::before { content: "❯"; position: absolute; left: 1ch; color: transparent; }
-.sel button span { color: var(--blue); font-size: 12px; white-space: nowrap; }
+.sel button span { color: var(--soft); font-size: 12px; white-space: nowrap; }
 .sel button:hover { background: var(--rule); } .sel button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
 .sel button[aria-pressed="true"] { background: var(--ink); color: var(--bg); } .sel button[aria-pressed="true"] span, .sel button[aria-pressed="true"]::before { color: inherit; }
 .sel { margin-top: 12px; } .tt { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rule); } .tt.off { opacity: .38; }
 /* the hours: a slider, and under it a meter of sixty cells that shows the plan's cap, the hours inside it and the hours above it */
-.hs { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--rule); } .hs input { display: block; width: 100%; margin: 4px 0 0; accent-color: var(--blue); cursor: pointer; }
+.hs { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--rule); } .hs input { display: block; width: 100%; margin: 4px 0 0; accent-color: var(--ink); cursor: pointer; }
 .m60 { display: grid; grid-template-columns: repeat(60, 1fr); gap: 1px; height: 12px; margin-top: 8px; } .m60 i { background: var(--rule); transition: background .2s; }
-.m60 .c { background: #c9d8fb; } .m60 .h { background: var(--blue); } .m60 .v { background: var(--accent); }
+.m60 .c { background: var(--glyph); } .m60 .h { background: var(--ink); } .m60 .v { background: var(--accent); }
 .hw { margin-top: 6px; color: var(--soft); font-size: 12px; } .hw b { color: var(--ink); font-weight: 600; font-stretch: 100%; }
-/* the price of the month, and one line under it when it is more or less than the plan alone */
-.pt { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--blue); font: 600 42px/1.15 var(--mono); font-stretch: 100%; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
+/* the price of the month, and one line under it when it is more or less than the plan alone. the quote is set in ink, so
+   the red of hours above the cap is the only colour that can appear in it */
+.pt { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--ink); font: 600 42px/1.15 var(--mono); font-stretch: 100%; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
 .pt span { margin-left: 1ch; font: 400 12px/1.75 var(--mono); font-stretch: 87.5%; letter-spacing: 0; }
 .mu { min-height: 1.75em; color: var(--soft); font-size: 12px; } .mu s { margin-right: 1ch; color: var(--muted); }
 .qp .hint { margin-top: 8px; }
