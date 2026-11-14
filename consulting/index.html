@@ -31,14 +31,14 @@
 html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 body { margin: 0; }
 ul { list-style: none; margin: 0; padding: 0; }
-h1, h2, p { margin: 0; }
+h1, p { margin: 0; }
 
 :root { --bg: #fafafa; --ink: #383a42; --soft: #696c77; --muted: #a0a1a7; --glyph: #c5c6cb; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --cyan: #0184bc; --mono: "Martian Mono", monospace; }
 body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
 a { color: var(--cyan); text-decoration: none; transition: color .15s; } a:hover { color: var(--violet); }
 a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 2px; }
 ::selection { background: #fbe08a; color: var(--ink); }
-h2 { font: inherit; }
+h1 { font: inherit; }
 .tm { max-width: 1560px; margin: 0 auto; padding: clamp(48px, 10vh, 112px) 32px 64px; }
 .p { color: var(--muted); } .p .cmd { color: var(--ink); }
 .u { color: var(--green); } .w { color: var(--blue); } .ar { color: var(--green); }
@@ -93,9 +93,10 @@ h2 { font: inherit; }
 .m60 .c { background: var(--glyph); } .m60 .h { background: var(--ink); } .m60 .v { background: var(--accent); }
 .hw { margin-top: 6px; color: var(--soft); font-size: 12px; } .hw b { color: var(--ink); font-weight: 600; font-stretch: 100%; }
 /* the price of the month, and one line under it when it is more or less than the plan alone. the quote is set in ink, so
-   the red of hours above the cap is the only colour that can appear in it */
-.pt { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--ink); font: 600 42px/1.15 var(--mono); font-stretch: 100%; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
-.pt span { margin-left: 1ch; font: 400 12px/1.75 var(--mono); font-stretch: 87.5%; letter-spacing: 0; }
+   the red of hours above the cap is the only colour that can appear in it. the figure is the size of the home page's name */
+.pt { margin-top: 12px; padding-top: 4px; border-top: 1px solid var(--rule); font-size: 12px; }
+.pt b { font-size: clamp(22px, 4vw, 32px); font-weight: 600; font-stretch: 100%; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.pt span { margin-left: 1ch; }
 .mu { min-height: 1.75em; color: var(--soft); font-size: 12px; } .mu s { margin-right: 1ch; color: var(--muted); }
 .qp .hint { margin-top: 8px; }
 
