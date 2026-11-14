@@ -29,84 +29,97 @@
 @font-face { font-family: "Martian Mono"; font-style: normal; font-weight: 600; font-stretch: 100%; font-display: swap; src: url(../assets/fonts/martian-mono-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
-body { margin: 0; }
-ul { list-style: none; margin: 0; padding: 0; }
 h1, p { margin: 0; }
 
-:root { --bg: #fafafa; --ink: #383a42; --soft: #696c77; --muted: #a0a1a7; --glyph: #c5c6cb; --rule: #e5e5e6; --accent: #e45649; --green: #50a14f; --blue: #4078f2; --violet: #a626a4; --cyan: #0184bc; --mono: "Martian Mono", monospace; }
-body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
+:root { --bg: #282c34; --ink: #b6bdca; --soft: #8b93a1; --muted: #7a8291; --glyph: #5a6170; --rule: #3a404b; --accent: #e06c75; --green: #98c379; --blue: #61afef; --violet: #c678dd; --cyan: #56b6c2; --mono: "Martian Mono", monospace;
+  --e-chrome: #17191e; --e-line: #353b45; --e-cl: #2c313a; --e-tab: 34px; --e-top: 38px; color-scheme: dark; }
+body { margin: 0; background: var(--e-chrome); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
 a { color: var(--cyan); text-decoration: none; transition: color .15s; } a:hover { color: var(--violet); }
 a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 2px; }
-::selection { background: #fbe08a; color: var(--ink); }
+::selection { background: #fbe08a; color: #23252b; }
 h1 { font: inherit; }
-.tm { max-width: 1560px; margin: 0 auto; padding: clamp(48px, 10vh, 112px) 32px 64px; }
-.p { color: var(--muted); } .p .cmd { color: var(--ink); }
-.u { color: var(--green); } .w { color: var(--blue); } .ar { color: var(--green); }
-.o > p + p { margin-top: 10px; } .o p { text-wrap: pretty; }
-.hint { color: var(--muted); font-size: 12px; }
-.xd { font-size: 12px; margin: 10px 0 4px; } .o > .xd:first-child { margin-top: 0; }
-.xd + p { margin-top: 12px; }
-.xd .k { font-weight: 600; font-stretch: 100%; }
-.xd .tr { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 6px; } .o > .xd:first-child > .tr:first-child { margin-top: 0; }
-.xd .g { color: var(--glyph); white-space: pre; }
 
-/* the file as a vim buffer: numbered lines, a status line under the file, and the command line under it.
-   a number sits on the baseline of its line, which in Martian Mono at this leading is 1.27 of the type size down */
-.vi { margin-top: 14px; border-top: 1px solid var(--rule); }
-.pn { display: flex; flex-direction: column; counter-reset: ln; padding: 14px 20px 0 46px; --row: 13.5px; } .xd, .o > .hint { --row: 12px; }
-.o > p, .tr { position: relative; counter-increment: ln; }
-.o > p::before, .tr::before { content: counter(ln); position: absolute; left: -46px; top: calc((var(--row) - 11px) * 1.27); width: 30px; text-align: right; color: var(--glyph); font-size: 11px; font-weight: 400; font-stretch: 87.5%; }
-.vt { flex: 1 1 0; min-height: 3.5em; margin: 8px 0 0 -46px; padding-left: 21px; overflow: hidden; color: var(--blue); opacity: .5; white-space: pre; }
-.vs { display: flex; justify-content: space-between; margin: 0 -20px 0 -46px; background: var(--rule); color: var(--soft); font-size: 12px; } .on .vs { color: var(--ink); }
-.vs span { padding: 2px 12px; } .vs .fn { margin-right: auto; }
-.pn:not(.on) .vs .md, .pn:not(.on) .vs .ty { display: none; }
-.vs .md { padding-right: 20px; background: var(--green); color: #fff; clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 50%, calc(100% - 9px) 100%, 0 100%); }
-.on .vs .ps { padding-left: 20px; background: var(--ink); color: var(--bg); clip-path: polygon(9px 0, 100% 0, 100% 100%, 9px 100%, 0 50%); }
-.vc { padding: 5px 12px 0; font-size: 12px; overflow-wrap: anywhere; }
+/* the page as a dark editor: a title bar with the search field, the file and the quote side by side, and a status bar
+   under both. the classes of the editor's own parts start with e- */
+.tm { position: relative; }
+.e-i { display: block; flex: none; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.e-top { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr minmax(0, 460px) 1fr; align-items: start; gap: 12px; height: var(--e-top); padding: 0 12px; background: var(--e-chrome); color: var(--soft); font-size: 12px; }
+.e-tl, .e-tr { display: flex; align-items: center; gap: 12px; height: var(--e-top); white-space: nowrap; } .e-tr { justify-content: flex-end; }
+.e-pj { display: flex; align-items: center; gap: 8px; color: var(--ink); } .e-pj b { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; background: linear-gradient(135deg, var(--blue), var(--violet)); color: #17191e; font-size: 11px; font-weight: 600; font-stretch: 100%; }
+
+/* the search field of the title bar is vim's command line. it opens downward like a palette when it has more to say */
+.vc { min-height: 26px; margin-top: calc((var(--e-top) - 26px) / 2); padding: 2px 10px 2px 28px; border: 1px solid transparent; border-radius: 6px; background: #23262d url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22 fill=%22none%22 stroke=%22%237a8291%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%227%22 cy=%227%22 r=%224.2%22/%3E%3Cpath d=%22M10.2 10.2l3.3 3.3%22/%3E%3C/svg%3E") 8px 5px / 14px no-repeat; color: var(--ink); font-size: 12px; overflow-wrap: anywhere; }
 .vc i { display: inline-block; width: .62em; height: 1.25em; margin-left: 1px; vertical-align: text-bottom; background: var(--ink); animation: bl 1.1s steps(1) infinite; }
 @keyframes bl { 50% { opacity: 0; } }
 .vc .q { outline: none; caret-color: var(--ink); } .vc .q[contenteditable] { cursor: text; }
 .vc .q:focus:not(:empty) + i, .vc.nm i, .vc.say .sl, .vc.say .q, .vc.say i { display: none; }
 .vc .ms { white-space: pre-wrap; } .vc .mo { color: var(--green); }
-.vc.err { color: var(--accent); } .vc.dim { color: var(--muted); }
+.vc.say { box-shadow: 0 8px 24px rgba(0, 0, 0, .12); } .vc.err { color: var(--accent); } .vc.dim { color: var(--muted); }
 .vc.nm:not(.say)::before { content: "/ search   :help keys"; float: right; margin-left: 2ch; color: var(--muted); white-space: pre; }
 
-/* the call link is the match of the search in the command line; one colour passes over a few of its letters at a time */
-.cta a { white-space: nowrap; margin: 0 1px 0 -3px; padding: 2px 3px; background: #fbe08a; color: var(--ink); }
-.cta a:hover { background: #f4bf4f; color: var(--ink); }
+/* the file as a vim buffer: numbered lines under a tab strip that holds the file's name and the place of the cursor.
+   a number sits on the baseline of its line, which in Martian Mono at this leading is 1.27 of the type size down */
+.sp { padding: 0 8px; }
+.pn, .qp { border-radius: 10px; background: var(--bg); overflow: hidden; }
+.pn { display: flex; flex-direction: column; counter-reset: ln; padding: 0 20px 0 46px; --row: 13.5px; } .xd, .o > .hint { --row: 12px; }
+.vs { order: -2; display: flex; height: var(--e-tab); margin: 0 -20px 12px -46px; box-shadow: inset 0 -1px var(--e-line); color: var(--soft); font-size: 12px; }
+.vs .fn { display: flex; align-items: center; margin-left: 14px; padding: 0 2px; color: #e6e9ef; box-shadow: inset 0 -2px var(--blue); }
+.vs .ps { align-self: center; margin-left: auto; padding: 0 12px; color: var(--muted); }
+.o > p + p { margin-top: 10px; } .o p { text-wrap: pretty; }
+.o > p, .tr { position: relative; counter-increment: ln; }
+.o > p::before, .tr::before { content: counter(ln); position: absolute; left: -46px; top: calc((var(--row) - 11px) * 1.27); width: 30px; text-align: right; color: var(--glyph); font-size: 11px; font-weight: 400; font-stretch: 87.5%; }
+.hint { color: var(--muted); font-size: 12px; }
+.xd { font-size: 12px; margin: 10px 0 4px; } .xd + p { margin-top: 12px; }
+.xd .k { color: #e6e9ef; font-weight: 600; font-stretch: 100%; }
+.xd .tr { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 6px; }
+.xd .g { color: var(--glyph); white-space: pre; }
+/* a blank line of the file is a line of its own, with its number, where the window has the room for it. so are the
+   lines past the end of the file, which carry a tilde */
+.e-bl { display: none; }
+.vt { flex: 1 1 0; min-height: 10px; overflow: hidden; white-space: pre; visibility: hidden; }
+
+/* normal mode: a block cursor, its line lit with the number in ink, and :set nonu */
+::highlight(cur) { background-color: var(--ink); color: var(--bg); }
+.vi .cl { background: var(--e-cl); box-shadow: -46px 0 var(--e-cl), 20px 0 var(--e-cl); } .vi .cl::before { color: var(--ink); }
+.nonu .o > p::before, .nonu .tr::before { content: none; }
+
+/* the call link is the match of the search in the title bar; one colour passes over a few of its letters at a time */
+.cta a { white-space: nowrap; margin: 0 1px 0 -3px; padding: 2px 3px; background: #fbe08a; color: #23252b; }
+.cta a:hover { background: #f4bf4f; color: #23252b; }
 .cta a.miss { margin: 0; padding: 2px 0; background: none; color: var(--cyan); } .cta a.miss:hover { background: none; color: var(--violet); }
 .cta a span { animation: gl 3.4s linear infinite; animation-delay: calc(var(--i) * 70ms); } .cta a:hover span { animation: none; }
 @keyframes gl { 0%, 12%, 100% { color: inherit; } 3%, 9% { color: var(--accent); } }
 ::highlight(hit) { background-color: #fbe08a; color: #383a42; } ::highlight(hitl) { background-color: #fbe08a; }
 
-/* the quote, a tmux pane beside the editor: a plan, a term and the hours in a month give one price */
-.qp { margin: 26px 0; padding: 22px 0; border: solid var(--rule); border-width: 1px 0; }
+/* the quote, a pane beside the file: a plan, a term and the hours in a month give one price */
+.qp { --e-qx: 20px; margin: 8px 0; padding: 0 var(--e-qx) 18px; }
+.e-ph { display: flex; align-items: center; gap: 8px; height: var(--e-tab); margin: 0 calc(-1 * var(--e-qx)); padding: 0 var(--e-qx); box-shadow: inset 0 -1px var(--e-line); color: var(--soft); font-size: 12px; }
 .sel button { all: unset; box-sizing: border-box; position: relative; display: flex; justify-content: space-between; gap: 2ch; width: 100%; padding: 4px 1ch 4px 3ch; cursor: pointer; }
 .sel button::before { content: "❯"; position: absolute; left: 1ch; color: transparent; }
 .sel button span { color: var(--soft); font-size: 12px; white-space: nowrap; }
-.sel button:hover { background: var(--rule); } .sel button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
-.sel button[aria-pressed="true"] { background: var(--ink); color: var(--bg); } .sel button[aria-pressed="true"] span, .sel button[aria-pressed="true"]::before { color: inherit; }
+.sel button:hover { background: #30353f; } .sel button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+.sel button[aria-pressed="true"] { background: #3e4451; color: #e6e9ef; } .sel button[aria-pressed="true"] span, .sel button[aria-pressed="true"]::before { color: inherit; }
 .sel { margin-top: 12px; } .tt { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rule); } .tt.off { opacity: .38; }
 /* the hours: a slider, and under it a meter of sixty cells that shows the plan's cap, the hours inside it and the hours above it */
-.hs { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--rule); } .hs input { display: block; width: 100%; margin: 4px 0 0; accent-color: var(--ink); cursor: pointer; }
-.m60 { display: grid; grid-template-columns: repeat(60, 1fr); gap: 1px; height: 12px; margin-top: 8px; } .m60 i { background: var(--rule); transition: background .2s; }
-.m60 .c { background: var(--glyph); } .m60 .h { background: var(--ink); } .m60 .v { background: var(--accent); }
-.hw { margin-top: 6px; color: var(--soft); font-size: 12px; } .hw b { color: var(--ink); font-weight: 600; font-stretch: 100%; }
+.hs { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--rule); } .hs input { display: block; width: 100%; margin: 4px 0 0; accent-color: #e6e9ef; cursor: pointer; }
+.m60 { display: grid; grid-template-columns: repeat(60, 1fr); gap: 1px; height: 12px; margin-top: 8px; } .m60 i { background: var(--e-line); transition: background .2s; }
+.m60 .c { background: #4b5263; } .m60 .h { background: #e6e9ef; } .m60 .v { background: var(--accent); }
+.hw { margin-top: 6px; color: var(--soft); font-size: 12px; } .hw b { color: #e6e9ef; font-weight: 600; font-stretch: 100%; }
 /* the price of the month, and one line under it when it is more or less than the plan alone. the quote is set in ink, so
    the red of hours above the cap is the only colour that can appear in it. the figure is the size of the home page's name */
 .pt { margin-top: 12px; padding-top: 4px; border-top: 1px solid var(--rule); font-size: 12px; }
-.pt b { font-size: clamp(22px, 4vw, 32px); font-weight: 600; font-stretch: 100%; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.pt b { color: #e6e9ef; font-size: clamp(22px, 4vw, 32px); font-weight: 600; font-stretch: 100%; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .pt span { margin-left: 1ch; }
 .mu { min-height: 1.75em; color: var(--soft); font-size: 12px; } .mu s { margin-right: 1ch; color: var(--muted); }
 .qp .hint { margin-top: 8px; }
 
-/* the tmux status line under it all, with the visitor's own time */
-.tb { display: flex; justify-content: space-between; gap: 2ch; margin-top: 6px; padding: 1px 12px; background: var(--green); color: #fff; font-size: 12px; white-space: nowrap; overflow: hidden; }
-.tb b { font-weight: 600; font-stretch: 100%; } .tb .wn { margin-left: 2ch; opacity: .8; } .tb .wn.at { opacity: 1; background: #fff; color: var(--green); padding: 0 1ch; margin-right: -1ch; }
+/* the status bar under it all, with the visitor's own time */
+.tb { display: flex; justify-content: space-between; align-items: center; gap: 2ch; height: 28px; padding: 0 12px; color: var(--soft); font-size: 12px; white-space: nowrap; overflow: hidden; }
+.tb > span { display: flex; align-items: center; gap: 16px; } .tb span span { display: flex; align-items: center; gap: 5px; }
 
 /* the motto, drawn in blocks with a red shadow, at the foot of the quote pane. it stays out of the page until someone
    types in the search or moves the hours */
-.ft { padding-top: 14px; --s: var(--accent); }
+.ft { padding-top: 14px; --f: var(--ink); --s: var(--accent); }
 .ft h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .ft svg { display: block; width: 100%; height: auto; }
 .art { fill: var(--f, #202227); } .art .l2 { fill: none; stroke: var(--s, #202227); stroke-width: .42; } .art .l2.in { stroke: var(--bg); stroke-width: .18; }
@@ -114,131 +127,58 @@ h1 { font: inherit; }
 .egg .ft .k { opacity: 0; transition: opacity .15s; } .egg .ft .k.on { opacity: 1; }
 .shut .ft { padding-top: 0; } .shut .ft svg { display: none; }
 
-@media (min-width: 1080px) {
-  .sp { display: grid; grid-template-columns: 1.5fr 1fr 340px; }
-  .qp { order: 3; margin: 0; padding: 14px 0 0 18px; border: 0; border-left: 1px solid var(--green); }
-  .qp + .pn { border-left: 1px solid var(--rule); }
-}
-@media (max-width: 720px) {
-  .tm { padding: clamp(48px, 10vh, 112px) 20px 44px; }
-  .pn { padding-left: 34px; padding-right: 0; }
-  .o > p::before, .tr::before { left: -34px; width: 22px; }
-  .vt { margin-left: -34px; padding-left: 13px; } .vs { margin: 0 0 0 -34px; }
-  .tb .hn { display: none; }
-}
-@media (max-width: 420px) { .vs .ty { display: none; } }
-
+/* the calendar opens in a dialog, under a prompt as on the home page */
 .viewer { width: min(920px, calc(100vw - 32px)); max-width: calc(100vw - 32px); max-height: none; padding: 0; border: 1px solid var(--rule); border-radius: 10px;
-  background: var(--bg); color: var(--ink); box-shadow: 0 24px 70px rgba(56,58,66,.28); overflow: hidden; }
-.viewer::backdrop { background: rgba(250,250,250,.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  background: var(--bg); color: var(--ink); box-shadow: 0 24px 70px rgba(0, 0, 0, .5); overflow: hidden; }
+.viewer::backdrop { background: rgba(12, 13, 16, .7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .viewer[open] { animation: vin .18s ease-out; }
 @keyframes vin { from { opacity: 0; transform: translateY(8px) scale(.985); } }
 .viewer .bar { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--rule); color: var(--muted); font-size: 12px; }
-.viewer .bar .cmd { color: var(--ink); }
+.viewer .bar .cmd { color: var(--ink); } .u, .ar { color: var(--green); } .w { color: var(--blue); }
 .viewer .x { all: unset; margin-left: auto; cursor: pointer; color: var(--muted); padding: 0 4px; line-height: 1; font-size: 14px; }
 .viewer .x:hover, .viewer .x:focus-visible { color: var(--accent); }
 .viewer:focus { outline: none; }
 .viewer iframe { display: block; width: 100%; height: min(72vh, 680px); border: 0; background: #fff; }
 .viewer .cap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; padding: 9px 12px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
 
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-
-/* normal mode: a block cursor, the number of its line in ink, and :set nonu */
-::highlight(cur) { background-color: #383a42; color: #fafafa; }
-.vi .cl::before { color: var(--ink); }
-.nonu .o > p::before, .nonu .tr::before { content: none; }
-
-/* where there is room, the session fills the window: each file scrolls inside its own pane, and the motto has its place
-   kept at the foot of the quote pane, so nothing moves when it appears */
-@media screen and (min-width: 1080px) and (min-height: 640px) {
-  .tm { display: flex; flex-direction: column; height: 100vh; height: 100dvh; padding: clamp(16px, 2.5vh, 32px) 32px 12px; }
-  .tm > * { flex: none; }
-  .tm > .sp { flex: 1 1 0; min-height: 0; grid-template-rows: minmax(0, 1fr); }
-  .pn { min-height: 0; }
-  .pn .o { flex: 0 1 auto; min-height: 0; margin: 0 -20px 0 -46px; padding: 0 20px 0 46px; overflow: hidden auto; scrollbar-width: none; }
-  .pn .o::-webkit-scrollbar, .qp::-webkit-scrollbar { display: none; }
-  /* the line with the call link is pinned to the foot of its window, so it is in view wherever the file is scrolled to */
-  .o > .cta { position: sticky; bottom: 0; z-index: 1; margin-left: -46px; padding-left: 46px; background: var(--bg); box-shadow: 0 -10px 8px var(--bg); }
-  .o > .cta::before { left: 0; }
-  .vt { min-height: 0; }
-  .qp { display: flex; flex-direction: column; min-height: 0; overflow: hidden auto; scrollbar-width: none; }
-  .qp > * { flex: none; }
-  .qp .ft { margin-top: auto; padding: 10px 0 6px; }
+@media (min-width: 1080px) {
+  .sp { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 8px; }
+  .qp { --e-qx: 16px; margin: 0; padding: 0 var(--e-qx); }
+}
+@media (max-width: 1079px) { .e-top { grid-template-columns: auto minmax(0, 1fr); } .e-tr { display: none; } }
+@media (max-width: 720px) {
+  .pn { padding: 0 16px 0 34px; }
+  .o > p::before, .tr::before { left: -34px; width: 22px; }
+  .vs { margin: 0 -16px 12px -34px; }
+  .vc.nm:not(.say)::before { content: none; } .e-pj, .tb .e-x { display: none; }
 }
 
-/* the page as an editor: the file's status line is its tab strip, the command line is the search field of the title bar
-   and opens downward like a palette when it has more to say, and the bar at the foot is the editor's status bar. the
-   classes added for it all start with e- */
-:root { --e-chrome: #f0f0f1; --e-line: var(--rule); --e-tab: 34px; --e-top: 38px; }
-.e-i { display: block; flex: none; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
-.e-l { display: flex; gap: 8px; } .e-l i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; } .e-l i:nth-child(2) { background: #febc2e; } .e-l i:nth-child(3) { background: #28c840; }
-.tm { position: relative; max-width: none; padding: 0; }
-.e-top { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr minmax(0, 460px) 1fr; align-items: start; gap: 12px; height: var(--e-top); padding: 0 12px; background: var(--e-chrome); box-shadow: inset 0 -1px var(--e-line); color: var(--soft); font-size: 12px; }
-.e-tl, .e-tr { display: flex; align-items: center; gap: 12px; height: var(--e-top); white-space: nowrap; } .e-tr { justify-content: flex-end; }
-.e-top .vc { min-height: 26px; margin-top: calc((var(--e-top) - 26px) / 2); padding: 2px 10px 2px 28px; border: 1px solid var(--e-line); border-radius: 6px; background: var(--bg) var(--e-find) 8px 5px / 14px no-repeat; color: var(--ink); }
-.e-top .vc.say { box-shadow: 0 8px 24px rgba(0, 0, 0, .12); } .e-top .vc.err { color: var(--accent); } .e-top .vc.dim { color: var(--muted); }
-.vi { margin-top: 0; border-top: 0; }
-.vt { visibility: hidden; min-height: 10px; margin-top: 0; }
-.pn { padding-top: 0; }
-.pn .vs { order: -2; justify-content: flex-start; align-items: stretch; height: var(--e-tab); margin-bottom: 12px; background: var(--e-chrome); box-shadow: inset 0 -1px var(--e-line); color: var(--soft); }
-.pn .vs .md, .pn .vs .ty { display: none; }
-.pn .vs .fn { display: flex; align-items: center; gap: 7px; margin: 0; padding: 0 16px 0 12px; background: var(--bg); color: var(--ink); box-shadow: 1px 0 var(--e-line); }
-.pn .vs .ps { all: unset; align-self: center; margin-left: auto; padding: 0 12px; color: var(--muted); }
-.vi .cl { background: var(--e-cl, transparent); box-shadow: -46px 0 var(--e-cl, transparent), 20px 0 var(--e-cl, transparent); }
-.tb { align-items: center; height: 24px; margin-top: 0; padding: 0 12px; background: var(--e-chrome); box-shadow: inset 0 1px var(--e-line); color: var(--soft); }
-.tb > span { display: flex; align-items: center; gap: 16px; } .tb span span { display: flex; align-items: center; gap: 5px; }
-.qp { --e-qx: 20px; border-color: var(--e-line); }
-.e-ph { display: flex; align-items: center; gap: 8px; height: var(--e-tab); margin: 0 calc(-1 * var(--e-qx)); padding: 0 var(--e-qx); color: var(--soft); font-size: 12px; }
-@media (max-width: 1079px) {
-  .e-top { grid-template-columns: auto minmax(0, 1fr); } .e-tr { display: none; }
-  .qp { margin: 14px 0; padding: 0 var(--e-qx) 18px; }
-}
-@media (max-width: 720px) { .pn { padding-right: 16px; } .pn .vs { margin-right: -16px; } .e-top .vc.nm::before { content: none; } .e-tl > :not(.e-l) { display: none; } .tb .e-x { display: none; } }
-@media (min-width: 1080px) { .qp { --e-qx: 16px; padding: 0 var(--e-qx); border-left-color: var(--e-line); } }
-
-/* the editor is dark, and in a large window it is a window on a desktop: a grid of dots, with the mark of the site
-   as a low range along its foot. each square of the range holds sixteen dots, and no edge of it touches one */
-.cta a, .cta a:hover { color: #23252b; } ::selection { color: #23252b; } ::highlight(cur) { background-color: var(--ink); color: var(--bg); }
-.ft { --f: var(--ink); } .viewer::backdrop { background: rgba(12, 13, 16, .7); } .viewer { box-shadow: 0 24px 70px rgba(0, 0, 0, .5); }
-
-:root { --bg: #282c34; --ink: #b6bdca; --soft: #8b93a1; --muted: #7a8291; --glyph: #5a6170; --rule: #3a404b; --accent: #e06c75; --green: #98c379; --blue: #61afef; --violet: #c678dd; --cyan: #56b6c2;
-  --e-chrome: #17191e; --e-line: #353b45; --e-cl: #2c313a; --e-find: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22 fill=%22none%22 stroke=%22%237a8291%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%227%22 cy=%227%22 r=%224.2%22/%3E%3Cpath d=%22M10.2 10.2l3.3 3.3%22/%3E%3C/svg%3E"); color-scheme: dark; }
-body { background: var(--e-chrome); }
-.e-top { box-shadow: none; } .e-top .vc { border-color: transparent; background-color: #23262d; }
-.e-pj { display: flex; align-items: center; gap: 8px; color: var(--ink); } .e-pj b { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; background: linear-gradient(135deg, var(--blue), var(--violet)); color: #17191e; font-size: 11px; font-weight: 600; font-stretch: 100%; }
-.pn, .qp { border-radius: 10px; background: var(--bg); overflow: hidden; }
-.pn .vs { background: none; } .pn .vs .fn { padding: 0 2px; margin-left: 14px; background: none; box-shadow: none; color: var(--soft); }
-.pn.on .vs .fn { color: #e6e9ef; box-shadow: inset 0 -2px var(--blue); }
-.xd .k, .hw b, .pt b { color: #e6e9ef; }
-.e-ph { box-shadow: inset 0 -1px var(--e-line); }
-.sel button:hover { background: #30353f; } .sel button[aria-pressed="true"] { background: #3e4451; color: #e6e9ef; }
-.m60 i { background: #353b45; } .m60 .c { background: #4b5263; } .m60 .h { background: #e6e9ef; } .hs input { accent-color: #e6e9ef; }
-.tb { background: none; box-shadow: none; height: 28px; }
-.sp { padding: 0 8px; } .qp { margin: 8px 0; border: 0; } .pn { margin-bottom: 0; }
-@media (min-width: 1080px) { .sp { gap: 8px; } .qp { margin: 0; } .qp + .pn { border: 0; } }
-
-.e-wb { display: flex; align-items: center; gap: 8px; } .e-wb i { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: var(--ink); }
-.e-wb svg { fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; } .e-rd i { background: rgba(255, 255, 255, .09); } .e-fl { gap: 12px; }
+/* in a large window the editor is a window on a desktop: a grid of dots, with the mark of the site as a low range along
+   its foot. each square of the range holds sixteen dots, and no edge of it touches one. the window is moved by its title bar */
 @media screen and (min-width: 1080px) and (min-height: 640px) {
-  /* the desktop, and the editor as a window on it. the window is moved by its title bar */
-  html, body { height: 100%; } body { overflow: hidden; background: #0b0d10; }
-  .tm { position: fixed; inset: 0; margin: auto; width: min(1240px, calc(100vw - 32px)); height: min(940px, calc(100vh - 16px)); border-radius: 12px; overflow: hidden; background: var(--e-chrome);
+  html, body { height: 100%; }
+  body { overflow: hidden; background: #0b0d10; background-image: radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1.6px), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%224032%22 height=%22576%22 viewBox=%220 0 56 8%22 preserveAspectRatio=%22none%22 shape-rendering=%22crispEdges%22%3E%3Cpath fill=%22%23a0a1a7%22 opacity=%220.045%22 d=%22M50 3h1v3h-1zM49 4h1v3h-1zM48 5h1v3h-1zM47 6h1v2h-1zM46 7h1v1h-1zM45 7h1v1h-1zM41 7h1v1h-1zM40 7h1v1h-1zM39 7h1v1h-1zM34 6h1v2h-1zM33 7h1v1h-1zM32 7h1v1h-1zM31 7h1v1h-1zM30 7h1v1h-1zM26 7h1v1h-1zM25 7h1v1h-1zM24 7h1v1h-1zM19 6h1v2h-1zM18 7h1v1h-1zM17 7h1v1h-1zM16 7h1v1h-1zM12 7h1v1h-1zM11 7h1v1h-1zM10 7h1v1h-1zM5 6h1v2h-1zM4 7h1v1h-1zM3 7h1v1h-1zM2 7h1v1h-1zM1 7h1v1h-1zM0 7h1v1h-1z%22/%3E%3Cpath fill=%22%23fafafa%22 opacity=%220.06%22 d=%22M55 5h1v3h-1zM54 3h1v5h-1zM53 2h1v6h-1zM52 3h1v5h-1zM51 4h1v4h-1zM50 6h1v2h-1zM49 7h1v1h-1zM44 7h1v1h-1zM43 6h1v2h-1zM42 7h1v1h-1zM38 6h1v2h-1zM37 5h1v3h-1zM36 6h1v2h-1zM35 7h1v1h-1zM29 7h1v1h-1zM28 6h1v2h-1zM27 7h1v1h-1zM23 6h1v2h-1zM22 5h1v3h-1zM21 6h1v2h-1zM20 7h1v1h-1zM15 7h1v1h-1zM14 6h1v2h-1zM13 7h1v1h-1zM9 6h1v2h-1zM8 5h1v3h-1zM7 6h1v2h-1zM6 7h1v1h-1z%22/%3E%3Cpath fill=%22%23e45649%22 opacity=%220.5%22 d=%22M53 0h1v1h-1z%22/%3E%3C/svg%3E"); background-repeat: repeat, no-repeat; background-position: right bottom; background-size: 18px 18px, 4032px 576px; }
+  .tm { position: fixed; inset: 0; display: flex; flex-direction: column; margin: auto; width: min(1240px, calc(100vw - 32px)); height: min(940px, calc(100vh - 16px)); border-radius: 12px; overflow: hidden; background: var(--e-chrome);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .55), 0 28px 80px rgba(0, 0, 0, .5), 0 6px 18px rgba(0, 0, 0, .3); }
   .tm::after { content: ""; position: absolute; z-index: 5; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); pointer-events: none; }
   .tm.e-mv { inset: auto; margin: 0; }
+  .tm > * { flex: none; } .tm > .sp { flex: 1 1 0; min-height: 0; grid-template-rows: minmax(0, 1fr); }
   .e-top { cursor: default; touch-action: none; } .e-tl, .e-tr { -webkit-user-select: none; user-select: none; }
-  .sp { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
-  /* the window is smaller than the screen, so the lines of the file sit a little closer and it ends inside the window */
-  .pn { line-height: 1.5; } .pn .vs { margin-bottom: 6px; } .pn .o > p + p, .pn .xd + p { margin-top: 0; } .pn .xd { margin: 0; } .pn .e-bl { display: block; height: 1.5em; } .pn .o > .cta { box-shadow: none; } .pn .xd .tr { margin-top: 0; }
-  /* the lines the file does not reach carry a tilde, as in vim */
-  .pn > .vt { visibility: visible; min-height: 0; margin-top: 4px; color: var(--glyph); opacity: 1; columns: 1; column-fill: auto; }
-}
-@media screen and (min-width: 1080px) and (min-height: 640px) {
-  body { background: #0b0d10; background-image: radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1.6px), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%224032%22 height=%22576%22 viewBox=%220 0 56 8%22 preserveAspectRatio=%22none%22 shape-rendering=%22crispEdges%22%3E%3Cpath fill=%22%23a0a1a7%22 opacity=%220.045%22 d=%22M50 3h1v3h-1zM49 4h1v3h-1zM48 5h1v3h-1zM47 6h1v2h-1zM46 7h1v1h-1zM45 7h1v1h-1zM41 7h1v1h-1zM40 7h1v1h-1zM39 7h1v1h-1zM34 6h1v2h-1zM33 7h1v1h-1zM32 7h1v1h-1zM31 7h1v1h-1zM30 7h1v1h-1zM26 7h1v1h-1zM25 7h1v1h-1zM24 7h1v1h-1zM19 6h1v2h-1zM18 7h1v1h-1zM17 7h1v1h-1zM16 7h1v1h-1zM12 7h1v1h-1zM11 7h1v1h-1zM10 7h1v1h-1zM5 6h1v2h-1zM4 7h1v1h-1zM3 7h1v1h-1zM2 7h1v1h-1zM1 7h1v1h-1zM0 7h1v1h-1z%22/%3E%3Cpath fill=%22%23fafafa%22 opacity=%220.06%22 d=%22M55 5h1v3h-1zM54 3h1v5h-1zM53 2h1v6h-1zM52 3h1v5h-1zM51 4h1v4h-1zM50 6h1v2h-1zM49 7h1v1h-1zM44 7h1v1h-1zM43 6h1v2h-1zM42 7h1v1h-1zM38 6h1v2h-1zM37 5h1v3h-1zM36 6h1v2h-1zM35 7h1v1h-1zM29 7h1v1h-1zM28 6h1v2h-1zM27 7h1v1h-1zM23 6h1v2h-1zM22 5h1v3h-1zM21 6h1v2h-1zM20 7h1v1h-1zM15 7h1v1h-1zM14 6h1v2h-1zM13 7h1v1h-1zM9 6h1v2h-1zM8 5h1v3h-1zM7 6h1v2h-1zM6 7h1v1h-1z%22/%3E%3Cpath fill=%22%23e45649%22 opacity=%220.5%22 d=%22M53 0h1v1h-1z%22/%3E%3C/svg%3E"); background-repeat: repeat, no-repeat; background-position: right bottom; background-size: 18px 18px, 4032px 576px; }
+  /* the window is smaller than the screen, so the lines of the file sit a little closer and it ends inside the window.
+     where the window is too short for it even so, the file scrolls inside its pane */
+  .pn { min-height: 0; line-height: 1.5; } .vs { margin-bottom: 6px; }
+  .pn .o { flex: 0 1 auto; min-height: 0; margin: 0 -20px 0 -46px; padding: 0 20px 0 46px; overflow: hidden auto; scrollbar-width: none; } .pn .o::-webkit-scrollbar { display: none; }
+  .o > p + p, .xd + p, .xd .tr { margin-top: 0; } .xd { margin: 0; } .e-bl { display: block; height: 1.5em; }
+  /* the line with the call link is pinned to the foot of the file, so it is in view wherever the file is scrolled to.
+     it casts no shadow, which would cover the number of the blank line over it */
+  .o > .cta { position: sticky; bottom: 0; z-index: 1; margin-left: -46px; padding-left: 46px; background: var(--bg); } .o > .cta::before { left: 0; }
+  .o > .cta.cl { background: var(--e-cl); box-shadow: none; }
+  .vt { visibility: visible; min-height: 0; margin: 4px 0 0 -46px; padding-left: 21px; color: var(--glyph); columns: 1; column-fill: auto; }
+  /* the motto has its place kept at the foot of the quote pane, so nothing moves when it appears */
+  .qp { display: flex; flex-direction: column; min-height: 0; } .qp > * { flex: none; } .qp .ft { margin-top: auto; padding: 10px 0 6px; }
 }
 
-/* a blank line of the file is a line of its own, with its number, where the window has the room for it */
-.e-bl { display: none; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
   </style>
 </head>
 
@@ -246,7 +186,7 @@ body { background: var(--e-chrome); }
 <main class="tm">
   <div class="e-top" data-nosnippet><div class="e-tl"><span class="e-pj"><b>c</b>consulting<svg class="e-i" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3.5 6l4.5 4.5l4.5-4.5"/></svg></span></div><p class="vc" aria-hidden="true"><span class="sl">/</span><span class="q">free 30-minute call</span><i></i></p><div class="e-tr"><svg class="e-i" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M5 3l8 5l-8 5z"/></svg><svg class="e-i" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M3.6 12.4l1.4-1.4M11 5l1.4-1.4"/></svg></div></div>
 <div class="sp vi">
-<div class="pn on">
+<div class="pn">
   <div class="o">
     <p>I plan, orchestrate, and execute across ops, comms, and design, keeping you ready to pitch and diligence ready for whenever opportunity strikes. On top of that, I use AI agents to keep output high and overhead low.</p>
     <p class="e-bl" aria-hidden="true"></p>
@@ -312,7 +252,7 @@ body { background: var(--e-chrome); }
 ~
 ~
 </p>
-  <p class="vs" aria-hidden="true"><span class="md">NORMAL</span><span class="fn">overview.md</span><span class="ty">markdown</span><span class="ps">8:18</span></p>
+  <p class="vs" aria-hidden="true"><span class="fn">overview.md</span><span class="ps">8:18</span></p>
 </div>
 <aside class="qp">
   <p class="e-ph" aria-hidden="true"><svg class="e-i" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><rect x="1.8" y="2.8" width="12.4" height="10.4" rx="1.5"/><path d="M4.5 6l2.3 2l-2.3 2M8.5 10.5h3"/></svg>quote</p>
@@ -432,10 +372,6 @@ body { background: var(--e-chrome); }
   });
   const draw = () => {
     const c = pos[win];
-    panes.forEach((pn, p) => {
-      pn.classList.toggle('on', p === win);
-      pn.querySelector('.md').textContent = mode === 'cmd' ? 'COMMAND' : 'NORMAL';
-    });
     rule();
     lines.forEach((l) => l.el.classList.toggle('cl', mode === 'normal' && l.p === win && l.n === c.l.n));
     blk.clear();
