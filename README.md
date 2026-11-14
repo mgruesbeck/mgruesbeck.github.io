@@ -28,7 +28,7 @@ with an annotated ski-mountaineering photo whose gear markers link to the
 | `projects/index.html` | Password-gated project pages (`noindex`). Asks for the password in a `[sudo]` prompt, derives the key with PBKDF2 using `vault/meta.json`, then decrypts `vault/index.bin` (every project's text and photo list) and each photo as it scrolls into view. `#<slug>` opens one project. Keeps the derived key in `sessionStorage` until the tab closes or `logout`. |
 | `projects/vault/` | Output of `make projects`: `meta.json` (salt and iteration count, not secret), `index.bin`, and one `<id>.bin` per photo. Each `.bin` is a 12-byte IV followed by AES-256-GCM ciphertext. Never edit by hand. |
 | `tools/build-projects.mjs` | Builds `projects/vault/` from `projects/<slug>/project.md` and the photos it names. Resizes photos to 1600 px (2400 px for `.png` screenshots) and strips their metadata. IVs and file names are HMACs of the content, so unchanged projects rebuild byte-for-byte. Refuses a password that can't open the existing vault unless `CHANGE_PASSWORD=1`. |
-| `consulting/index.html` | Consulting & booking page (`noindex`), linked from `open --links` in `index.html`. Drawn as a tmux session: a vim window split over two files, a `./quote` pane beside it, and a green status line with the visitor's own time under both. The files are `overview.md` (the pitch: operations, communications and design run as one effort, year round, so the company is ready whenever a raise, partner or acquirer comes) and `terms.md` (a summary of the Consulting Services Agreement: one agreement, month to month, 5% off for a 3-month term and 10% off for a 6-month term, hours above a plan's cap need approval and are $250 each). The quote pane (`aside.qp`) has a plan picker (a one-time Trial, 10h in 30 days, $2,000, and two monthly plans, Advisory 10h/$2,500 and Fractional 40h/$9,000), a term picker, and an hours slider over a meter of sixty cells. It shows one price: the plan less its term discount, plus $250 for each hour above the plan's cap. Choosing a plan sets the hours to its cap, and a term chosen on the Trial moves the quote to Advisory. Its numbers are the `PLANS`, `OFF` and `RATE` constants in the page's second inline script, which also writes the clock. The call to action is the "free 30-minute call" link, which opens the Google Calendar Appointment Schedule in a dialog. It is the only link on the page, so nothing draws a click away from it. The command line under the window holds a search for that link and can be typed over, by clicking it or by pressing a key anywhere on the page: the matches in the two files light up and the cursor moves to the first. Enter or Escape leaves the search for normal mode, where a small set of vim keys and colon commands work (`n`, `N`, `j`, `k`, `h`, `l`, `w`, `b`, `0`, `$`, `gg`, `G`, `*`, `:e`, `:12`, `:set nonu`, `:noh`, `:q` back to the home page, and `:help` for the list). In a window at least 1080px wide and 640px tall the editor has a fixed height, each file scrolls in its own pane, and the line with the call link stays pinned at the foot of `overview.md`. The headline, "Better Every Month. Ready Any Day.", is block lettering in a `<footer class="ft">` at the foot of the quote pane, kept out of the page until someone presses a key or moves the hours slider; each keystroke, and each hour the slider moves, sets one more letter, and the last sets the two tone mark of the site icon. In the fixed-height layout its place is kept free, so nothing moves when it appears. Nothing is signed or paid on the page: the agreement is sent for signature through SignWell after the intro call, and the Stripe payment link is emailed after both parties sign. |
+| `consulting/index.html` | Consulting & booking page (`noindex`), linked from `open --links` in `index.html`. Drawn as a dark code editor's window on a desktop: a title bar with a search field, one file with numbered lines, a `quote` pane beside it, and a status bar with the visitor's own time under both. The file is `overview.md`: the pitch (operations, communications and design run as one effort, year round, so the company is ready whenever a raise, partner or acquirer comes), then a summary of the Consulting Services Agreement (one agreement, month to month, 5% off for a 3-month term and 10% off for a 6-month term, hours above a plan's cap need approval and are $250 each), and the call to action on its last line. The desktop behind the window is a grid of dots with a low range of squares along its foot, cut from the shape of the site icon; both are CSS backgrounds on `body`, the range an inline SVG data URL. The quote pane (`aside.qp`) has a plan picker (a one-time Trial, 10h in 30 days, $2,000, and two monthly plans, Advisory 10h/$2,500 and Fractional 40h/$9,000), a term picker, and an hours slider over a meter of sixty cells. It shows one price: the plan less its term discount, plus $250 for each hour above the plan's cap. Choosing a plan sets the hours to its cap, and a term chosen on the Trial moves the quote to Advisory. Its numbers are the `PLANS`, `OFF` and `RATE` constants in the page's second inline script, which also writes the clock. The call to action is the "free 30-minute call" link, which opens the Google Calendar Appointment Schedule in a dialog. It is the only link on the page, so nothing draws a click away from it. The search field in the title bar holds a search for that link and can be typed over, by clicking it or by pressing a key anywhere on the page: the matches in the file light up and the cursor moves to the first. Enter or Escape leaves the search for normal mode, where a small set of vim keys and colon commands work (`n`, `N`, `j`, `k`, `h`, `l`, `w`, `b`, `0`, `$`, `gg`, `G`, `*`, `:12`, `:set nonu`, `:noh`, `:q` back to the home page, and `:help` for the list). In a browser window at least 1080px wide and 640px tall the editor is a window of its own, at most 1240px by 940px, that can be dragged by its title bar and is put back in the middle by a double click there (the page's last inline script). In that layout the file is set at a line height of 1.5 with blank numbered lines between its sections and `~` on the lines past its end, and where the window is too short for the file, the file scrolls in its pane and the line with the call link stays pinned at its foot. In a smaller window the page is one column that scrolls, without the blank lines, and the numbers count only the lines shown. The headline, "Better Every Month. Ready Any Day.", is block lettering in a `<footer class="ft">` at the foot of the quote pane, kept out of the page until someone presses a key or moves the hours slider; each keystroke, and each hour the slider moves, sets one more letter, and the last sets the two tone mark of the site icon. In the window layout its place is kept free, so nothing moves when it appears. Nothing is signed or paid on the page: the agreement is sent for signature through SignWell after the intro call, and the Stripe payment link is emailed after both parties sign. |
 | `Makefile` | `make serve` runs a local server. `make projects` asks for the password and rebuilds the vault (`make projects CHANGE_PASSWORD=1` to set a new one). `make resume` exports the resume to PDF with LibreOffice (`soffice`) and copies it to `$(FORAGER)` (default `../forager/profile/resume.pdf`) when that folder exists. |
 
 Invariants:
@@ -75,13 +75,13 @@ Invariants:
   collects no visitor data and holds no payment links or keys; keep it that
   way. Its copy uses no parentheses.
   Prices live in three places that must agree: the page (the quote pane's
-  buttons, the `PLANS`, `OFF` and `RATE` constants in its script, and
-  `terms.md`), section 2 of the agreement, and the Stripe links and codes.
-  `terms.md` summarizes the agreement template, a Google Doc (plans, term
-  discounts and notice, the discount billed back on early termination, hours,
-  AI accounts, costs, specialists, payment). The Google Doc is the source of
-  truth: after any change to it, update `terms.md` and replace the template
-  in SignWell.
+  buttons, the `PLANS`, `OFF` and `RATE` constants in its script, and the
+  terms at the end of `overview.md`), section 2 of the agreement, and the
+  Stripe links and codes. Those terms summarize the agreement template, a
+  Google Doc (plans, term discounts and notice, the discount billed back on
+  early termination, hours, AI accounts, costs, specialists, payment). The
+  Google Doc is the source of truth: after any change to it, update the terms
+  on the page and replace the template in SignWell.
 
 ## Global Invariants
 
@@ -101,7 +101,7 @@ Invariants:
   derived key in `sessionStorage` under `projects-key`.
 - `consulting/index.html` loads the Google Calendar Appointment Schedule iframe
   on demand when the visitor clicks "free 30-minute call". The search in its
-  command line runs in the page. It sends nothing else.
+  title bar runs in the page. It sends nothing else.
 - Fonts are served from `assets/fonts/`. No page contacts another site when it
   loads.
 - A push to `master` publishes the site through GitHub Pages.
@@ -151,11 +151,13 @@ Invariants:
   `http://localhost:8000/`. Use `make serve PORT=3000` for another port.
 - For consulting, open `http://localhost:8000/consulting/` and verify that
   "free 30-minute call" opens the calendar dialog with the schedule in it,
-  that typing over the search in the command line lights the matches, that
-  Enter then `:help` lists the keys and `:q` returns to the home page, and
-  that the plan and term buttons and the hours slider change the price in the
-  quote pane, and that the motto appears at the foot of that pane one letter
-  per keystroke or per hour moved while the status lines stay where they are.
+  that typing over the search in the title bar lights the matches, that
+  Enter then `:help` lists the keys and `:q` returns to the home page, that
+  the plan and term buttons and the hours slider change the price in the
+  quote pane, that the motto appears at the foot of that pane one letter per
+  keystroke or per hour moved while the status bar stays where it is, and
+  that on a laptop the window drags by its title bar and nothing in it needs
+  scrolling at 1470×840.
   With JavaScript off, the quote shows Advisory month to month, the motto is
   simply shown and the link opens the calendar in a new tab.
 - For projects, run `make projects`, then open `http://localhost:8000/projects/`
