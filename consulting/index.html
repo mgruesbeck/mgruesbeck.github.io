@@ -7,7 +7,6 @@
   <title>Consulting · Melvin Gruesbeck</title>
   <meta name="description" content="I plan, orchestrate, and execute across ops, comms, and design, keeping you ready to pitch and diligence ready for whenever opportunity strikes. It starts with a free 30-minute call.">
   <link rel="canonical" href="https://mgruesbeck.sh/consulting/">
-  <meta name="robots" content="noindex, nofollow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Melvin Gruesbeck">
   <meta property="og:title" content="Consulting · Melvin Gruesbeck">
@@ -192,7 +191,32 @@ h1 { font: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* on paper the page is the offer alone, in ink on white: whose it is, the motto, the file, the plans, the terms and where
+   to book the call. the editor around them stays on the screen, and so does the quote's arithmetic */
+@media print {
+  @page { margin: 16mm; }
+  :root { --bg: #fff; --ink: #1b1c20; --soft: #44464d; --muted: #5d5f67; --glyph: #9a9ba1; --rule: #c9cacf; --accent: #e45649; --cyan: #1b1c20; color-scheme: light; }
+  body { background: none; }
+  .e-top, .tb, .vs, .vt, .e-bl, .e-sx, .e-rz, .e-ph, .hs, .m60, .hw, .pt, .mu, .viewer { display: none !important; }
+  .o > p::before, .tr::before, .sel button::before { content: none; }
+  /* the parts are set in one column, in the order they are read on paper: the plans, with the terms beside them, come before
+     the small print, and the call last. the lines sit as close as they do in the window, so it all fits one sheet */
+  .tm { position: static !important; display: grid; grid-template-columns: 1fr 1fr; column-gap: 6ch; width: auto !important; height: auto !important; max-width: 660px; margin: 0 auto !important; line-height: 1.5; }
+  .sp, .pn, .o, .qp { display: contents; } .tm::before, .o > *, .qp > * { grid-column: 1 / -1; } .qp > .pp { grid-column: 1; } .qp > .tt { grid-column: 2; }
+  .tm::before { content: "Melvin Gruesbeck  ·  Consulting  ·  mgruesbeck.sh/consulting"; order: -2; white-space: pre; color: var(--muted); font-size: 11px; }
+  .ft { order: -1; padding: 12px 0 18px; } .ft svg { display: block !important; width: 62%; } .egg .ft .k { opacity: 1; }
+  .sel, .qp > .hint { order: 1; } .e-tm, .e-th { order: 2; } .cta { order: 3; }
+  .xd .k, .sel button[aria-pressed] { background: none; color: var(--ink); } .sel button span { color: var(--soft); }
+  .sel { margin-top: 16px; font-size: 12px; } .sel button { padding: 1px 0; } .tt { border: 0; padding: 0; } .tt.off { opacity: 1; }
+  .sel::before { content: attr(aria-label); color: var(--muted); font-size: 11px; }
+  .e-tm { margin-top: 18px; } .e-th { margin-top: 8px; } .xd, .o > p { break-inside: avoid; }
+  .cta { margin-top: 18px !important; } .cta a { margin: 0; padding: 0; background: none; color: var(--ink); font-weight: 600; } .cta a span { animation: none; }
+  .cta::after { content: " Book one at mgruesbeck.sh/consulting"; }
+}
   </style>
+  <!-- analytics: GoatCounter counts page views and where they came from, and sets no cookie. the file is pinned by its hash -->
+  <script data-goatcounter="https://mgruesbeck.goatcounter.com/count" async src="https://gc.zgo.at/count.v5.js" crossorigin="anonymous" integrity="sha384-atnOLvQb9t+jTSipvd75X2yginT4PjVbqDdlJAmxMm+wYElFmeR6EmLP5bYeoRVQ"></script>
 </head>
 
 <body>
@@ -205,21 +229,21 @@ h1 { font: inherit; }
     <p class="e-bl" aria-hidden="true"></p>
     <p>Three things get stronger together, and keep telling the same story.</p>
     <div class="xd">
-      <p class="tr"><span class="g">├──</span><span><span class="k">The story</span> A narrative that keeps up with the company, carried through the deck, the website, announcements, and investor updates.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">The numbers</span> Finance, legal, HR, and security kept in order as you grow, with a data room ready at a moment's notice.</span></p>
-      <p class="tr"><span class="g">└──</span><span><span class="k">The proof</span> Figures, demos, and visuals that make hard technology clear to customers, hires, and investors.</span></p>
+      <p class="tr"><span class="g" aria-hidden="true">├──</span><span><span class="k">The story</span> A narrative that keeps up with the company, carried through the deck, the website, announcements, and investor updates.</span></p>
+      <p class="tr"><span class="g" aria-hidden="true">├──</span><span><span class="k">The numbers</span> Finance, legal, HR, and security kept in order as you grow, with a data room ready at a moment's notice.</span></p>
+      <p class="tr"><span class="g" aria-hidden="true">└──</span><span><span class="k">The proof</span> Figures, demos, and visuals that make hard technology clear to customers, hires, and investors.</span></p>
     </div>
     <p class="e-bl" aria-hidden="true"></p>
     <p>I have done this from the inside. As the first full-time hire at Profluent, joining just after its seed round closed, I shaped the narrative and decks with the CEO for the two financings that followed, of $35M and $106M, coordinated diligence for both rounds and an Eli Lilly partnership worth up to $2.25B, and ran operations as a department of one as the team grew past fifty.</p>
     <p class="e-bl" aria-hidden="true"></p>
     <div class="xd e-tm">
-      <p class="tr"><span class="g">├──</span><span><span class="k">One agreement</span> It covers the trial and both monthly plans. Your hours go wherever the priorities are, and an email is enough to change plans.</span></p>
-      <p class="tr"><span class="g">├──</span><span><span class="k">Terms</span> Monthly plans run month to month with 30 days' notice. End a 3 or 6-month term early and the discount on the months used is billed back.</span></p>
-      <p class="tr"><span class="g">└──</span><span><span class="k">Costs</span> Hours do not roll over, and hours above the cap need your approval at $250 each. AI platforms such as Claude Max run on accounts you own. Other costs need your approval and pass through with no markup.</span></p>
+      <p class="tr"><span class="g" aria-hidden="true">├──</span><span><span class="k">One agreement</span> It covers the trial and both monthly plans. Your hours go wherever the priorities are, and an email is enough to change plans.</span></p>
+      <p class="tr"><span class="g" aria-hidden="true">├──</span><span><span class="k">Terms</span> Monthly plans run month to month with 30 days' notice. End a 3 or 6-month term early and the discount on the months used is billed back.</span></p>
+      <p class="tr"><span class="g" aria-hidden="true">└──</span><span><span class="k">Costs</span> Hours do not roll over, and hours above the cap need your approval at $250 each. AI platforms such as Claude Max run on accounts you own. Other costs need your approval and pass through with no markup.</span></p>
     </div>
     <p class="hint e-th">// the agreement has the full terms; I send it after the intro call</p>
     <p class="e-bl" aria-hidden="true"></p>
-    <p class="cta">It starts with a <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ11I8e4jU3gjZ8jNkvJyKs7j6AMjH1TOBgXuA_q0elvkDiUFV1op4VqEzYyX9aCjPGYxih9YZAH?gv=true" target="_blank" rel="noopener" data-cal><span style="--i:0">f</span><span style="--i:1">r</span><span style="--i:2">e</span><span style="--i:3">e</span> <span style="--i:5">3</span><span style="--i:6">0</span><span style="--i:7">-</span><span style="--i:8">m</span><span style="--i:9">i</span><span style="--i:10">n</span><span style="--i:11">u</span><span style="--i:12">t</span><span style="--i:13">e</span> <span style="--i:15">c</span><span style="--i:16">a</span><span style="--i:17">l</span><span style="--i:18">l</span></a>.</p>
+    <p class="cta">It starts with a <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ11I8e4jU3gjZ8jNkvJyKs7j6AMjH1TOBgXuA_q0elvkDiUFV1op4VqEzYyX9aCjPGYxih9YZAH?gv=true" target="_blank" rel="noopener" aria-label="free 30-minute call" data-cal><span style="--i:0">f</span><span style="--i:1">r</span><span style="--i:2">e</span><span style="--i:3">e</span> <span style="--i:5">3</span><span style="--i:6">0</span><span style="--i:7">-</span><span style="--i:8">m</span><span style="--i:9">i</span><span style="--i:10">n</span><span style="--i:11">u</span><span style="--i:12">t</span><span style="--i:13">e</span> <span style="--i:15">c</span><span style="--i:16">a</span><span style="--i:17">l</span><span style="--i:18">l</span></a>.</p>
   </div>
 
   <p class="vt" aria-hidden="true">~
@@ -280,7 +304,7 @@ h1 { font: inherit; }
   <div class="hs"><input type="range" min="0" max="60" value="10" aria-label="Hours in a month"></div>
   <div class="m60" aria-hidden="true"><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <p class="hw"><b>10</b> of 10 hours a month</p>
-  <p class="pt"><b>$2,500</b><span>every month</span></p>
+  <p class="pt" aria-live="polite" aria-atomic="true"><b>$2,500</b><span>every month</span></p>
   <p class="mu"></p>
   <p class="hint">// the Trial and Advisory are capped at 10 hours a month, and Fractional at 40</p>
   <footer class="ft">

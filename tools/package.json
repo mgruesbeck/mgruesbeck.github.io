@@ -1,0 +1,10 @@
+{
+  "name": "site-checks",
+  "private": true,
+  "description": "Browser checks for mgruesbeck.sh. Run with: make check",
+  "type": "module",
+  "devDependencies": {
+    "axe-core": "4.10.2",
+    "playwright": "1.53.0"
+  }
+}
