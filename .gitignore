@@ -9,3 +9,5 @@ projects/*/
 !projects/vault/
 # agreements and signed client documents stay local
 contracts/
+# the checks' browser driver is installed locally by make check-setup
+node_modules/
