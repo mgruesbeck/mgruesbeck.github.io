@@ -8,7 +8,7 @@ GitHub Pages at `https://mgruesbeck.sh/` (the `og:url` in
 GitHub Pages serves the files as-is.
 
 The page is styled as a light "One Light" terminal transcript (`whoami`,
-`cat about.md`, `open scramble.jpg`, `cat gear.json`, `ls experience/`, …)
+`cat about.md`, `open --links`, `open scramble.jpg`, `cat gear.json`, `ls experience/`, …)
 with an annotated ski-mountaineering photo whose gear markers link to the
 `gear.json` lines on hover, focus, or tap.
 
@@ -49,6 +49,9 @@ Invariants:
 - `sitemap.xml` lists the home page and `consulting/` and nothing else, and
   `projects/index.html` keeps its `noindex`. `robots.txt` does not name
   `projects/`, which would advertise it.
+- The `Consulting` link in `open --links` has the red glimmer of the call link
+  on the consulting page: one `span` per letter and the `gl` keyframes, which
+  are written in both files. Change the timing in both together.
 - The email address is written in no file: the `Email` link in `open --links`,
   whose links are in alphabetical order, is hidden until the script shows it, and gets its `mailto:` when it is
   pointed at, focused or touched. Keep the address out of the HTML, the
