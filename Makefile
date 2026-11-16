@@ -22,3 +22,11 @@ resume:
 	soffice --headless --convert-to pdf --outdir resume "resume/Melvin Gruesbeck.docx" >/dev/null 2>&1
 	@echo "Wrote resume/Melvin Gruesbeck.pdf"
 	@if [ -d "$(dir $(FORAGER))" ]; then cp "resume/Melvin Gruesbeck.pdf" "$(FORAGER)" && echo "Copied to $(FORAGER)"; fi
+
+# Run the browser checks in tools/check.mjs against a local copy of the site.
+# First time: make check-setup
+.PHONY: check check-setup
+check:
+	@node tools/check.mjs $(ONLY)
+check-setup:
+	cd tools && npm install --no-audit --no-fund && npx playwright install webkit
