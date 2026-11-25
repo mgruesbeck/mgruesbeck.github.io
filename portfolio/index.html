@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at 'sha256-RyK7SxfiiVOxIcOfr4sZOf2eUc4zCwDUkti5gdUg05g=' 'sha256-Kh+ynjMe0IMPZnbBL0U4N+qcH+xJkWOGsK65uRdYiEU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mgruesbeck.goatcounter.com; connect-src 'self' https://mgruesbeck.goatcounter.com; font-src 'self'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at 'sha256-GDN/3ix4jUk+JTLHLaZkKwpo1iTwPvwkigy29OZalMA=' 'sha256-Kh+ynjMe0IMPZnbBL0U4N+qcH+xJkWOGsK65uRdYiEU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mgruesbeck.goatcounter.com; connect-src 'self' https://mgruesbeck.goatcounter.com; font-src 'self'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 
   <!-- title -->
   <title>OMW · Melvin Gruesbeck</title>
@@ -63,6 +63,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .tm { max-width: 820px; margin: 0 auto; padding: clamp(48px, 10vh, 112px) 20px 64px; }
 .p { margin-top: 56px; color: var(--muted); scroll-margin-top: 24px; } .p:first-child { margin-top: 0; }
 .p .cmd { color: var(--ink); }
+/* a plain-English label beside each command, so the page skims */
+.p .cm { color: var(--muted); }
+.lk { line-height: 1.9; }
 .o { margin-top: 10px; } .o > * + * { margin-top: 14px; } .o p { text-wrap: pretty; }
 /* screens get more room than the text: they break out of the column on a wide screen */
 .wide { width: min(1120px, calc(100vw - 40px)); margin-left: 50%; transform: translateX(-50%); }
@@ -167,38 +170,28 @@ figcaption .st { color: var(--green); } figcaption .st.m { color: var(--amber); 
 
 <body>
 <main class="tm">
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> </span><span class="cmd">cd portfolio/omw.now &amp;&amp; cat README.md</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> </span><span class="cmd">cd portfolio/omw.now &amp;&amp; cat README.md</span> <span class="cm"># what this is</span></p>
 <div class="o">
   <h1>omw<i>.</i></h1>
-  <p class="dim">a small social app · product, brand, interface, copy, code · 2026</p>
+  <p class="dim">a small social app · built in one week, November 2026 · product, brand, interface, copy, code</p>
   <p class="big">From <s>“we should hang out”</s> to a time and a place.</p>
-  <p class="lead">This page is about how I work with AI agents: the rules they follow, the reviews that check their work, and the calls I make myself.</p>
-  <p>You post a plan (“skiing at Loveland Pass on Saturday”) or say you’re out now, choose who sees it, and friends tap Join. People who join get a group chat, a calendar invite and directions.</p>
-  <p>I designed, wrote and built all of it, from the brand sheet to the database rules, working with AI agents in Claude Code. It runs on phones and desktops at <a href="https://omw.now" target="_blank" rel="noopener">omw.now</a>.</p>
+  <p class="lead">I built the business infrastructure at Profluent, an AI startup, as it grew from a single room through its $35M and $106M rounds. Next I want to bring AI agents to operations, design and communications. OMW is where I tested how I’d run that work with agents: written rules they follow, a review that checks their output, and a person who decides what ships.</p>
+  <p>The app itself: you post a plan (“skiing at Berthoud Pass on Saturday”) or say you’re out now, choose who sees it, and friends tap Join. People who join get a group chat, a calendar invite and directions. I designed, wrote and built all of it, from the brand sheet to the database rules, working with AI agents in Claude Code.</p>
   <div class="wide hero">
     <a class="sh" href="img/s-plan-desktop.webp" data-name="plan, desktop" data-cap="A mountain plan: the meet-up, then the spot, the forecast, the drive and sunrise. The right column holds your ride and the one next action." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>omw.now</span></div><img src="img/s-plan-desktop.webp" width="1440" height="900" alt="OMW plan page on desktop: Backcountry Skiing at Berthoud Pass, with a topo map, a 6 AM meet-up, the forecast, drive time and sunrise, and Maya’s car in the right column" fetchpriority="high"></div></a>
     <a class="sh ph" href="img/s-feed-phone.webp" data-name="feed, phone" data-cap="The feed on a phone: plans from your crew by day, with forecast and who’s going." data-w="390" data-h="844"><img src="img/s-feed-phone.webp" width="390" height="844" alt="OMW feed on a phone"></a>
   </div>
   <dl class="kv">
+    <dt>built</dt><dd>In one week, November 2026, by me with Claude Code</dd>
+    <dt>used by</dt><dd>3 people and 2 plans so far: I haven’t made a growth push yet</dd>
     <dt>role</dt><dd>Everything: product, brand, interface, copy, engineering, security</dd>
-    <dt>platform</dt><dd>A web app, one codebase for phone and desktop</dd>
     <dt>stack</dt><dd>Expo + React Native Web, Supabase Postgres, Cloudflare</dd>
-    <dt>made with</dt><dd>Claude Code, with written rules the agents follow</dd>
   </dl>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat brief.md</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat .claude/skills/prerelease/SKILL.md</span> <span class="cm"># how agents’ work gets checked</span></p>
 <div class="o">
-  <p class="big"><s>“We should go skiing sometime.”</s><br>Saturday, 7 AM, Loveland Pass. Maya’s driving.</p>
-  <dl class="kv">
-    <dt>problem</dt><dd>Plans start in a group chat and stall there. Nobody wants to be the one to pick a time, a place, and who’s driving. Social apps make it worse: they reward posting, not showing up.</dd>
-    <dt>job</dt><dd>Post a plan or say you’re out now. Choose who sees it. Friends tap Join and get a chat, a calendar invite and directions. Every plan ends with someone texting “omw”.</dd>
-  </dl>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat .claude/skills/prerelease/SKILL.md</span></p>
-<div class="o">
-  <p>Agents write most of the code, so I don’t trust any single one. Before anything ships, one command in Claude Code runs the same review every time, with two model families so one model’s blind spots don’t decide what ships.</p>
+  <p>Agents write most of the code, so I don’t trust any single one. Before anything ships, one command in Claude Code runs the same review every time.</p>
 <pre class="code"><span class="mu"># /prerelease  (excerpts)</span>
 Never commit, merge, push, deploy or run migrations as part of
 this skill. Those wait for the user’s own “commit and push”.
@@ -216,74 +209,16 @@ this skill. Those wait for the user’s own “commit and push”.
    Re-rate the severity yourself; don’t keep a reviewer’s rating
    on trust.</pre>
   <ul class="list">
-    <li><span><span class="t">I tune the pipeline, not just run it.</span><span class="d">The first run’s Gemini review took 43 minutes on the high model. The next commit fixed the two findings it confirmed and capped Gemini at 15 minutes on a faster model.</span></span><span class="m">commit a680c4d</span></li>
+    <li><span><span class="t">Code checks, and judgment calls.</span><span class="d">Typecheck, lint, 64 unit tests and a smoke test of every main screen at phone and desktop width run as code. The security, correctness, offline and design reviews are agents’ judgment: I read the verdict, decide what gets fixed, and make every commit and deploy myself. The database rules have no automated tests yet.</span></span><span class="m">AGENTS.md</span></li>
+    <li><span><span class="t">What I haven’t measured.</span><span class="d">Two model families, on the bet that their blind spots differ. They share training data, so their agreement is weaker evidence than it looks, and the verifier is a model too. I don’t yet count what each reviewer raises against what holds up, or seed known bugs to see what they miss. Those are the next things to measure.</span></span><span class="m">open question</span></li>
+    <li><span><span class="t">Tuned for cost and time.</span><span class="d">The first run’s Gemini review took 43 minutes on the high model. I capped it at 15 minutes on a faster model and fixed the two findings that run confirmed. Whether the faster model misses more is not measured yet.</span></span><span class="m">commit a680c4d</span></li>
     <li><span><span class="t">Every change can be traced.</span><span class="d">40 of the 64 commits link the Claude Code session that made them, so any line can be followed back to the conversation that produced it.</span></span><span class="m">git log</span></li>
-    <li><span><span class="t">The docs are the agents’ brief.</span><span class="d">AGENTS.md, DESIGN.md, VALUES.md and SECURITY.md say what to build and how to check it, so every agent starts from the same rules.</span></span><span class="m">docs/</span></li>
   </ul>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat strengths.md</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">diff mockups/plan.png shipped/plan.png</span> <span class="cm"># the calls I make myself</span></p>
 <div class="o">
-  <p class="dim">What the rest of this page shows, and where the proof lives in the repo.</p>
-  <ul class="list">
-    <li><span><span class="t">Systems, not screens</span><span class="d">Every colour has one job: ember means happening now, and nothing else. About 40 line icons cover 111 activities. A component table says which part to use, and the words it may say.</span></span><span class="m">DESIGN.md</span></li>
-    <li><span><span class="t">Words as interface</span><span class="d">A voice guide, a glossary and house rules (never say “coming”). Five values drawn from Seneca, Aristotle and Confucius, each one a single line at the moment it matters, and never named.</span></span><span class="m">VALUES.md</span></li>
-    <li><span><span class="t">Ops rigour, shipped</span><span class="d">Every feature passes five checks before it ships: security, design, UI, performance, offline. Every schema change gets a dated security review: 11 so far, the first with 16 fixes, plus a list of accepted risks.</span></span><span class="m">SECURITY.md</span></li>
-  </ul>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat principles.md</span></p>
-<div class="o">
-  <p class="dim">Quiet, warm, outdoors, and always about meeting up. Four rules settled most arguments before they started.</p>
-  <ul class="list">
-    <li><span><span class="t">One clear action per place.</span><span class="d">Joining is one tap. No “Maybe”. Rarely used actions (copy, delete, report) live behind the ….</span></span></li>
-    <li><span><span class="t">Colour only where it means something.</span><span class="d">Ember is for out now. Spruce green is for going. Warnings are amber, never red and never ember.</span></span></li>
-    <li><span><span class="t">Like a friend texting, not a form.</span><span class="d">“What’s the plan?” “You in?” Name the person, the spot and the time: “Maya will see you at Eldo, Saturday at 7.”</span></span></li>
-    <li><span><span class="t">Plan for the bad day.</span><span class="d">Trip plans, emergency contacts, offline maps and a “not back yet” check. Then get out of the way and enjoy the good one.</span></span></li>
-  </ul>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open design/brand.png &amp;&amp; cat tokens.json</span></p>
-<div class="o">
-  <p class="dim">The brand sheet came first. Tokens, type and components live in code, and one document is the source of truth for me and for the agents.</p>
-  <div class="g2 wide" style="align-items:start">
-    <figure><a class="sh" href="img/m-brand.webp" data-name="brand and UI system" data-cap="The first thing made: logo, colour, type, icons, avatars, components, motion, voice and spacing. The app was still called “let’s go”." data-w="1280" data-h="1760"><div class="win"><img src="img/m-brand.webp" width="1280" height="1760" alt="The OMW brand and UI system sheet: logo, colour, type, icons, avatars, components, motion, voice and spacing" loading="lazy"></div></a></figure>
-    <div>
-<pre class="code nw" tabindex="0" role="region" aria-label="tokens.json"><span class="mu">{</span>
-  <span class="key">"paper"</span>:  <span class="sw" style="background:#FAF8F4"></span><span class="s">"#FAF8F4"</span>, <span class="mu">// every page</span>
-  <span class="key">"ink"</span>:    <span class="sw" style="background:#16241F"></span><span class="s">"#16241F"</span>, <span class="mu">// text, primary buttons</span>
-  <span class="key">"ember"</span>:  <span class="sw" style="background:#C2410C"></span><span class="s">"#C2410C"</span>, <span class="mu">// out now, and only that</span>
-  <span class="key">"plan"</span>:   <span class="sw" style="background:#2F6B4F"></span><span class="s">"#2F6B4F"</span>, <span class="mu">// going, planned</span>
-  <span class="key">"warn"</span>:   <span class="sw" style="background:#FBF1D9"></span><span class="s">"#FBF1D9"</span>, <span class="mu">// never red, never ember</span>
-  <span class="key">"type"</span>: <span class="mu">{</span>
-    <span class="key">"display"</span>: <span class="s">"Instrument Serif"</span>, <span class="mu">// one italic accent</span>
-    <span class="key">"text"</span>:    <span class="s">"Work Sans"</span>,        <span class="mu">// never under 13 px</span>
-  <span class="mu">},</span>
-  <span class="key">"space"</span>:   <span class="mu">[</span><span class="n">4, 8, 12, 16, 20, 24, 32</span><span class="mu">],</span>
-  <span class="key">"corners"</span>: <span class="mu">{</span> <span class="key">"field"</span>: <span class="n">16</span>, <span class="key">"card"</span>: <span class="n">22</span>, <span class="key">"sheet"</span>: <span class="n">28</span> <span class="mu">}</span>
-<span class="mu">}</span></pre>
-<pre class="code" style="margin-top:14px"><span class="mu">$ grep -n ember docs/DESIGN.md</span>
-<span class="n">35</span>: Ember means <span class="key">happening now</span>. Never use it for
-    errors, links or decoration.
-<span class="n">36</span>: Warnings are amber, never red and never ember.</pre>
-    </div>
-  </div>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/core-loop/</span></p>
-<div class="o">
-  <p class="dim">Make a plan, share it, join, show up. Every screen moves someone one step closer to meeting in person.</p>
-  <div class="g4 wide">
-    <figure><a class="sh ph" href="img/s-new-plan-phone.webp" data-name="1 · make a plan" data-cap="What, when, where, who. End time, extra days, meet-up and max guests wait under More options." data-w="390" data-h="844"><img src="img/s-new-plan-phone.webp" width="390" height="844" alt="Make a plan screen" loading="lazy"></a><figcaption><span class="b">1 · make a plan</span>What, when, where, who. The rest is folded away.</figcaption></figure>
-    <figure><a class="sh ph" href="img/m-p-15-posted-share-it.webp" data-name="2 · share it" data-cap="One share sheet: a preview of the message, then Messages, Mail, WhatsApp or a copied link." data-w="780" data-h="1688"><img src="img/m-p-15-posted-share-it.webp" width="780" height="1688" alt="Posted, share it screen" loading="lazy"></a><figcaption><span class="b">2 · share it</span>One share sheet, with a link preview.</figcaption></figure>
-    <figure><a class="sh ph" href="img/m-p-09-you-re-in.webp" data-name="3 · join" data-cap="One tap. “People are counting on you now. If that changes, say so early.”" data-w="780" data-h="1688"><img src="img/m-p-09-you-re-in.webp" width="780" height="1688" alt="You’re in screen" loading="lazy"></a><figcaption><span class="b">3 · join</span>One tap. “If that changes, say so early.”</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-plan-phone.webp" data-name="4 · show up" data-cap="A plan you’ve joined: the facts, then chat and crew notes, and a bar with your status, Can’t make it and Chat." data-w="390" data-h="844"><img src="img/s-plan-phone.webp" width="390" height="844" alt="Plan page on a phone" loading="lazy"></a><figcaption><span class="b">4 · show up</span>Chat, crew notes, rides, costs, directions.</figcaption></figure>
-  </div>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">diff mockups/plan.png shipped/plan.png</span></p>
-<div class="o">
-  <p class="dim">I designed 39 screens up front, then let real use edit them. The rule in the repo: when a mockup and the app disagree, the app wins, and the change gets written down.</p>
+  <p>Agents propose; I decide. Most of the advice I turn down is about mockups and layout: a screen an agent calls finished, I judge on the real app at phone and desktop width. I designed 39 screens up front, then let the working app edit them. The rule in the repo: when a mockup and the app disagree, the app wins, and the change gets written down.</p>
   <div class="g2 wide">
     <figure><a class="sh" href="img/m-d07-plan.webp" data-name="plan, mockup" data-cap="The original mockup, when the app was called “let’s go”: Maybe and Join side by side." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>mockup</span></div><img src="img/m-d07-plan.webp" width="1440" height="900" alt="Original mockup of the desktop plan page" loading="lazy"></div></a><figcaption><span class="b"><span class="key">---</span> mockup</span>The first design, called “let’s go”.</figcaption></figure>
     <figure><a class="sh" href="img/s-plan-desktop.webp" data-name="plan, shipped" data-cap="The shipped plan page: the meet-up and the spot as a timeline, conditions as fact rows, rides in the right column." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>omw.now</span></div><img src="img/s-plan-desktop.webp" width="1440" height="900" alt="Shipped desktop plan page" loading="lazy"></div></a><figcaption><span class="b"><span class="s">+++</span> shipped</span>What real use turned it into.</figcaption></figure>
@@ -298,50 +233,7 @@ this skill. Those wait for the user’s own “commit and push”.
   </ul>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/feed --phone --desktop</span></p>
-<div class="o">
-  <p class="dim">One codebase, two shapes. Under 1024 px: a bottom tab bar with a raised Create button, and sheets that rise from the bottom. Above it: a sidebar, a readable main column, and a right column for the one next action.</p>
-  <div class="gw wide">
-    <a class="sh" href="img/s-feed-desktop.webp" data-name="feed, desktop" data-cap="The sidebar replaces the tab bar; the right column shows your next plan with its forecast." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>omw.now</span></div><img src="img/s-feed-desktop.webp" width="1440" height="900" alt="Feed on desktop with the next plan in the right column" loading="lazy"></div></a>
-    <a class="sh ph" href="img/s-feed-phone.webp" data-name="feed, phone" data-cap="The same feed under 1024 px, with the tab bar and the raised Create button." data-w="390" data-h="844"><img src="img/s-feed-phone.webp" width="390" height="844" alt="Feed on a phone" loading="lazy"></a>
-  </div>
-  <p class="dim">Every release is checked at both widths in a headless browser: no console errors, no crash screens, no sideways scrolling on phones. The shipped screens on this page come from those checks.</p>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat voice.md</span></p>
-<div class="o">
-  <p class="dim">Warm, brief, specific. The copy is part of the design system, with a glossary the agents follow as strictly as the colour tokens.</p>
-  <table class="voice">
-    <thead><tr><th scope="col">instead of</th><th scope="col">OMW says</th></tr></thead>
-    <tbody>
-      <tr><td>No plans yet.</td><td>Quiet out there. Start something.</td></tr>
-      <tr><td>Join to unlock the group chat.</td><td>Join to sort out rides and gear with the crew.</td></tr>
-      <tr><td>Invalid code.</td><td>That code didn’t work. Check the newest email, or send a new code.</td></tr>
-      <tr><td>Location sharing enabled.</td><td>Shares the spot you name, never your live location.</td></tr>
-      <tr><td>Be reliable.</td><td>People are counting on you now. If that changes, say so early.</td></tr>
-    </tbody>
-  </table>
-  <p class="words"><span>crew</span><span>plan</span><span>you’re in</span><span>out now</span><span>see you there</span><span class="no">coming</span><span class="no">RSVP</span><span class="no">users</span><span class="no">events</span><span class="no">go live</span></p>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/trailhead/</span></p>
-<div class="o">
-  <p class="dim">I ski, climb and ride, so the details that matter at 5 AM in a parking lot with no signal are in the product.</p>
-  <div class="g3 wide" style="max-width:860px">
-    <figure><a class="sh ph" href="img/s-topo-phone.webp" data-name="topo map" data-cap="Maps around your plans save themselves for offline: the meet-up, the spot, and the climb between them." data-w="390" data-h="844"><img src="img/s-topo-phone.webp" width="390" height="844" alt="Full-screen topo map from the meet-up to Berthoud Pass, saved for offline" loading="lazy"></a><figcaption><span class="b">topo, saved for offline</span>Before you lose signal, not after.</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-out-now-phone.webp" data-name="out now" data-cap="The only ember button in the app. Add a trip plan: back-by time and who to tell. It ends on its own." data-w="390" data-h="844"><img src="img/s-out-now-phone.webp" width="390" height="844" alt="Out now screen: tell your crew you’re out" loading="lazy"></a><figcaption><span class="b">out now, with a trip plan</span>Back by, who to tell. Ends on its own.</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-costs-phone.webp" data-name="costs" data-cap="Who owes whom, in as few payments as possible. “Settle up quickly, and cover someone now and then.”" data-w="390" data-h="844"><img src="img/s-costs-phone.webp" width="390" height="844" alt="Costs screen: gas and breakfast burritos split three ways, with who owes whom" loading="lazy"></a><figcaption><span class="b">costs, settled</span>Fewest payments, one tap to mark paid.</figcaption></figure>
-  </div>
-  <dl class="kv">
-    <dt>reliable</dt><dd>Joined means yes.</dd>
-    <dt>technical</dt><dd>Know the route, the gear and the conditions.</dd>
-    <dt>safety</dt><dd>Plan for the bad day, then enjoy the good one.</dd>
-    <dt>team</dt><dd>Go at the pace of the slowest.</dd>
-    <dt>generous</dt><dd>An empty seat is the easiest thing to give.</dd>
-  </dl>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">sed -n '/the checklist/,/Offline/p' AGENTS.md</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">sed -n '/the checklist/,/Offline/p' AGENTS.md</span> <span class="cm"># what every feature passes before it ships</span></p>
 <div class="o">
 <pre class="code"><span class="mu">## Shipping a new feature: the checklist</span>
 
@@ -362,19 +254,71 @@ and deployed. Report the result of each.
 <span class="key">5.</span> <span class="b">Offline.</span> Works with no signal: last copy shown
    (`src/lib/offline.ts`), actions queued and sent later
    (`src/lib/outbox.ts`) or clearly unavailable, and nothing lost.</pre>
-  <p class="dim">There is no app server: the browser talks to Postgres directly, so the database rules are the only security boundary. I treat them like a finance system. Every schema change gets a dated review in SECURITY.md, 11 so far, with an accepted-risks list and a checklist for the next change.</p>
+  <p>There is no app server: the browser talks to Postgres directly, so the database rules are the only security boundary. Every schema change gets a dated review in SECURITY.md, 11 so far, with an accepted-risks list. The first review found a critical hole: the person a friend request went to could rewrite it to make anyone their friend, and see that stranger’s friends-only plans. The fix, from the migration:</p>
+<pre class="code"><span class="mu">-- 0013_security.sql: no forged or unwanted friendships</span>
+<span class="k">revoke update on</span> friendships <span class="k">from</span> anon, authenticated;
+<span class="k">grant update</span> (status) <span class="k">on</span> friendships <span class="k">to</span> authenticated;
+<span class="k">create policy</span> fr_accept <span class="k">on</span> friendships <span class="k">for update to</span> authenticated
+  <span class="k">using</span>      (friend_id = auth.uid() <span class="k">and</span> status = <span class="s">'pending'</span>)
+  <span class="k">with check</span> (friend_id = auth.uid() <span class="k">and</span> status = <span class="s">'accepted'</span>);</pre>
+  <p class="dim">Only the status can change, only from pending to accepted, and only by the person the request was sent to.</p>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">wc --summary</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/core-loop/</span> <span class="cm"># the product</span></p>
 <div class="o">
-  <div class="wc"><span class="b">16,751</span><span>lines of TypeScript</span><span class="b">40</span><span>migrations</span><span class="b">11</span><span>security reviews</span><span class="b">$0</span><span>a month to host</span></div>
+  <p class="dim">Make a plan, share it, join, show up. Every screen moves someone one step closer to meeting in person.</p>
+  <div class="g4 wide">
+    <figure><a class="sh ph" href="img/s-new-plan-phone.webp" data-name="1 · make a plan" data-cap="What, when, where, who. End time, extra days, meet-up and max guests wait under More options." data-w="390" data-h="844"><img src="img/s-new-plan-phone.webp" width="390" height="844" alt="Make a plan screen" loading="lazy"></a><figcaption><span class="b">1 · make a plan</span>What, when, where, who. The rest is folded away.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-posted-phone.webp" data-name="2 · share it" data-cap="Right after posting: what friends will see, and one tap to send it by Messages, Mail or a copied link." data-w="390" data-h="844"><img src="img/s-posted-phone.webp" width="390" height="844" alt="Posted screen: the plan’s share preview and ways to send it" loading="lazy"></a><figcaption><span class="b">2 · share it</span>A link preview, and one tap to send it.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-joined-phone.webp" data-name="3 · join" data-cap="One tap on Join. “People are counting on you now. If that changes, say so early.”" data-w="390" data-h="844"><img src="img/s-joined-phone.webp" width="390" height="844" alt="You’re in: the sheet that opens after tapping Join" loading="lazy"></a><figcaption><span class="b">3 · join</span>One tap. “If that changes, say so early.”</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-plan-phone.webp" data-name="4 · show up" data-cap="A plan you’ve joined: the facts, then chat and crew notes, and a bar with your status, Can’t make it and Chat." data-w="390" data-h="844"><img src="img/s-plan-phone.webp" width="390" height="844" alt="Plan page on a phone" loading="lazy"></a><figcaption><span class="b">4 · show up</span>Chat, crew notes, rides, costs, directions.</figcaption></figure>
+  </div>
+</div>
+
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open design/brand.png</span> <span class="cm"># the design system</span></p>
+<div class="o">
+  <p class="dim">The brand sheet came first. Tokens, type and components live in code, and one document is the source of truth for me and for the agents. Every colour has one job:</p>
+  <div class="g2 wide" style="align-items:start">
+    <figure><a class="sh" href="img/m-brand.webp" data-name="brand and UI system" data-cap="The first thing made: logo, colour, type, icons, avatars, components, motion, voice and spacing. The app was still called “let’s go”." data-w="1280" data-h="1760"><div class="win"><img src="img/m-brand.webp" width="1280" height="1760" alt="The OMW brand and UI system sheet: logo, colour, type, icons, avatars, components, motion, voice and spacing" loading="lazy"></div></a></figure>
+    <div>
+<pre class="code" style="margin-top:14px"><span class="mu">$ grep -n ember docs/DESIGN.md</span>
+<span class="n">35</span>: Ember means <span class="key">happening now</span>. Never use it for
+    errors, links or decoration.
+<span class="n">36</span>: Warnings are amber, never red and never ember.</pre>
+  <table class="voice">
+    <thead><tr><th scope="col">instead of</th><th scope="col">OMW says</th></tr></thead>
+    <tbody>
+      <tr><td>No plans yet.</td><td>Quiet out there. Start something.</td></tr>
+      <tr><td>Invalid code.</td><td>That code didn’t work. Check the newest email, or send a new code.</td></tr>
+      <tr><td>Location sharing enabled.</td><td>Shares the spot you name, never your live location.</td></tr>
+    </tbody>
+  </table>
+  <p class="dim">The copy is part of the system too: a glossary the agents follow as strictly as the colour tokens.</p>
+    </div>
+  </div>
+</div>
+
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/trailhead/</span> <span class="cm"># built by someone who goes</span></p>
+<div class="o">
+  <p class="dim">I ski, climb and ride, so the details that matter at 5 AM in a parking lot with no signal are in the product.</p>
+  <div class="g3 wide" style="max-width:860px">
+    <figure><a class="sh ph" href="img/s-topo-phone.webp" data-name="topo map" data-cap="Maps around your plans save themselves for offline: the meet-up, the spot, and the climb between them." data-w="390" data-h="844"><img src="img/s-topo-phone.webp" width="390" height="844" alt="Full-screen topo map from the meet-up to Berthoud Pass, saved for offline" loading="lazy"></a><figcaption><span class="b">topo, saved for offline</span>Before you lose signal, not after.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-out-now-phone.webp" data-name="out now" data-cap="The only ember button in the app. Add a trip plan: back-by time and who to tell. It ends on its own." data-w="390" data-h="844"><img src="img/s-out-now-phone.webp" width="390" height="844" alt="Out now screen: tell your crew you’re out" loading="lazy"></a><figcaption><span class="b">out now, with a trip plan</span>Back by, who to tell. Ends on its own.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-costs-phone.webp" data-name="costs" data-cap="Who owes whom, in as few payments as possible. “Settle up quickly, and cover someone now and then.”" data-w="390" data-h="844"><img src="img/s-costs-phone.webp" width="390" height="844" alt="Costs screen: gas and breakfast burritos split three ways, with who owes whom" loading="lazy"></a><figcaption><span class="b">costs, settled</span>Fewest payments, one tap to mark paid.</figcaption></figure>
+  </div>
+</div>
+
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">wc --summary</span> <span class="cm"># the numbers</span></p>
+<div class="o">
+  <div class="wc"><span class="b">1</span><span>week to build</span><span class="b">3</span><span>people, 2 plans</span><span class="b">64</span><span>unit tests</span><span class="b">11</span><span>security reviews</span></div>
   <p class="dim">Expo SDK 58 · React Native Web · Supabase (Postgres, Auth, Realtime, Storage) · Cloudflare Workers · MapLibre + OpenFreeMap · Photon · Resend</p>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open --walkthrough</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open --walkthrough</span> <span class="cm"># get in touch</span></p>
 <div class="o">
-  <p>Want the walkthrough? I’ll go through the repo docs, a /prerelease run and the app itself. Reach me on <a href="https://www.linkedin.com/in/melvingruesbeck/" target="_blank" rel="noopener">LinkedIn</a> or <a href="https://x.com/melvingruesbeck" target="_blank" rel="noopener">X</a>.</p>
-  <p class="dim">OMW is invite only and grows one friend at a time. Ask, and I’ll send you one.</p>
+  <p>I’m looking for a role where I put AI agents to work across operations, design and communications. Want the walkthrough? I’ll go through the repo docs, a /prerelease run and the app itself.</p>
+  <p class="lk"><span hidden><a class="em" href="#">Email</a>&nbsp; </span><a href="https://www.linkedin.com/in/melvingruesbeck/" target="_blank" rel="noopener">LinkedIn</a>&nbsp; <a href="https://x.com/melvingruesbeck" target="_blank" rel="noopener">X</a></p>
+  <p class="dim">OMW is invite only and grows one friend at a time. Reviewing my work? Ask, and I’ll send you a guest invite.</p>
   <p><a class="cta" href="https://omw.now" target="_blank" rel="noopener"><i></i>omw.now</a></p>
 </div>
 
@@ -403,6 +347,11 @@ and deployed. Report the result of each.
   dlg.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
   // focus goes back to the screen that opened the viewer, wherever the arrows have stepped since
   dlg.addEventListener('close', () => (opener || shots[cur]).focus({ preventScroll: true }));
+  // the Email link, as on the home page: the address is in no file, so harvesters don't find it. the link is shown by this
+  // script, and its address is put together when it is pointed at, focused or touched
+  for (const a of document.querySelectorAll('a.em')) a.parentNode.hidden = false;
+  const mail = (e) => { const a = e.target.closest && e.target.closest('a.em'); if (a && a.protocol !== 'mailto:') a.href = 'mailto:' + ['hello', 'mgruesbeck.sh'].join('@'); };
+  for (const t of ['pointerover', 'focusin', 'touchstart']) addEventListener(t, mail, { passive: true });
 </script>
 <script>
   // the service worker (sw.js) keeps a copy of each page, so the site opens on a slow connection and offline
