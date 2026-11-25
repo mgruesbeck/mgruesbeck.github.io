@@ -210,6 +210,7 @@ this skill. Those wait for the user’s own “commit and push”.
    on trust.</pre>
   <ul class="list">
     <li><span><span class="t">Code checks, and judgment calls.</span><span class="d">Typecheck, lint, 64 unit tests and a smoke test of every main screen at phone and desktop width run as code. The security, correctness, offline and design reviews are agents’ judgment: I read the verdict, decide what gets fixed, and make every commit and deploy myself. The database rules have no automated tests yet.</span></span><span class="m">AGENTS.md</span></li>
+    <li><span><span class="t">Simulated users before real ones.</span><span class="d">Four agents used OMW as a friend crew on three trips: a multi-day backpacking trip, a day climb and an evening meet-up. They logged 40 findings. Engineer agents checked each one against the code, designer agents mocked up a fix for each, and a final review caught proposed fixes that would have leaked private data before anyone built them. Eight are fixed so far, and twelve decisions came back to me. Simulated testers find what a fresh pair of eyes would; they can’t tell me what people want, so real users still decide.</span></span><span class="m">crew test</span></li>
     <li><span><span class="t">What I haven’t measured.</span><span class="d">Two model families, on the bet that their blind spots differ. They share training data, so their agreement is weaker evidence than it looks, and the verifier is a model too. I don’t yet count what each reviewer raises against what holds up, or seed known bugs to see what they miss. Those are the next things to measure.</span></span><span class="m">open question</span></li>
     <li><span><span class="t">Tuned for cost and time.</span><span class="d">The first run’s Gemini review took 43 minutes on the high model. I capped it at 15 minutes on a faster model and fixed the two findings that run confirmed. Whether the faster model misses more is not measured yet.</span></span><span class="m">commit a680c4d</span></li>
     <li><span><span class="t">Every change can be traced.</span><span class="d">40 of the 64 commits link the Claude Code session that made them, so any line can be followed back to the conversation that produced it.</span></span><span class="m">git log</span></li>
@@ -225,11 +226,12 @@ this skill. Those wait for the user’s own “commit and push”.
   </div>
 <pre class="code"><span class="hh">@@ the app wins when it disagrees with the mockup @@</span>
 <span class="del">- let’s go</span><span class="add">+ OMW: the name is the promise, every plan ends with “omw”</span><span class="del">- [Go live]</span><span class="add">+ [Out now]    “go live” sounds like social media</span><span class="del">- [Maybe] [Join]</span><span class="add">+ [Join]       one clear answer; Can’t go is on the plan page</span><span class="del">- a conditions sheet</span><span class="add">+ fact rows: meet-up, forecast, drive time, sunrise</span><span class="del">- host buttons on the page</span><span class="add">+ one … menu over the map</span><span class="del">- crew radio in the nav</span><span class="add">+ cut. chat is text again</span></pre>
-  <p class="dim">What I cut, and why:</p>
+  <p class="dim">What I cut, and what I’m holding back:</p>
   <ul class="list">
     <li><span><span class="t">Garmin inReach check-ins</span><span class="d">Built, reviewed and removed the same day, with its tables and stored passwords: phones’ satellite SOS already covers emergencies.</span></span><span class="m">migration 0040</span></li>
     <li><span><span class="t">Crew radio</span><span class="d">Push-to-talk shipped, then came out of the app the next day. Chat is text again.</span></span><span class="m">DESIGN.md</span></li>
-    <li><span><span class="t">Maybe</span><span class="d">A plan needs a yes or a no. Guests get Join and Can’t go.</span></span><span class="m">DESIGN.md</span></li>
+    <li><span><span class="t">Maybe</span><span class="d">A plan needs a yes or a no. Guests get Join and Can’t go. The simulated crew asked for Maybe back; I kept it out.</span></span><span class="m">DESIGN.md</span></li>
+    <li><span><span class="t">What I’m not building yet</span><span class="d">My next idea needs hardware, so it’s planned in gates, not as a launch: a field test with off-the-shelf parts and no code comes first, and each later step waits for the last to prove itself.</span></span><span class="m">roadmap</span></li>
   </ul>
 </div>
 
