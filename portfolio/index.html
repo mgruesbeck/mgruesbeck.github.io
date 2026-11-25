@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at 'sha256-RyK7SxfiiVOxIcOfr4sZOf2eUc4zCwDUkti5gdUg05g=' 'sha256-Kh+ynjMe0IMPZnbBL0U4N+qcH+xJkWOGsK65uRdYiEU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mgruesbeck.goatcounter.com; connect-src 'self' https://mgruesbeck.goatcounter.com; font-src 'self'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 
   <!-- title -->
   <title>OMW · Melvin Gruesbeck</title>
@@ -50,6 +51,8 @@ h1, h2, p, figure, pre { margin: 0; }
   --ember: #C2410C; --spruce: #16241F; --plan: #2F6B4F; }
 body { background: var(--bg); color: var(--ink); font: 400 13.5px/1.75 var(--mono); font-stretch: 87.5%; }
 a { color: var(--cyan); text-decoration: none; transition: color .15s, background .15s; } a:hover { color: var(--violet); }
+/* a link inside a sentence is tall enough for a finger, as on the home page */
+.o > p a:not(.cta) { padding: 4px 0; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 2px; }
 ::selection { background: var(--hl); color: var(--ink); }
 .u { color: var(--green); } .w { color: var(--blue); } .ar { color: var(--green); }
@@ -108,6 +111,7 @@ figcaption .st { color: var(--green); } figcaption .st.m { color: var(--amber); 
 .code .add { display: block; color: var(--green); background: #eff7ef; margin: 0 -18px; padding: 0 18px; }
 .code .hh { color: var(--cyan); }
 .code.nw { white-space: pre; overflow-x: auto; overflow-wrap: normal; }
+.code.nw:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .sw { display: inline-block; width: 1.05em; height: 1.05em; border-radius: 3px; vertical-align: -3px; margin-right: 6px; border: 1px solid rgba(0,0,0,.08); }
 
 /* grids of screens */
@@ -115,6 +119,8 @@ figcaption .st { color: var(--green); } figcaption .st.m { color: var(--amber); 
 .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .gw { display: grid; grid-template-columns: 3fr 1fr; gap: 20px; align-items: end; }
+/* a grid item may shrink below its widest line, so a code block scrolls inside its box instead of widening the page */
+.g2 > *, .g3 > *, .g4 > *, .gw > * { min-width: 0; }
 @media (max-width: 860px) { .g4 { grid-template-columns: 1fr 1fr; gap: 24px 14px; } .g3 { grid-template-columns: 1fr 1fr; gap: 24px 14px; } }
 @media (max-width: 640px) { .g2 { grid-template-columns: 1fr; } .gw { grid-template-columns: 1fr 1fr; } .gw > :first-child { grid-column: 1 / -1; } }
 
@@ -243,7 +249,7 @@ this skill. Those wait for the user’s own “commit and push”.
   <div class="g2 wide" style="align-items:start">
     <figure><a class="sh" href="img/m-brand.webp" data-name="brand and UI system" data-cap="The first thing made: logo, colour, type, icons, avatars, components, motion, voice and spacing. The app was still called “let’s go”." data-w="1280" data-h="1760"><div class="win"><img src="img/m-brand.webp" width="1280" height="1760" alt="The OMW brand and UI system sheet: logo, colour, type, icons, avatars, components, motion, voice and spacing" loading="lazy"></div></a></figure>
     <div>
-<pre class="code nw"><span class="mu">{</span>
+<pre class="code nw" tabindex="0" role="region" aria-label="tokens.json"><span class="mu">{</span>
   <span class="key">"paper"</span>:  <span class="sw" style="background:#FAF8F4"></span><span class="s">"#FAF8F4"</span>, <span class="mu">// every page</span>
   <span class="key">"ink"</span>:    <span class="sw" style="background:#16241F"></span><span class="s">"#16241F"</span>, <span class="mu">// text, primary buttons</span>
   <span class="key">"ember"</span>:  <span class="sw" style="background:#C2410C"></span><span class="s">"#C2410C"</span>, <span class="mu">// out now, and only that</span>
@@ -389,12 +395,18 @@ and deployed. Report the result of each.
     dlg.querySelector('.cap .c').textContent = d.cap;
     if (!dlg.open) dlg.showModal();
   };
-  shots.forEach((a, i) => a.addEventListener('click', (e) => { e.preventDefault(); show(i); }));
+  let opener = null;
+  shots.forEach((a, i) => a.addEventListener('click', (e) => { e.preventDefault(); opener = a; show(i); }));
   dlg.querySelectorAll('.nav button').forEach((b) => b.addEventListener('click', () => show(cur + +b.dataset.d)));
   dlg.querySelector('.x').addEventListener('click', () => dlg.close());
   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
-  dlg.addEventListener('close', () => shots[cur].focus({ preventScroll: true }));
+  // focus goes back to the screen that opened the viewer, wherever the arrows have stepped since
+  dlg.addEventListener('close', () => (opener || shots[cur]).focus({ preventScroll: true }));
+</script>
+<script>
+  // the service worker (sw.js) keeps a copy of each page, so the site opens on a slow connection and offline
+  if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
 </script>
 </body>
 </html>

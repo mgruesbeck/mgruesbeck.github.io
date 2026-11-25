@@ -4,9 +4,8 @@
 explorations/
 # the resume stays local; the site carries the public version
 resume/
-# project originals and text stay local; only the encrypted vault is published
-projects/*/
-!projects/vault/
+# old project originals, kept locally and never published
+projects/
 # agreements and signed client documents stay local
 contracts/
 # the checks' browser driver is installed locally by make check-setup

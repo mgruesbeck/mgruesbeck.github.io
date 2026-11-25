@@ -13,6 +13,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { dirname, extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { webkit } from "playwright";
+import { PAGES, stale } from "./csp.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".json": "application/json",
@@ -42,6 +43,9 @@ const open = async (path, [width, height], opts = {}) => {
   page.away = []; page.errs = [];
   await page.route((u) => u.hostname !== "127.0.0.1", (r) => { page.away.push(r.request().url()); r.abort(); });
   page.on("pageerror", (e) => page.errs.push(e.message));
+  // a load or script the page's Content-Security-Policy blocks is an error too
+  await page.addInitScript(() => addEventListener("securitypolicyviolation", (e) => console.error(`CSP blocked ${e.blockedURI || "inline"} (${e.violatedDirective})`)));
+  page.on("console", (m) => { if (m.type() === "error" && m.text().startsWith("CSP blocked")) page.errs.push(m.text()); });
   await page.goto(BASE + path, { waitUntil: "load" });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(400);
@@ -95,7 +99,9 @@ for (const path of ["/", "/consulting/", "/portfolio/"]) {
 }
 
 await check("/consulting/ fits without scrolling inside a pane", async (want) => {
-  for (const size of [DESK, [1728, 1117], [1280, 720], [1200, 600]]) {
+  // every size is tall enough for the window layout (640 px or more), or there would be no pane to overflow. the short
+  // ones fit because the panes are drawn smaller there (fit() in the page); 1080×640 is the hardest, at the 0.85 floor
+  for (const size of [DESK, [1728, 1117], [1280, 720], [1366, 640], [1080, 640]]) {
     const page = await open("/consulting/", size);
     const over = await page.evaluate(() => ["file", ".pn .o", "quote", ".qp"].reduce((o, v, i, a) => (i % 2 ? o : { ...o, [v]: document.querySelector(a[i + 1]).scrollHeight - document.querySelector(a[i + 1]).clientHeight }), {}));
     want(over.file === 0 && over.quote === 0, `${size.join("×")}: file over by ${over.file}px, quote over by ${over.quote}px`);
@@ -246,13 +252,33 @@ await check("print layout", async (want) => {
   await page.context().close();
 });
 
+// on a touch screen the tap's own hover and focus come first; the tap must still leave the marker and its line lit
+await check("/ gear markers by touch", async (want) => {
+  const page = await open("/", PHONE);
+  const lit = (i) => page.evaluate((i) => [document.querySelector(`.hs[data-i="${i}"]`), document.querySelector(`[data-gear="${i}"]`)].every((e) => e.classList.contains("on")), i);
+  const dot = page.locator('.hs[data-i="0"]');
+  await dot.scrollIntoViewIfNeeded(); await dot.tap();
+  want(await lit(0), "tapping a marker does not light it and its line");
+  await dot.tap();
+  want(!(await lit(0)), "a second tap on the marker does not turn it off");
+  await page.locator('[data-gear="2"]').tap();
+  want(await lit(2), "tapping a gear.json line does not light it and its marker");
+  await page.context().close();
+});
+
+// each page's policy carries the hashes of its own inline scripts, so an edited script needs `make csp`
+await check("content security policy is up to date", async (want) => {
+  for (const f of Object.keys(PAGES)) want(!stale(f), `${f}: run make csp`);
+});
+
 await check("search engines", async (want) => {
   const map = existsSync(join(ROOT, "sitemap.xml")) ? text("sitemap.xml") : "";
   want(!/name="robots"[^>]*noindex/.test(text("consulting/index.html")), "the consulting page is marked noindex");
   want(!/name="robots"[^>]*noindex/.test(text("index.html")), "the home page is marked noindex");
-  want(/name="robots"[^>]*noindex/.test(text("projects/index.html")), "the projects page must stay noindex");
-  want(map.includes("<loc>https://mgruesbeck.sh/</loc>") && map.includes("<loc>https://mgruesbeck.sh/consulting/</loc>"), "sitemap.xml does not list both pages");
-  want(!/projects/.test(map + (existsSync(join(ROOT, "robots.txt")) ? text("robots.txt") : "")), "sitemap.xml or robots.txt names the projects page");
+  want(!/name="robots"[^>]*noindex/.test(text("portfolio/index.html")), "the portfolio page is marked noindex");
+  // the sitemap lists the three public pages and nothing else
+  const locs = [...map.matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) => m[1]).sort().join(" ");
+  want(locs === "https://mgruesbeck.sh/ https://mgruesbeck.sh/consulting/ https://mgruesbeck.sh/portfolio/", `sitemap.xml lists ${locs || "nothing"}, not the three public pages`);
   want(existsSync(join(ROOT, "robots.txt")) && text("robots.txt").includes("Sitemap: https://mgruesbeck.sh/sitemap.xml"), "robots.txt does not point to the sitemap");
 });
 
