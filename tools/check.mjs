@@ -63,7 +63,7 @@ const box = (page, sel) => page.evaluate((s) => { const r = document.querySelect
 const near = (a, b, by = 1) => a.every((v, i) => Math.abs(v - b[i]) <= by);
 const text = (file) => readFileSync(join(ROOT, file), "utf8");
 
-for (const path of ["/", "/consulting/"]) {
+for (const path of ["/", "/consulting/", "/portfolio/"]) {
   await check(`${path} loads clean`, async (want) => {
     for (const size of [DESK, PHONE]) {
       const page = await open(path, size);
