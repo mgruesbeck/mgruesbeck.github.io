@@ -9,7 +9,7 @@
   <title>OMW · Melvin Gruesbeck</title>
 
   <!-- meta tags -->
-  <meta name="description" content="OMW turns “we should hang out” into a time and a place. I designed, wrote and built all of it, from the brand sheet to the database rules, working with AI agents in Claude Code.">
+  <meta name="description" content="OMW: one person and a team of AI agents, eight days, a product, a brand and a launch plan. How I run operations, design and communications with AI agents.">
   <meta name="author" content="Melvin Gruesbeck">
   <meta name="theme-color" content="#fafafa">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Melvin Gruesbeck">
   <meta property="og:title" content="OMW · Melvin Gruesbeck">
-  <meta property="og:description" content="A small social app that turns “we should hang out” into a time and a place. Product, brand, interface, copy and code.">
+  <meta property="og:description" content="One person and a team of AI agents. Eight days. A product, a brand and a launch plan.">
   <meta property="og:url" content="https://mgruesbeck.sh/portfolio/">
   <meta property="og:image" content="https://mgruesbeck.sh/assets/portfolio-og.jpg">
   <meta property="og:image:width" content="1200">
@@ -165,6 +165,38 @@ figcaption .st { color: var(--green); } figcaption .st.m { color: var(--amber); 
 .viewer .nav { display: flex; gap: 4px; flex: none; }
 .viewer .nav button { all: unset; cursor: pointer; color: var(--muted); padding: 0 4px; }
 .viewer .nav button:hover, .viewer .nav button:focus-visible { color: var(--cyan); }
+
+/* steps with a gate or an outcome under each: the process and the launch stages */
+.gates li { display: grid; grid-template-columns: 3ch 1fr; gap: 0 2ch; padding: 10px 0; border-top: 1px solid var(--rule); }
+.gates li:first-child { border-top: 0; padding-top: 0; }
+.gates .st { color: var(--violet); font-weight: 600; font-stretch: 100%; }
+.gates .t { color: #202227; }
+.gates .g { display: block; color: var(--soft); font-size: 12.5px; }
+.gates li.now .st::after { content: " ◂"; color: var(--ember); }
+.never li { padding-left: 4ch; text-indent: -4ch; color: var(--soft); }
+.never li::before { content: "[ ] "; color: var(--accent); }
+
+/* the five values, with the idea each rests on */
+.vals li { display: grid; grid-template-columns: 11ch 1fr; gap: 0 2ch; padding: 10px 0; border-top: 1px solid var(--rule); }
+.vals li:first-child { border-top: 0; padding-top: 0; }
+.vals .t { color: #202227; font-weight: 600; font-stretch: 100%; }
+.vals .src { display: block; color: var(--muted); font-size: 12px; }
+@media (max-width: 560px) { .vals li { grid-template-columns: 1fr; } }
+
+/* the testers' scores: the table scrolls inside its box on a phone */
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: #fff; }
+.tbl:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.tbl table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; min-width: 560px; }
+.tbl th, .tbl td { text-align: left; padding: 7px 12px; border-top: 1px solid var(--rule); white-space: nowrap; }
+.tbl thead th { border-top: 0; color: var(--soft); font-weight: 400; }
+.tbl .num { text-align: right; }
+.tbl tr.avg td { color: #202227; font-weight: 600; font-stretch: 100%; background: #f6f6f7; }
+.tbl .lo { color: var(--accent); }
+/* six numbers: three to a row, two on a phone */
+.wc { grid-template-columns: repeat(3, max-content 1fr); }
+@media (max-width: 640px) { .wc { grid-template-columns: max-content 1fr; } }
+.gates { list-style: none; margin: 0; padding: 0; }
+.g2 .chk, .g2 .never, .g2 .list { margin-top: 8px; }
   </style>
 </head>
 
@@ -173,154 +205,178 @@ figcaption .st { color: var(--green); } figcaption .st.m { color: var(--amber); 
 <p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~</span> <span class="ar">❯</span> </span><span class="cmd">cd portfolio/omw.now &amp;&amp; cat README.md</span> <span class="cm"># what this is</span></p>
 <div class="o">
   <h1>omw<i>.</i></h1>
-  <p class="dim">a small social app for making plans with friends</p>
-  <p class="big">From <s>“we should hang out”</s> to a time and a place.</p>
-  <p class="lead">I built the business infrastructure at Profluent, an AI startup, as it grew from a single room through its $35M and $106M rounds. Next I want to bring AI agents to operations, design and communications. OMW is where I tested how I’d run that work with agents: written rules they follow, a review that checks their output, and a person who decides what ships.</p>
+  <p class="dim">an app for making plans with friends, in person</p>
+  <p class="big">One person and a team of AI agents. Eight days. A product, a brand and a launch plan.</p>
+  <p class="lead">I ran business infrastructure at Profluent, an AI startup, through its $35M and $106M rounds. OMW shows how I’d run operations, design and communications with AI agents: clear rules, fast rounds of testing, and every decision made by a person.</p>
   <p class="lk"><span hidden><a class="em" href="#">Email me for a walkthrough</a></span></p>
-  <p>The app itself: you post a plan (“skiing at Berthoud Pass on Saturday”) or say you’re out now, choose who sees it, and friends tap Join. People who join get a group chat, a calendar invite and directions. I designed, wrote and built all of it, from the brand sheet to the database rules, working with AI agents in Claude Code.</p>
+  <p>OMW turns “we should hang out” into a plan. Start one (a game night, a cookout, a club ride), drop the link in the group chat, and friends tap I’m in. No account needed to start. Everyone who joins gets a chat, a calendar invite, rides, a shared list and directions.</p>
   <div class="wide hero">
-    <a class="sh" href="img/s-plan-desktop.webp" data-name="plan, desktop" data-cap="A mountain plan: the meet-up, then the spot, the forecast, the drive and sunrise. The right column holds your ride and the one next action." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>omw.now</span></div><img src="img/s-plan-desktop.webp" width="1440" height="900" alt="OMW plan page on desktop: Backcountry Skiing at Berthoud Pass, with a topo map, a 6 AM meet-up, the forecast, drive time and sunrise, and Maya’s car in the right column" fetchpriority="high"></div></a>
-    <a class="sh ph" href="img/s-feed-phone.webp" data-name="feed, phone" data-cap="The feed on a phone: plans from your crew by day, with forecast and who’s going." data-w="390" data-h="844"><img src="img/s-feed-phone.webp" width="390" height="844" alt="OMW feed on a phone"></a>
+    <a class="sh" href="img/s-landing-desktop.webp" data-name="landing page" data-cap="The landing page: “Fewer followers. Better friends.” A plan being typed over a public-domain painting chosen for the season." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>omw.now</span></div><img src="img/s-landing-desktop.webp" width="1440" height="900" alt="The OMW landing page with the headline “Fewer followers. Better friends.” and a club ride plan being typed over a public-domain painting" fetchpriority="high"></div></a>
+    <a class="sh ph" href="img/s-link-phone.webp" data-name="plan link, phone" data-cap="A shared plan link: the area shows, the exact spot shows once you’re in." data-w="390" data-h="844"><img src="img/s-link-phone.webp" width="390" height="844" alt="A shared plan link on a phone: a Tilden ridge hike that shows only the area, with I’m in and Can’t go buttons"></a>
   </div>
   <dl class="kv">
-    <dt>built</dt><dd>In one week, November 2026, by me with Claude Code</dd>
-    <dt>used by</dt><dd>3 people and 2 plans so far: I haven’t made a growth push yet</dd>
-    <dt>role</dt><dd>Solo: product, brand, interface, copy, engineering, security</dd>
-    <dt>stack</dt><dd>Expo + React Native Web, Supabase Postgres, Cloudflare</dd>
+    <dt>built</dt><dd>November 19–26, 2026, solo, with Claude Code</dd>
+    <dt>role</dt><dd>Product, launch, brand, interface, copy, engineering, security</dd>
+    <dt>status</dt><dd>Ready for an invite-only release with a waitlist. Open sign-up is built and waits on legal review.</dd>
+    <dt>stack</dt><dd>Expo + React Native Web, Supabase Postgres, Cloudflare Workers</dd>
   </dl>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat .claude/skills/prerelease/SKILL.md</span> <span class="cm"># how agents’ work gets checked</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">git log --oneline --reverse</span> <span class="cm"># how it was made</span></p>
 <div class="o">
-  <p>Agents write most of the code, so I don’t trust any single one. Before anything ships, one command in Claude Code runs the same review every time.</p>
-<pre class="code"><span class="mu"># /prerelease  (excerpts)</span>
-Never commit, merge, push, deploy or run migrations as part of
-this skill. Those wait for the user’s own “commit and push”.
+  <p class="big">Build it. Test it. Decide. Build it again.</p>
+  <p>OMW went through twelve rounds. In each one, AI agents played real users and specialist reviewers. I read the results, made the calls, and the next round started from what the last one found.</p>
+  <ol class="gates">
+    <li><span class="st">1</span><span><span class="t">A working first version in a week</span><span class="g">Features that didn’t earn their place were cut within a day</span></span></li>
+    <li><span class="st">2</span><span><span class="t">Four agents use it as a group of friends on three trips</span><span class="g">40 findings, all addressed in the next build</span></span></li>
+    <li><span class="st">3</span><span><span class="t">Ten landing page concepts, reviewed by six specialists and scored by ten visitors</span><span class="g">The outdoor pitch scored 6.4 of 10 on desire</span></span></li>
+    <li><span class="st">4</span><span><span class="t">A sharper story: get people off their phones and into the real world</span><span class="g">The page now leads with “Fewer followers. Better friends.”</span></span></li>
+    <li><span class="st">5</span><span><span class="t">Ten testers, then reviews from marketing, engineering, design, content, legal and security</span><span class="g">Every issue got a recommended fix</span></span></li>
+    <li><span class="st">6</span><span><span class="t">The launch build</span><span class="g">Waitlist, repeating plans, host approval, plans for families</span></span></li>
+    <li><span class="st">7</span><span><span class="t">Ten testers on the live app</span><span class="g">15 of 16 findings fixed the same evening</span></span></li>
+  </ol>
+  <p class="dim">Steps 3 to 7 took about 30 hours.</p>
+</div>
 
-<span class="key">1.</span> Start the automatic review: checks, the smoke test and an
-   independent Gemini review, in the background.
-<span class="key">3.</span> Focused Claude reviews (parallel, at most 4 agents):
-   security · correctness · offline and performance · design.
-   Give each agent the list of changed files and the base commit,
-   <span class="s">never your own opinion of the change.</span>
-<span class="key">5.</span> Verify every finding. Open the file at the line and trace the
-   scenario through the real code. Mark it <span class="s">confirmed</span>, <span class="n">plausible</span>
-   or <span class="mu">rejected</span>. When both Gemini and Claude found the same
-   problem independently, say so: that’s a strong signal.
-   Re-rate the severity yourself; don’t keep a reviewer’s rating
-   on trust.</pre>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat tests/live-app/FINDINGS.md</span> <span class="cm"># testing with simulated users</span></p>
+<div class="o">
+  <p>Before the launch, ten tester agents used the live app on a phone and scored it. Each had a role: a weekly game night host, a parent bringing two kids, a 63-year-old using large text, someone with no invite at all.</p>
+  <div class="tbl" tabindex="0" role="region" aria-label="Scores from ten simulated testers, out of 10"><table>
+    <thead><tr><th>tester</th><th>role</th><th class="num">clarity</th><th class="num">getting in</th><th class="num">useful</th><th class="num">trust</th></tr></thead>
+    <tbody>
+      <tr><td>Kai, 24</td><td>stranger with a plan link</td><td class="num">7</td><td class="num">8</td><td class="num">8</td><td class="num">8</td></tr>
+      <tr><td>Helen, 63</td><td>large text, privacy</td><td class="num">7</td><td class="num">9</td><td class="num">8</td><td class="num">8</td></tr>
+      <tr><td>Ana, 29</td><td>no invite</td><td class="num">6</td><td class="num lo">3</td><td class="num">7</td><td class="num">7</td></tr>
+      <tr><td>Marcus, 41</td><td>weekly game night host</td><td class="num">7</td><td class="num">9</td><td class="num">7</td><td class="num">8</td></tr>
+      <tr><td>Marisol, 50</td><td>weekly trivia, not techy</td><td class="num">6</td><td class="num">9</td><td class="num lo">5</td><td class="num">8</td></tr>
+      <tr><td>Kenji, 44</td><td>parent host, 12 families</td><td class="num">7</td><td class="num">9</td><td class="num">6</td><td class="num">8</td></tr>
+      <tr><td>+ 4 more</td><td>friend invite, waitlist, monthly host, parent guest</td><td></td><td></td><td></td><td></td></tr>
+      <tr class="avg"><td>average of 10</td><td></td><td class="num">6.9</td><td class="num">8.0</td><td class="num">7.0</td><td class="num">7.7</td></tr>
+    </tbody>
+  </table></div>
+  <p>They found 16 problems. Two mattered most: the waitlist email promised repeating plans that the sign-up form didn’t offer, and an automatic title could show a venue’s exact name on a public link. The fixes went out that evening in four parallel branches.</p>
+  <p class="dim">Simulated testers catch friction quickly. Real users decide what the product becomes.</p>
+</div>
+
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">git diff v0.1..v1.0 -- docs/</span> <span class="cm"># the decisions that shaped it</span></p>
+<div class="o">
+  <p>The biggest decision was what OMW is for. It started as an app for outdoor trips. Testing showed that the plans people struggle to make are dinners, game nights and Saturday rides. OMW now covers plans of every kind, and the outdoor tools appear when a plan needs them.</p>
+<pre class="code"><span class="hh">@@ first version → launch @@</span>
+<span class="del">- “skiing at Berthoud Pass on Saturday”</span><span class="add">+ “Thursday game night, every Thursday”</span><span class="del">- sign up, then make a plan</span><span class="add">+ start a plan, no account needed</span><span class="del">- [Join]</span><span class="add">+ [I’m in]        joining means yes</span><span class="del">- the host sees who can’t go</span><span class="add">+ “Rosa won’t be told if you can’t go.”</span><span class="del">- “1 going” on a stranger’s preview</span><span class="add">+ “a few going” until 3 people are in</span></pre>
+  <p class="b">What I cut</p>
   <ul class="list">
-    <li><span><span class="t">Code checks, and judgment calls.</span><span class="d">Typecheck, lint, 64 unit tests and a smoke test of every main screen at phone and desktop width run as code. The security, correctness, offline and design reviews are agents’ judgment: I read the verdict, decide what gets fixed, and make every commit and deploy myself.</span></span><span class="m">AGENTS.md</span></li>
-    <li><span><span class="t">Simulated users before real ones.</span><span class="d">Four agents used OMW as a friend crew on three trips: a multi-day backpacking trip, a day climb and an evening meet-up. They logged 40 findings. Engineer agents checked each one against the code, designer agents mocked up a fix for each, and a final review caught proposed fixes that would have leaked private data before anyone built them. Eight are fixed so far, and twelve decisions came back to me. Simulated testers catch friction; they can’t tell me what people want, so real users still decide.</span></span><span class="m">crew test</span></li>
-    <li><span><span class="t">What I haven’t measured.</span><span class="d">Two model families, on the bet that their blind spots differ. They share training data, so their agreement is weaker evidence than it looks, and the verifier is a model too. I don’t yet count what each reviewer raises against what holds up, or seed known bugs to see what they miss. Those are the next things to measure.</span></span><span class="m">open question</span></li>
-    <li><span><span class="t">Tuned for cost and time.</span><span class="d">The first run’s Gemini review took 43 minutes on the high model. I capped it at 15 minutes on a faster model and fixed the two findings that run confirmed. Whether the faster model misses more is not measured yet.</span></span><span class="m">commit a680c4d</span></li>
-    <li><span><span class="t">Most changes can be traced.</span><span class="d">40 of the 64 commits link the Claude Code session that made them, so any line can be followed back to the conversation that produced it.</span></span><span class="m">git log</span></li>
+    <li><div><span class="t">Satellite messenger check-ins</span><span class="d">Built, reviewed and removed the same day. Phones’ own satellite SOS already covers emergencies.</span></div></li>
+    <li><div><span class="t">Maybe</span><span class="d">A plan needs a yes or a no. Testers asked for Maybe twice. It stayed out.</span></div></li>
+    <li><div><span class="t">Safety prompts on a game night</span><span class="d">Trip plans and emergency contacts show only on remote plans. A potluck doesn’t need them.</span></div></li>
   </ul>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">diff mockups/plan.png shipped/plan.png</span> <span class="cm"># the calls I make myself</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat docs/LAUNCH.md</span> <span class="cm"># the launch plan</span></p>
 <div class="o">
-  <p>Agents propose; I decide. Most of the advice I turn down is about mockups and layout: a screen an agent calls finished, I judge on the real app at phone and desktop width. I designed 39 screens up front, then let the working app edit them. The rule in the repo: when a mockup and the app disagree, the app wins, and the change gets written down.</p>
-  <div class="g2 wide">
-    <figure><a class="sh" href="img/m-d07-plan.webp" data-name="plan, mockup" data-cap="The original mockup, when the app was called “let’s go”: Maybe and Join side by side." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>mockup</span></div><img src="img/m-d07-plan.webp" width="1440" height="900" alt="Original mockup of the desktop plan page" loading="lazy"></div></a><figcaption><span class="b"><span class="key">---</span> mockup</span>The first design, called “let’s go”.</figcaption></figure>
-    <figure><a class="sh" href="img/s-plan-desktop.webp" data-name="plan, shipped" data-cap="The shipped plan page: the meet-up and the spot as a timeline, conditions as fact rows, rides in the right column." data-w="1440" data-h="900"><div class="win"><div class="bar"><i></i><i></i><i></i><span>omw.now</span></div><img src="img/s-plan-desktop.webp" width="1440" height="900" alt="Shipped desktop plan page" loading="lazy"></div></a><figcaption><span class="b"><span class="s">+++</span> shipped</span>What real use turned it into.</figcaption></figure>
+  <p class="big">Every growth idea has to make a real plan more likely to happen, or happen more safely.</p>
+  <p>If an idea only makes the app bigger or stickier, OMW doesn’t build it. That rule sets the metrics and the limits.</p>
+  <div class="g2">
+    <div>
+      <p class="b">What OMW measures</p>
+      <p class="dim">from the database, with no analytics trackers</p>
+      <ul class="chk">
+        <li>plans that happened: 3+ people, not cancelled</li>
+        <li>groups that plan again within 30 days</li>
+        <li>trip plans closed with “I’m back”</li>
+        <li>reports, and how fast each is handled</li>
+      </ul>
+    </div>
+    <div>
+      <p class="b">What OMW won’t build</p>
+      <p class="dim">decided before launch</p>
+      <ul class="never">
+        <li>follower counts, likes, public profiles</li>
+        <li>contact upload, “people you may know”</li>
+        <li>streaks, leaderboards, referral bonuses</li>
+        <li>ads, or selling data</li>
+      </ul>
+    </div>
   </div>
-<pre class="code"><span class="hh">@@ the app wins when it disagrees with the mockup @@</span>
-<span class="del">- let’s go</span><span class="add">+ OMW: the name is the promise, every plan ends with “omw”</span><span class="del">- [Go live]</span><span class="add">+ [Out now]    “go live” sounds like social media</span><span class="del">- [Maybe] [Join]</span><span class="add">+ [Join]       one clear answer; Can’t go is on the plan page</span><span class="del">- a conditions sheet</span><span class="add">+ fact rows: meet-up, forecast, drive time, sunrise</span><span class="del">- host buttons on the page</span><span class="add">+ one … menu over the map</span><span class="del">- crew radio in the nav</span><span class="add">+ cut. chat is text again</span></pre>
-  <p class="dim">What I cut:</p>
-  <ul class="list">
-    <li><span><span class="t">Garmin inReach check-ins</span><span class="d">Built, reviewed and removed the same day, with its tables and stored passwords: phones’ satellite SOS already covers emergencies.</span></span><span class="m">migration 0040</span></li>
-    <li><span><span class="t">Crew radio</span><span class="d">Push-to-talk shipped, then came out of the app the next day.</span></span><span class="m">DESIGN.md</span></li>
-    <li><span><span class="t">Maybe</span><span class="d">A plan needs a yes or a no. The simulated crew asked for Maybe back; I kept it out.</span></span><span class="m">DESIGN.md</span></li>
+  <p class="b">Opening in stages</p>
+  <ol class="gates">
+    <li class="now"><span class="st">1</span><span><span class="t">Invite-only: friends join through plan links and invites</span><span class="g">a friend joins from a link, and a stranger lands on the waitlist</span></span></li>
+    <li><span class="st">2</span><span><span class="t">Invites from the waitlist, in small daily batches</span><span class="g">every invite arrives and signs up cleanly</span></span></li>
+    <li><span class="st">3</span><span><span class="t">Company formed and the terms reviewed by a lawyer</span><span class="g">both done</span></span></li>
+    <li><span class="st">4</span><span><span class="t">Open sign-up, capped per hour and watched closely for two days</span><span class="g">reports handled within a day</span></span></li>
+  </ol>
+  <p class="dim">Stage 1 is ready to ship. Open sign-up is already built: it is one setting away.</p>
+</div>
+
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/</span> <span class="cm"># the product</span></p>
+<div class="o">
+  <p>Start a plan, share one link, say I’m in, show up.</p>
+  <div class="wide g4">
+    <figure><a class="sh ph" href="img/s-start-phone.webp" data-name="start a plan" data-cap="Start a plan: what, when, where. No account until you share it." data-w="390" data-h="844"><img src="img/s-start-phone.webp" width="390" height="844" alt="The start-a-plan form: what, when and where, with no account needed" loading="lazy"></a><figcaption><span class="b">start a plan</span>What, when, where. No account yet.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-link-phone.webp" data-name="open the link" data-cap="The plan link shows the area. The exact spot shows once you’re in." data-w="390" data-h="844"><img src="img/s-link-phone.webp" width="390" height="844" alt="A plan link that shows the general area of the plan and hides the exact spot" loading="lazy"></a><figcaption><span class="b">open the link</span>The area shows. The exact spot shows once you’re in.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-youre-in-phone.webp" data-name="you’re in" data-cap="You’re in: say hi to the people who are new, and offer a seat if nobody’s driving." data-w="390" data-h="844"><img src="img/s-youre-in-phone.webp" width="390" height="844" alt="The You’re in screen, with prompts to say hi to new people and offer a seat" loading="lazy"></a><figcaption><span class="b">you’re in</span>Say hi to the new person. Offer a seat.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-host-ok-phone.webp" data-name="the host decides" data-cap="The host’s plan page: strangers who opened the link wait for the host’s OK." data-w="390" data-h="844"><img src="img/s-host-ok-phone.webp" width="390" height="844" alt="The host view: a list of people waiting for the host’s OK" loading="lazy"></a><figcaption><span class="b">the host decides</span>Strangers wait for the host’s OK.</figcaption></figure>
+  </div>
+  <p>For ski days, climbs and long drives, OMW adds the outdoor tools: maps saved for offline, a trip plan with a back-by time, and a “Not back yet” alert to the people you chose.</p>
+  <div class="g3">
+    <figure><a class="sh ph" href="img/s-topo-phone.webp" data-name="offline maps" data-cap="Maps around your plans save themselves for offline: the meet-up, the spot, and the climb between them." data-w="390" data-h="844"><img src="img/s-topo-phone.webp" width="390" height="844" alt="A topo map saved for offline use" loading="lazy"></a><figcaption><span class="b">offline maps</span>Saved before you lose signal.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-out-now-phone.webp" data-name="trip plan" data-cap="A trip plan: back-by time and who to tell. It ends on its own." data-w="390" data-h="844"><img src="img/s-out-now-phone.webp" width="390" height="844" alt="An Out now screen with a trip plan and a back-by time" loading="lazy"></a><figcaption><span class="b">trip plan</span>Back by when, and who to tell.</figcaption></figure>
+    <figure><a class="sh ph" href="img/s-costs-phone.webp" data-name="costs" data-cap="Who owes whom, in as few payments as possible." data-w="390" data-h="844"><img src="img/s-costs-phone.webp" width="390" height="844" alt="Trip costs split between the group" loading="lazy"></a><figcaption><span class="b">costs</span>Split fairly, settled in the fewest payments.</figcaption></figure>
+  </div>
+</div>
+
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat docs/VALUES.md</span> <span class="cm"># what OMW stands for</span></p>
+<div class="o">
+  <p>OMW is about real bonds and lasting trust. No likes, no follows, no click bait. Five values say what it asks of people, in the order they come up over a plan. Each rests on an old idea, written in plain words.</p>
+  <ul class="vals">
+    <li><span class="t">Reliable</span><span>“I’m in” means yes. If that changes, say so early.<span class="src">after Confucius, Analects 2.22</span></span></li>
+    <li><span class="t">Prepared</span><span>Know what the plan needs, and show the new person how.<span class="src">after Richard Sennett, The Craftsman</span></span></li>
+    <li><span class="t">Safe</span><span>Everyone gets there, and everyone gets home.<span class="src">after Seneca, Letters 91</span></span></li>
+    <li><span class="t">Together</span><span>Nobody gets left behind or left out.</span></li>
+    <li><span class="t">Generous</span><span>Offer the seat, bring the extra, then forget you did.</span></li>
   </ul>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">sed -n '/the checklist/,/Offline/p' AGENTS.md</span> <span class="cm"># what every feature passes before it ships</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open landing/</span> <span class="cm"># the brand</span></p>
 <div class="o">
-<pre class="code"><span class="mu">## Shipping a new feature: the checklist</span>
+  <p>Ten landing page concepts, narrowed by specialist reviews and visitor scores. The page that won leads with the problem everyone knows: the forty-message group chat that never becomes a plan.</p>
+  <div class="g2">
+    <figure><a class="sh" href="img/s-landing-desktop.webp" data-name="the paintings" data-cap="Public-domain art from the Art Institute of Chicago, chosen for the season where the visitor is." data-w="1440" data-h="900"><div class="win"><img src="img/s-landing-desktop.webp" width="1440" height="900" alt="The OMW landing page hero over a public-domain painting" loading="lazy"></div></a><figcaption><span class="b">the paintings</span>Public-domain art from the Art Institute of Chicago, chosen for the season where the visitor is.</figcaption></figure>
+    <div>
+      <p class="b">Lines from the page</p>
+      <ul class="list">
+        <li><div><span class="t">“Fewer followers. Better friends.”</span></div></li>
+        <li><div><span class="t">“Your friends aren’t content. They’re your crew.”</span></div></li>
+        <li><div><span class="t">“OMW doesn’t call for help; the person you tell does.”</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <p>Every colour has one job. <span class="b" style="color:var(--ember)">Ember</span> means happening now, and nothing else. The copy follows a glossary as strict as the colour tokens.</p>
+</div>
 
-Every new feature goes through all five before it’s committed
-and deployed. Report the result of each.
-
-<span class="key">1.</span> <span class="b">Security review.</span> Row-level security on every new table
-   (who can read, insert, update, delete), column grants, …
-   Add a row to `docs/SECURITY.md`.
-<span class="key">2.</span> <span class="b">Design review.</span> Fits the app’s structure and voice
-   (`docs/DESIGN.md`): existing components and tokens, one clear
-   action per place, no draft-level shortcuts.
-<span class="key">3.</span> <span class="b">UI check, in three tiers</span> (fast by default, thorough now
-   and then) …
-<span class="key">4.</span> <span class="b">Performance review.</span> Parallel requests instead of chains,
-   no reloads on every render or event (debounce bursts), small
-   payloads, …
-<span class="key">5.</span> <span class="b">Offline.</span> Works with no signal: last copy shown
-   (`src/lib/offline.ts`), actions queued and sent later
-   (`src/lib/outbox.ts`) or clearly unavailable, and nothing lost.</pre>
-  <p>The database rules decide who can see each plan, so every schema change gets a dated review in SECURITY.md, 11 so far, with an accepted-risks list. The first review found a critical hole: the person a friend request went to could rewrite it to make anyone their friend, and see that stranger’s friends-only plans. The fix, from the migration:</p>
-<pre class="code"><span class="mu">-- 0013_security.sql: no forged or unwanted friendships</span>
-<span class="k">revoke update on</span> friendships <span class="k">from</span> anon, authenticated;
-<span class="k">grant update</span> (status) <span class="k">on</span> friendships <span class="k">to</span> authenticated;
-<span class="k">create policy</span> fr_accept <span class="k">on</span> friendships <span class="k">for update to</span> authenticated
-  <span class="k">using</span>      (friend_id = auth.uid() <span class="k">and</span> status = <span class="s">'pending'</span>)
-  <span class="k">with check</span> (friend_id = auth.uid() <span class="k">and</span> status = <span class="s">'accepted'</span>);</pre>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">cat .claude/skills/prerelease/SKILL.md</span> <span class="cm"># how agents’ work is checked</span></p>
+<div class="o">
+  <p>Agents wrote most of the code, so no single agent is trusted. Before anything ships, one command runs the same review: typecheck, lint, 418 unit tests and a test of every main screen, then an independent review by a second AI model and four focused reviews for security, correctness, offline use and design. Every finding is checked against the real code. I make every commit and deploy myself.</p>
+  <p>Every database change gets a dated security review. The first one caught a serious hole: someone could turn a friend request into a friendship with anyone, and see that stranger’s plans. The fix:</p>
+<pre class="code nw" tabindex="0" aria-label="The fix, from migration 0013"><span class="dim">-- 0013_security.sql: no forged or unwanted friendships</span>
+revoke update on friendships from anon, authenticated;
+grant update (status) on friendships to authenticated;
+create policy fr_accept on friendships for update to authenticated
+  using      (friend_id = auth.uid() and status = 'pending')
+  with check (friend_id = auth.uid() and status = 'accepted');</pre>
   <p class="dim">Only the status can change, only from pending to accepted, and only by the person the request was sent to.</p>
 </div>
 
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/core-loop/</span> <span class="cm"># the product</span></p>
+<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">wc --summary</span> <span class="cm"># by the numbers</span></p>
 <div class="o">
-  <p class="dim">Make a plan, share it, join, show up.</p>
-  <div class="g4 wide">
-    <figure><a class="sh ph" href="img/s-new-plan-phone.webp" data-name="1 · make a plan" data-cap="What, when, where, who. End time, extra days, meet-up and max guests wait under More options." data-w="390" data-h="844"><img src="img/s-new-plan-phone.webp" width="390" height="844" alt="Make a plan screen" loading="lazy"></a><figcaption><span class="b">1 · make a plan</span>What, when, where, who. The rest is folded away.</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-posted-phone.webp" data-name="2 · share it" data-cap="Right after posting: what friends will see, and one tap to send it by Messages, Mail or a copied link." data-w="390" data-h="844"><img src="img/s-posted-phone.webp" width="390" height="844" alt="Posted screen: the plan’s share preview and ways to send it" loading="lazy"></a><figcaption><span class="b">2 · share it</span>A link preview, and one tap to send it.</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-joined-phone.webp" data-name="3 · join" data-cap="One tap on Join. “People are counting on you now. If that changes, say so early.”" data-w="390" data-h="844"><img src="img/s-joined-phone.webp" width="390" height="844" alt="You’re in: the sheet that opens after tapping Join" loading="lazy"></a><figcaption><span class="b">3 · join</span>One tap. “If that changes, say so early.”</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-plan-phone.webp" data-name="4 · show up" data-cap="A plan you’ve joined: the facts, then chat and crew notes, and a bar with your status, Can’t make it and Chat." data-w="390" data-h="844"><img src="img/s-plan-phone.webp" width="390" height="844" alt="Plan page on a phone" loading="lazy"></a><figcaption><span class="b">4 · show up</span>Chat, crew notes, rides, costs, directions.</figcaption></figure>
-  </div>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open design/brand.png</span> <span class="cm"># the design system</span></p>
-<div class="o">
-  <p class="dim">The brand sheet came first. Tokens, type and components live in code, and one document is the source of truth for me and for the agents. Every colour has one job:</p>
-  <div class="g2 wide" style="align-items:start">
-    <figure><a class="sh" href="img/m-brand.webp" data-name="brand and UI system" data-cap="The first thing made: logo, colour, type, icons, avatars, components, motion, voice and spacing. The app was still called “let’s go”." data-w="1280" data-h="1760"><div class="win"><img src="img/m-brand.webp" width="1280" height="1760" alt="The OMW brand and UI system sheet: logo, colour, type, icons, avatars, components, motion, voice and spacing" loading="lazy"></div></a></figure>
-    <div>
-<pre class="code" style="margin-top:14px"><span class="mu">$ grep -n ember docs/DESIGN.md</span>
-<span class="n">35</span>: Ember means <span class="key">happening now</span>. Never use it for
-    errors, links or decoration.
-<span class="n">36</span>: Warnings are amber, never red and never ember.</pre>
-  <table class="voice">
-    <thead><tr><th scope="col">instead of</th><th scope="col">OMW says</th></tr></thead>
-    <tbody>
-      <tr><td>No plans yet.</td><td>Quiet out there. Start something.</td></tr>
-      <tr><td>Invalid code.</td><td>That code didn’t work. Check the newest email, or send a new code.</td></tr>
-      <tr><td>Location sharing enabled.</td><td>Shares the spot you name, never your live location.</td></tr>
-    </tbody>
-  </table>
-  <p class="dim">The copy is part of the system too: a glossary the agents follow as strictly as the colour tokens.</p>
-    </div>
-  </div>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open screens/trailhead/</span> <span class="cm"># built by someone who goes</span></p>
-<div class="o">
-  <p class="dim">I ski, climb and ride, so the details that matter at 5 AM in a parking lot with no signal are in the product.</p>
-  <div class="g3 wide" style="max-width:860px">
-    <figure><a class="sh ph" href="img/s-topo-phone.webp" data-name="topo map" data-cap="Maps around your plans save themselves for offline: the meet-up, the spot, and the climb between them." data-w="390" data-h="844"><img src="img/s-topo-phone.webp" width="390" height="844" alt="Full-screen topo map from the meet-up to Berthoud Pass, saved for offline" loading="lazy"></a><figcaption><span class="b">topo, saved for offline</span>Before you lose signal, not after.</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-out-now-phone.webp" data-name="out now" data-cap="The only ember button in the app. Add a trip plan: back-by time and who to tell. It ends on its own." data-w="390" data-h="844"><img src="img/s-out-now-phone.webp" width="390" height="844" alt="Out now screen: tell your crew you’re out" loading="lazy"></a><figcaption><span class="b">out now, with a trip plan</span>Back by, who to tell. Ends on its own.</figcaption></figure>
-    <figure><a class="sh ph" href="img/s-costs-phone.webp" data-name="costs" data-cap="Who owes whom, in as few payments as possible. “Settle up quickly, and cover someone now and then.”" data-w="390" data-h="844"><img src="img/s-costs-phone.webp" width="390" height="844" alt="Costs screen: gas and breakfast burritos split three ways, with who owes whom" loading="lazy"></a><figcaption><span class="b">costs, settled</span>Fewest payments, one tap to mark paid.</figcaption></figure>
-  </div>
-</div>
-
-<p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">wc --summary</span> <span class="cm"># the numbers</span></p>
-<div class="o">
-  <div class="wc"><span class="b">1</span><span>week to build</span><span class="b">3</span><span>people, 2 plans</span><span class="b">64</span><span>unit tests</span><span class="b">11</span><span>security reviews</span></div>
+  <div class="wc"><span class="b">8</span><span>days</span><span class="b">12</span><span>rounds of testing</span><span class="b">34</span><span>simulated testers</span><span class="b">418</span><span>unit tests</span><span class="b">84</span><span>database migrations</span><span class="b">18</span><span>security reviews</span></div>
   <p class="dim">Expo SDK 58 · React Native Web · Supabase (Postgres, Auth, Realtime, Storage) · Cloudflare Workers · MapLibre + OpenFreeMap · Photon · Resend</p>
 </div>
 
 <p class="p" role="heading" aria-level="2"><span aria-hidden="true"><span class="u">mgruesbeck</span> <span class="w">~/portfolio/omw.now</span> <span class="ar">❯</span> </span><span class="cmd">open --walkthrough</span> <span class="cm"># get in touch</span></p>
 <div class="o">
-  <p>I’m looking for a role where I put AI agents to work across operations, design and communications. Want the walkthrough? I’ll go through the repo docs, a /prerelease run and the app itself.</p>
+  <p>I’m looking for a role running operations, design and communications with AI agents. I’d be glad to walk you through how OMW was made, from the first tests to the launch plan.</p>
   <p class="lk"><span hidden><a class="em" href="#">Email</a>&nbsp; </span><a href="https://www.linkedin.com/in/melvingruesbeck/" target="_blank" rel="noopener">LinkedIn</a>&nbsp; <a href="https://x.com/melvingruesbeck" target="_blank" rel="noopener">X</a></p>
-  <p class="dim">OMW is invite only and grows one friend at a time. Reviewing my work? Ask, and I’ll send you a guest invite.</p>
+  <p class="dim">OMW is invite-only. Ask, and I’ll send you a plan link.</p>
   <p><a class="cta" href="https://omw.now" target="_blank" rel="noopener"><i></i>omw.now</a></p>
 </div>
 
